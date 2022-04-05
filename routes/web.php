@@ -20,7 +20,7 @@ use App\Http\Controllers\PengajuanController;
 |
 */
 
-
+//umm
 
 Route::get('/', function () {
     return view('landingpage');
