@@ -103,10 +103,9 @@ route::get('/hapustemplate/{id}',[TemplateController::class,"hapustemplate"])->n
 
 //Profile Dosen
 
-route::get('/tambahprofile',[ProfileController::class,"tambahprofile"])->name('tambahprofile');
+route::get('/editprofile',[ProfileController::class,"editprofile"])->name('editprofile');
 route::post('/insertprofile',[ProfileController::class,"insertprofile"])->name('insertprofile');
-route::get('/editprofile/{id}',[ProfileController::class,"editprofile"])->name('editprofile');
-route::post('/updateprofile/{id}',[ProfileController::class,"updateprofile"])->name('updateprofile');
+
 
 //Unduh Template
 route::get('/unduhtemplate',[TemplateController::class,"unduhtemplate"])->name('unduhtemplate');
