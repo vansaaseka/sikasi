@@ -38,7 +38,7 @@
                 <td>{{ $data->deskripsi }}</td>
                
                 <td>
-                  <a href="{{ url('template/'.$data->id.'/edit') }}" class="btn btn-primary"> <i class="fa fa-download"></i>  Unduh</a>    
+                  <a href="filedrafkerjasama/{{$data->filedraf}}" class="btn btn-primary"> <i class="fa fa-download"></i>  Unduh</a>    
                 </td>
              
               </tr>

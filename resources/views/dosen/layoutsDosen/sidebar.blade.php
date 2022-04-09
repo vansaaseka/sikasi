@@ -63,12 +63,21 @@
         </div>
       </div>
     </li> --}}
+ 
+
     <li class="nav-item">
-      <a class="nav-link" href="/pengajuan">
+      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePage" aria-expanded="true"
+        aria-controls="collapsePage">
         <i class="fas fa-fw fa-file"></i>
         <span>Pengajuan Kerjasama</span>
       </a>
-    </li>
+      <div id="collapsePage" class="collapse" aria-labelledby="headingPage" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+          <a class="collapse-item" href="/pengajuan">PKS</a>
+          <a class="collapse-item" href="">MoU</a>
+        </div>
+      </div>
+    </li> 
 
     <li class="nav-item">
       <a class="nav-link" href="/unduhtemplate">

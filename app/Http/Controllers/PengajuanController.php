@@ -7,6 +7,6 @@ use Illuminate\Http\Request;
 class PengajuanController extends Controller
 {
     public function index(){
-        return view('dosen\Pengajuan\tambahpengajuan');
+        return view('dosen\Pengajuan\tampilpengajuan');
         }
 }

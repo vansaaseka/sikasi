@@ -117,3 +117,7 @@ route::post('/insertakun',[AkunController::class,"insertakun"])->name('insertaku
 route::get('/hapusakun/{id}',[AkunController::class,"hapusakun"])->name('hapusakun');
 route::get('/editakun/{id}',[AkunController::class,"editakun"])->name('editakun');
 route::post('/updateakun/{id}',[AkunController::class,"updateakun"])->name('updateakun');
+
+Route::get('/tambah', function () {
+    return view('dosen\Pengajuan\tambahpengajuan');
+});

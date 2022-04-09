@@ -46,8 +46,6 @@
   <script src="vendor/select2/dist/js/select2.min.js"></script>
   <!-- Bootstrap Datepicker -->
   <script src="vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
-  <!-- RuangAdmin Javascript -->
-  <script src="js/ruang-admin.min.js"></script>
   <!-- Javascript for this page -->
   <script>
     $(document).ready(function () {
@@ -103,6 +101,9 @@
 
     });
   </script>
+
+
+@livewireScripts
 
 </body>
 </html>
