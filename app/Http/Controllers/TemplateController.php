@@ -32,13 +32,13 @@ class TemplateController extends Controller
 
         $draf = Template::create($request->all());
         if ($request->hasFile('filedraf')) {
-            $request->file('filedraf')->move('filedrafkerjasama/', $request->file('filedraf')->getClientOriginalName());
+            $request->file('filedraf')->move('templatekerjasama/', $request->file('filedraf')->getClientOriginalName());
             $draf->filedraf = $request->file('filedraf')->getClientOriginalName();
             $draf->save();
     
         }
-        return redirect()->route('template')->with('success', 'Data Berhasil Ditambahkan');
-        }
+        return redirect('template')->with('toast_success','Data Berhasil Diupdate');
+    }
         
     
 

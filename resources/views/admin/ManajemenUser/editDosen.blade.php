@@ -1,15 +1,23 @@
-@include('layouts/header')
+@include('admin/layoutsAdmin/header')
 
-@include('layouts/sidebar')
+@include('admin/layoutsAdmin/sidebar')
 
-@include('layouts/navbar')
+@include('admin/layoutsAdmin/navbar')
 
 
 
-<div class="col-12 grid-margin stretch-card">
-    <div class="card">
-      <div class="card-body">
-        <h4 class="card-title">Edit Form Account Dosen</h4>
+
+<div class="conatiner-fluid content-inner mt-n5 py-0">
+  <div>
+      <div class="row">
+          <div class="col-sm-12">
+              <div class="card">
+                  <div class="card-header d-flex justify-content-between">
+                      <div class="header-title">
+                          <h4 class="card-title">Edit Akun Dosen</h4>
+                      </div>
+                  </div>
+                  <div class="card-body">
         <form action="/updateakun/{{ $data->id }}" method="POST" enctype="multipart/form-data" class="forms-sample">
             @csrf
 
@@ -22,11 +30,11 @@
                 @error('name')
                 <div class="invalid-feedback">{{ $message }}</div>
                @enderror
+            </div>
 
-              </div>
               <div class="form-group">
                 <label for="exampleInputEmail1">Email</label>
-                <input type="email" name="email" class="@error('email') is-invalid @enderror" id="email" aria-describedby="emailHelp" placeholder="Input Email" name="email" required autocomplete="email"
+                <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" id="email" aria-describedby="emailHelp" placeholder="Input Email" name="email" required autocomplete="email"
                 value="{{ $data->email }}"> 
                 @error('email')
                 <div class="invalid-feedback">{{ $message }}</div>
@@ -47,8 +55,12 @@
               <input name="role" type="hidden" value="0">
               
               <button type="submit" class="btn btn-primary">Submit</button>
-              {{-- <a href="/kategori" class="btn btn-light">Cancel</a> --}}
+             
             </form>
           </div>
         </div>
       </div>
+    </div>
+  </div>
+</div>
+@include('admin/layoutsAdmin/footer')

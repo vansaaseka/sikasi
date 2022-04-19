@@ -4,106 +4,86 @@
 
 @include('dosen/layoutsDosen/navbar')
 
-
-<div class="container-fluid" id="container-wrapper">
-  <div class="d-sm-flex align-items-center justify-content-between mb-4">
-      <h1 class="h3 mb-0 text-gray-800">Profile</h1>
-  </div>
-<form action="/insertprofile" method="POST" enctype="multipart/form-data" class="forms-sample"> @csrf
-
-          <div class="row">
-              <div class="col-lg-12">
-                  <!-- Select2 -->
-                  <div class="card mb-4">
-                      <div
-                          class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                          <h6 class="m-0 font-weight-bold text-primary">Identitas</h6>
-                      </div>
-                      <div class="card-body">
-
-                        <div class="form-group">
-                          <label for="nama">Nama Lengkap</label>
-                          <input type="text" name="name" class="form-control" id="nama" 
-                          value=<?= Auth::user()->name ?>> 
-                        </div>
-          
-                        <div class="form-group">
-                          <label for="exampleInputUsername1">Email</label>
-                          <input readonly type="text" name="email"
-                           class="form-control" id="drafKerjasama" 
-                          value=<?= Auth::user()->email ?>> 
-                        </div>
-          
-                        <div class="form-group">
-                          <label for="no_hp">No HP</label>
-                          <input type="text" name="nomorhp" class="form-control" id="nomorhp"
-                          value=<?= Auth::user()->nomorhp ?>>  
-                        </div>
-                          
-
-                      </div>
-                  </div>
-
-                  <div class="card mb-4">
-                      <div
-                          class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                          <h6 class="m-0 font-weight-bold text-primary">Detail Profil</h6>
-                      </div>
-                      <div class="card-body">
-
-                        <div class="form-group">
-                          <label for="photodosen">Photo</label>
-                          <div class="custom-file">
-                              <input type="file" name="photo"  value=<?= Auth::user()->photo?> class="custom-file-input" id="customFile">
-                              <label class="custom-file-label" for="customFile">Choose file</label>
-                          </div>
-                          @error('')
-                          <div style="color:red">{{ $message }}</div>
-                          @enderror
-                      </div>
-
-                        <div class="form-group">
-                          <label for="select2SinglePlaceholder">Asal Prodi</label>
-                          <select name="prodi_id" class="placeholder form-control">
-                              <option value="">--Pilih--</option>
-                              @foreach ($prodi as $item )
-                              <option value="{{ $item->id }}" selected>{{ $item->namaprodi }}</option>  
-                              @endforeach
-                              
-                            @error('prodi_id')
-                              <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                              </select>
-                        </div>
-
-                          <div class="form-group">
-                              <label for="">Alamat </label>
-                              <input
-                                  type="text"
-                                  name="alamat"
-                                  id="alamatdosen"
-                                  class="form-control @error('') is-invalid @enderror"
-                                  value=<?= Auth::user()->alamat?> 
-                                  autofocus="autofocus">
-                              @error('')
-                              <div class="invalid-feedback">{{ $message }}</div>
-                              @enderror
-                          </div>
-
-                      
-
-                      </div>
-                  </div>
+<div class="conatiner-fluid content-inner mt-n5 py-0">
+  <div>
+     <div class="row">
+      <div class="col-lg-12 mb-4">
+           <div class="card">
+              <div class="card-header d-flex justify-content-between">
+                 <div class="header-title">
+                    <h4 class="card-title">Add New User</h4>
+                 </div>
               </div>
+              <div class="card-body">
+                <form action="/insertprofile" method="POST" enctype="multipart/form-data" class="forms-sample"> 
+                  @csrf
+                    <div class="form-group">
+                       <div class="profile-img-edit position-relative">
+                          <img class="profile-pic rounded avatar-100" value=<?= Auth::user()->photo?> src="{{asset('HOPE/assets/images/avatars/01.png')}}" alt="profile-pic">
+                          <div class="upload-icone bg-primary">
+                             <svg class="upload-button" width="14" height="14" viewBox="0 0 24 24">
+                                <path fill="#ffffff" d="M14.06,9L15,9.94L5.92,19H5V18.08L14.06,9M17.66,3C17.41,3 17.15,3.1 16.96,3.29L15.13,5.12L18.88,8.87L20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18.17,3.09 17.92,3 17.66,3M14.06,6.19L3,17.25V21H6.75L17.81,9.94L14.06,6.19Z" />
+                             </svg>
+                             <input class="file-upload" type="file" name="photo" accept="image/*" value=<?= Auth::user()->photo?> >
+                          </div>
+                       </div>
+                       <div class="img-extension mt-3">
+                          <div class="d-inline-block align-items-center">
+                             <span>Only</span>
+                             <a href="javascript:void();">.jpg</a>
+                             <a href="javascript:void();">.png</a>
+                             <a href="javascript:void();">.jpeg</a>
+                             <span>allowed</span>
+                          </div>
+                       </div>
+                    </div>
+                    
+                    <div class="form-group">
+                       <label class="form-label" for="furl">Nama Lengkap</label>
+                       <input type="text" class="form-control" id="namalengkap" name="name" value=<?= Auth::user()->name ?>>
+                    </div>
+                    <div class="form-group">
+                       <label class="form-label" for="turl">Email:</label>
+                       <input readonly type="text" class="form-control" id="email" name="email" value=<?= Auth::user()->email ?> >
+                    </div>
+                    <div class="form-group">
+                       <label class="form-label" for="instaurl">Nomor HP</label>
+                       <input type="text" class="form-control" id="nomorhp" name="nomorhp" value=<?= Auth::user()->nomorhp ?>>
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">Asal Prodi</label>
+                      <select name="prodi_id" class="selectpicker form-control" data-style="py-0">
+                       <option value="">--Pilih--</option>
+                         @foreach ($prodi as $item )
+                           <option value="{{ $item->id }}" selected>{{ $item->namaprodi }}</option>  
+                         @endforeach
 
-              &nbsp;&nbsp;&nbsp;
-              <button type="submit" class="btn btn-primary">Submit</button>
-              &nbsp;&nbsp;&nbsp;&nbsp;
-              <a href={{ url()->previous() }} class="btn btn-light">Cancel</a>
+                       @error('prodi_id')
+                               <div class="invalid-feedback"></div>
+                       @enderror
+                      </select>
+                   </div>
+                    <div class="form-group mb-0">
+                       <label class="form-label" for="lurl">Alamat</label>
+                       <input type="text" class="form-control" id="alamat" placeholder="Linkedin Url" name="alamat" value=<?= Auth::user()->alamat?> >
+                       @error('alamat')
+                               <div class="invalid-feedback"></div>
+                       @enderror
+                    </div>
 
-          </div>
-          </form>
-      </div>
-      
-      <br/>
+                    {{-- Input Confirmation --}}
+                    <input name="confirmation" type="hidden" value="1">
+                    
+                      <br/>
+                      <button type="submit" class="btn btn-primary">Submit</button>
+                    
+                   
+                 </form>
+              </div>
+           </div>
+        </div>
+     </div>
+  </div>
+  </div>
+
 @include('dosen/layoutsDosen/footer')

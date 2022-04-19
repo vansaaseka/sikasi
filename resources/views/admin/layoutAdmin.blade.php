@@ -1,7 +1,7 @@
-@include('layouts/header')
+@include('admin/layoutsAdmin/header')
 
-@include('layouts/sidebar')
+@include('admin/layoutsAdmin/sidebar')
 
-@include('layouts/navbar')
+@include('admin/layoutsAdmin/navbar')
 
-@include('layouts/footer')
+@include('admin/layoutsAdmin/footer')

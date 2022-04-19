@@ -5,7 +5,27 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class pengajuan extends Model
+class Pengajuan extends Model
 {
+    public $timestamps = true;
+    protected $table = 'pengajuan';
+    protected $fillable = ['user_id', 'id_kategori' , 'mitra_id' , 'ruanglingkup_id', 'prodi_id' , 'tanggalmulai' , 'tanggalakhir', 'nomordokumen', 'dokumen'];
+    protected $guarded = [];
     use HasFactory;
+
+    public function kategori(){
+        return $this->belongsTo('App\Models\Kategori');
+    }
+    public function user(){
+        return $this->belongsTo('App\Models\User');
+    }
+    public function mitra(){
+        return $this->belongsTo('App\Models\Mitra');
+    }
+    public function ruanglingkup(){
+        return $this->belongsTo('App\Models\RuangLingkup');
+    }
+    public function Prodi(){
+        return $this->belongsTo('App\Models\Prodi');
+    }
 }
