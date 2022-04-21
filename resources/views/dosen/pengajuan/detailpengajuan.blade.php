@@ -53,12 +53,12 @@
                                     <td scope="row">{{ $no++ }}</td>
                                     <td>{{ date('Y', strtotime($datapengajuan->tanggalmulai)) }}</td>
                                     
-                                    <td>{{ $datapengajuan->mitra_id->namamitra}}</td>
-                                   
+                                    <td>{{ $datapengajuan->mitra->namamitra}}</td>
+                                
                                     <td>
                                         <button
                                             type="button"
-                                            class="btn btn-outline-success mb-1"
+                                            class="btn btn-primary dropdown-toggle"
                                             data-bs-toggle="modal"
                                             data-bs-target="#status"
                                             id="#modalCenter">
@@ -80,7 +80,7 @@
                                             <i class="fa fa-info-circle"></i>
                                         </button>
 
-                                        <a href="" class="btn btn-primary btn-sm">
+                                        <a href="editpengajuan/{id}" class="btn btn-primary btn-sm">
                                             <i class="fa fa-edit"></i>
                                         </a>
 

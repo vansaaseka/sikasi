@@ -11,7 +11,8 @@ class TemplateController extends Controller
     public function index()
     {
         $template = Template::all();
-        return view('admin\Template\tampiltemplate', compact('template'));
+        return view('admin\Template\tampiltemplate', 
+        compact('template' ,'title'));
     }
 
   //tampiltambahtemplate

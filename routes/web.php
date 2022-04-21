@@ -31,6 +31,8 @@ Route::get('/layoutAdmin', function () {
     return view('admin/layoutAdmin');
 });
 
+
+
 // Route::get('/home', function () {
 //     return view('home');
 // });
@@ -114,6 +116,8 @@ route::get('/unduhtemplate',[TemplateController::class,"unduhtemplate"])->name('
 route::get('/pengajuan',[PengajuanController::class,"index"])->name('pengajuan');
 route::get('/tambahpengajuan',[PengajuanController::class,"tambahpengajuan"])->name('tambahpengajuan');
 route::post('/insertpengajuan',[PengajuanController::class,"insertpengajuan"])->name('insertpengajuan');
+route::get('/editpengajuan/{id}',[PengajuanController::class,"editpengajuan"])->name('editpengajuan');
+route::post('/updatepengajuan/{id}',[PengajuanController::class,"updatepengajuan"])->name('updatepengajuan');
 
 
 

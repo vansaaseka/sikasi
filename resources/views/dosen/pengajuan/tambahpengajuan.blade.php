@@ -2,7 +2,9 @@
 @include('dosen/layoutsDosen/sidebar')
 @include('dosen/layoutsDosen/navbar')
 
+
 <div class="conatiner-fluid content-inner mt-n5 py-0">
+    
 
     <div class="row">
         <div class="col-sm-12 col-lg-12">
@@ -123,13 +125,20 @@
                                         <div class="form-group">
                                             <label class="form-label">Nama Dagang Mitra
                                             </label>
-                                            <input type="text" class="form-control" name="namadagangmitra" placeholder=""/>
+                                            <input type="text" class="form-control @error('namadagangmitra') is-invalid @enderror" name="namadagangmitra">
+                                            @error('namadagangmitra')
+                                                <div class="invalid-feedback">Nama Dagang Mitra Harus Diisi</div>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="col-md-6">
+                                        
                                         <div class="form-group">
                                             <label class="form-label">Nama Mitra *</label>
                                             <input type="text" class="form-control" name="namamitra" placeholder=""/>
+                                            @error('namamitra')
+                                                <div class="invalid-feedback">Nama Dagang Harus Diisi</div>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="col-md-6">
@@ -249,7 +258,7 @@
                                                 type="date"
                                                 class="form-control"
                                                 id="exampleInputdate"
-                                                value="2019-12-18"></div>
+                                                value=""></div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
@@ -259,7 +268,7 @@
                                                 type="date"
                                                 class="form-control"
                                                 id="exampleInputdate"
-                                                value="2019-12-18"></div>
+                                                value=""></div>
                                     </div>
 
                                 </div>

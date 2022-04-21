@@ -29,6 +29,18 @@ class PengajuanController extends Controller
         }
     
     public function insertpengajuan (Request $request){
+
+        $this->validate($request, [
+            'namamitra' => 'required',
+            'namadagangmitra' => 'required',
+            'logo' => 'required|mimes:jpg,jif,jpeg,png',
+            'alamat' => 'required',
+            'email' => 'required',
+            'namapenandatangan' => 'required',
+            'jabatanpenandatangan' => 'required',  
+            'narahubung' => 'required', 
+            'no_hp' => 'required',
+             ]);
         
          //mengambil data file yang diupload
          $logo = $request->file('logo');
@@ -76,22 +88,40 @@ class PengajuanController extends Controller
             $ruanglingkup = new RuangLingkup;
             $prodi = new Prodi;
 
-            $ajuan = new Pengajuan;
-            $ajuan->user_id = Auth::user()->id;
-            $ajuan->id_kategori = $kategori->id;
-            $ajuan->mitra_id = $mitra->id;
-            $ajuan->ruanglingkup_id = $ruanglingkup->id;
-            $ajuan->prodi_id = $prodi->id;
-            $ajuan->tanggalmulai = $data['tanggalmulai'];
-            $ajuan->tanggalakhir = $data['tanggalakhir'];
-            $ajuan->dokumen = $dokumen_file;
-            $ajuan->save();
+            $pengajuan = new Pengajuan;
+            $pengajuan->user_id = Auth::user()->id;
+            $pengajuan->kategori_id = $kategori->id;
+            $pengajuan->mitra_id = $mitra->id;
+            $pengajuan->ruanglingkup_id = $ruanglingkup->id;
+            $pengajuan->prodi_id = $prodi->id;
+            $pengajuan->tanggalmulai = $data['tanggalmulai'];
+            $pengajuan->tanggalakhir = $data['tanggalakhir'];
+            $pengajuan->dokumen = $dokumen_file;
+            $pengajuan->save();
 
             return redirect()->route('pengajuan');
             
 
 
         }
+
+        public function editpengajuan($id){
+            $pengajuan = Pengajuan::find($id);
+            //dd($draf);
+            return view('dosen\pengajuan\editpengajuan', compact('pengajuan'));
+            }
+        
+            public function updatepengajuan(Request $request, $id){
+            $pengajuan = Pengajuan::find($id);
+            $pengajuan->update($request->all());
+            if ($request->hasFile('dokumen')) 
+                {
+                    $request->file('dokumen')->move('dokumenkerjasama/', $request->file('dokumen')->getClientOriginalName());
+                    $pengajuan->dokumen = $request->file('dokumen')->getClientOriginalName();
+                    $pengajuan->save();
+                }
+            return redirect()->route('pengajuan')->with('toast_success','Data Berhasil Diupdate');
+            }
         
 
        

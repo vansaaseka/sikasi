@@ -1,5 +1,6 @@
-@include('layouts/header') @include('layouts/sidebar')
-@include('layouts/navbar')
+@include('dosen/layoutsDosen/header') 
+@include('dosen/layoutsDosen/sidebar')
+@include('dosen/layoutsDosen/navbar')
 
 <!-- Form Basic -->
 <div class="card mb-4">
@@ -65,4 +66,4 @@
     </div>
 </div>
 
-@include('layouts/footer')
+@include('dosen/layoutsDosen/footer') 
