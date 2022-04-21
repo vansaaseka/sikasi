@@ -12,7 +12,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="/updatepengajuan/{{ $pengajuan->id }}" method="POST" enctype="multipart/form-data">
+                    <form action="" method="POST" enctype="multipart/form-data">
                         @csrf
              
 
