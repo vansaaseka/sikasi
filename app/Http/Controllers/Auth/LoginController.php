@@ -62,7 +62,7 @@ class LoginController extends Controller
         ]);
         if (auth()->attempt(array('email' => $input['email'], 'password' => $input['password']))) {
 
-            if (auth()->user()->role == 2) {
+            if (auth()->user()->role == 3) {
                 return view('dosen/layoutDosen');
             } elseif (auth()->user()->role == 1 && auth()->user()->status == 1) {
                 return view('admin/layoutAdmin');
@@ -72,10 +72,11 @@ class LoginController extends Controller
                 return view('dosen/layoutDosen');
             } elseif (auth()->user()->role == 0 && auth()->user()->status == 0) {
                 (auth()->logout());
-            // } elseif (auth()->user()->role == 1 && auth()->user()->status == 1) {
-            //     return redirect()->route('dashboardpengawas');
-            // } elseif (auth()->user()->role == 1 && auth()->user()->status == 0) {
-            //     (auth()->logout());
+            }  elseif (auth()->user()->role == 2 && auth()->user()->status == 1) {
+                return view('verifikator/layoutVerifikator');
+            } elseif (auth()->user()->role == 2 && auth()->user()->status == 0) {
+                (auth()->logout());
+           
             // } elseif (auth()->user()->role == 0 && auth()->user()->status == 1) {
             //     return redirect()->route('dashboardpelakuusaha');
             // } elseif (auth()->user()->role == 0 && auth()->user()->status == 0) {

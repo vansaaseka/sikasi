@@ -20,7 +20,7 @@ class KategoriController extends Controller
     public function insertkategori(Request $request){
         // dd($request->all());
         $this->validate($request, [
-            'namakategori' => 'required',
+            'status' => 'required',
             'deskripsi' => 'required',
         ]);
         Kategori::create($request->all());
@@ -35,9 +35,9 @@ class KategoriController extends Controller
 
     public function updatekategori(Request $request, $id){
         $this->validate($request, [
-            'namakategori' => 'required',
-            'deskripsi' => 'required',
+            'status' => 'required',
         ]);
+        
         $kategori = Kategori::find($id);
         $kategori->update($request->all());
         return redirect()->route('kategori')->with('toast_success','Data Berhasil Diupdate');

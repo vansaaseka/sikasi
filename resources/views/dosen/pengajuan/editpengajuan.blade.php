@@ -11,14 +11,14 @@
                         <h4 class="card-title">Kategori Kerjasama</h4>
                     </div>
                 </div>
-                <div class="card-body">
-                    <form action="" method="POST" enctype="multipart/form-data">
+                <div class="card-body">    
+                  <form action="/updatepengajuan/{{ $pengajuan->id }}" method="POST" enctype="multipart/form-data">
                         @csrf
              
 
                 <div class="form-group">
                   <div class="custom-file">
-                    <input type="file" name="dokumen" id="customFile" class="form-control" value="{{ old('dokumen') }}" autofocus> 
+                    <input type="file" name="dokumen" id="dokumen" class="form-control" value="{{ old('dokumen', $pengajuan->namadokumen) }}" autofocus> 
                  
                   @error('dokumen')
                   <div class="invalid-feedback">Example invalid form file feedback</div>
@@ -29,7 +29,7 @@
                 
                 
                 <button type="submit" class="btn btn-primary">Submit</button>
-                <a href="/template" class="btn btn-danger">Cancel</a>
+                <a href="/pengajuan" class="btn btn-danger">Cancel</a>
               </form>
             </div>
           </div>

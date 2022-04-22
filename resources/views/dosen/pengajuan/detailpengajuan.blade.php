@@ -80,7 +80,7 @@
                                             <i class="fa fa-info-circle"></i>
                                         </button>
 
-                                        <a href="editpengajuan/{id}" class="btn btn-primary btn-sm">
+                                        <a href="editpengajuan/{{$datapengajuan->id}}" class="btn btn-primary btn-sm">
                                             <i class="fa fa-edit"></i>
                                         </a>
 

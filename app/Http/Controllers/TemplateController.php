@@ -12,7 +12,7 @@ class TemplateController extends Controller
     {
         $template = Template::all();
         return view('admin\Template\tampiltemplate', 
-        compact('template' ,'title'));
+        compact('template'));
     }
 
   //tampiltambahtemplate

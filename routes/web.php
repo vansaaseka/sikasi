@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AkunController;
 use App\Http\Controllers\DrafController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\StatusController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\TemplateController;
@@ -20,12 +21,14 @@ use App\Http\Controllers\PengajuanController;
 |
 */
 
-//umm
+
+// Route::get('/', function () {
+//     return view('landingpage');
+// });
 
 Route::get('/', function () {
-    return view('landingpage');
+    return view('auth/login');
 });
-
 
 Route::get('/layoutAdmin', function () {
     return view('admin/layoutAdmin');
@@ -119,6 +122,16 @@ route::post('/insertpengajuan',[PengajuanController::class,"insertpengajuan"])->
 route::get('/editpengajuan/{id}',[PengajuanController::class,"editpengajuan"])->name('editpengajuan');
 route::post('/updatepengajuan/{id}',[PengajuanController::class,"updatepengajuan"])->name('updatepengajuan');
 
+//Status Verifikasi
+route::get('/status',[StatusController::class,"index"])->name('status');
+route::get('/tambahstatus',[StatusController::class,"tambahstatus"])->name('tambahstatus');
+route::post('/insertstatus',[StatusController::class,"insertstatus"])->name('insertstatus');
+route::get('/editstatus/{id}',[StatusController::class,"editstatus"])->name('editstatus');
+route::post('/updatestatus/{id}',[StatusController::class,"updatestatus"])->name('updatestatus');
 
-
-
+//Status Verifikasi
+route::get('/verifikasi',[VerifikasiController::class,"index"])->name('verifikasi');
+route::get('/tambahverifikasi',[VerifikasiController::class,"tambahverifikasi"])->name('tambahverifikasi');
+route::post('/insertverifikasi',[VerifikasiController::class,"insertverifikasi"])->name('insertverifikasi');
+route::get('/editverifikasi/{id}',[VerifikasiController::class,"editverifikasi"])->name('editverifikasi');
+route::post('/updateverifikasi/{id}',[VerifikasiController::class,"updateverifikasi"])->name('updateverifikasi');
