@@ -15,20 +15,21 @@ class Pengajuan extends Migration
     {
         Schema::create('pengajuan', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('mitra_id');
-            $table->string('kategori_id')->nullable()->constrained('kategori')->onDelete('cascade')->onUpdate('cascade');
-            $table->string('ruanglingkup_id')->nullable()->constrained('ruanglingkup')->onDelete('cascade')->onUpdate('cascade');
-            $table->string('prodi_id')->nullable()->constrained('prodis')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('mitra_id')->constrained('mitra')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('status_id')->nullable()->default(null)->constrained('status')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('kategori_id')->constrained('kategori')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('ruanglingkup_id')->constrained('ruanglingkup')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('prodi_id')->constrained('prodis')->onDelete('cascade')->onUpdate('cascade');
+    
             $table->date('tanggalmulai')->nullable()->default(null);
             $table->date('tanggalakhir')->nullable()->default(null);
             $table->string('nomordokumen')->nullable()->default(null);
             $table->string('dokumen')->nullable()->default(null);
             $table->timestamps();
 
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreign('mitra_id')->references('id')->on('mitra')->onDelete('cascade')->onUpdate('cascade');
-        
+            
+
         });
 
       

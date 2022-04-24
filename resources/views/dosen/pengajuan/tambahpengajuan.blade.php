@@ -136,9 +136,9 @@
                                         <div class="form-group">
                                             <label class="form-label">Nama Mitra *</label>
                                             <input type="text" class="form-control" name="namamitra" placeholder=""/>
-                                            @error('namamitra')
+                                            {{-- @error('namamitra')
                                                 <div class="invalid-feedback">Nama Dagang Harus Diisi</div>
-                                            @enderror
+                                            @enderror --}}
                                         </div>
                                     </div>
                                     <div class="col-md-6">
@@ -225,9 +225,9 @@
                                             <label for="MultipleSelect">Ruang Lingkup Perjanjian</label>
                                             {{-- <select class="js-example-basic-multiple" name="states[]" multiple="multiple"> --}}
                                             <select
-                                                class="multipleselect form-control"
+                                                class="form-control"
                                                 name="ruanglingkup_id"
-                                                id="MultipleSelect">
+                                                >
                                                 <option value="">--Pilih--</option>
                                                 @foreach ($ruanglingkup as $item )
                                                 <option value="{{ $item->id }}">{{ $item->ruanglingkup }}</option>
@@ -235,13 +235,14 @@
                                             </select>
                                         </div>
                                     </div>
+            
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="MultipleSelect">Prodi Yang Terlibat</label>
                                             <select
-                                                class="select2-multiple form-control"
+                                                class="form-control"
                                                 name="prodi_id"
-                                                id="MultipleSelect">
+                                                >
                                                 <option value="">--Pilih--</option>
                                                 @foreach ($prodi as $item )
                                                 <option value="{{ $item->id }}">{{ $item->namaprodi }}</option>
@@ -299,6 +300,10 @@
                                     <label class="form-label">Dokumen Kerjasama:</label>
                                     <input type="file" class="form-control" name="dokumen" ></div>
                             </div>
+
+                            {{-- Input kategori --}}
+                                <input name="kategori_id" type="hidden" value="1">
+
                             <button
                                 type="submit"
                                 name="next"

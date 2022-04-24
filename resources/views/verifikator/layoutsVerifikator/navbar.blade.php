@@ -208,7 +208,7 @@
               <a class="nav-link py-0 d-flex align-items-center" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 <img src="{{asset('HOPE/assets/images/avatars/01.png')}}" alt="User-Profile" class="img-fluid avatar avatar-50 avatar-rounded">
                 <div class="caption ms-3 d-none d-md-block ">
-                    <h6 class="mb-0 caption-title"><?= Auth::user()->name ?></h6>
+                    <h6 class="mb-0 caption-title"><?= Auth::user()->name?></h6>
                     <p class="mb-0 caption-sub-title">verifikator</p>
                 </div>
               </a>

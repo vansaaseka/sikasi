@@ -83,8 +83,8 @@
                                         <a href="editpengajuan/{{$datapengajuan->id}}" class="btn btn-primary btn-sm">
                                             <i class="fa fa-edit"></i>
                                         </a>
-
-                                        <a href="#" class="btn btn-danger delete btn-sm">
+                                        <a class="btn btn-danger delete btn-sm hapus" id-data="{{ $datapengajuan->id }}" nama-data="{{ $datapengajuan->mitra->namamitra }}" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" href="#">
+                                        {{-- <a href="#" class="btn btn-danger delete btn-sm"> --}}
                                             <i class="fa fa-trash"></i>
                                         </a>
 
@@ -278,20 +278,20 @@
                 </div>
             </div>
 
-{{-- alert Delete Kategori --}}
+{{-- alert Delete Pengajuan --}}
             <script>
-                $('.delete').click(function () {
-                    var kategoriid = $(this).attr('data-id');
-                    var namakategori = $(this).attr('data-nama');
+                $('.hapus').click(function () {
+                    var pengajuanid = $(this).attr('data-id');
+                    var namapengajuan = $(this).attr('data-nama');
                     swal({
                         title: "Apakah kamu yakin??",
-                        text: "Menghapus data kategori " + namakategori + " ",
+                        text: "Menghapus data pengajuan dengan mitra " + namapengajuan + " ",
                         icon: "warning",
                         buttons: true,
                         dangerMode: true
                     }).then((willDelete) => {
                         if (willDelete) {
-                            window.location = "/hapuskategori/" + kategoriid + ""
+                            window.location = "/hapuspengajuan/" + pengajuanid + ""
                             swal("Data berhasil Dihapus!", {icon: "success"});
                         } else {
                             swal("Data tidak berhasil dihapus");

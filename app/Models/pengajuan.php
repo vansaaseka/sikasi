@@ -9,7 +9,7 @@ class Pengajuan extends Model
 {
     public $timestamps = true;
     protected $table = 'pengajuan';
-    protected $fillable = ['user_id', 'id_kategori' , 'mitra_id' , 'ruanglingkup_id', 'prodi_id' , 'tanggalmulai' , 'tanggalakhir', 'nomordokumen', 'dokumen'];
+    protected $fillable = ['user_id', 'kategori_id' , 'mitra_id' , 'ruanglingkup_id', 'prodi_id' , 'status_id', 'tanggalmulai' , 'tanggalakhir', 'nomordokumen', 'dokumen'];
     protected $guarded = [];
     use HasFactory;
 
@@ -27,5 +27,8 @@ class Pengajuan extends Model
     }
     public function Prodi(){
         return $this->belongsTo('App\Models\Prodi');
+    }
+    public function status(){
+        return $this->belongsTo('App\Models\Status');
     }
 }
