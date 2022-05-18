@@ -60,17 +60,15 @@
                                     <td>{{ date('Y', strtotime($datapengajuan->tanggalmulai)) }}</td>
                                     
                                     <td>{{ $datapengajuan->mitra->namamitra}}</td>
-                                    <td>{{ $datapengajuan->status->namastatus}}</td>
-                                
-                                    <td>
-                                    </td>
-                                    <td>-</td>
+                                    {{-- <td>{{ $datapengajuan->status->namastatus}}</td>
+                                 --}}
+                                    <td></td>
                                     <td>
                                         <a href="dokumenkerjasama/{{$datapengajuan->dokumen}}">{{$datapengajuan->dokumen}}</a>
                                     </td>
 
                                     <td>
-                                        <a href= "ubahstatus/{{$datapengajuan->id}}" class="btn btn-info btn-sm">
+                                        <a href= "/upgradepengajuan" class="btn btn-info btn-sm">
                                             <i class="fa fa-edit"></i>
                                         </a>
                                         <a href="editpengajuan/{{$datapengajuan->id}}" class="btn btn-primary btn-sm">

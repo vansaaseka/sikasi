@@ -29,7 +29,7 @@
                                     class="form-control"
                                     id="statusKerjasama"
                                     placeholder="Nama status"
-                                    value="{{ $status->status }}">
+                                    value="{{ $status->namastatus }}">
                             </div>
                             
 

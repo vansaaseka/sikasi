@@ -16,7 +16,6 @@ class Status extends Migration
         Schema::create('status', function (Blueprint $table) {
             $table->id();
             $table->string('namastatus');
-            $table->string('catatan')->nullable()->default(null);
             });
     }
 

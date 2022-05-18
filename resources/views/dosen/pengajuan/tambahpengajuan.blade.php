@@ -153,7 +153,7 @@
                                             <select
                                                 class="form-select"
                                                 data-trigger="data-trigger"
-                                                name="kategori_id"
+                                                name="kategorimitra_id"
                                                 id="choices-single-default">
                                                 <option value="">--Pilih--</option>
                                                 @foreach ($kategorimitra as $item )
@@ -241,7 +241,7 @@
                                             <label for="MultipleSelect">Prodi Yang Terlibat</label>
                                             <select
                                                 class="form-control"
-                                                name="prodi_id"
+                                                name="proditerlibat_id"
                                                 >
                                                 <option value="">--Pilih--</option>
                                                 @foreach ($prodi as $item )
@@ -271,6 +271,9 @@
                                                 id="exampleInputdate"
                                                 value=""></div>
                                     </div>
+                                {{-- Input kategori --}}
+                                <input name="kategori_id" type="hidden" value="1">
+                            
 
                                 </div>
                             </div>
@@ -301,8 +304,7 @@
                                     <input type="file" class="form-control" name="dokumen" ></div>
                             </div>
 
-                            {{-- Input kategori --}}
-                                <input name="kategori_id" type="hidden" value="1">
+                          
 
                             <button
                                 type="submit"

@@ -17,6 +17,9 @@ class StatusSeeder extends Seeder
         {
             $posts = [
                 [
+                    'namastatus' => 'Draft Diajukan',
+                  ],
+                [
                   'namastatus' => 'Ajuan Diterima',
                 ],
                 [

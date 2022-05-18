@@ -7,9 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Status extends Model
 {
-    public $timestamps = true;
+    public $timestamps = false;
     protected $table = 'status';
     protected $guarded = [];
-    protected $fillable = ['namastatus','catatan'];
+    protected $fillable = ['namastatus',];
     use HasFactory;
 }

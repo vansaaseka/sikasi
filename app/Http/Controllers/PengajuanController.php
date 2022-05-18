@@ -70,18 +70,35 @@ class PengajuanController extends Controller
 
             $mitra = new Mitra;
             $kategorimitra = new KategoriMitra;
+            Mitra::create([
+                'namamitra' => $request->namamitra,
+                'namadagangmitra' => $request->namadagangmitra,
+                'logo' => $foto_file,
+                'kategorimitra_id' => $request->kategorimitra_id,
+                'alamat' => $request->alamat,
+                'email' => $request->email,
+                'namapenandatangan' => $request->namapenandatangan,
+                'jabatanpenandatangan' => $request->jabatanpenandatangan,
+                'narahubung' => $request->narahubung,
+                'no_hp' => $request->no_hp,
+                
+            ]);
 
-            $mitra->namamitra = $data['namamitra'];
-            $mitra->namadagangmitra = $data['namadagangmitra'];
-            $mitra->logo = $foto_file;
-            $mitra->kategori_id = $kategorimitra->namakategori;
-            $mitra->alamat = $data['alamat'];
-            $mitra->email = $data['email'];
-            $mitra->namapenandatangan = $data['namapenandatangan'];
-            $mitra->jabatanpenandatangan = $data['jabatanpenandatangan'];
-            $mitra->narahubung = $data['narahubung'];
-            $mitra->no_hp = $data['no_hp'];
-            $mitra->save();
+           
+            
+
+
+            // $mitra->namamitra = $data['namamitra'];
+            // $mitra->namadagangmitra = $data['namadagangmitra'];
+            // $mitra->logo = $foto_file;
+            // $mitra->kategorimitra_id = $kategorimitra->namakategori;
+            // $mitra->alamat = $data['alamat'];
+            // $mitra->email = $data['email'];
+            // $mitra->namapenandatangan = $data['namapenandatangan'];
+            // $mitra->jabatanpenandatangan = $data['jabatanpenandatangan'];
+            // $mitra->narahubung = $data['narahubung'];
+            // $mitra->no_hp = $data['no_hp'];
+            // $mitra->save();
             
             
            
@@ -89,20 +106,31 @@ class PengajuanController extends Controller
             $kategori = new Kategori;
             $ruanglingkup = new RuangLingkup;
             $prodi = new Prodi;
-            $status = new Status;
+     
+            // $pengajuan = new Pengajuan;
+            // $pengajuan->user_id = Auth::user()->id;
+            // $pengajuan->kategori_id = $kategori->id;
+            // $pengajuan->mitra_id = $mitra->id;
+            // $pengajuan->ruanglingkup_id = $ruanglingkup->id;
+            // $pengajuan->proditerlibat_id = $prodi->id;
+            // $pengajuan->status_id = $status->id;
+            // $pengajuan->tanggalmulai = $data['tanggalmulai'];
+            // $pengajuan->tanggalakhir = $data['tanggalakhir'];
+            // $pengajuan->dokumen = $dokumen_file;
+            // $pengajuan->save();
 
-            $pengajuan = new Pengajuan;
-            $pengajuan = Pengajuan::create($request->all());
-            $pengajuan->user_id = Auth::user()->id;
-            $pengajuan->kategori_id = $kategori->id;
-            $pengajuan->mitra_id = $mitra->id;
-            $pengajuan->ruanglingkup_id = $ruanglingkup->id;
-            $pengajuan->prodi_id = $prodi->id;
-            $pengajuan->status_id = $status->id;
-            $pengajuan->tanggalmulai = $data['tanggalmulai'];
-            $pengajuan->tanggalakhir = $data['tanggalakhir'];
-            $pengajuan->dokumen = $dokumen_file;
-            $pengajuan->save();
+            Pengajuan::create([
+                'user_id' => Auth::user()->id,
+                'kategori_id' => $request->kategori_id,
+                'mitra_id' => 1,
+                'ruanglingkup_id' => $request->ruanglingkup_id,
+                'proditerlibat_id' => $request->proditerlibat_id,
+                'tanggalmulai' => $request->tanggalmulai,
+                'tanggalakhir' => $request->tanggalakhir,
+                'nomordokumen' => $request->nomordokumen,
+                'dokumen' => $dokumen_file,
+            ]);
+ 
 
             return redirect()->route('pengajuan');
             
@@ -131,27 +159,6 @@ class PengajuanController extends Controller
                 $pengajuan->delete();
                 return redirect()->route('pengajuan')->with('toast_success','Data Berhasil Dihapus');
                 }
-
-        public function verifikasi(){
-            $pengajuan = Pengajuan::all();
-            $mitra = Mitra::all();
-            $status = Status::all();
-            return view('verifikator\tampilverifikasi' , compact('pengajuan' , 'mitra', 'status'));
-        }
-
-        public function ubahstatus($id){
-            $pengajuan = Pengajuan::find($id);
-            $status = Status::all();
-            return view('verifikator\ubahstatus' , compact('pengajuan' , 'status'));
-         }
-
-         public function updatestatus(Request $request, $id){
-            $pengajuan = Pengajuan::find($id);
-            $pengajuan->update($request->all());
-            return redirect()->route('verifikasi');
-         }
-                    
-                    
         
 
        

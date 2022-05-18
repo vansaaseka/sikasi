@@ -38,7 +38,7 @@
                               <tr role="row" class="odd">
                                 <th scope="row">{{ $no++ }}</th>
                                 {{--  diambil dari as $ -> nama di database  --}}
-                                <td><div class="d-flex align-items-center">{{ $data->status }}</div></td>
+                                <td><div class="d-flex align-items-center">{{ $data->namastatus }}</div></td>
                 
                                 <td class="text-center">
                                   <div class="flex align-items-center list-user-action">

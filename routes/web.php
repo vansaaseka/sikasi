@@ -123,6 +123,14 @@ route::get('/editpengajuan/{id}',[PengajuanController::class,"editpengajuan"])->
 route::post('/updatepengajuan/{id}',[PengajuanController::class,"updatepengajuan"])->name('updatepengajuan');
 
 //Status Verifikasi
-route::get('/verifikasi',[PengajuanController::class,"verifikasi"])->name('verifikasi');
-route::get('/ubahstatus/{id}',[PengajuanController::class,"ubahstatus"])->name('ubahstatus');
-route::post('/updatestatus/{id}',[PengajuanController::class,"updatestatus"])->name('updatestatus');
+route::get('/verifikasi',[StatusController::class,"verifikasi"])->name('verifikasi');
+route::get('/upgradepengajuan',[StatusController::class,"upgradepengajuan"])->name('upgradepengajuan');
+route::post('/insertupgrade',[StatusController::class,"insertupgrade"])->name('insertupgrade');
+
+
+//Tambah Status Admin
+route::get('/status',[StatusController::class,"index"])->name('status');
+route::get('/tambahstatus',[StatusController::class,"tambahstatus"])->name('tambahstatus');
+route::post('/insertstatus',[StatusController::class,"insertstatus"])->name('insertstatus');
+route::get('/editstatus',[StatusController::class,"editstatus"])->name('editstatus');
+route::post('/insertupdate',[StatusController::class,"insertupdate"])->name('insertupdate');

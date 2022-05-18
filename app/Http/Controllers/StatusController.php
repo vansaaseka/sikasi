@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Mitra;
 
 use App\Models\Status;
+use App\Models\Pengajuan;
+use Illuminate\Http\Request;
 
 class StatusController extends Controller
 {
-    public function index(){
+public function index(){
 
         // Status tanpa dolar = nama database
         $status = Status::all();
@@ -48,4 +50,23 @@ public function hapusStatus($id){
     $status->delete();
     return redirect()->route('status')->with('toast_success','Data Berhasil Dihapus');
 }
+
+    // public function verifikasi(){
+    //     $pengajuan = Pengajuan::all();
+    //     $mitra = Mitra::all();
+    //     $status = Status::all();
+    //     return view('verifikator\tampilverifikasi' , compact('pengajuan' , 'mitra', 'status'));
+    // }
+
+    // public function upgradepengajuan(){
+    // $pengajuan = Pengajuan::all();
+    // $status = Status::all();
+    // return view('verifikator\updatestatus', compact('status' ,'pengajuan'));
+    // }
+
+    // public function insertupgrade(Request $request){
+    // $status = Status::create($request->all());
+    // return view('verifikator\tampilverifikasi');
+    // }
+
 }

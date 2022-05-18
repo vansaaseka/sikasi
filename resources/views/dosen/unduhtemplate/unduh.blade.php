@@ -36,7 +36,7 @@
                                     <td>{{ $data->deskripsi }}</td>
 
                                     <td>
-                                        <a href="filedrafkerjasama/{{$data->filedraf}}" class="btn btn-primary">
+                                        <a href="templatekerjasama/{{$data->filedraf}}" class="btn btn-primary">
                                             <i class="fa fa-download"></i>
                                             Unduh</a>
                                     </td>

@@ -16,7 +16,7 @@
                     <div class="card-body">
 
                         <form
-                            action="/insertkategori"
+                            action="{{url('/insertkategori')}}"
                             method="POST"
                             enctype="multipart/form-data"
                             class="forms-sample">
