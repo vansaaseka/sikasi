@@ -22,7 +22,7 @@
                     >
                     @csrf
                         <ul id="top-tab-list" class="p-0 row list-inline">
-                            <li class="col-lg-3 col-md-6 text-start mb-2 active" id="account">
+                            <li class="col-lg-4 col-md-6 text-start mb-2 active" id="account">
                                 <a href="javascript:void();">
                                     <div class="iq-icon me-3">
                                         <svg
@@ -43,7 +43,7 @@
                                     <span>Mitra</span>
                                 </a>
                             </li>
-                            <li id="personal" class="col-lg-3 col-md-6 mb-2 text-start">
+                            <li id="personal" class="col-lg-4 col-md-6 mb-2 text-start">
                                 <a href="javascript:void();">
                                     <div class="iq-icon me-3">
                                         <svg
@@ -60,10 +60,10 @@
                                                 d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
                                         </svg>
                                     </div>
-                                    <span>Informasi</span>
+                                    <span>Informasi Pnegajuan</span>
                                 </a>
                             </li>
-                            <li id="payment" class="col-lg-3 col-md-6 mb-2 text-start">
+                            {{-- <li id="payment" class="col-lg-3 col-md-6 mb-2 text-start">
                                 <a href="javascript:void();">
                                     <div class="iq-icon me-3">
                                         <svg
@@ -87,8 +87,8 @@
                                     </div>
                                     <span>Dokumen</span>
                                 </a>
-                            </li>
-                            <li id="confirm" class="col-lg-3 col-md-6 mb-2 text-start">
+                            </li> --}}
+                            <li id="confirm" class="col-lg-4 col-md-6 mb-2 text-start">
                                 <a href="javascript:void();">
                                     <div class="iq-icon me-3">
                                         <svg
@@ -277,18 +277,19 @@
 
                                 </div>
                             </div>
+                            
                             <button
-                                type="button"
+                                type="submit"
                                 name="next"
                                 class="btn btn-primary next action-button float-end"
-                                value="Next">Next</button>
+                                value="Submit">Submit</button>
                             <button
                                 type="button"
                                 name="previous"
                                 class="btn btn-dark previous action-button-previous float-end me-1"
                                 value="Previous">Previous</button>
                         </fieldset>
-                        <fieldset>
+                        {{-- <fieldset>
                             <div class="form-card text-start">
                                 <div class="row">
                                     <div class="col-7">
@@ -316,7 +317,7 @@
                                 name="previous"
                                 class="btn btn-dark previous action-button-previous float-end me-1"
                                 value="Previous">Previous</button>
-                        </fieldset>
+                        </fieldset> --}}
                         <fieldset>
                             <div class="form-card">
                                 <div class="row">
@@ -324,7 +325,7 @@
                                         <h3 class="mb-4 text-left">Finish:</h3>
                                     </div>
                                     <div class="col-5">
-                                        <h2 class="steps">Step 4 - 4</h2>
+                                        <h2 class="steps">Step 3 - 3</h2>
                                     </div>
                                 </div>
                                 <br>

@@ -10,6 +10,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\TemplateController;
 use App\Http\Controllers\PengajuanController;
+use App\Http\Controllers\DokumenController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -134,3 +135,8 @@ route::get('/tambahstatus',[StatusController::class,"tambahstatus"])->name('tamb
 route::post('/insertstatus',[StatusController::class,"insertstatus"])->name('insertstatus');
 route::get('/editstatus',[StatusController::class,"editstatus"])->name('editstatus');
 route::post('/insertupdate',[StatusController::class,"insertupdate"])->name('insertupdate');
+
+//Unggah Dokumen
+route::post('/insertdokumen',[DokumenController::class,"insertdokumen"])->name('insertdokumen');
+route::get('/editdokumen/{id}',[DokumenController::class,"editdokumen"])->name('editdokumen');
+route::post('/updatedokumen/{id}',[DokumenController::class,"updatedokumen"])->name('updatedokumen');

@@ -3,7 +3,7 @@
 @include('dosen/layoutsDosen/navbar')
 <!-- DataTable with Hover -->
 
-<div class = "conatiner-fluid content-inner mt-n5 py-0" > <div class="row">
+<div class = "container-fluid content-inner mt-n5 py-0" > <div class="row">
     <div class="col-lg-12 mb-4">
         <div class="card">
             <div class="card-header d-flex justify-content-between">
@@ -26,7 +26,7 @@
                                 <th>Mitra</th>
                                 <th>Status</th>
                                 <th>Catatan</th>
-                                <th>Dokumen Final</th>
+                                <th>Dokumen Kerjasama</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -42,23 +42,20 @@
                             </tfoot>
 
                             <tbody>
-                                @php 
-                                $no = 1; 
-                                @endphp 
-                                {{-- @foreach (-diambil dari isi comapct di controller- as -namanya bebas-)  --}}
-                               
-                                @foreach ($pengajuan as $datapengajuan) 
-                                @if ($datapengajuan->user_id == Auth::user()->id)
+                                @php $no = 1; @endphp {{-- @foreach (-diambil dari isi comapct di controller- as -namanya bebas-)  --}}
+
+                                @foreach ($pengajuan as $datapengajuan) @if ($datapengajuan->user_id ==
+                                Auth::user()->id)
                                 <tr role="row" class="odd text-center">
                                     <td scope="row">{{ $no++ }}</td>
                                     <td>{{ date('Y', strtotime($datapengajuan->tanggalmulai)) }}</td>
-                                    
+
                                     <td>{{ $datapengajuan->mitra->namamitra}}</td>
-                                
+
                                     <td>
                                         <button
                                             type="button"
-                                            class="btn btn-primary dropdown-toggle"
+                                            class="btn btn-outline-info dropdown-toggle"
                                             data-bs-toggle="modal"
                                             data-bs-target="#status"
                                             id="#modalCenter">
@@ -67,7 +64,29 @@
                                     </td>
                                     <td>-</td>
                                     <td>
-                                        <a href="dokumenkerjasama/{{$datapengajuan->dokumen}}">{{$datapengajuan->dokumen}}</a>
+                                        <?php
+                                        $sudahUnggah = 0;
+                                            foreach($dokumen as $d){
+                                                if($d->pengajuan_id == $datapengajuan->id){
+$sudahUnggah += 1;
+                                                }
+                                            }
+                                            ?>
+
+                                            @if($sudahUnggah==0)
+                                        <button
+                                            type="button"
+                                            class="btn btn-outline-secondary"
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#modaldokumen{{ $datapengajuan->id }}"
+                                            id="#modaldokumen{{ $datapengajuan->id }}">
+                                            Unggah Dokumen
+                                        </button>
+                                        @endif
+                                        @if($sudahUnggah==1)
+                                        
+                                        <a href="dokumenkerjasama/{{$d->dokumen}}">{{$d->dokumen}}</a>
+                                        @endif
                                     </td>
 
                                     <td>
@@ -79,195 +98,273 @@
                                             id="#modalCenter">
                                             <i class="fa fa-info-circle"></i>
                                         </button>
+                                        {{-- Modal Dokumen --}}
+                                        <div
+                                            class="modal fade"
+                                            id="modaldokumen{{ $datapengajuan->id }}"
+                                            tabindex="-1"
+                                            role="dialog"
+                                            aria-labelledby="staticBackdropLiveLabel"
+                                            aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-scrollable" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="staticBackdropLiveLabel">Unggah Dokumen Pengajuan</h5>
+                                                        <button
+                                                            type="button"
+                                                            class="btn-close"
+                                                            data-bs-dismiss="modal"
+                                                            aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="row d-flex justify-content-center">
+                                                            <div class="col-md-12">
+                                                                <div class="card">
+                                                                    <div class="card-body">
+                                                                        <form
+                                                                            action="/insertdokumen"
+                                                                            method="POST"
+                                                                            enctype="multipart/form-data"
+                                                                            class="forms-sample">
+                                                                            @csrf
+                                                                            <div class="form-group">
+                                                                                <div class="custom-file">
+                                                                                    <input type="file" name="dokumen" class="custom-file-input" id="dokumen">
+                                                                                        <label class="custom-file-label" for="customFile">Choose file</label>
+                                                                                    </div>
+                                                                                </div>
+                                                                                @foreach ($pengajuan as $datapengajuan) 
+                                                                                @if ($datapengajuan->user_id ==Auth::user()->id) 
+                                                                                <input  type="hidden"
+                                                                                    name="pengajuan_id"
+                                                                                    value={{
+                                                                                        $datapengajuan->id
+                                                                                    }}>
+                                                                                    <input  type="hidden"
+                                                                                    name="user_id"
+                                                                                    value={{
+                                                                                        Auth::user()->id
+                                                                                    }}>
+                                                                                    @endif
+                                                                                    @endforeach
+                                                                                    <button
+                                                                                        type="submit"
+                                                                                        class="btn btn-primary next action-button float-end"
+                                                                                        value="Submit">Submit</button>
 
-                                        <a href="editpengajuan/{{$datapengajuan->id}}" class="btn btn-primary btn-sm">
-                                            <i class="fa fa-edit"></i>
-                                        </a>
-                                        <a class="btn btn-danger delete btn-sm hapus" id-data="{{ $datapengajuan->id }}" nama-data="{{ $datapengajuan->mitra->namamitra }}" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" href="#">
-                                        {{-- <a href="#" class="btn btn-danger delete btn-sm"> --}}
-                                            <i class="fa fa-trash"></i>
-                                        </a>
+                                                                                </form>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
 
-                                    </td>
-                                   
-                                </tr>
-                                @endif
-                                @endforeach
-                             
-                                
-                            </tbody>
-                        </table>
+                                            <a href="editpengajuan/{{$datapengajuan->id}}" class="btn btn-primary btn-sm">
+                                                <i class="fa fa-edit"></i>
+                                            </a>
+                                            <a
+                                                class="btn btn-danger delete btn-sm hapus"
+                                                id-data="{{ $datapengajuan->id }}"
+                                                nama-data="{{ $datapengajuan->mitra->namamitra }}"
+                                                data-toggle="tooltip"
+                                                data-placement="top"
+                                                title=""
+                                                data-original-title="Delete"
+                                                href="#">
+                                                {{-- <a href="#" class="btn btn-danger delete btn-sm"> --}}
+                                                <i class="fa fa-trash"></i>
+                                            </a>
+
+                                        </td>
+
+                                    </tr>
+
+                                    @endif @endforeach
+
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-
-            <!-- Modal Scrollable -->
-            <div
-                class="modal fade"
-                id="pengajuan"
-                data-bs-backdrop="static" 
-                data-bs-keyboard="false"
-                tabindex="-1"
-                role="dialog"
-                aria-labelledby="staticBackdropLiveLabel"
-                aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="staticBackdropLiveLabel">Detail Pengajuan</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="table-responsive">
-                                <table
-                                    class="table align-items-center table-flush table-hover"
-                                    id="dataTableHover">
-                                    <thead></thead>
-                                    <tbody>
-                                        <tr>
-                                            <td class="font-size:3">
-                                                Nomor Dokumen
-                                            </td>
-                                            <td>:</td>
-                                            <td>52/UN27/KS/2021</td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                Tanggal Ajuan
-                                            </td>
-                                            <td>:</td>
-                                            <td>28 Maret 2022</td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                Tanggal Mulai Kerjasama
-                                            </td>
-                                            <td>:</td>
-                                            <td>28 Agustus 2022</td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                Tanggal Berakhir Kerjasama
-                                            </td>
-                                            <td>:</td>
-                                            <td>31 Desember 2022</td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                Masa Berlaku Kerjasama :
-                                            </td>
-                                            <td>:</td>
-                                            <td style="color: red">
-                                                Aktif (4 Bulan 3 Hari )</td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                Status Dokumen
-                                            </td>
-                                            <td>:</td>
-                                            <td>Dibawa Prodi</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                <!-- Modal Scrollable -->
+                <div
+                    class="modal fade"
+                    id="pengajuan"
+                    data-bs-backdrop="static"
+                    data-bs-keyboard="false"
+                    tabindex="-1"
+                    role="dialog"
+                    aria-labelledby="staticBackdropLiveLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="staticBackdropLiveLabel">Detail Pengajuan</h5>
+                                <button
+                                    type="button"
+                                    class="btn-close"
+                                    data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
                             </div>
+                            <div class="modal-body">
+                                <div class="table-responsive">
+                                    <table
+                                        class="table align-items-center table-flush table-hover"
+                                        id="dataTableHover">
+                                        <thead></thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="font-size:3">
+                                                    Nomor Dokumen
+                                                </td>
+                                                <td>:</td>
+                                                <td>52/UN27/KS/2021</td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    Tanggal Ajuan
+                                                </td>
+                                                <td>:</td>
+                                                <td>28 Maret 2022</td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    Tanggal Mulai Kerjasama
+                                                </td>
+                                                <td>:</td>
+                                                <td>28 Agustus 2022</td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    Tanggal Berakhir Kerjasama
+                                                </td>
+                                                <td>:</td>
+                                                <td>31 Desember 2022</td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    Masa Berlaku Kerjasama :
+                                                </td>
+                                                <td>:</td>
+                                                <td style="color: red">
+                                                    Aktif (4 Bulan 3 Hari )</td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    Status Dokumen
+                                                </td>
+                                                <td>:</td>
+                                                <td>Dibawa Prodi</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
 
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Close</button>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Close</button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-         
-
-            {{-- Modal Status --}}
-            <div
-                class="modal fade"
-                id="status"
-                tabindex="-1"
-                role="dialog"
-                aria-labelledby="staticBackdropLiveLabel"
-                aria-hidden="true">
-                <div class="modal-dialog modal-dialog-scrollable" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="staticBackdropLiveLabel">Status Pengajuan</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="row d-flex justify-content-center">
-                                <div class="col-md-12">
+                {{-- Modal Status --}}
+                <div
+                    class="modal fade"
+                    id="status"
+                    tabindex="-1"
+                    role="dialog"
+                    aria-labelledby="staticBackdropLiveLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-scrollable" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="staticBackdropLiveLabel">Status Pengajuan</h5>
+                                <button
+                                    type="button"
+                                    class="btn-close"
+                                    data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row d-flex justify-content-center">
+                                    <div class="col-md-12">
                                         <div class="card">
-                                           <div class="card-body">
-                                              <div class="iq-timeline0 m-0 d-flex align-items-center justify-content-between position-relative">
-                                                 <ul class="list-inline p-0 m-0">
-                                                    <li>
-                                                       <div class="timeline-dots timeline-dot1 border-primary text-primary"></div>
-                                                       <h6 class="float-left mb-1">Client Login</h6>
-                                                       <small class="float-right mt-1">24 November 2019</small>
-                                                       <div class="d-inline-block w-100">
-                                                          <p>Bonbon macaroon jelly beans gummi bears jelly lollipop apple</p>
-                                                       </div>
-                                                    </li>
-                                                    <li>
-                                                       <div class="timeline-dots timeline-dot1 border-success text-success"></div>
-                                                       <h6 class="float-left mb-1">Scheduled Maintenance</h6>
-                                                       <small class="float-right mt-1">23 November 2019</small>
-                                                       <div class="d-inline-block w-100">
-                                                          <p>Bonbon macaroon jelly beans gummi bears jelly lollipop apple</p>
-                                                       </div>
-                                                    </li>
-                                                    <li>
-                                                       <div class="timeline-dots timeline-dot1 border-danger text-danger"></div>
-                                                       <h6 class="float-left mb-1">Dev Meetup</h6>
-                                                       <small class="float-right mt-1">20 November 2019</small>
-                                                       <div class="d-inline-block w-100">
-                                                          <p>Bonbon macaroon jelly beans <a href="#">gummi bears</a>gummi bears jelly lollipop apple</p>
-                                                          <div class="iq-media-group iq-media-group-1">
-                                                             <a href="#" class="iq-media-1">
-                                                                <div class="icon iq-icon-box-3 rounded-pill">SP</div>
-                                                             </a>
-                                                             <a href="#" class="iq-media-1">
-                                                                <div class="icon iq-icon-box-3 rounded-pill">PP</div>
-                                                             </a>
-                                                             <a href="#" class="iq-media-1">
-                                                                <div class="icon iq-icon-box-3 rounded-pill">MM</div>
-                                                             </a>
-                                                             <a href="#" class="iq-media-1">
-                                                                <div class="icon iq-icon-box-3 rounded-pill">SP</div>
-                                                             </a>
-                                                             <a href="#" class="iq-media-1">
-                                                                <div class="icon iq-icon-box-3 rounded-pill">PP</div>
-                                                             </a>
-                                                             <a href="#" class="iq-media-1">
-                                                                <div class="icon iq-icon-box-3 rounded-pill">MM</div>
-                                                             </a>
-                                                          </div>
-                                                       </div>
-                                                    </li>
-                                                    <li>
-                                                       <div class="timeline-dots timeline-dot1 border-primary text-primary"></div>
-                                                       <h6 class="float-left mb-1">Client Call</h6>
-                                                       <small class="float-right mt-1">19 November 2019</small>
-                                                       <div class="d-inline-block w-100">
-                                                          <p>Bonbon macaroon jelly beans gummi bears jelly lollipop apple</p>
-                                                       </div>
-                                                    </li>
-                                                    <li>
-                                                       <div class="timeline-dots timeline-dot1 border-warning text-warning"></div>
-                                                       <h6 class="float-left mb-1">Mega event</h6>
-                                                       <small class="float-right mt-1">15 November 2019</small>
-                                                       <div class="d-inline-block w-100">
-                                                          <p>Bonbon macaroon jelly beans gummi bears jelly lollipop apple</p>
-                                                       </div>
-                                                    </li>
-                                                 </ul>
-                                              </div>
-                                           </div>
+                                            <div class="card-body">
+                                                <div
+                                                    class="iq-timeline0 m-0 d-flex align-items-center justify-content-between position-relative">
+                                                    <ul class="list-inline p-0 m-0">
+                                                        <li>
+                                                            <div class="timeline-dots timeline-dot1 border-primary text-primary"></div>
+                                                            <h6 class="float-left mb-1">Client Login</h6>
+                                                            <small class="float-right mt-1">24 November 2019</small>
+                                                            <div class="d-inline-block w-100">
+                                                                <p>Bonbon macaroon jelly beans gummi bears jelly lollipop apple</p>
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="timeline-dots timeline-dot1 border-success text-success"></div>
+                                                            <h6 class="float-left mb-1">Scheduled Maintenance</h6>
+                                                            <small class="float-right mt-1">23 November 2019</small>
+                                                            <div class="d-inline-block w-100">
+                                                                <p>Bonbon macaroon jelly beans gummi bears jelly lollipop apple</p>
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="timeline-dots timeline-dot1 border-danger text-danger"></div>
+                                                            <h6 class="float-left mb-1">Dev Meetup</h6>
+                                                            <small class="float-right mt-1">20 November 2019</small>
+                                                            <div class="d-inline-block w-100">
+                                                                <p>Bonbon macaroon jelly beans
+                                                                    <a href="#">gummi bears</a>gummi bears jelly lollipop apple</p>
+                                                                <div class="iq-media-group iq-media-group-1">
+                                                                    <a href="#" class="iq-media-1">
+                                                                        <div class="icon iq-icon-box-3 rounded-pill">SP</div>
+                                                                    </a>
+                                                                    <a href="#" class="iq-media-1">
+                                                                        <div class="icon iq-icon-box-3 rounded-pill">PP</div>
+                                                                    </a>
+                                                                    <a href="#" class="iq-media-1">
+                                                                        <div class="icon iq-icon-box-3 rounded-pill">MM</div>
+                                                                    </a>
+                                                                    <a href="#" class="iq-media-1">
+                                                                        <div class="icon iq-icon-box-3 rounded-pill">SP</div>
+                                                                    </a>
+                                                                    <a href="#" class="iq-media-1">
+                                                                        <div class="icon iq-icon-box-3 rounded-pill">PP</div>
+                                                                    </a>
+                                                                    <a href="#" class="iq-media-1">
+                                                                        <div class="icon iq-icon-box-3 rounded-pill">MM</div>
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="timeline-dots timeline-dot1 border-primary text-primary"></div>
+                                                            <h6 class="float-left mb-1">Client Call</h6>
+                                                            <small class="float-right mt-1">19 November 2019</small>
+                                                            <div class="d-inline-block w-100">
+                                                                <p>Bonbon macaroon jelly beans gummi bears jelly lollipop apple</p>
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="timeline-dots timeline-dot1 border-warning text-warning"></div>
+                                                            <h6 class="float-left mb-1">Mega event</h6>
+                                                            <small class="float-right mt-1">15 November 2019</small>
+                                                            <div class="d-inline-block w-100">
+                                                                <p>Bonbon macaroon jelly beans gummi bears jelly lollipop apple</p>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
                                         </div>
-                                     </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -278,7 +375,7 @@
                 </div>
             </div>
 
-{{-- alert Delete Pengajuan --}}
+            {{-- alert Delete Pengajuan --}}
             <script>
                 $('.hapus').click(function () {
                     var pengajuanid = $(this).attr('data-id');
@@ -300,4 +397,4 @@
                 });
             </script>
 
-@include('dosen/layoutsDosen/footer') 
+            @include('dosen/layoutsDosen/footer')
