@@ -68,7 +68,7 @@
                                         $sudahUnggah = 0;
                                             foreach($dokumen as $d){
                                                 if($d->pengajuan_id == $datapengajuan->id){
-$sudahUnggah += 1;
+                                                    $sudahUnggah += 1;
                                                 }
                                             }
                                             ?>
@@ -117,7 +117,7 @@ $sudahUnggah += 1;
                                                             aria-label="Close"></button>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <div class="row d-flex justify-content-center">
+                                                        <div class="row d-flex justify-content">
                                                             <div class="col-md-12">
                                                                 <div class="card">
                                                                     <div class="card-body">
@@ -128,11 +128,8 @@ $sudahUnggah += 1;
                                                                             class="forms-sample">
                                                                             @csrf
                                                                             <div class="form-group">
-                                                                                <div class="custom-file">
-                                                                                    <input type="file" name="dokumen" class="custom-file-input" id="dokumen">
-                                                                                        <label class="custom-file-label" for="customFile">Choose file</label>
-                                                                                    </div>
-                                                                                </div>
+                                                                                <input class="form-control" type="file" name="dokumen" placeholder="a" id="customFile2">
+                                                                            </div>
                                                                                 @foreach ($pengajuan as $datapengajuan) 
                                                                                 @if ($datapengajuan->user_id ==Auth::user()->id) 
                                                                                 <input  type="hidden"
@@ -147,6 +144,7 @@ $sudahUnggah += 1;
                                                                                     }}>
                                                                                     @endif
                                                                                     @endforeach
+                                                                                    <br/>
                                                                                     <button
                                                                                         type="submit"
                                                                                         class="btn btn-primary next action-button float-end"
@@ -299,67 +297,32 @@ $sudahUnggah += 1;
                                                 <div
                                                     class="iq-timeline0 m-0 d-flex align-items-center justify-content-between position-relative">
                                                     <ul class="list-inline p-0 m-0">
-                                                        <li>
+                                                        @foreach ($trxstatus as $a)
+                                                        @if ($datapengajuan->id == $a->pengajuan_id)
+                                                        
+                                                        <li>  
                                                             <div class="timeline-dots timeline-dot1 border-primary text-primary"></div>
-                                                            <h6 class="float-left mb-1">Client Login</h6>
-                                                            <small class="float-right mt-1">24 November 2019</small>
-                                                            <div class="d-inline-block w-100">
-                                                                <p>Bonbon macaroon jelly beans gummi bears jelly lollipop apple</p>
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div class="timeline-dots timeline-dot1 border-success text-success"></div>
-                                                            <h6 class="float-left mb-1">Scheduled Maintenance</h6>
-                                                            <small class="float-right mt-1">23 November 2019</small>
-                                                            <div class="d-inline-block w-100">
-                                                                <p>Bonbon macaroon jelly beans gummi bears jelly lollipop apple</p>
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div class="timeline-dots timeline-dot1 border-danger text-danger"></div>
-                                                            <h6 class="float-left mb-1">Dev Meetup</h6>
-                                                            <small class="float-right mt-1">20 November 2019</small>
-                                                            <div class="d-inline-block w-100">
-                                                                <p>Bonbon macaroon jelly beans
-                                                                    <a href="#">gummi bears</a>gummi bears jelly lollipop apple</p>
-                                                                <div class="iq-media-group iq-media-group-1">
-                                                                    <a href="#" class="iq-media-1">
-                                                                        <div class="icon iq-icon-box-3 rounded-pill">SP</div>
-                                                                    </a>
-                                                                    <a href="#" class="iq-media-1">
-                                                                        <div class="icon iq-icon-box-3 rounded-pill">PP</div>
-                                                                    </a>
-                                                                    <a href="#" class="iq-media-1">
-                                                                        <div class="icon iq-icon-box-3 rounded-pill">MM</div>
-                                                                    </a>
-                                                                    <a href="#" class="iq-media-1">
-                                                                        <div class="icon iq-icon-box-3 rounded-pill">SP</div>
-                                                                    </a>
-                                                                    <a href="#" class="iq-media-1">
-                                                                        <div class="icon iq-icon-box-3 rounded-pill">PP</div>
-                                                                    </a>
-                                                                    <a href="#" class="iq-media-1">
-                                                                        <div class="icon iq-icon-box-3 rounded-pill">MM</div>
-                                                                    </a>
+                                                            @foreach ($status as $item)
+                                                            @if ($a->status_id == $item->id)
+                                                            <h6 class="float-left mb-1">{{$item->namastatus}}</h6>
+                                                            @endif
+                                                            @endforeach
+                                    
+                                                            <?php
+                                                            foreach($user as $p){
+                                                                if($a->created_by == $p->id){?>
+                                                                <div class="d-inline-block w-100">
+                                                                <p>
+                                                                  Created by {{  $p->name}}<br>
+                                                                  {{$a->created_at}}</p> 
                                                                 </div>
-                                                            </div>
+                                                               <?php }
+                                                            }
+                                                            ?>
+
                                                         </li>
-                                                        <li>
-                                                            <div class="timeline-dots timeline-dot1 border-primary text-primary"></div>
-                                                            <h6 class="float-left mb-1">Client Call</h6>
-                                                            <small class="float-right mt-1">19 November 2019</small>
-                                                            <div class="d-inline-block w-100">
-                                                                <p>Bonbon macaroon jelly beans gummi bears jelly lollipop apple</p>
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div class="timeline-dots timeline-dot1 border-warning text-warning"></div>
-                                                            <h6 class="float-left mb-1">Mega event</h6>
-                                                            <small class="float-right mt-1">15 November 2019</small>
-                                                            <div class="d-inline-block w-100">
-                                                                <p>Bonbon macaroon jelly beans gummi bears jelly lollipop apple</p>
-                                                            </div>
-                                                        </li>
+                                                        @endif
+                                                        @endforeach
                                                     </ul>
                                                 </div>
                                             </div>

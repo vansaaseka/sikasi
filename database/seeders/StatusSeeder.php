@@ -17,25 +17,35 @@ class StatusSeeder extends Seeder
         {
             $posts = [
                 [
-                    'namastatus' => 'Draft Diajukan',
+                    'namastatus' => 'Ajuan Diterima',
                   ],
                 [
-                  'namastatus' => 'Ajuan Diterima',
+                  'namastatus' => 'Dokumen direview BPU',
                 ],
                 [
-                  'namastatus' => 'Draft direview DKPI UNS',
+                  'namastatus' => 'Dokumen Selesai direview BPU',
+                ],
+                
+                [
+                    'namastatus' => 'Tanda tangan Dekan',
                 ],
                 [
-                    'namastatus' => 'Draft selesai direview',
+                    'namastatus' => 'Dokumen telah ditandatangani Dekan',
                 ],
                 [
-                    'namastatus' => 'Tanda tangan mitra',
+                    'namastatus' => 'Tanda tangan Mitra',
                 ],
                 [
-                    'namastatus' => 'Dokumen telah ditandatangani mitra',
+                    'namastatus' => 'Dokumen telah ditandatangani Mitra',
                 ],
                 [
-                    'namastatus' => 'Tanda tangan WR4',
+                    'namastatus' => 'Pengajuan tanda tangan WR 4',
+                ],
+                [
+                    'namastatus' => 'Dokumen direview DKPI',
+                ],
+                [
+                    'namastatus' => 'Tanda tangan WR 4',
                 ],
                 [
                     'namastatus' => 'Selesai',

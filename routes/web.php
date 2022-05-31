@@ -108,7 +108,6 @@ Route::resource('template', TemplateController::class);
 route::get('/hapustemplate/{id}',[TemplateController::class,"hapustemplate"])->name('hapustemplate');
 
 //Profile Dosen
-
 route::get('/editprofile',[ProfileController::class,"editprofile"])->name('editprofile');
 route::post('/insertprofile',[ProfileController::class,"insertprofile"])->name('insertprofile');
 
@@ -125,8 +124,8 @@ route::post('/updatepengajuan/{id}',[PengajuanController::class,"updatepengajuan
 
 //Status Verifikasi
 route::get('/verifikasi',[StatusController::class,"verifikasi"])->name('verifikasi');
-route::get('/upgradepengajuan',[StatusController::class,"upgradepengajuan"])->name('upgradepengajuan');
-route::post('/insertupgrade',[StatusController::class,"insertupgrade"])->name('insertupgrade');
+route::get('/newstatus',[StatusController::class,"newstatus"])->name('newstatus');
+route::post('/insertnewstatus',[StatusController::class,"insertnewstatus"])->name('insertnewstatus');
 
 
 //Tambah Status Admin

@@ -19,7 +19,7 @@ class DokumenController extends Controller
             // ddd($request);
             //membuat validasi, jika tidak diisi maka akan menampilkan pesan error
             $this->validate($request, [
-                'dokumen'          => 'mimes:doc,docx,pdf,xls,xlxs',
+                'dokumen'=> 'mimes:doc,docx,pdf,xls,xlxs',
             ],
        
         );
@@ -40,12 +40,6 @@ class DokumenController extends Controller
     
             //kembali ke halaman sebelumnya
             return back()->with('toast_success', 'Data Berhasil Tersimpan');
-        
-    
-
-    //     $this->validate($request, [
-    //         'dokumen' => 'required|mimes:doc,docx,rtf',
-    //     ]);
    
     // // return redirect()->route('pengajuan')->with('success', 'Data Berhasil Ditambahkan');
     }

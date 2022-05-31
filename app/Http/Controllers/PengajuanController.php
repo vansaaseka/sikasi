@@ -6,12 +6,13 @@ use App\Models\User;
 use App\Models\Mitra;
 use App\Models\Prodi;
 use App\Models\Status;
+use App\Models\Dokumen;
 use App\Models\Kategori;
 use App\Models\Pengajuan;
-use App\Models\Dokumen;
+use App\Models\Trxstatus;
 use App\Models\RuangLingkup;
-use Illuminate\Http\Request;
 
+use Illuminate\Http\Request;
 use App\Models\KategoriMitra;
 use Illuminate\Support\Facades\Auth;
 
@@ -20,8 +21,11 @@ class PengajuanController extends Controller
     public function index(){
         $pengajuan = Pengajuan::all();
         $mitra = Mitra::all();
+        $user = User::all();
         $dokumen = Dokumen::all();
-        return view('dosen\Pengajuan\detailpengajuan' , compact('pengajuan' , 'mitra','dokumen'));
+        $status = Status::all();
+        $trxstatus = Trxstatus::all();
+        return view('dosen\Pengajuan\detailpengajuan' , compact('pengajuan' , 'mitra','dokumen', 'trxstatus', 'status','user'));
         }
         
 
