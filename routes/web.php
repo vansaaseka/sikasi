@@ -121,7 +121,7 @@ route::get('/tambahpengajuan',[PengajuanController::class,"tambahpengajuan"])->n
 route::post('/insertpengajuan',[PengajuanController::class,"insertpengajuan"])->name('insertpengajuan');
 route::get('/editpengajuan/{id}',[PengajuanController::class,"editpengajuan"])->name('editpengajuan');
 route::post('/updatepengajuan/{id}',[PengajuanController::class,"updatepengajuan"])->name('updatepengajuan');
-route::get('/hapuspengajuan/{id}',[DrafController::class,"hapuspengajuan"])->name('hapuspengajuan');
+route::get('/hapuspengajuan/{id}',[PengajuanController::class,"hapuspengajuan"])->name('hapuspengajuan');
 
 //Status Verifikasi
 route::get('/verifikasi',[StatusController::class,"verifikasi"])->name('verifikasi');

@@ -3,10 +3,14 @@
 namespace App\Http\Controllers\Auth;
 
 use auth;
+use App\Models\Prodi;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Foundation\Auth\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use Illuminate\Http\Request;
+
+
 class LoginController extends Controller
 {
     /*
@@ -56,13 +60,18 @@ class LoginController extends Controller
     // }
     public function login(Request $request){
         $input = $request->all();
+        $profil = User::all();
+        $prodi = Prodi::all();
+
         $this->validate($request, [
             'email' => 'required|email',
             'password' => 'required'
         ]);
         if (auth()->attempt(array('email' => $input['email'], 'password' => $input['password']))) {
 
-            if (auth()->user()->role == 3 && auth()->user()->status == 1) {
+      
+         
+            if (empty(auth()->user()->nomorhp) && auth()->user()->role == 3 && auth()->user()->status == 1) {
                 return view('reviewer/layoutReviewer');
             } elseif (auth()->user()->role == 3 && auth()->user()->status == 0) {
                 (auth()->logout());
@@ -70,7 +79,9 @@ class LoginController extends Controller
                 return view('admin/layoutAdmin');
             } elseif (auth()->user()->role == 1 && auth()->user()->status == 0) {
                 (auth()->logout());
-            }  elseif (auth()->user()->role == 0 && auth()->user()->status == 1) {
+            } elseif ( empty(auth()->user()->nomorhp) && auth()->user()->role == 0 && auth()->user()->status == 1) {
+                return view('dosen\Profile\editprofile', compact( 'profil' ,'prodi'));
+            } elseif ( !empty(auth()->user()->nomorhp) && auth()->user()->role == 0 && auth()->user()->status == 1) {
                 return view('dosen/layoutDosen');
             } elseif (auth()->user()->role == 0 && auth()->user()->status == 0) {
                 (auth()->logout());
@@ -79,13 +90,10 @@ class LoginController extends Controller
             } elseif (auth()->user()->role == 2 && auth()->user()->status == 0) {
                 (auth()->logout());
            
-            // } elseif (auth()->user()->role == 0 && auth()->user()->status == 1) {
-            //     return redirect()->route('dashboardpelakuusaha');
-            // } elseif (auth()->user()->role == 0 && auth()->user()->status == 0) {
-            //     (auth()->logout());
             }
         } else {
             return redirect()->route('login')->with('error', 'Email and password are wrong');
         }
+        
     }
 }
