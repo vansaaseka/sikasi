@@ -107,7 +107,7 @@
                 </ul>
             </li>
 
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a class="nav-link {{ 'unduhtemplate' == request()->path() ? 'active' : '' }}" href="/unduhtemplate">
                     <i class="icon">
                         <svg width="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -125,7 +125,7 @@
                     </i>
                     <span class="item-name">Unduh Template</span>
                 </a>
-            </li>
+            </li> --}}
 
 
 

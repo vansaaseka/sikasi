@@ -1,41 +1,41 @@
-
-
 <!doctype html>
 <html lang="en" dir="ltr">
-  <head>
+
+<head>
     <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-      <title>SIKASI</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>SIKASI</title>
 
-        <!-- Select2 -->
-        
-        <link href="{{asset('HOPE/assets/vendor/select2/dist/css/select2.min.css')}}" rel="stylesheet" type="text/css">
-        <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-      
-      <!-- Favicon -->
-      <link rel="shortcut icon" href="{{asset('HOPE/assets/images/favicon.ico')}}">
-      
-      <!-- Library / Plugin Css Build -->
-      <link rel="stylesheet" href="{{asset('HOPE/assets/css/core/libs.min.css')}}">
-      
-      <!-- Aos Animation Css -->
-      <link rel="stylesheet" href="{{asset('HOPE/assets/vendor/aos/dist/aos.css"')}}">
-      
-      <!-- Hope Ui Design System Css -->
-      <link rel="stylesheet" href="{{asset('HOPE/assets/css/hope-ui.min.css?v=1.1.0" ')}}">
-      
-      <!-- Custom Css -->
-      <link rel="stylesheet" href="{{asset('HOPE/assets/css/custom.min.css?v=1.1.0"')}}">
-      
-      <!-- Dark Css -->
-      <link rel="stylesheet" href="{{asset('HOPE/assets/css/dark.min.css')}}">
-      
-      <!-- RTL Css -->
-      <link rel="stylesheet" href="{{asset('HOPE/assets/css/rtl.min.css')}}">
+    <!-- Select2 -->
 
-  </head>
-  <body class="  ">
+    <link href="{{ asset('HOPE/assets/vendor/select2/dist/css/select2.min.css') }}" rel="stylesheet" type="text/css">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="{{ asset('HOPE/assets/images/favicon.ico') }}">
+
+    <!-- Library / Plugin Css Build -->
+    <link rel="stylesheet" href="{{ asset('HOPE/assets/css/core/libs.min.css') }}">
+
+    <!-- Aos Animation Css -->
+    <link rel="stylesheet" href="{{ asset('HOPE/assets/vendor/aos/dist/aos.css"') }}">
+
+    <!-- Hope Ui Design System Css -->
+    <link rel="stylesheet" href="{{ asset('HOPE/assets/css/hope-ui.min.css?v=1.1.0" ') }}">
+
+    <!-- Custom Css -->
+    <link rel="stylesheet" href="{{ asset('HOPE/assets/css/custom.min.css?v=1.1.0"') }}">
+
+    <!-- Dark Css -->
+    <link rel="stylesheet" href="{{ asset('HOPE/assets/css/dark.min.css') }}">
+
+    <!-- RTL Css -->
+    <link rel="stylesheet" href="{{ asset('HOPE/assets/css/rtl.min.css') }}">
+
+</head>
+
+<body class="  ">
     {{-- <!-- loader Start -->
     <div id="loading">
       <div class="loader simple-loader">
@@ -43,24 +43,19 @@
       </div>    
     </div>
     <!-- loader END --> --}}
-    
+
     <aside class="sidebar sidebar-default navs-rounded-all ">
         <div class="sidebar-header d-flex align-items-center justify-content-start">
-            <a href="{{asset('"HOPE/dashboard/index.html')}}" class="navbar-brand">
-                <!--Logo start-->
-                <svg width="30" class="" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect x="-0.757324" y="19.2427" width="28" height="4" rx="2" transform="rotate(-45 -0.757324 19.2427)" fill="currentColor"/>
-                    <rect x="7.72803" y="27.728" width="28" height="4" rx="2" transform="rotate(-45 7.72803 27.728)" fill="currentColor"/>
-                    <rect x="10.5366" y="16.3945" width="16" height="4" rx="2" transform="rotate(45 10.5366 16.3945)" fill="currentColor"/>
-                    <rect x="10.5562" y="-0.556152" width="28" height="4" rx="2" transform="rotate(45 10.5562 -0.556152)" fill="currentColor"/>
-                </svg>
-                <!--logo End-->            <h4 class="logo-title">SIKASI</h4>
+            <a href="{{ asset('"HOPE/dashboard/index.html') }}" class="navbar-brand">
+                <img src="SIKASI.png" width="162" height="75">
             </a>
             <div class="sidebar-toggle" data-toggle="sidebar" data-active="true">
                 <i class="icon">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M4.25 12.2744L19.25 12.2744" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                        <path d="M10.2998 18.2988L4.2498 12.2748L10.2998 6.24976" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <path d="M4.25 12.2744L19.25 12.2744" stroke="currentColor" stroke-width="1.5"
+                            stroke-linecap="round" stroke-linejoin="round"></path>
+                        <path d="M10.2998 18.2988L4.2498 12.2748L10.2998 6.24976" stroke="currentColor"
+                            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
                 </i>
             </div>
