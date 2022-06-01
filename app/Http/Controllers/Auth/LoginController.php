@@ -62,8 +62,10 @@ class LoginController extends Controller
         ]);
         if (auth()->attempt(array('email' => $input['email'], 'password' => $input['password']))) {
 
-            if (auth()->user()->role == 3) {
-                return view('dosen/layoutDosen');
+            if (auth()->user()->role == 3 && auth()->user()->status == 1) {
+                return view('reviewer/layoutReviewer');
+            } elseif (auth()->user()->role == 3 && auth()->user()->status == 0) {
+                (auth()->logout());
             } elseif (auth()->user()->role == 1 && auth()->user()->status == 1) {
                 return view('admin/layoutAdmin');
             } elseif (auth()->user()->role == 1 && auth()->user()->status == 0) {

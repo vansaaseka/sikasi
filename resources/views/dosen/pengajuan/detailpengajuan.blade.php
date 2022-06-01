@@ -42,7 +42,7 @@
                             </tfoot>
 
                             <tbody>
-                                @php $no = 1; @endphp {{-- @foreach (-diambil dari isi comapct di controller- as -namanya bebas-)  --}}
+                                @php $no = 1; @endphp 
 
                                 @foreach ($pengajuan as $datapengajuan) @if ($datapengajuan->user_id ==
                                 Auth::user()->id)
@@ -57,20 +57,20 @@
                                             type="button"
                                             class="btn btn-outline-info dropdown-toggle"
                                             data-bs-toggle="modal"
-                                            data-bs-target="#status"
-                                            id="#modalCenter">
-                                            Tanda Tangan Mitra
+                                            data-bs-target="#status{{ $datapengajuan->id }}"
+                                            id="#status{{ $datapengajuan->id }}">
+                                           Status
                                         </button>
                                     </td>
-                                    <td>-</td>
+                                    
+                                    <td>- </td>
                                     <td>
                                         <?php
                                         $sudahUnggah = 0;
                                             foreach($dokumen as $d){
                                                 if($d->pengajuan_id == $datapengajuan->id){
                                                     $sudahUnggah += 1;
-                                                }
-                                            }
+                                           
                                             ?>
 
                                             @if($sudahUnggah==0)
@@ -87,6 +87,10 @@
                                         
                                         <a href="dokumenkerjasama/{{$d->dokumen}}">{{$d->dokumen}}</a>
                                         @endif
+                                        <?php
+                                             }
+                                            }
+                                        ?>
                                     </td>
 
                                     <td>
@@ -99,7 +103,7 @@
                                             <i class="fa fa-info-circle"></i>
                                         </button>
                                         {{-- Modal Dokumen --}}
-                                        <div
+                                     <div
                                             class="modal fade"
                                             id="modaldokumen{{ $datapengajuan->id }}"
                                             tabindex="-1"
@@ -127,7 +131,10 @@
                                                                             enctype="multipart/form-data"
                                                                             class="forms-sample">
                                                                             @csrf
-                                                                            <div class="form-group">
+
+                                                                        <div class="form-group">
+                                                                            <div class="form-group"> 
+                                                                                {{-- <label class="form-label" for="exampleInputText1">Unggah Dokumen </label> --}}
                                                                                 <input class="form-control" type="file" name="dokumen" placeholder="a" id="customFile2">
                                                                             </div>
                                                                                 @foreach ($pengajuan as $datapengajuan) 
@@ -160,6 +167,72 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                         </div>
+{{-- Modal Status --}}
+@foreach ($pengajuan as $datapengajuan) 
+<div
+class="modal fade"
+id="status{{ $datapengajuan->id }}"
+tabindex="-1"
+role="dialog"
+aria-labelledby="staticBackdropLiveLabel"
+aria-hidden="true">
+<div class="modal-dialog modal-dialog-scrollable" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLiveLabel">Status Pengajuan</h5>
+            <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <div class="row d-flex justify-content-center">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div
+                                class="iq-timeline0 m-0 d-flex align-items-center justify-content-between position-relative">
+                                <ul class="list-inline p-0 m-0">
+                                                                       @foreach ($trxstatus as $a)
+                                    @if ($datapengajuan->id == $a->pengajuan_id)
+                                    
+                                    <li>  
+                                        <div class="timeline-dots timeline-dot1 border-primary text-primary"></div>
+                                        @foreach ($status as $item)
+                                        @if ($a->status_id == $item->id)
+                                        <h6 class="float-left mb-1">{{$item->namastatus}}</h6>
+                                        @endif
+                                        @endforeach
+                
+                                        <?php
+                                        foreach($user as $p){
+                                            if($a->created_by == $p->id){?>
+                                            <div class="d-inline-block w-100">
+                                            <p>
+                                              Created by {{  $p->name}}<br>
+                                              {{$a->created_at}}</p> 
+                                            </div>
+                                           <?php }
+                                        }
+                                        ?>
+
+                                    </li>
+                                    @endif
+                                    @endforeach
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+@endforeach
+ 
 
                                             <a href="editpengajuan/{{$datapengajuan->id}}" class="btn btn-primary btn-sm">
                                                 <i class="fa fa-edit"></i>
@@ -173,7 +246,6 @@
                                                 title=""
                                                 data-original-title="Delete"
                                                 href="#">
-                                                {{-- <a href="#" class="btn btn-danger delete btn-sm"> --}}
                                                 <i class="fa fa-trash"></i>
                                             </a>
 
@@ -189,7 +261,7 @@
                     </div>
                 </div>
 
-                <!-- Modal Scrollable -->
+                <!-- Modal Detail -->
                 <div
                     class="modal fade"
                     id="pengajuan"
@@ -271,78 +343,14 @@
                     </div>
                 </div>
 
-                {{-- Modal Status --}}
-                <div
-                    class="modal fade"
-                    id="status"
-                    tabindex="-1"
-                    role="dialog"
-                    aria-labelledby="staticBackdropLiveLabel"
-                    aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-scrollable" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="staticBackdropLiveLabel">Status Pengajuan</h5>
-                                <button
-                                    type="button"
-                                    class="btn-close"
-                                    data-bs-dismiss="modal"
-                                    aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="row d-flex justify-content-center">
-                                    <div class="col-md-12">
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <div
-                                                    class="iq-timeline0 m-0 d-flex align-items-center justify-content-between position-relative">
-                                                    <ul class="list-inline p-0 m-0">
-                                                        @foreach ($trxstatus as $a)
-                                                        @if ($datapengajuan->id == $a->pengajuan_id)
-                                                        
-                                                        <li>  
-                                                            <div class="timeline-dots timeline-dot1 border-primary text-primary"></div>
-                                                            @foreach ($status as $item)
-                                                            @if ($a->status_id == $item->id)
-                                                            <h6 class="float-left mb-1">{{$item->namastatus}}</h6>
-                                                            @endif
-                                                            @endforeach
-                                    
-                                                            <?php
-                                                            foreach($user as $p){
-                                                                if($a->created_by == $p->id){?>
-                                                                <div class="d-inline-block w-100">
-                                                                <p>
-                                                                  Created by {{  $p->name}}<br>
-                                                                  {{$a->created_at}}</p> 
-                                                                </div>
-                                                               <?php }
-                                                            }
-                                                            ?>
-
-                                                        </li>
-                                                        @endif
-                                                        @endforeach
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Close</button>
-                        </div>
-                    </div>
-                </div>
+               
             </div>
 
             {{-- alert Delete Pengajuan --}}
             <script>
                 $('.hapus').click(function () {
-                    var pengajuanid = $(this).attr('data-id');
-                    var namapengajuan = $(this).attr('data-nama');
+                    var pengajuanid = $(this).attr('id-data');
+                    var namapengajuan = $(this).attr('nama-data');
                     swal({
                         title: "Apakah kamu yakin??",
                         text: "Menghapus data pengajuan dengan mitra " + namapengajuan + " ",

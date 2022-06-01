@@ -31,7 +31,7 @@
                                 @php
                                 $no = 1;  
                                 @endphp
-                                {{-- @foreach (-diambil dari isi comapct di controller- as -namanya bebas-)  --}}
+                           
                                 @foreach ($status as $data) 
                             
 

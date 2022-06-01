@@ -25,7 +25,7 @@
                             </thead>
                             <tbody>
                                 @php $no = 1; @endphp
-                                {{-- @foreach (-diambil dari isi comapct di controller- as -namanya bebas-)  --}}
+                             
                                 @foreach ($template as $data)
 
                                 <tr role="row" class="odd">

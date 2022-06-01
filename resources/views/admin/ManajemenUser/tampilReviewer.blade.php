@@ -42,7 +42,7 @@
                                 <tbody>
 
                                     @php $no = 1; @endphp
-                                    {{-- @foreach (-diambil dari isi comapct di controller- as -namanya bebas-)  --}}
+                                
                                     @foreach ($reviewer as $account) @if ($account->role == 3)
                                     <tr role="row" class="odd">
                                         <th scope="row">{{ $no++ }}</th>

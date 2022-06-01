@@ -23,7 +23,6 @@ class DokumenController extends Controller
             ],
        
         );
-
              //mengambil data file yang diupload
              $dokumen           = $request->file('dokumen');
              //mengambil nama file
@@ -50,16 +49,16 @@ class DokumenController extends Controller
     return view('admin\Draf\editdraf', compact('draf'));
     }
 
-    public function updatedraf(Request $request, $id){
-    $draf = Draf::find($id);
-    $draf->update($request->all());
-    if ($request->hasFile('filedraf')) 
+    public function updatedokumen(Request $request, $id){
+    $dokumen = Dokumen::find($id);
+    $dokumen->update($request->all());
+    if ($request->hasFile('dokumen')) 
         {
-            $request->file('filedraf')->move('filedrafkerjasama/', $request->file('filedraf')->getClientOriginalName());
-            $draf->filedraf = $request->file('filedraf')->getClientOriginalName();
-            $draf->save();
+            $request->file('dokumen')->move('dokumenkerjasama/', $request->file('dokumen')->getClientOriginalName());
+            $dokumen->dokumen = $request->file('dokumen')->getClientOriginalName();
+            $dokumen->save();
         }
-    return redirect()->route('draf')->with('toast_success','Data Berhasil Diupdate');
+        return back()->with('toast_success','Data Berhasil Diupdate');
     }
 
     public function hapusdraf($id){

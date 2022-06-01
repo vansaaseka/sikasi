@@ -23,7 +23,7 @@
                                 <th>Mitra</th>
                                 <th>Status</th>
                                 <th>Catatan</th>
-                                <th>Dokumen Final</th>
+                                <th>Dokumen Kerjasama</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -44,13 +44,14 @@
                                 @php 
                                 $no = 1; 
                                 @endphp 
-                                {{-- @foreach (-diambil dari isi comapct di controller- as -namanya bebas-)  --}}
+                             
                                
                                 @foreach ($pengajuan as $datapengajuan) 
                                 <tr role="row" class="odd text-center">
                                     <td scope="row">{{ $no++ }}</td>
                                     
                                     <td>{{  $datapengajuan->user->name }}</td>
+                                    <td>
                                     <?php
                                     foreach($prodi as $p){
                                         if($p->id == $datapengajuan->user->prodi_id){?>
@@ -58,38 +59,60 @@
                                        <?php }
                                     }
                                     ?>
+                                    </td>
                                     <td>{{ date('Y', strtotime($datapengajuan->tanggalmulai)) }}</td>
                                     
                                     <td>{{ $datapengajuan->mitra->namamitra}}</td>
-                                   <td>
+                                    <td>
                                         <button
                                             type="button"
-                                            class="btn btn-outline-secondary"
+                                            class="btn btn-outline-info dropdown-toggle"
                                             data-bs-toggle="modal"
-                                            data-bs-target="#modalstatus{{ $datapengajuan->id }}"
-                                            id="#modalstatus{{ $datapengajuan->id }}">
-                                            Status
+                                            data-bs-target="#status{{ $datapengajuan->id }}"
+                                            id="#status{{ $datapengajuan->id }}">
+                                           Status
+                                           
                                         </button>
-                                   </td>
-                                    <td>-</td>
+                                          <i class="fa fa-edit" 
+                                                    data-bs-toggle="modal"
+                                                    data-bs-target="#modalstatus{{ $datapengajuan->id }}"
+                                                    id="#modalstatus{{ $datapengajuan->id }}">
+                                                </i>
+                                    </td>
+                                   
                                     <td>
-                                        <a href="dokumenkerjasama/{{$datapengajuan->dokumen}}">{{$datapengajuan->dokumen}}</a>
+                                       {{-- {{  $datapengajuan->trxstatus->catatan}} --}}
+                                      <?php
+                                      foreach($trxstatus as $p){
+                                          if($p->pengajuan_id == $datapengajuan->id){?>
+                                              {{  $p->catatan}}
+                                         <?php }
+                                      }
+                                      ?>
+                                    </td>
+                                    <td>
+                                        <?php
+                                        foreach($dokumen as $d){
+                                            if($d->pengajuan_id == $datapengajuan->id){?>
+                                                <a href="dokumenkerjasama/{{$d->dokumen}}">{{$d->dokumen}}</a> 
+                                           <?php }
+                                        }
+                                        ?>
                                     </td>
 
                                     <td>
-                                        <a href= "/upgradepengajuan" class="btn btn-info btn-sm">
-                                            <i class="fa fa-edit"></i>
-                                        </a>
-                                        <a href="editpengajuan/{{$datapengajuan->id}}" class="btn btn-primary btn-sm">
-                                            <i class="fa fa-edit"></i>
-                                        </a>
-                                        <a class="btn btn-danger delete btn-sm hapus" id-data="{{ $datapengajuan->id }}" nama-data="{{ $datapengajuan->mitra->namamitra }}" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" href="#">
-                                        {{-- <a href="#" class="btn btn-danger delete btn-sm"> --}}
-                                            <i class="fa fa-trash"></i>
-                                        </a>
+                                        <?php foreach($dokumen as $item){
+                                            if($item->pengajuan_id == $datapengajuan->id){?>
+                                            <a class="btn btn-primary btn-sm">
+                                            <i class="fa fa-edit" 
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#modaleditdokumen{{ $item->id }}"
+                                            id="#modaleditdokumen{{ $item->id }}">
+                                                </i>
+                                            </a>    
                                     </td>
 
-        {{-- Modal Status --}}
+   {{-- Modal Status --}}
         <div
                 class="modal fade"
                 id="modalstatus{{ $datapengajuan->id }}"
@@ -121,51 +144,12 @@
                                                        
                                                         <div class="form-group">
                                                             <label class="form-label" for="exampleInputText1">Verifikasi </label>
-                                                            <div class="form-check">
-                                                                <input type="radio" name="status_id" class="form-check-input" id="status_id" value="1">
-                                                                <label class="form-check-label" for="exampleRadio1">Ajuan Diterima</label>
-                                                            </div>
-                                                            <div class="form-check">
-                                                                <input type="radio" name="status_id" class="form-check-input" id="status_id" value="2">
-                                                                <label class="form-check-label" for="exampleRadio1">Dokumen Review BPU</label>
-                                                            </div>
-                                                            <div class="form-check">
-                                                                <input type="radio" name="status_id" class="form-check-input" id="status_id" value="3">
-                                                                <label class="form-check-label" for="exampleRadio1">Default Selesai di Review BPU</label>
-                                                            </div>
-                                                            <div class="form-check">
-                                                                <input type="radio" name="status_id" class="form-check-input" id="status_id" value="4">
-                                                                <label class="form-check-label" for="exampleRadio1">Tanda Tangan Dekan</label>
-                                                            </div>
-                                                            <div class="form-check">
-                                                                <input type="radio" name="status_id" class="form-check-input" id="status_id" value="5">
-                                                                <label class="form-check-label" for="exampleRadio1">Dokumen Telah ditandatangani Dekan</label>
-                                                            </div>
-                                                            <div class="form-check">
-                                                                <input type="radio" name="status_id" class="form-check-input" id="status_id" value="6">
-                                                                <label class="form-check-label" for="exampleRadio1">Tanda Tangan Mitra</label>
-                                                            </div>
-                                                            <div class="form-check">
-                                                                <input type="radio" name="status_id" class="form-check-input" id="status_id" value="7">
-                                                                <label class="form-check-label" for="exampleRadio1">Dokumen Telah ditandatangani Mitra</label>
-                                                            </div>
-                                                            <div class="form-check">
-                                                                <input type="radio" name="status_id" class="form-check-input" id="status_id" value="8">
-                                                                <label class="form-check-label" for="exampleRadio1">Pengajuan Tanda Tangan WR 4</label>
-                                                            </div>
-                                                            <div class="form-check">
-                                                                <input type="radio" name="status_id" class="form-check-input" id="status_id" value="9">
-                                                                <label class="form-check-label" for="exampleRadio1">Dokumen Direview DKPI</label>
-                                                            </div>
-                                                            <div class="form-check">
-                                                                <input type="radio" name="status_id" class="form-check-input" id="status_id" value="10">
-                                                                <label class="form-check-label" for="exampleRadio1">Tanda Tangan WR 4</label>
-                                                            </div>
-                                                            <div class="form-check">
-                                                                <input type="radio" name="status_id" class="form-check-input" id="status_id" value="11">
-                                                                <label class="form-check-label" for="exampleRadio1">Selesai</label>
-                                                            </div>
-
+                                                                @foreach($status as $s)
+                                                                <div class="form-check">
+                                                                    <input type="radio" name="{{$s->id}}" class="form-check-input" id="{{$s->id}}" value="{{$s->namastatus}}">
+                                                                    <label class="form-check-label" for="exampleRadio1">{{$s->namastatus}}</label>
+                                                                </div>
+                                                                @endforeach
                                                             <br/>
                                                             <div class="form-group">
                                                                 <label class="form-label" for="exampleInputText1">Catatan </label>
@@ -212,6 +196,144 @@
                             </div>
                         </div>
         </div> 
+
+         {{-- Modal Edit Dokumen --}}
+<div class="modal fade"
+         id="modaleditdokumen{{ $item->id }}"
+         tabindex="-1"
+         role="dialog"
+         aria-labelledby="staticBackdropLiveLabel"
+         aria-hidden="true">
+         <div class="modal-dialog modal-dialog-scrollable" role="document">
+             <div class="modal-content">
+                 <div class="modal-header">
+                     <h5 class="modal-title" id="staticBackdropLiveLabel">Edit Dokumen Pengajuan</h5>
+                     <button
+                         type="button"
+                         class="btn-close"
+                         data-bs-dismiss="modal"
+                         aria-label="Close"></button>
+                 </div>
+                 <div class="modal-body">
+                     <div class="row d-flex justify-content">
+                         <div class="col-md-12">
+                             <div class="card">
+                                 <div class="card-body">
+                                     <form
+                                         action="/updatedokumen/{{ $item->id }}"
+                                         method="POST"
+                                         enctype="multipart/form-data"
+                                         class="forms-sample">
+                                         @csrf
+
+                                     <div class="form-group">
+                                         <div class="form-group"> 
+                                             {{-- <label class="form-label" for="exampleInputText1">Unggah Dokumen </label> --}}
+                                             <div class="form-group">
+                                                <div class="custom-file">
+                                                  <input type="file" name="dokumen" id="customFile" class="form-control" value="{{ old('dokumen') }}" autofocus> 
+                                                </div>
+                                              </div>
+                                         </div>
+                                             @foreach ($pengajuan as $datapengajuan) 
+                                             @if ($datapengajuan->user_id ==Auth::user()->id) 
+                                             <input  type="hidden"
+                                                 name="pengajuan_id"
+                                                 value={{
+                                                     $datapengajuan->id
+                                                 }}>
+                                                 <input  type="hidden"
+                                                 name="user_id"
+                                                 value={{
+                                                     Auth::user()->id
+                                                 }}>
+                                                 @endif
+                                                 @endforeach
+                                                 <br/>
+                                                 <button
+                                                     type="submit"
+                                                     class="btn btn-primary next action-button float-end"
+                                                     value="Submit">Submit</button>
+
+                                             </form>
+                                         </div>
+                                     </div>
+                                 </div>
+                             </div>
+                         </div>
+                     </div>
+                 </div>
+             </div>
+         </div>
+        </div>
+       <?php }} ?>
+    
+     
+
+ {{-- Modal Status --}}
+@foreach ($pengajuan as $datapengajuan) 
+<div
+class="modal fade"
+id="status{{ $datapengajuan->id }}"
+tabindex="-1"
+role="dialog"
+aria-labelledby="staticBackdropLiveLabel"
+aria-hidden="true">
+<div class="modal-dialog modal-dialog-scrollable" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLiveLabel">Status Pengajuan</h5>
+            <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <div class="row d-flex justify-content-center">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div
+                                class="iq-timeline0 m-0 d-flex align-items-center justify-content-between position-relative">
+                                <ul class="list-inline p-0 m-0">
+                                                                       @foreach ($trxstatus as $a)
+                                    @if ($datapengajuan->id == $a->pengajuan_id)
+                                    
+                                    <li>  
+                                        <div class="timeline-dots timeline-dot1 border-primary text-primary"></div>
+                                        @foreach ($status as $item)
+                                        @if ($a->status_id == $item->id)
+                                        <h6 class="float-left mb-1">{{$item->namastatus}}</h6>
+                                        @endif
+                                        @endforeach
+                
+                                        <?php
+                                        foreach($user as $p){
+                                            if($a->created_by == $p->id){?>
+                                            <div class="d-inline-block w-100">
+                                            <p>
+                                              Created by {{  $p->name}}<br>
+                                              {{$a->created_at}}</p> 
+                                            </div>
+                                           <?php }
+                                        }
+                                        ?>
+
+                                    </li>
+                                    @endif
+                                    @endforeach
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+@endforeach
                                 </tr>
                                 @endforeach
                              

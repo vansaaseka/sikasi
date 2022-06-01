@@ -107,7 +107,7 @@ route::post('/updateakun/{id}',[AkunController::class,"updateakun"])->name('upda
 Route::resource('template', TemplateController::class);
 route::get('/hapustemplate/{id}',[TemplateController::class,"hapustemplate"])->name('hapustemplate');
 
-//Profile Dosen
+//Profile 
 route::get('/editprofile',[ProfileController::class,"editprofile"])->name('editprofile');
 route::post('/insertprofile',[ProfileController::class,"insertprofile"])->name('insertprofile');
 
@@ -121,9 +121,15 @@ route::get('/tambahpengajuan',[PengajuanController::class,"tambahpengajuan"])->n
 route::post('/insertpengajuan',[PengajuanController::class,"insertpengajuan"])->name('insertpengajuan');
 route::get('/editpengajuan/{id}',[PengajuanController::class,"editpengajuan"])->name('editpengajuan');
 route::post('/updatepengajuan/{id}',[PengajuanController::class,"updatepengajuan"])->name('updatepengajuan');
+route::get('/hapuspengajuan/{id}',[DrafController::class,"hapuspengajuan"])->name('hapuspengajuan');
 
 //Status Verifikasi
 route::get('/verifikasi',[StatusController::class,"verifikasi"])->name('verifikasi');
+route::get('/newstatus',[StatusController::class,"newstatus"])->name('newstatus');
+route::post('/insertnewstatus',[StatusController::class,"insertnewstatus"])->name('insertnewstatus');
+
+//Reviewer
+route::get('/validasi',[StatusController::class,"validasi"])->name('validasi');
 route::get('/newstatus',[StatusController::class,"newstatus"])->name('newstatus');
 route::post('/insertnewstatus',[StatusController::class,"insertnewstatus"])->name('insertnewstatus');
 
@@ -137,5 +143,4 @@ route::post('/insertupdate',[StatusController::class,"insertupdate"])->name('ins
 
 //Unggah Dokumen
 route::post('/insertdokumen',[DokumenController::class,"insertdokumen"])->name('insertdokumen');
-route::get('/editdokumen/{id}',[DokumenController::class,"editdokumen"])->name('editdokumen');
 route::post('/updatedokumen/{id}',[DokumenController::class,"updatedokumen"])->name('updatedokumen');

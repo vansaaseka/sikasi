@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Mitra;
-
+use App\Models\User;
 use App\Models\Prodi;
 use App\Models\Status;
+use App\Models\Dokumen;
 use App\Models\Pengajuan;
 use App\Models\Trxstatus;
 use Illuminate\Http\Request;
@@ -58,7 +59,10 @@ public function hapusStatus($id){
         $mitra = Mitra::all();
         $status = Status::all();
         $prodi = Prodi::all();
-        return view('verifikator\tampilverifikasi' , compact('pengajuan' , 'mitra', 'status','prodi'));
+        $dokumen = Dokumen::all();
+        $trxstatus = Trxstatus::all();
+        $user = User::all();
+        return view('verifikator\tampilverifikasi' , compact('pengajuan' , 'mitra', 'status','prodi', 'dokumen', 'trxstatus', 'user'));
     }
 
     public function newstatus(){
@@ -76,6 +80,18 @@ public function hapusStatus($id){
             $trxstatus->status_dokumen = $request['status_dokumen'];
             $trxstatus->save();
             return back()->with('toast_success','Data Berhasil Diupdate');
+    }
+
+    public function validasi(){
+    $pengajuan = Pengajuan::all();
+    $mitra = Mitra::all();
+    $status = Status::all();
+    $prodi = Prodi::all();
+    $dokumen = Dokumen::all();
+    $trxstatus = Trxstatus::all();
+    $user = User::all();
+    return view('reviewer.tampilvalidasi' , compact('pengajuan' , 'mitra', 'status','prodi', 'dokumen',
+    'trxstatus', 'user'));
     }
 
 }
