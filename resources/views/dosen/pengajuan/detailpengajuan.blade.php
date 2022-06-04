@@ -306,6 +306,9 @@
 
 </div>
 
+
+@include('dosen/layoutsDosen/footer')
+
 {{-- alert Delete Pengajuan --}}
 <script>
     $('.hapus').click(function() {
