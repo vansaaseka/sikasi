@@ -213,9 +213,17 @@
                 @endforeach
 
 
-                <a href="editpengajuan/{{ $datapengajuan->id }}" class="btn btn-primary btn-sm">
-                    <i class="fa fa-edit"></i>
+                <?php foreach($dokumen as $item){
+                                            if($item->pengajuan_id == $datapengajuan->id){?>
+                <a class="btn btn-primary btn-sm">
+                    <i class="fa fa-edit" data-bs-toggle="modal"
+                        data-bs-target="#modaleditdokumen{{ $item->id }}"
+                        id="#modaleditdokumen{{ $item->id }}">
+                    </i>
                 </a>
+
+
+
                 <a class="btn btn-danger delete btn-sm hapus" id-data="{{ $datapengajuan->id }}"
                     nama-data="{{ $datapengajuan->mitra->namamitra }}" data-toggle="tooltip" data-placement="top"
                     title="" data-original-title="Delete" href="#">
@@ -225,85 +233,137 @@
                 </td>
 
                 </tr>
-                @endif
-                @endforeach
 
-                </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
+                {{-- Modal Edit Dokumen --}}
+                <div class="modal fade" id="modaleditdokumen{{ $item->id }}" tabindex="-1" role="dialog"
+                    aria-labelledby="staticBackdropLiveLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-scrollable" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="staticBackdropLiveLabel">Edit Dokumen Pengajuan</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row d-flex justify-content">
+                                    <div class="col-md-12">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <form action="/updatedokumen/{{ $item->id }}" method="POST"
+                                                    enctype="multipart/form-data" class="forms-sample">
+                                                    @csrf
 
-    <!-- Modal Detail -->
-    <div class="modal fade" id="pengajuan" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-        role="dialog" aria-labelledby="staticBackdropLiveLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLiveLabel">Detail Pengajuan</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="table-responsive">
-                        <table class="table align-items-center table-flush table-hover" id="dataTableHover">
-                            <thead></thead>
-                            <tbody>
-                                <tr>
-                                    <td class="font-size:3">
-                                        Nomor Dokumen
-                                    </td>
-                                    <td>:</td>
-                                    <td>52/UN27/KS/2021</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        Tanggal Ajuan
-                                    </td>
-                                    <td>:</td>
-                                    <td>28 Maret 2022</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        Tanggal Mulai Kerjasama
-                                    </td>
-                                    <td>:</td>
-                                    <td>28 Agustus 2022</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        Tanggal Berakhir Kerjasama
-                                    </td>
-                                    <td>:</td>
-                                    <td>31 Desember 2022</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        Masa Berlaku Kerjasama :
-                                    </td>
-                                    <td>:</td>
-                                    <td style="color: red">
-                                        Aktif (4 Bulan 3 Hari )</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        Status Dokumen
-                                    </td>
-                                    <td>:</td>
-                                    <td>Dibawa Prodi</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                                                    <div class="form-group">
+                                                        <div class="form-group">
+                                                            {{-- <label class="form-label" for="exampleInputText1">Unggah Dokumen </label> --}}
+                                                            <div class="form-group">
+                                                                <div class="custom-file">
+                                                                    <input type="file" name="dokumen" id="customFile"
+                                                                        class="form-control"
+                                                                        value="{{ old('dokumen') }}" autofocus>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        @foreach ($pengajuan as $datapengajuan)
+                                                            @if ($datapengajuan->user_id == Auth::user()->id)
+                                                                <input type="hidden" name="pengajuan_id"
+                                                                    value={{ $datapengajuan->id }}>
+                                                                <input type="hidden" name="user_id"
+                                                                    value={{ Auth::user()->id }}>
+                                                            @endif
+                                                        @endforeach
+                                                        <br />
+                                                        <button type="submit"
+                                                            class="btn btn-primary next action-button float-end"
+                                                            value="Submit">Submit</button>
+
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
+        <?php }} ?>
+        @endif
+        @endforeach
+
+        </tbody>
+        </table>
     </div>
+</div>
 
+<!-- Modal Detail -->
+<div class="modal fade" id="pengajuan" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    role="dialog" aria-labelledby="staticBackdropLiveLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLiveLabel">Detail Pengajuan</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="table-responsive">
+                    <table class="table align-items-center table-flush table-hover" id="dataTableHover">
+                        <thead></thead>
+                        <tbody>
+                            <tr>
+                                <td class="font-size:3">
+                                    Nomor Dokumen
+                                </td>
+                                <td>:</td>
+                                <td>52/UN27/KS/2021</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Tanggal Ajuan
+                                </td>
+                                <td>:</td>
+                                <td>28 Maret 2022</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Tanggal Mulai Kerjasama
+                                </td>
+                                <td>:</td>
+                                <td>28 Agustus 2022</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Tanggal Berakhir Kerjasama
+                                </td>
+                                <td>:</td>
+                                <td>31 Desember 2022</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Masa Berlaku Kerjasama :
+                                </td>
+                                <td>:</td>
+                                <td style="color: red">
+                                    Aktif (4 Bulan 3 Hari )</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Status Dokumen
+                                </td>
+                                <td>:</td>
+                                <td>Dibawa Prodi</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
 
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
 </div>
 
 

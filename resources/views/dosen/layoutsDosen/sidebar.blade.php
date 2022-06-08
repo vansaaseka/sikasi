@@ -34,9 +34,16 @@
                     <span class="mini-icon">-</span>
                 </a>
             </li>
+            <?php
+            if (empty(auth()->user()->nomorhp)) {
+                $statusDisable = 'disabled';
+            } else {
+                $statusDisable = '';
+            }
+            ?>
             <li class="nav-item">
-                <a class="nav-link" data-bs-toggle="collapse" href="#utilities-error" role="button"
-                    aria-expanded="false" aria-controls="utilities-error">
+                <a class="nav-link" data-bs-toggle="collapse" href="#utilities-error"
+                    role="button {{ $statusDisable }}" aria-expanded="false" aria-controls="utilities-error">
                     <i class="icon">
                         <svg width="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path opacity="0.4"
@@ -77,16 +84,8 @@
                             <span class="item-name">MoU</span>
                         </a>
                     </li>
-                    <?php
-                    if (empty(auth()->user()->nomorhp)) {
-                        $statusDisable = 'disabled';
-                    } else {
-                        $statusDisable = '';
-                    }
-                    ?>
                     <li class="nav-item">
-                        <a class="nav-link {{ 'pengajuan' == request()->path() ? 'active' : '' }} {{ $statusDisable }}"
-                            href="/pengajuan">
+                        <a class="nav-link {{ 'pengajuan' == request()->path() ? 'active' : '' }}" href="/pengajuan">
                             <i class="icon">
                                 <svg width="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path opacity="0.4"
