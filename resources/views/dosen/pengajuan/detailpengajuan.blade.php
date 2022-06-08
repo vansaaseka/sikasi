@@ -392,5 +392,3 @@
         });
     });
 </script>
-
-@include('dosen/layoutsDosen/footer')
