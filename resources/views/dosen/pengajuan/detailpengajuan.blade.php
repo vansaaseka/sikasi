@@ -60,6 +60,73 @@
                                                     id="#status{{ $datapengajuan->id }}">
                                                     Status
                                                 </button>
+                                                {{-- Modal Status --}}
+
+                                                <div class="modal fade" id="status{{ $datapengajuan->id }}"
+                                                    tabindex="-1" role="dialog"
+                                                    aria-labelledby="staticBackdropLiveLabel" aria-hidden="true">
+                                                    <div class="modal-dialog modal-dialog-scrollable" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="staticBackdropLiveLabel">
+                                                                    Status Pengajuan
+                                                                </h5>
+                                                                <button type="button" class="btn-close"
+                                                                    data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <div class="row d-flex justify-content-center">
+                                                                    <div class="col-md-12">
+                                                                        <div class="card">
+                                                                            <div class="card-body">
+                                                                                <div
+                                                                                    class="iq-timeline0 m-0 d-flex align-items-center justify-content-between position-relative">
+                                                                                    <ul class="list-inline p-0 m-0">
+                                                                                        @foreach ($trxstatus as $a)
+                                                                                            @if ($datapengajuan->id == $a->pengajuan_id)
+                                                                                                <li>
+                                                                                                    <div
+                                                                                                        class="timeline-dots timeline-dot1 border-primary text-primary">
+                                                                                                    </div>
+                                                                                                    @foreach ($status as $item)
+                                                                                                        @if ($a->status_id == $item->id)
+                                                                                                            <h6
+                                                                                                                class="float-left mb-1">
+                                                                                                                {{ $item->namastatus }}
+                                                                                                            </h6>
+                                                                                                        @endif
+                                                                                                    @endforeach
+
+                                                                                                    <?php
+                                                                                                            foreach($user as $p){
+                                                                                                                if($a->created_by == $p->id){?>
+                                                                                                    <div
+                                                                                                        class="d-inline-block w-100">
+                                                                                                        <p>
+                                                                                                            Created
+                                                                                                            by
+                                                                                                            {{ $p->name }}<br>
+                                                                                                            {{ $a->created_at }}
+                                                                                                        </p>
+                                                                                                    </div>
+                                                                                                    <?php }
+                                                                                                                        }
+                                                                                                                        ?>
+
+                                                                                                </li>
+                                                                                            @endif
+                                                                                        @endforeach
+                                                                                    </ul>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
                                             </td>
 
                                             <td>- </td>
@@ -153,64 +220,7 @@
                                                 </div>
                     </div>
                 </div>
-                {{-- Modal Status --}}
-                @foreach ($pengajuan as $datapengajuan)
-                    <div class="modal fade" id="status{{ $datapengajuan->id }}" tabindex="-1" role="dialog"
-                        aria-labelledby="staticBackdropLiveLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-scrollable" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="staticBackdropLiveLabel">Status Pengajuan</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="row d-flex justify-content-center">
-                                        <div class="col-md-12">
-                                            <div class="card">
-                                                <div class="card-body">
-                                                    <div
-                                                        class="iq-timeline0 m-0 d-flex align-items-center justify-content-between position-relative">
-                                                        <ul class="list-inline p-0 m-0">
-                                                            @foreach ($trxstatus as $a)
-                                                                @if ($datapengajuan->id == $a->pengajuan_id)
-                                                                    <li>
-                                                                        <div
-                                                                            class="timeline-dots timeline-dot1 border-primary text-primary">
-                                                                        </div>
-                                                                        @foreach ($status as $item)
-                                                                            @if ($a->status_id == $item->id)
-                                                                                <h6 class="float-left mb-1">
-                                                                                    {{ $item->namastatus }}</h6>
-                                                                            @endif
-                                                                        @endforeach
 
-                                                                        <?php
-                                        foreach($user as $p){
-                                            if($a->created_by == $p->id){?>
-                                                                        <div class="d-inline-block w-100">
-                                                                            <p>
-                                                                                Created by {{ $p->name }}<br>
-                                                                                {{ $a->created_at }}</p>
-                                                                        </div>
-                                                                        <?php }
-                                        }
-                                        ?>
-
-                                                                    </li>
-                                                                @endif
-                                                            @endforeach
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
 
 
                 <?php foreach($dokumen as $item){
