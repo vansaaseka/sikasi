@@ -5,12 +5,15 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AkunController;
 use App\Http\Controllers\DrafController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProdiController;
 use App\Http\Controllers\StatusController;
+use App\Http\Controllers\DokumenController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\TemplateController;
 use App\Http\Controllers\PengajuanController;
-use App\Http\Controllers\DokumenController;
+use App\Http\Controllers\RuanglingkupController;
+use App\Http\Controllers\KategorimitraController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -47,19 +50,6 @@ route::get('/redirects',[HomeController::class,"index"]);
 Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
-
-// Kategori
-route::get('/kategori',[KategoriController::class,"index"])->name('kategori');
-
-route::get('/tambahkategori',[KategoriController::class,"tambahkategori"])->name('tambahkategori');
-
-route::post('/insertkategori',[KategoriController::class,"insertkategori"])->name('insertkategori');
-
-route::get('/editkategori/{id}',[KategoriController::class,"editkategori"])->name('editkategori');
-
-route::post('/updatekategori/{id}',[KategoriController::class,"updatekategori"])->name('updatekategori');
-
-route::get('/hapuskategori/{id}',[KategoriController::class,"hapuskategori"])->name('hapuskategori');
 
 //Draf Kerjasama
 route::get('/draf',[DrafController::class,"index"])->name('draf');
@@ -140,6 +130,31 @@ route::get('/tambahstatus',[StatusController::class,"tambahstatus"])->name('tamb
 route::post('/insertstatus',[StatusController::class,"insertstatus"])->name('insertstatus');
 route::get('/editstatus',[StatusController::class,"editstatus"])->name('editstatus');
 route::post('/insertupdate',[StatusController::class,"insertupdate"])->name('insertupdate');
+
+//Tambah Prodi Admin
+route::get('/prodi',[ProdiController::class,"index"])->name('prodi');
+route::get('/tambahprodi',[ProdiController::class,"tambahprodi"])->name('tambahprodi');
+route::post('/insertprodi',[ProdiController::class,"insertprodi"])->name('insertprodi');
+route::get('/editprodi/{id}',[ProdiController::class,"editprodi"])->name('editprodi');
+route::post('/updateprodi/{id}',[ProdiController::class,"updateprodi"])->name('updateprodi');
+route::get('/hapusprodi/{id}',[prodiController::class,"hapusprodi"])->name('hapusprodi');
+
+
+//Tambah Kategori Mitra Admin
+route::get('/kategorimitra',[KategorimitraController::class,"index"])->name('kategorimitra');
+route::get('/tambahkategorimitra',[KategorimitraController::class,"tambahkategorimitra"])->name('tambahkategorimitra');
+route::post('/insertkategorimitra',[KategorimitraController::class,"insertkategorimitra"])->name('insertkategorimitra');
+route::get('/editkategorimitra/{id}',[KategorimitraController::class,"editkategorimitra"])->name('editkategorimitra');
+route::post('/updatekategorimitra/{id}',[KategorimitraController::class,"updatekategorimitra"])->name('updatekategorimitra');
+route::get('/hapuskategorimitra/{id}',[KategorimitraController::class,"hapuskategorimitra"])->name('hapuskategorimitra');
+
+//Tambah RuangLingkup Mitra Admin
+route::get('/ruanglingkup',[RuanglingkupController::class,"index"])->name('ruanglingkup');
+route::get('/tambahruanglingkup',[RuanglingkupController::class,"tambahruanglingkup"])->name('tambahruanglingkup');
+route::post('/insertruanglingkup',[RuanglingkupController::class,"insertruanglingkup"])->name('insertruanglingkup');
+route::get('/editruanglingkup/{id}',[RuanglingkupController::class,"editruanglingkup"])->name('editruanglingkup');
+route::post('/updateruanglingkup/{id}',[RuanglingkupController::class,"updateruanglingkup"])->name('updateruanglingkup');
+route::get('/hapusruanglingkup/{id}',[RuanglingkupController::class,"hapusruanglingkup"])->name('hapusruanglingkup');
 
 //Unggah Dokumen
 route::post('/insertdokumen',[DokumenController::class,"insertdokumen"])->name('insertdokumen');
