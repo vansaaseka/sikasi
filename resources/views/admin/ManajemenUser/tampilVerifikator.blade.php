@@ -1,8 +1,8 @@
-@include('verifikator/layoutsVerifikator/header')
+@include('admin/layoutsAdmin/header')
 
-@include('verifikator/layoutsVerifikator/sidebar')
+@include('admin/layoutsAdmin/sidebar')
 
-@include('verifikator/layoutsVerifikator/navbar')
+@include('admin/layoutsAdmin/navbar')
 
 <div class="conatiner-fluid content-inner mt-n5 py-0">
     <div class="row">
@@ -82,7 +82,8 @@
     </div>
 </div>
 
-@include('verifikator/layoutsVerifikator/footer')
+@include('admin/layoutsAdmin/footer')
+
 
 <script>
     $('.delete').click(function() {
