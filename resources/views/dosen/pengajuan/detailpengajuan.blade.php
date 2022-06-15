@@ -130,19 +130,18 @@
                                             </td>
 
                                             <td>- </td>
-                                            <td>
-                                                <?php
-                                                $sudahUnggah = 0;
-                                                $unggah = 0;
-                                                foreach ($dokumen as $d) {
-                                                    if ($d->pengajuan_id == $datapengajuan->id) {
-                                                        $sudahUnggah += 1;
-                                                        $unggah += 1;
-                                                        $namadok = $d->dokumen;
-                                                    }
+                                            <?php
+                                            $sudahUnggah = 0;
+                                            $unggah = 0;
+                                            foreach ($dokumen as $d) {
+                                                if ($d->pengajuan_id == $datapengajuan->id) {
+                                                    $sudahUnggah += 1;
+                                                    $unggah += 1;
+                                                    $namadok = $d->dokumen;
                                                 }
-                                                ?>
-
+                                            }
+                                            ?>
+                                            <td>
                                                 @if ($sudahUnggah == 0)
                                                     <button type="button" class="btn btn-secondary btn-sm"
                                                         data-bs-toggle="modal"
@@ -217,23 +216,15 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <?php
-                                                ?>
 
                                             </td>
 
                                             <td>
-                                                <?php
-                                                $unggah = 0;
-                                                foreach ($dokumen as $data) {
-                                                    if ($data->pengajuan_id == $datapengajuan->id) {
-                                                        $unggah += 1;
-                                                    }
-                                                }
-                                                ?>
-                                                {{ $unggah }}
+
                                                 @if ($unggah == 0)
-                                                    tooltip
+                                                    <i class="fa fa-info-circle" data-bs-toggle="tooltip"
+                                                        data-bs-placement="top"
+                                                        title="Button Edit dan Hapus akan tampil setelah unggah dokumen"></i>
                                                 @endif
                                                 @if ($unggah == 1)
                                                     <button type="button" class="btn btn-info btn-sm"
@@ -244,8 +235,8 @@
 
                                                     <a class="btn btn-primary btn-sm">
                                                         <i class="fa fa-edit" data-bs-toggle="modal"
-                                                            data-bs-target="#modaleditdokumen{{ $data->id }}"
-                                                            id="#modaleditdokumen{{ $data->id }}">
+                                                            data-bs-target="#modaleditdokumen{{ $d->id }}"
+                                                            id="#modaleditdokumen{{ $d->id }}">
                                                         </i>
                                                     </a>
 
@@ -258,7 +249,7 @@
                                                     </a>
                                                 @endif
                                                 {{-- Modal Edit Dokumen --}}
-                                                <div class="modal fade" id="modaleditdokumen{{ $data->id }}"
+                                                <div class="modal fade" id="modaleditdokumen{{ $d->id }}"
                                                     tabindex="-1" role="dialog"
                                                     aria-labelledby="staticBackdropLiveLabel" aria-hidden="true">
                                                     <div class="modal-dialog modal-dialog-scrollable" role="document">
@@ -276,7 +267,7 @@
                                                                         <div class="card">
                                                                             <div class="card-body">
                                                                                 <form
-                                                                                    action="/updatedokumen/{{ $data->id }}"
+                                                                                    action="/updatedokumen/{{ $d->id }}"
                                                                                     method="POST"
                                                                                     enctype="multipart/form-data"
                                                                                     class="forms-sample">
@@ -321,8 +312,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <?php
-                                                ?>
+
                                             </td>
                                         </tr>
                                     @endif

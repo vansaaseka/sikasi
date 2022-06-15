@@ -12,4 +12,11 @@ class Dokumen extends Model
     protected $fillable = ['pengajuan_id','user_id','dokumen','nodokumen'];
     protected $table = 'dokumen';
     protected $guarded = [];
+
+           public function user(){
+           return $this->belongsTo('App\Models\User');
+           }
+               public function pengajuan(){
+               return $this->belongsTo('App\Models\Pengajuan');
+               }
 }
