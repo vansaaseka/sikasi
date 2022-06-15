@@ -133,9 +133,11 @@
                                             <td>
                                                 <?php
                                                 $sudahUnggah = 0;
+                                                $unggah = 0;
                                                 foreach ($dokumen as $d) {
                                                     if ($d->pengajuan_id == $datapengajuan->id) {
                                                         $sudahUnggah += 1;
+                                                        $unggah += 1;
                                                         $namadok = $d->dokumen;
                                                     }
                                                 }
@@ -158,14 +160,6 @@
                                                     <a
                                                         href="dokumenkerjasama/{{ $d->dokumen }}">{{ $namadok }}</a>
                                                 @endif
-
-                                            </td>
-
-                                            <td>
-                                                <button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal"
-                                                    data-bs-target="#pengajuan" id="#modalCenter">
-                                                    <i class="fa fa-info-circle"></i>
-                                                </button>
                                                 {{-- Modal Dokumen --}}
                                                 <div class="modal fade" id="modaldokumen{{ $datapengajuan->id }}"
                                                     tabindex="-1" role="dialog"
@@ -223,95 +217,124 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                    </div>
-                </div>
+                                                <?php
+                                                ?>
 
+                                            </td>
 
+                                            <td>
+                                                <?php
+                                                $unggah = 0;
+                                                foreach ($dokumen as $data) {
+                                                    if ($data->pengajuan_id == $datapengajuan->id) {
+                                                        $unggah += 1;
+                                                    }
+                                                }
+                                                ?>
+                                                {{ $unggah }}
+                                                @if ($unggah == 0)
+                                                    tooltip
+                                                @endif
+                                                @if ($unggah == 1)
+                                                    <button type="button" class="btn btn-info btn-sm"
+                                                        data-bs-toggle="modal" data-bs-target="#pengajuan"
+                                                        id="#modalCenter">
+                                                        <i class="fa fa-info-circle"></i>
+                                                    </button>
 
-                <?php foreach($dokumen as $item){
-                                            if($item->pengajuan_id == $datapengajuan->id){?>
-                <a class="btn btn-primary btn-sm">
-                    <i class="fa fa-edit" data-bs-toggle="modal"
-                        data-bs-target="#modaleditdokumen{{ $item->id }}"
-                        id="#modaleditdokumen{{ $item->id }}">
-                    </i>
-                </a>
+                                                    <a class="btn btn-primary btn-sm">
+                                                        <i class="fa fa-edit" data-bs-toggle="modal"
+                                                            data-bs-target="#modaleditdokumen{{ $data->id }}"
+                                                            id="#modaleditdokumen{{ $data->id }}">
+                                                        </i>
+                                                    </a>
 
+                                                    <a class="btn btn-danger delete btn-sm hapus"
+                                                        id-data="{{ $datapengajuan->id }}"
+                                                        nama-data="{{ $datapengajuan->mitra->namamitra }}"
+                                                        data-toggle="tooltip" data-placement="top" title=""
+                                                        data-original-title="Delete" href="#">
+                                                        <i class="fa fa-trash"></i>
+                                                    </a>
+                                                @endif
+                                                {{-- Modal Edit Dokumen --}}
+                                                <div class="modal fade" id="modaleditdokumen{{ $data->id }}"
+                                                    tabindex="-1" role="dialog"
+                                                    aria-labelledby="staticBackdropLiveLabel" aria-hidden="true">
+                                                    <div class="modal-dialog modal-dialog-scrollable" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="staticBackdropLiveLabel">
+                                                                    Edit Dokumen
+                                                                    Pengajuan</h5>
+                                                                <button type="button" class="btn-close"
+                                                                    data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <div class="row d-flex justify-content">
+                                                                    <div class="col-md-12">
+                                                                        <div class="card">
+                                                                            <div class="card-body">
+                                                                                <form
+                                                                                    action="/updatedokumen/{{ $data->id }}"
+                                                                                    method="POST"
+                                                                                    enctype="multipart/form-data"
+                                                                                    class="forms-sample">
+                                                                                    @csrf
 
+                                                                                    <div class="form-group">
+                                                                                        <div class="form-group">
+                                                                                            {{-- <label class="form-label" for="exampleInputText1">Unggah Dokumen </label> --}}
+                                                                                            <div class="form-group">
+                                                                                                <div
+                                                                                                    class="custom-file">
+                                                                                                    <input type="file"
+                                                                                                        name="dokumen"
+                                                                                                        id="customFile"
+                                                                                                        class="form-control"
+                                                                                                        value="{{ old('dokumen') }}"
+                                                                                                        autofocus>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        @foreach ($pengajuan as $datapengajuan)
+                                                                                            @if ($datapengajuan->user_id == Auth::user()->id)
+                                                                                                <input type="hidden"
+                                                                                                    name="pengajuan_id"
+                                                                                                    value={{ $datapengajuan->id }}>
+                                                                                                <input type="hidden"
+                                                                                                    name="user_id"
+                                                                                                    value={{ Auth::user()->id }}>
+                                                                                            @endif
+                                                                                        @endforeach
+                                                                                        <br />
+                                                                                        <button type="submit"
+                                                                                            class="btn btn-primary next action-button float-end"
+                                                                                            value="Submit">Submit</button>
 
-                <a class="btn btn-danger delete btn-sm hapus" id-data="{{ $datapengajuan->id }}"
-                    nama-data="{{ $datapengajuan->mitra->namamitra }}" data-toggle="tooltip" data-placement="top"
-                    title="" data-original-title="Delete" href="#">
-                    <i class="fa fa-trash"></i>
-                </a>
-
-                </td>
-
-                </tr>
-
-                {{-- Modal Edit Dokumen --}}
-                <div class="modal fade" id="modaleditdokumen{{ $item->id }}" tabindex="-1" role="dialog"
-                    aria-labelledby="staticBackdropLiveLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-scrollable" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="staticBackdropLiveLabel">Edit Dokumen Pengajuan</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="row d-flex justify-content">
-                                    <div class="col-md-12">
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <form action="/updatedokumen/{{ $item->id }}" method="POST"
-                                                    enctype="multipart/form-data" class="forms-sample">
-                                                    @csrf
-
-                                                    <div class="form-group">
-                                                        <div class="form-group">
-                                                            {{-- <label class="form-label" for="exampleInputText1">Unggah Dokumen </label> --}}
-                                                            <div class="form-group">
-                                                                <div class="custom-file">
-                                                                    <input type="file" name="dokumen" id="customFile"
-                                                                        class="form-control"
-                                                                        value="{{ old('dokumen') }}" autofocus>
+                                                                                </form>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        @foreach ($pengajuan as $datapengajuan)
-                                                            @if ($datapengajuan->user_id == Auth::user()->id)
-                                                                <input type="hidden" name="pengajuan_id"
-                                                                    value={{ $datapengajuan->id }}>
-                                                                <input type="hidden" name="user_id"
-                                                                    value={{ Auth::user()->id }}>
-                                                            @endif
-                                                        @endforeach
-                                                        <br />
-                                                        <button type="submit"
-                                                            class="btn btn-primary next action-button float-end"
-                                                            value="Submit">Submit</button>
-
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                                                    </div>
+                                                </div>
+                                                <?php
+                                                ?>
+                                            </td>
+                                        </tr>
+                                    @endif
+                                @endforeach
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
         </div>
-        <?php }} ?>
-        @endif
-        @endforeach
-
-        </tbody>
-        </table>
     </div>
 </div>
-
 <!-- Modal Detail -->
 <div class="modal fade" id="pengajuan" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
     role="dialog" aria-labelledby="staticBackdropLiveLabel" aria-hidden="true">
