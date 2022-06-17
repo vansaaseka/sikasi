@@ -1,6 +1,6 @@
 </aside>
 <main class="main-content">
-    <div class="position-fixed">
+    <div class="position-relative">
         <!--Nav Start-->
 
         <nav class="nav navbar navbar-expand-lg navbar-light iq-navbar">
@@ -16,8 +16,8 @@
                 <div class="input-group search-input">
                     <span class="input-group-text" id="search-input">
                         <svg width="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <circle cx="11.7669" cy="11.7666" r="8.98856" stroke="currentColor"
-                                stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></circle>
+                            <circle cx="11.7669" cy="11.7666" r="8.98856" stroke="currentColor" stroke-width="1.5"
+                                stroke-linecap="round" stroke-linejoin="round"></circle>
                             <path d="M18.0186 18.4851L21.5426 22" stroke="currentColor" stroke-width="1.5"
                                 stroke-linecap="round" stroke-linejoin="round"></path>
                         </svg>
@@ -56,13 +56,13 @@
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
-                                <li><a class="dropdown-item"
-                                        onclick="event.preventDefault();
+                                <li><a class="dropdown-item" onclick="event.preventDefault();
                   document.getElementById('logout-form').submit();">
                                         <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                         Logout
                                     </a></li>
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                    class="d-none">
                                     @csrf
                                 </form>
                             </ul>

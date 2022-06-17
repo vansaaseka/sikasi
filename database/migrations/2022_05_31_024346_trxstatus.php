@@ -14,7 +14,6 @@ class Trxstatus extends Migration
     public function up()
     {
         Schema::create('trxstatus', function (Blueprint $table) {
-            $table->id();
             $table->foreignId('pengajuan_id')->nullable()->default(null)->constrained('pengajuan')->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('status_id')->nullable()->default(null)->constrained('status')->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('created_by')->nullable()->default(null)->constrained('users')->onDelete('cascade')->onUpdate('cascade');
@@ -22,6 +21,7 @@ class Trxstatus extends Migration
             $table->string('status_dokumen')->nullable();
             $table->timestamps();
         });
+            
     }
 
     /**

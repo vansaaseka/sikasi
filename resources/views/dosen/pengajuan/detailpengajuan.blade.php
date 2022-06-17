@@ -1,3 +1,35 @@
+Skip to content
+Search or jump to…
+Pull requests
+Issues
+Marketplace
+Explore
+
+@syadza27
+syadza27
+/
+SIKASI-NEW
+Private
+Code
+Issues
+Pull requests
+Actions
+Projects
+Security
+19
+Insights
+Settings
+We found potential security vulnerabilities in your dependencies.
+Only the owner of this repository can see this message.
+
+SIKASI-NEW/resources/views/dosen/pengajuan/detailpengajuan.blade.php
+@syadza27
+syadza27 edit detail pengajuan
+Latest commit 0e8a1d2 2 days ago
+History
+1 contributor
+422 lines (398 sloc) 31 KB
+
 @include('dosen/layoutsDosen/header')
 @include('dosen/layoutsDosen/sidebar')
 @include('dosen/layoutsDosen/navbar')
@@ -185,8 +217,7 @@
                                                                                     <div class="form-group">
                                                                                         <div class="form-group">
                                                                                             {{-- <label class="form-label" for="exampleInputText1">Unggah Dokumen </label> --}}
-                                                                                            <input
-                                                                                                class="form-control"
+                                                                                            <input class="form-control"
                                                                                                 type="file"
                                                                                                 name="dokumen"
                                                                                                 placeholder="a"
@@ -259,7 +290,8 @@
                                                                     Edit Dokumen
                                                                     Pengajuan</h5>
                                                                 <button type="button" class="btn-close"
-                                                                    data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                    data-bs-dismiss="modal"
+                                                                    aria-label="Close"></button>
                                                             </div>
                                                             <div class="modal-body">
                                                                 <div class="row d-flex justify-content">
@@ -279,7 +311,8 @@
                                                                                             <div class="form-group">
                                                                                                 <div
                                                                                                     class="custom-file">
-                                                                                                    <input type="file"
+                                                                                                    <input
+                                                                                                        type="file"
                                                                                                         name="dokumen"
                                                                                                         id="customFile"
                                                                                                         class="form-control"
@@ -420,3 +453,16 @@
         });
     });
 </script>
+© 2022 GitHub, Inc.
+Terms
+Privacy
+Security
+Status
+Docs
+Contact GitHub
+Pricing
+API
+Training
+Blog
+About
+Loading complete
