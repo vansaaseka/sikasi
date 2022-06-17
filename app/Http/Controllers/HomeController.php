@@ -18,11 +18,11 @@ class HomeController extends Controller
            }
            if($role=='2')
            {
-               return view('verifikator');
+               return view('verifikator/layoutVerifikator');
            }
            if($role=='3')
            {
-               return view('reviewer');
+               return view('reviewer/layoutReviewer');
            }
            else
            {
