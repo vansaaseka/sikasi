@@ -54,11 +54,12 @@ class LoginController extends Controller
     //         'password'  => Input::get('password'),
     //         'active'    => 1
     //     ), $remember);
-        
-        
-        
+
+
+
     // }
-    public function login(Request $request){
+    public function login(Request $request)
+    {
         $input = $request->all();
         $profil = User::all();
         $prodi = Prodi::all();
@@ -69,31 +70,29 @@ class LoginController extends Controller
         ]);
         if (auth()->attempt(array('email' => $input['email'], 'password' => $input['password']))) {
 
-      
-         
+
+
             if (empty(auth()->user()->nomorhp) && auth()->user()->role == 3 && auth()->user()->status == 1) {
-                return view('reviewer/layoutReviewer');
+                return view('reviewer.layoutReviewer');
             } elseif (auth()->user()->role == 3 && auth()->user()->status == 0) {
                 (auth()->logout());
             } elseif (auth()->user()->role == 1 && auth()->user()->status == 1) {
-                return view('admin/layoutAdmin');
+                return view('admin.layoutAdmin');
             } elseif (auth()->user()->role == 1 && auth()->user()->status == 0) {
                 (auth()->logout());
-            } elseif ( empty(auth()->user()->nomorhp) && auth()->user()->role == 0 && auth()->user()->status == 1) {
-                return view('dosen\Profile\editprofile', compact( 'profil' ,'prodi'));
-            } elseif ( !empty(auth()->user()->nomorhp) && auth()->user()->role == 0 && auth()->user()->status == 1) {
-                return view('dosen/layoutDosen');
+            } elseif (empty(auth()->user()->nomorhp) && auth()->user()->role == 0 && auth()->user()->status == 1) {
+                return view('dosen.Profile.editprofile', compact('profil', 'prodi'));
+            } elseif (!empty(auth()->user()->nomorhp) && auth()->user()->role == 0 && auth()->user()->status == 1) {
+                return view('dosen.layoutDosen');
             } elseif (auth()->user()->role == 0 && auth()->user()->status == 0) {
                 (auth()->logout());
-            }  elseif (auth()->user()->role == 2 && auth()->user()->status == 1) {
-                return view('verifikator/layoutVerifikator');
+            } elseif (auth()->user()->role == 2 && auth()->user()->status == 1) {
+                return view('verifikator.layoutVerifikator');
             } elseif (auth()->user()->role == 2 && auth()->user()->status == 0) {
                 (auth()->logout());
-           
             }
         } else {
             return redirect()->route('login')->with('error', 'Email and password are wrong');
         }
-        
     }
 }
