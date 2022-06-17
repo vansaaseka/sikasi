@@ -22,7 +22,6 @@ class Trxstatus extends Migration
             $table->string('status_dokumen')->nullable();
             $table->timestamps();
         });
-            
     }
 
     /**
