@@ -1,40 +1,7 @@
-Skip to content
-Search or jump to…
-Pull requests
-Issues
-Marketplace
-Explore
-
-@syadza27
-syadza27
-/
-SIKASI-NEW
-Private
-Code
-Issues
-Pull requests
-Actions
-Projects
-Security
-19
-Insights
-Settings
-We found potential security vulnerabilities in your dependencies.
-Only the owner of this repository can see this message.
-
-SIKASI-NEW/resources/views/dosen/pengajuan/detailpengajuan.blade.php
-@syadza27
-syadza27 edit detail pengajuan
-Latest commit 0e8a1d2 2 days ago
-History
-1 contributor
-422 lines (398 sloc) 31 KB
-
 @include('dosen/layoutsDosen/header')
 @include('dosen/layoutsDosen/sidebar')
 @include('dosen/layoutsDosen/navbar')
 <!-- DataTable with Hover -->
-
 <div class="container-fluid content-inner mt-n5 py-0">
     <div class="row">
         <div class="col-lg-12 mb-4">
@@ -164,11 +131,10 @@ History
                                             <td>- </td>
                                             <?php
                                             $sudahUnggah = 0;
-                                            $unggah = 0;
+                                            
                                             foreach ($dokumen as $d) {
                                                 if ($d->pengajuan_id == $datapengajuan->id) {
                                                     $sudahUnggah += 1;
-                                                    $unggah += 1;
                                                     $namadok = $d->dokumen;
                                                 }
                                             }
@@ -233,7 +199,7 @@ History
                                                                                                     value={{ Auth::user()->id }}>
                                                                                             @endif
                                                                                         @endforeach
-                                                                                        <br />
+
                                                                                         <button type="submit"
                                                                                             class="btn btn-primary next action-button float-end"
                                                                                             value="Submit">Submit</button>
@@ -247,17 +213,15 @@ History
                                                         </div>
                                                     </div>
                                                 </div>
-
                                             </td>
 
                                             <td>
-
-                                                @if ($unggah == 0)
+                                                @if ($sudahUnggah == 0)
                                                     <i class="fa fa-info-circle" data-bs-toggle="tooltip"
                                                         data-bs-placement="top"
                                                         title="Button Edit dan Hapus akan tampil setelah unggah dokumen"></i>
                                                 @endif
-                                                @if ($unggah == 1)
+                                                @if ($sudahUnggah == 1)
                                                     <button type="button" class="btn btn-info btn-sm"
                                                         data-bs-toggle="modal" data-bs-target="#pengajuan"
                                                         id="#modalCenter">
@@ -266,8 +230,8 @@ History
 
                                                     <a class="btn btn-primary btn-sm">
                                                         <i class="fa fa-edit" data-bs-toggle="modal"
-                                                            data-bs-target="#modaleditdokumen{{ $d->id }}"
-                                                            id="#modaleditdokumen{{ $d->id }}">
+                                                            data-bs-target="#modaleditdokumen{{ $datapengajuan->id }}"
+                                                            id="#modaleditdokumen{{ $datapengajuan->id }}">
                                                         </i>
                                                     </a>
 
@@ -280,9 +244,11 @@ History
                                                     </a>
                                                 @endif
                                                 {{-- Modal Edit Dokumen --}}
-                                                <div class="modal fade" id="modaleditdokumen{{ $d->id }}"
-                                                    tabindex="-1" role="dialog"
-                                                    aria-labelledby="staticBackdropLiveLabel" aria-hidden="true">
+
+                                                <div class="modal fade"
+                                                    id="modaleditdokumen{{ $datapengajuan->id }}" tabindex="-1"
+                                                    role="dialog" aria-labelledby="staticBackdropLiveLabel"
+                                                    aria-hidden="true">
                                                     <div class="modal-dialog modal-dialog-scrollable" role="document">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
@@ -293,10 +259,13 @@ History
                                                                     data-bs-dismiss="modal"
                                                                     aria-label="Close"></button>
                                                             </div>
+
                                                             <div class="modal-body">
                                                                 <div class="row d-flex justify-content">
                                                                     <div class="col-md-12">
+
                                                                         <div class="card">
+
                                                                             <div class="card-body">
                                                                                 <form
                                                                                     action="/updatedokumen/{{ $d->id }}"
@@ -304,7 +273,6 @@ History
                                                                                     enctype="multipart/form-data"
                                                                                     class="forms-sample">
                                                                                     @csrf
-
                                                                                     <div class="form-group">
                                                                                         <div class="form-group">
                                                                                             {{-- <label class="form-label" for="exampleInputText1">Unggah Dokumen </label> --}}
@@ -321,30 +289,32 @@ History
                                                                                                 </div>
                                                                                             </div>
                                                                                         </div>
-                                                                                        @foreach ($pengajuan as $datapengajuan)
-                                                                                            @if ($datapengajuan->user_id == Auth::user()->id)
-                                                                                                <input type="hidden"
-                                                                                                    name="pengajuan_id"
-                                                                                                    value={{ $datapengajuan->id }}>
-                                                                                                <input type="hidden"
-                                                                                                    name="user_id"
-                                                                                                    value={{ Auth::user()->id }}>
-                                                                                            @endif
-                                                                                        @endforeach
+
+                                                                                        @if ($datapengajuan->user_id == Auth::user()->id)
+                                                                                            <input type="hidden"
+                                                                                                name="pengajuan_id"
+                                                                                                value={{ $datapengajuan->id }}>
+                                                                                            <input type="hidden"
+                                                                                                name="user_id"
+                                                                                                value={{ Auth::user()->id }}>
+                                                                                        @endif
+
                                                                                         <br />
                                                                                         <button type="submit"
                                                                                             class="btn btn-primary next action-button float-end"
                                                                                             value="Submit">Submit</button>
 
                                                                                 </form>
+
                                                                             </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
+
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
+
 
                                             </td>
                                         </tr>
@@ -453,16 +423,3 @@ History
         });
     });
 </script>
-© 2022 GitHub, Inc.
-Terms
-Privacy
-Security
-Status
-Docs
-Contact GitHub
-Pricing
-API
-Training
-Blog
-About
-Loading complete

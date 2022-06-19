@@ -34,8 +34,8 @@
                             <li id="personal" class="col-lg-4 col-md-6 mb-2 text-start">
                                 <a href="javascript:void();">
                                     <div class="iq-icon me-3">
-                                        <svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" fill="none"
-                                            viewbox="0 0 24 24" stroke="currentColor">
+                                        <svg xmlns="http://www.w3.org/2000/svg" height="20" width="20"
+                                            fill="none" viewbox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                 d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                                         </svg>
@@ -71,8 +71,8 @@
                             <li id="confirm" class="col-lg-4 col-md-6 mb-2 text-start">
                                 <a href="javascript:void();">
                                     <div class="iq-icon me-3">
-                                        <svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" fill="none"
-                                            viewbox="0 0 24 24" stroke="currentColor">
+                                        <svg xmlns="http://www.w3.org/2000/svg" height="20" width="20"
+                                            fill="none" viewbox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                 d="M5 13l4 4L19 7" />
                                         </svg>
@@ -89,7 +89,7 @@
                                         <h3 class="mb-4">Mitra</h3>
                                     </div>
                                     <div class="col-5">
-                                        <h2 class="steps">Step 1 - 4</h2>
+                                        <h2 class="steps">Step 1 - 3</h2>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -109,7 +109,8 @@
 
                                         <div class="form-group">
                                             <label class="form-label">Nama Mitra *</label>
-                                            <input type="text" class="form-control" name="namamitra" placeholder="" />
+                                            <input type="text" class="form-control" name="namamitra"
+                                                placeholder="" />
                                             {{-- @error('namamitra')
                                                 <div class="invalid-feedback">Nama Dagang Harus Diisi</div>
                                             @enderror --}}
@@ -141,13 +142,15 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="form-label">Alamat Lengkap Mitra *</label>
-                                            <input type="text" class="form-control" name="alamat" placeholder="" />
+                                            <input type="text" class="form-control" name="alamat"
+                                                placeholder="" />
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="form-label">Email Mitra *</label>
-                                            <input type="email" class="form-control" name="email" placeholder="" />
+                                            <input type="email" class="form-control" name="email"
+                                                placeholder="" />
                                         </div>
                                     </div>
                                     <div class="col-md-6">
@@ -174,13 +177,14 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="form-label">Nomor HP Narahubung Mitra *</label>
-                                            <input type="text" class="form-control" name="no_hp" placeholder="" />
+                                            <input type="text" class="form-control" name="no_hp"
+                                                placeholder="" />
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <button type="button" name="next" class="btn btn-primary next action-button float-end"
-                                value="Next">Next</button>
+                            <button type="button" name="next"
+                                class="btn btn-primary next action-button float-end" value="Next">Next</button>
                         </fieldset>
                         <fieldset>
                             <div class="form-card text-start">
@@ -189,7 +193,7 @@
                                         <h3 class="mb-4">Informasi Perjanjian:</h3>
                                     </div>
                                     <div class="col-5">
-                                        <h2 class="steps">Step 2 - 4</h2>
+                                        <h2 class="steps">Step 2 - 3</h2>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -243,8 +247,8 @@
                                 </div>
                             </div>
 
-                            <button type="submit" name="next" class="btn btn-primary next action-button float-end"
-                                value="Submit">Submit</button>
+                            <button type="submit" name="next"
+                                class="btn btn-primary next action-button float-end" value="Submit">Submit</button>
                             <button type="button" name="previous"
                                 class="btn btn-dark previous action-button-previous float-end me-1"
                                 value="Previous">Previous</button>
