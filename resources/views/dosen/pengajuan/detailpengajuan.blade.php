@@ -2,6 +2,7 @@
 @include('dosen/layoutsDosen/sidebar')
 @include('dosen/layoutsDosen/navbar')
 <!-- DataTable with Hover -->
+
 <div class="container-fluid content-inner mt-n5 py-0">
     <div class="row">
         <div class="col-lg-12 mb-4">
@@ -129,17 +130,26 @@
                                             </td>
 
                                             <td>- </td>
+
+
                                             <?php
                                             $sudahUnggah = 0;
-                                            
+                                            $unggah = 0;
                                             foreach ($dokumen as $d) {
                                                 if ($d->pengajuan_id == $datapengajuan->id) {
                                                     $sudahUnggah += 1;
+                                                }
+                                            
+                                                if ($d->pengajuan_id == $datapengajuan->id) {
+                                                    $unggah = 1;
                                                     $namadok = $d->dokumen;
+                                                    $iddok = $d->id;
                                                 }
                                             }
                                             ?>
+
                                             <td>
+
                                                 @if ($sudahUnggah == 0)
                                                     <button type="button" class="btn btn-secondary btn-sm"
                                                         data-bs-toggle="modal"
@@ -199,7 +209,7 @@
                                                                                                     value={{ Auth::user()->id }}>
                                                                                             @endif
                                                                                         @endforeach
-
+                                                                                        <br />
                                                                                         <button type="submit"
                                                                                             class="btn btn-primary next action-button float-end"
                                                                                             value="Submit">Submit</button>
@@ -213,13 +223,21 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </td>
+                                                <?php
+                                                ?>
 
+                                            </td>
                                             <td>
+                                                <?php
+                                                $unggah = 0;
+                                                // foreach ($dokumen as $data) {
+                                                //     if ($data->pengajuan_id == $datapengajuan->id) {
+                                                //         $unggah += 1;
+                                                //     }
+                                                // }
+                                                ?>
                                                 @if ($sudahUnggah == 0)
-                                                    <i class="fa fa-info-circle" data-bs-toggle="tooltip"
-                                                        data-bs-placement="top"
-                                                        title="Button Edit dan Hapus akan tampil setelah unggah dokumen"></i>
+                                                    tooltip
                                                 @endif
                                                 @if ($sudahUnggah == 1)
                                                     <button type="button" class="btn btn-info btn-sm"
@@ -244,7 +262,6 @@
                                                     </a>
                                                 @endif
                                                 {{-- Modal Edit Dokumen --}}
-
                                                 <div class="modal fade"
                                                     id="modaleditdokumen{{ $datapengajuan->id }}" tabindex="-1"
                                                     role="dialog" aria-labelledby="staticBackdropLiveLabel"
@@ -254,18 +271,15 @@
                                                             <div class="modal-header">
                                                                 <h5 class="modal-title" id="staticBackdropLiveLabel">
                                                                     Edit Dokumen
-                                                                    Pengajuan</h5>
+                                                                    Pengajuan </h5>
                                                                 <button type="button" class="btn-close"
                                                                     data-bs-dismiss="modal"
                                                                     aria-label="Close"></button>
                                                             </div>
-
                                                             <div class="modal-body">
                                                                 <div class="row d-flex justify-content">
                                                                     <div class="col-md-12">
-
                                                                         <div class="card">
-
                                                                             <div class="card-body">
                                                                                 <form
                                                                                     action="/updatedokumen/{{ $d->id }}"
@@ -273,6 +287,7 @@
                                                                                     enctype="multipart/form-data"
                                                                                     class="forms-sample">
                                                                                     @csrf
+
                                                                                     <div class="form-group">
                                                                                         <div class="form-group">
                                                                                             {{-- <label class="form-label" for="exampleInputText1">Unggah Dokumen </label> --}}
@@ -289,34 +304,32 @@
                                                                                                 </div>
                                                                                             </div>
                                                                                         </div>
-
-                                                                                        @if ($datapengajuan->user_id == Auth::user()->id)
-                                                                                            <input type="hidden"
-                                                                                                name="pengajuan_id"
-                                                                                                value={{ $datapengajuan->id }}>
-                                                                                            <input type="hidden"
-                                                                                                name="user_id"
-                                                                                                value={{ Auth::user()->id }}>
-                                                                                        @endif
-
+                                                                                        @foreach ($pengajuan as $datapengajuan)
+                                                                                            @if ($datapengajuan->user_id == Auth::user()->id)
+                                                                                                <input type="hidden"
+                                                                                                    name="pengajuan_id"
+                                                                                                    value={{ $datapengajuan->id }}>
+                                                                                                <input type="hidden"
+                                                                                                    name="user_id"
+                                                                                                    value={{ Auth::user()->id }}>
+                                                                                            @endif
+                                                                                        @endforeach
                                                                                         <br />
                                                                                         <button type="submit"
                                                                                             class="btn btn-primary next action-button float-end"
                                                                                             value="Submit">Submit</button>
 
                                                                                 </form>
-
                                                                             </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
-
                                                             </div>
                                                         </div>
                                                     </div>
-
-
+                                                </div>
                                             </td>
+
                                         </tr>
                                     @endif
                                 @endforeach
