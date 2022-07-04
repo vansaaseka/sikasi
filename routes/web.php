@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AkunController;
 use App\Http\Controllers\DrafController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\EmailController;
 use App\Http\Controllers\ProdiController;
 use App\Http\Controllers\StatusController;
 use App\Http\Controllers\DokumenController;
@@ -159,3 +160,6 @@ route::get('/hapusruanglingkup/{id}',[RuanglingkupController::class,"hapusruangl
 //Unggah Dokumen
 route::post('/insertdokumen',[DokumenController::class,"insertdokumen"])->name('insertdokumen');
 route::post('/updatedokumen/{id}',[DokumenController::class,"updatedokumen"])->name('updatedokumen');
+
+route::get('/email',[EmailController::class,"kirim"]);
+route::get('/pesan',[EmailController::class,"notif"]);

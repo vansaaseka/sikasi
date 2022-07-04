@@ -3,13 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Models\Mitra;
-use App\Models\User;
 use App\Models\Prodi;
 use App\Models\Status;
 use App\Models\Dokumen;
+use App\Mail\KirimEmail;
 use App\Models\Pengajuan;
 use App\Models\Trxstatus;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use Illuminate\Foundation\Auth\User;
+use Illuminate\Support\Facades\Mail;
+
+
+
 
 class StatusController extends Controller
 {
@@ -73,25 +80,44 @@ public function hapusStatus($id){
 
     public function insertnewstatus(Request $request){
     $trxstatus = new Trxstatus;
+    $user = User::all();
+
             $trxstatus->pengajuan_id = $request->input('pengajuan_id');
             $trxstatus->created_by = $request->input('created_by');
             $trxstatus->status_id = $request->input('status_id');
             $trxstatus->catatan = $request['catatan'];
             $trxstatus->status_dokumen = $request['status_dokumen'];
             $trxstatus->save();
-            return back()->with('toast_success','Data Berhasil Diupdate');
-    }
+ 
+            // \Mail::raw('Hallo'.$user->name, function ($message) use($user) {
+            //     $message->to($user->email,$user->name);
+            //     $message->subject('Pendaftaran');
+            // });
 
-    public function validasi(){
-    $pengajuan = Pengajuan::all();
-    $mitra = Mitra::all();
-    $status = Status::all();
-    $prodi = Prodi::all();
-    $dokumen = Dokumen::all();
-    $trxstatus = Trxstatus::all();
-    $user = User::all();
-    return view('reviewer.tampilvalidasi' , compact('pengajuan' , 'mitra', 'status','prodi', 'dokumen',
-    'trxstatus', 'user'));
-    }
+               
+                // $tujuan='derieri62@gmail.com';
+                
+                foreach($user as $a){
+                
+                    $tujuan= $a->email;
+                    \Mail::to($tujuan)->send(new KirimEmail());
+                    return back()->with('Email berhasil dikirm');
+                }
+}
+
+
+
+
+public function validasi(){
+$pengajuan = Pengajuan::all();
+$mitra = Mitra::all();
+$status = Status::all();
+$prodi = Prodi::all();
+$dokumen = Dokumen::all();
+$trxstatus = Trxstatus::all();
+$user = User::all();
+return view('reviewer.tampilvalidasi' , compact('pengajuan' , 'mitra', 'status','prodi', 'dokumen',
+'trxstatus', 'user'));
+}
 
 }

@@ -40,6 +40,11 @@ $prodi = Prodi::all();
 $ruanglingkup = RuangLingkup::all();
 return view('dosen\Pengajuan\tambahpengajuan' , compact('kategorimitra' , 'prodi' , 'ruanglingkup'));
 }
+        public function editdokumen($id){
+        $draf = Pengajuan::find($id);
+        $dokumen = Dokumen::where('pengajuan_id', $id)->first();
+        return view('admin\Draf\editdokumen', compact('draf', 'dokumen'));
+        }
 
 public function insertpengajuan (Request $request){
 

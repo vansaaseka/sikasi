@@ -16,9 +16,11 @@ class KirimEmail extends Mailable
      *
      * @return void
      */
+    // public function __construct($data)
     public function __construct()
     {
         //
+    //     $this->data = $data;
     }
 
     /**
@@ -28,6 +30,6 @@ class KirimEmail extends Mailable
      */
     public function build()
     {
-        return $this->view('view.name');
+        return $this->markdown('verifikator.kirimemail');
     }
 }
