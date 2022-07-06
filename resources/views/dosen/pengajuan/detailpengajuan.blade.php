@@ -247,10 +247,12 @@
                                                     <?php
                                                     
                                                     foreach ($trxstatus as $s) {
-                                                        if ($s->status_id > 1) {
-                                                            $statusDisable = 'disabled';
-                                                        } else {
-                                                            $statusDisable = '';
+                                                        if ($datapengajuan->id == $s->pengajuan_id) {
+                                                            if ($s->status_id >= 2) {
+                                                                $statusDisable = 'disabled';
+                                                            } else {
+                                                                $statusDisable = '';
+                                                            }
                                                         }
                                                     }
                                                     

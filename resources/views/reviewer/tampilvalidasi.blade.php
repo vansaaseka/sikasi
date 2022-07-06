@@ -72,61 +72,60 @@
 
                                             </button>
                                             {{-- Modal Status --}}
-                                            @foreach ($pengajuan as $datapengajuan)
-                                                <div class="modal fade" id="status{{ $datapengajuan->id }}"
-                                                    tabindex="-1" role="dialog"
-                                                    aria-labelledby="staticBackdropLiveLabel" aria-hidden="true">
-                                                    <div class="modal-dialog modal-dialog-scrollable" role="document">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h5 class="modal-title" id="staticBackdropLiveLabel">
-                                                                    Status Pengajuan</h5>
-                                                                <button type="button" class="btn-close"
-                                                                    data-bs-dismiss="modal" aria-label="Close"></button>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <div class="row d-flex justify-content-center">
-                                                                    <div class="col-md-12">
-                                                                        <div class="card">
-                                                                            <div class="card-body">
-                                                                                <div
-                                                                                    class="iq-timeline0 m-0 d-flex align-items-center justify-content-between position-relative">
-                                                                                    <ul class="list-inline p-0 m-0">
-                                                                                        @foreach ($trxstatus as $a)
-                                                                                            @if ($datapengajuan->id == $a->pengajuan_id)
-                                                                                                <li>
-                                                                                                    <div
-                                                                                                        class="timeline-dots timeline-dot1 border-primary text-primary">
-                                                                                                    </div>
-                                                                                                    @foreach ($status as $item)
-                                                                                                        @if ($a->status_id == $item->id)
-                                                                                                            <h6
-                                                                                                                class="float-left mb-1">
-                                                                                                                {{ $item->namastatus }}
-                                                                                                            </h6>
-                                                                                                        @endif
-                                                                                                    @endforeach
 
-                                                                                                    <?php
+                                            <div class="modal fade" id="status{{ $datapengajuan->id }}" tabindex="-1"
+                                                role="dialog" aria-labelledby="staticBackdropLiveLabel"
+                                                aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-scrollable" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="staticBackdropLiveLabel">
+                                                                Status Pengajuan</h5>
+                                                            <button type="button" class="btn-close"
+                                                                data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div class="row d-flex justify-content-center">
+                                                                <div class="col-md-12">
+                                                                    <div class="card">
+                                                                        <div class="card-body">
+                                                                            <div
+                                                                                class="iq-timeline0 m-0 d-flex align-items-center justify-content-between position-relative">
+                                                                                <ul class="list-inline p-0 m-0">
+                                                                                    @foreach ($trxstatus as $a)
+                                                                                        @if ($datapengajuan->id == $a->pengajuan_id)
+                                                                                            <li>
+                                                                                                <div
+                                                                                                    class="timeline-dots timeline-dot1 border-primary text-primary">
+                                                                                                </div>
+                                                                                                @foreach ($status as $item)
+                                                                                                    @if ($a->status_id == $item->id)
+                                                                                                        <h6
+                                                                                                            class="float-left mb-1">
+                                                                                                            {{ $item->namastatus }}
+                                                                                                        </h6>
+                                                                                                    @endif
+                                                                                                @endforeach
+
+                                                                                                <?php
                                                                                                 foreach($user as $p){
                                                                                                     if($a->created_by == $p->id){?>
-                                                                                                    <div
-                                                                                                        class="d-inline-block w-100">
-                                                                                                        <p>
-                                                                                                            Created by
-                                                                                                            {{ $p->name }}<br>
-                                                                                                            {{ $a->created_at }}
-                                                                                                        </p>
-                                                                                                    </div>
-                                                                                                    <?php }
+                                                                                                <div
+                                                                                                    class="d-inline-block w-100">
+                                                                                                    <p>
+                                                                                                        Created by
+                                                                                                        {{ $p->name }}<br>
+                                                                                                        {{ $a->created_at }}
+                                                                                                    </p>
+                                                                                                </div>
+                                                                                                <?php }
                                                                                                     }
                                                                                                     ?>
 
-                                                                                                </li>
-                                                                                            @endif
-                                                                                        @endforeach
-                                                                                    </ul>
-                                                                                </div>
+                                                                                            </li>
+                                                                                        @endif
+                                                                                    @endforeach
+                                                                                </ul>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -135,11 +134,12 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                            @endforeach
+                                            </div>
+
                                         </td>
 
                                         <td>
-                                            {{-- {{  $datapengajuan->trxstatus->catatan}} --}}
+
                                             <?php
                                       foreach($trxstatus as $p){
                                           if($p->pengajuan_id == $datapengajuan->id){?>
@@ -148,7 +148,9 @@
                                       }
                                       ?>
                                         </td>
+
                                         <td>
+
                                             <?php
                                         foreach($dokumen as $d){
                                             if($d->pengajuan_id == $datapengajuan->id){?>
@@ -159,8 +161,21 @@
 
                                             <?php foreach($dokumen as $item){
                                             if($item->pengajuan_id == $datapengajuan->id){?>
-                                            <a class="btn btn-primary btn-sm">
-                                                <i class="fa fa-edit" data-bs-toggle="modal"
+                                            <?php
+                                            
+                                            foreach ($trxstatus as $s) {
+                                                if ($datapengajuan->id == $s->pengajuan_id) {
+                                                    if ($s->status_id >= 2) {
+                                                        $statusDisable = 'disabled';
+                                                    } else {
+                                                        $statusDisable = '';
+                                                    }
+                                                }
+                                            }
+                                            
+                                            ?>
+                                            <a class="btn btn-sm btn-icon btn-primary {{ $statusDisable }}">
+                                                <i class="fa fa-file-pen" data-bs-toggle="modal"
                                                     data-bs-target="#modaleditdokumen{{ $item->id }}"
                                                     id="#modaleditdokumen{{ $item->id }}">
                                                 </i>
@@ -203,11 +218,11 @@
                                                                                             </div>
                                                                                         </div>
                                                                                     </div>
-                                                                                    @foreach ($pengajuan as $datapengajuan)
+                                                                                    @foreach ($pengajuan as $data)
                                                                                         @if ($datapengajuan->user_id == Auth::user()->id)
                                                                                             <input type="hidden"
                                                                                                 name="pengajuan_id"
-                                                                                                value={{ $datapengajuan->id }}>
+                                                                                                value={{ $data->id }}>
                                                                                             <input type="hidden"
                                                                                                 name="user_id"
                                                                                                 value={{ Auth::user()->id }}>
@@ -232,18 +247,20 @@
                                         </td>
 
                                         <td>
-                                            <?php $belumada_status = '<div class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modalstatus' . $datapengajuan->id . '"id="#modalstatus' . $datapengajuan->id . '"> Validasi </div>'; ?>
 
-                                            @foreach ($trxstatus as $a)
-                                                @if ($datapengajuan->id == $a->pengajuan_id)
+
+                                            <?php $belumada_status = '<div class="btn btn-outline-primary btn-sm ' . $datapengajuan->id . '" data-bs-toggle="modal" data-bs-target="#modalstatus' . $datapengajuan->id . '"id="#modalstatus' . $datapengajuan->id . '"> Validasi </div>'; ?>
+
+                                            @foreach ($trxstatus as $trx)
+                                                @if ($datapengajuan->id == $trx->pengajuan_id)
                                                     @foreach ($status as $b)
-                                                        @if ($a->status_id == $b->id)
-                                                            <?php $belumada_status = '<div class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modalstatus' . $datapengajuan->id . '"id="#modalstatus' . $datapengajuan->id . '"> Validasi </div>'; ?>
+                                                        @if ($trx->status_id == $b->id)
+                                                            <?php $belumada_status = '<div class="btn btn-outline-primary btn-sm ' . $datapengajuan->id . '" data-bs-toggle="modal" data-bs-target="#modalstatus' . $datapengajuan->id . '"id="#modalstatus' . $datapengajuan->id . '"> Validasi </div>'; ?>
                                                         @endif
                                                     @endforeach
 
                                                     @foreach ($status as $b)
-                                                        @if ($a->status_id == $b->id)
+                                                        @if ($trx->status_id == $b->id)
                                                             @if ($b->namastatus == 'Dokumen Selesai direview BPU')
                                                                 <?php $belumada_status = ' <div class="btn btn-outline-primary btn-sm"> <i class="fa fa-check-circle"></i>Selesai</div>';
                                                                 
