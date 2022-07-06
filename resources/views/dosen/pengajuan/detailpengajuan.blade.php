@@ -17,7 +17,7 @@
                         </a>
                     </div>
                 </div>
-                <div class="card-body p-0">
+                <div class="card-body">
                     <div class="table-responsive mt-4">
                         <table id="datatable" class="table table-striped" data-toggle="data-table">
                             <thead>
@@ -237,24 +237,39 @@
 
                                                 {{ $datapengajuan->id }}
                                                 @if ($sudahUnggah == 0)
-                                                    tooltip
+                                                    <i class="fa fa-info-circle" data-bs-toggle="tooltip"
+                                                        data-bs-placement="top"
+                                                        title="Button Edit dan Hapus akan tampil ketika sudah unggah dokumen">
+                                                    </i>
                                                 @endif
 
                                                 @if ($sudahUnggah == 1)
+                                                    <?php
+                                                    
+                                                    foreach ($trxstatus as $s) {
+                                                        if ($s->status_id > 1) {
+                                                            $statusDisable = 'disabled';
+                                                        } else {
+                                                            $statusDisable = '';
+                                                        }
+                                                    }
+                                                    
+                                                    ?>
+
                                                     <button type="button" class="btn btn-info btn-sm"
                                                         data-bs-toggle="modal" data-bs-target="#pengajuan"
                                                         id="#modalCenter{{ $datapengajuan->id }}">
                                                         <i class="fa fa-info-circle"></i>
                                                     </button>
 
-                                                    <a class="btn btn-primary btn-sm">
+                                                    <a class="btn btn-primary btn-sm {{ $statusDisable }}">
                                                         <i class="fa fa-edit" data-bs-toggle="modal"
                                                             data-bs-target="#modaleditdokumen{{ $iddok }}"
                                                             id="#modaleditdokumen{{ $d->id }}">
                                                         </i>
                                                     </a>
 
-                                                    <a class="btn btn-danger delete btn-sm hapus"
+                                                    <a class="btn btn-danger delete btn-sm hapus {{ $statusDisable }} "
                                                         id-data="{{ $datapengajuan->id }}"
                                                         nama-data="{{ $datapengajuan->mitra->namamitra }}"
                                                         data-toggle="tooltip" data-placement="top" title=""
@@ -262,6 +277,7 @@
                                                         <i class="fa fa-trash"></i>
                                                     </a>
                                                 @endif
+
                                                 <!-- Modal Detail -->
                                                 <div class="modal fade" id="pengajuan" data-bs-backdrop="static"
                                                     data-bs-keyboard="false" tabindex="-1" role="dialog"
@@ -338,6 +354,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
+
                                                 {{-- Modal Edit Dokumen --}}
                                                 <div class="modal fade" id="modaleditdokumen{{ $iddok }}"
                                                     tabindex="-1" role="dialog"
@@ -364,7 +381,8 @@
 
                                                                             <tr>
                                                                                 <td class="font-size:3">
-                                                                                    Edit Dokumen Pengajuan dengan Mitra
+                                                                                    Edit Dokumen Pengajuan
+                                                                                    dengan Mitra
                                                                                     :
                                                                                     {{ $datapengajuan->mitra->namamitra }}
                                                                                 </td>

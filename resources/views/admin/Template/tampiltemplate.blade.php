@@ -18,7 +18,7 @@
                         </a>
                     </div>
                 </div>
-                <div class="card-body p-0">
+                <div class="card-body">
                     <div class="table-responsive mt-4">
                         <table id="basic-table" class="table table-striped mb-0" role="grid">
                             <thead>

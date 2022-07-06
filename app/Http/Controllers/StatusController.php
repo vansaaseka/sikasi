@@ -72,6 +72,29 @@ public function hapusStatus($id){
         return view('verifikator\tampilverifikasi' , compact('pengajuan' , 'mitra', 'status','prodi', 'dokumen', 'trxstatus', 'user'));
     }
 
+    public function dataajuan(){
+    $pengajuan = Pengajuan::all();
+    $mitra = Mitra::all();
+    $status = Status::all();
+    $prodi = Prodi::all();
+    $dokumen = Dokumen::all();
+    $trxstatus = Trxstatus::all();
+    $user = User::all();
+    return view('admin.pengajuan.tampilpengajuan' , compact('pengajuan' , 'mitra', 'status','prodi', 'dokumen',
+    'trxstatus', 'user'));
+    }
+
+    public function cetakpengajuan(){
+    $pengajuan = Pengajuan::all();
+    $mitra = Mitra::all();
+   $trxstatus = Trxstatus::all();
+    $prodi = Prodi::all();
+    $dokumen = Dokumen::all();
+    $user = User::all();
+    return view('admin.pengajuan.cetakpengajuan' , compact('pengajuan' , 'mitra','prodi', 'dokumen',
+    'trxstatus', 'user'));
+    }
+
     public function newstatus(){
     $pengajuan = Pengajuan::all();
     $status = Status::all();

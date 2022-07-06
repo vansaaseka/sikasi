@@ -13,7 +13,7 @@
                         <h4 class="card-title">Review Pengajuan</h4>
                     </div>
                 </div>
-                <div class="card-body p-0">
+                <div class="card-body">
                     <div class="table-responsive mt-4">
                         <table id="datatable" class="table table-striped" data-toggle="data-table">
                             <thead>
@@ -26,6 +26,7 @@
                                     <th>Status</th>
                                     <th>Catatan</th>
                                     <th>Dokumen Kerjasama</th>
+                                    <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tfoot>
@@ -38,6 +39,7 @@
                                     <th>Status</th>
                                     <th>Catatan</th>
                                     <th>Dokumen Kerjasama</th>
+                                    <th>Aksi</th>
                             </tfoot>
 
                             <tbody>
@@ -55,11 +57,9 @@
                                             <?php
                                     foreach($prodi as $p){
                                         if($p->id == $datapengajuan->user->prodi_id){?>
-                                        <td>{{ $p->namaprodi }} </td>
-                                        <?php }
+                                            {{ $p->namaprodi }} <?php }
                                     }
-                                    ?>
-                                        </td>
+                                    ?> </td>
                                         <td>{{ date('Y', strtotime($datapengajuan->tanggalmulai)) }}</td>
 
                                         <td>{{ $datapengajuan->mitra->namamitra }}</td>
@@ -71,10 +71,71 @@
                                                 Status
 
                                             </button>
-                                            <i class="fa fa-edit" data-bs-toggle="modal"
-                                                data-bs-target="#modalstatus{{ $datapengajuan->id }}"
-                                                id="#modalstatus{{ $datapengajuan->id }}">
-                                            </i>
+                                            {{-- Modal Status --}}
+                                            @foreach ($pengajuan as $datapengajuan)
+                                                <div class="modal fade" id="status{{ $datapengajuan->id }}"
+                                                    tabindex="-1" role="dialog"
+                                                    aria-labelledby="staticBackdropLiveLabel" aria-hidden="true">
+                                                    <div class="modal-dialog modal-dialog-scrollable" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="staticBackdropLiveLabel">
+                                                                    Status Pengajuan</h5>
+                                                                <button type="button" class="btn-close"
+                                                                    data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <div class="row d-flex justify-content-center">
+                                                                    <div class="col-md-12">
+                                                                        <div class="card">
+                                                                            <div class="card-body">
+                                                                                <div
+                                                                                    class="iq-timeline0 m-0 d-flex align-items-center justify-content-between position-relative">
+                                                                                    <ul class="list-inline p-0 m-0">
+                                                                                        @foreach ($trxstatus as $a)
+                                                                                            @if ($datapengajuan->id == $a->pengajuan_id)
+                                                                                                <li>
+                                                                                                    <div
+                                                                                                        class="timeline-dots timeline-dot1 border-primary text-primary">
+                                                                                                    </div>
+                                                                                                    @foreach ($status as $item)
+                                                                                                        @if ($a->status_id == $item->id)
+                                                                                                            <h6
+                                                                                                                class="float-left mb-1">
+                                                                                                                {{ $item->namastatus }}
+                                                                                                            </h6>
+                                                                                                        @endif
+                                                                                                    @endforeach
+
+                                                                                                    <?php
+                                                                                                foreach($user as $p){
+                                                                                                    if($a->created_by == $p->id){?>
+                                                                                                    <div
+                                                                                                        class="d-inline-block w-100">
+                                                                                                        <p>
+                                                                                                            Created by
+                                                                                                            {{ $p->name }}<br>
+                                                                                                            {{ $a->created_at }}
+                                                                                                        </p>
+                                                                                                    </div>
+                                                                                                    <?php }
+                                                                                                    }
+                                                                                                    ?>
+
+                                                                                                </li>
+                                                                                            @endif
+                                                                                        @endforeach
+                                                                                    </ul>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            @endforeach
                                         </td>
 
                                         <td>
@@ -95,157 +156,69 @@
                                             <?php }
                                         }
                                         ?>
-                                        </td>
 
-
-                                        <?php foreach($dokumen as $item){
+                                            <?php foreach($dokumen as $item){
                                             if($item->pengajuan_id == $datapengajuan->id){?>
+                                            <a class="btn btn-primary btn-sm">
+                                                <i class="fa fa-edit" data-bs-toggle="modal"
+                                                    data-bs-target="#modaleditdokumen{{ $item->id }}"
+                                                    id="#modaleditdokumen{{ $item->id }}">
+                                                </i>
+                                            </a>
+                                            {{-- Modal Edit Dokumen --}}
+                                            <div class="modal fade" id="modaleditdokumen{{ $item->id }}"
+                                                tabindex="-1" role="dialog" aria-labelledby="staticBackdropLiveLabel"
+                                                aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-scrollable" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="staticBackdropLiveLabel">Edit
+                                                                Dokumen Pengajuan</h5>
+                                                            <button type="button" class="btn-close"
+                                                                data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div class="row d-flex justify-content">
+                                                                <div class="col-md-12">
+                                                                    <div class="card">
+                                                                        <div class="card-body">
+                                                                            <form
+                                                                                action="/updatedokumen/{{ $item->id }}"
+                                                                                method="POST"
+                                                                                enctype="multipart/form-data"
+                                                                                class="forms-sample">
+                                                                                @csrf
 
-
-
-                                        {{-- Modal Edit Status --}}
-                                        <div class="modal fade" id="modalstatus{{ $datapengajuan->id }}"
-                                            tabindex="-1" role="dialog" aria-labelledby="staticBackdropLiveLabel"
-                                            aria-hidden="true">
-                                            <div class="modal-dialog modal-dialog-scrollable" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="staticBackdropLiveLabel">
-                                                            Validasi Pengajuan</h5>
-                                                        <button type="button" class="btn-close"
-                                                            data-bs-dismiss="modal" aria-label="Close"></button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <div class="row d-flex justify-content-center">
-                                                            <div class="col-md-12">
-                                                                <div class="bd-example">
-                                                                    <nav>
-                                                                        <div class="nav nav-tabs mb-6" id="nav-tab"
-                                                                            role="tablist">
-                                                                            <button class="nav-link active"
-                                                                                id="nav-home-tab" data-bs-toggle="tab"
-                                                                                data-bs-target="#nav-home" type="button"
-                                                                                role="tab" aria-controls="nav-home"
-                                                                                aria-selected="true">Validasi</button>
-                                                                            <button class="nav-link"
-                                                                                id="nav-profile-tab"
-                                                                                data-bs-toggle="tab"
-                                                                                data-bs-target="#nav-profile"
-                                                                                type="button" role="tab"
-                                                                                aria-controls="nav-profile"
-                                                                                aria-selected="false">Edit
-                                                                                Dokumen</button>
-                                                                        </div>
-                                                                    </nav>
-                                                                    <div class="tab-content" id="nav-tabContent">
-                                                                        <div class="tab-pane fade show active"
-                                                                            id="nav-home" role="tabpanel"
-                                                                            aria-labelledby="nav-home-tab">
-                                                                            <div class="card">
-                                                                                <div class="card-body">
-                                                                                    <form action="/insertnewstatus"
-                                                                                        method="POST"
-                                                                                        enctype="multipart/form-data"
-                                                                                        class="forms-sample">
-                                                                                        @csrf
-
+                                                                                <div class="form-group">
+                                                                                    <div class="form-group">
+                                                                                        {{-- <label class="form-label" for="exampleInputText1">Unggah Dokumen </label> --}}
                                                                                         <div class="form-group">
-                                                                                            <label
-                                                                                                class="form-label"
-                                                                                                for="exampleInputText1">Validasi
-                                                                                            </label>
-                                                                                            <div class="form-check">
-                                                                                                <input type="radio"
-                                                                                                    name="status_id"
-                                                                                                    value="3">
-                                                                                                <label
-                                                                                                    class="form-check-label"
-                                                                                                    for="exampleRadio1">Dokumen
-                                                                                                    Direview BPU</label>
-                                                                                            </div>
-                                                                                            <br />
-                                                                                            <div class="form-group">
-                                                                                                <label
-                                                                                                    class="form-label"
-                                                                                                    for="exampleInputText1">Catatan
-                                                                                                </label>
-                                                                                                <input type="text"
+                                                                                            <div class="custom-file">
+                                                                                                <input type="file"
+                                                                                                    name="dokumen"
+                                                                                                    id="customFile"
                                                                                                     class="form-control"
-                                                                                                    id="exampleInputText1"
-                                                                                                    name="catatan">
+                                                                                                    value="{{ old('dokumen') }}"
+                                                                                                    autofocus>
                                                                                             </div>
-
-                                                                                            {{-- <div class="custom-file">
-                                                                                                    <input type="file" name="dokumen" placeholder="Choose file" id="file">
-                                                                                                </div> --}}
                                                                                         </div>
+                                                                                    </div>
+                                                                                    @foreach ($pengajuan as $datapengajuan)
+                                                                                        @if ($datapengajuan->user_id == Auth::user()->id)
+                                                                                            <input type="hidden"
+                                                                                                name="pengajuan_id"
+                                                                                                value={{ $datapengajuan->id }}>
+                                                                                            <input type="hidden"
+                                                                                                name="user_id"
+                                                                                                value={{ Auth::user()->id }}>
+                                                                                        @endif
+                                                                                    @endforeach
+                                                                                    <br />
+                                                                                    <button type="submit"
+                                                                                        class="btn btn-primary next action-button float-end"
+                                                                                        value="Submit">Submit</button>
 
-                                                                                        <input type="hidden"
-                                                                                            name="pengajuan_id"
-                                                                                            value={{ $datapengajuan->id }}>
-                                                                                        <input type="hidden"
-                                                                                            name="created_by"
-                                                                                            value={{ Auth::user()->id }}>
-                                                                                        <input type="hidden"
-                                                                                            name="created_by"
-                                                                                            value={{ Auth::user()->id }}>
-
-                                                                                        <button type="submit"
-                                                                                            class="btn btn-primary next action-button float-end"
-                                                                                            value="Submit">Submit</button>
-
-                                                                                    </form>
-                                                                                </div>
-                                                                            </div>
-
-                                                                        </div>
-                                                                        <div class="tab-pane fade" id="nav-profile"
-                                                                            role="tabpanel"
-                                                                            aria-labelledby="nav-home-tab">
-                                                                            <div class="card">
-                                                                                <div class="card-body">
-                                                                                    <form
-                                                                                        action="/updatedokumen/{{ $item->id }}"
-                                                                                        method="POST"
-                                                                                        enctype="multipart/form-data"
-                                                                                        class="forms-sample">
-                                                                                        @csrf
-
-                                                                                        <div class="form-group">
-                                                                                            <div class="form-group">
-                                                                                                {{-- <label class="form-label" for="exampleInputText1">Unggah Dokumen </label> --}}
-                                                                                                <div
-                                                                                                    class="form-group">
-                                                                                                    <div
-                                                                                                        class="custom-file">
-                                                                                                        <input
-                                                                                                            type="file"
-                                                                                                            name="dokumen"
-                                                                                                            id="customFile"
-                                                                                                            class="form-control"
-                                                                                                            value="{{ old('dokumen') }}"
-                                                                                                            autofocus>
-                                                                                                    </div>
-                                                                                                </div>
-                                                                                            </div>
-                                                                                            @foreach ($pengajuan as $datapengajuan)
-                                                                                                @if ($datapengajuan->user_id == Auth::user()->id)
-                                                                                                    <input type="hidden"
-                                                                                                        name="pengajuan_id"
-                                                                                                        value={{ $datapengajuan->id }}>
-                                                                                                    <input type="hidden"
-                                                                                                        name="user_id"
-                                                                                                        value={{ Auth::user()->id }}>
-                                                                                                @endif
-                                                                                            @endforeach
-                                                                                            <br />
-                                                                                            <button type="submit"
-                                                                                                class="btn btn-primary next action-button float-end"
-                                                                                                value="Submit">Submit</button>
-
-                                                                                    </form>
-                                                                                </div>
-                                                                            </div>
+                                                                            </form>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -254,108 +227,145 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                    </div>
-                </div>
+                                            <?php }} ?>
 
+                                        </td>
 
-            </div>
-        </div>
-        <?php }} ?>
+                                        <td>
+                                            <?php $belumada_status = '<div class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modalstatus' . $datapengajuan->id . '"id="#modalstatus' . $datapengajuan->id . '"> Validasi </div>'; ?>
 
-
-
-        {{-- Modal Status --}}
-        @foreach ($pengajuan as $datapengajuan)
-            <div class="modal fade" id="status{{ $datapengajuan->id }}" tabindex="-1" role="dialog"
-                aria-labelledby="staticBackdropLiveLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-scrollable" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="staticBackdropLiveLabel">Status Pengajuan</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="row d-flex justify-content-center">
-                                <div class="col-md-12">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <div
-                                                class="iq-timeline0 m-0 d-flex align-items-center justify-content-between position-relative">
-                                                <ul class="list-inline p-0 m-0">
-                                                    @foreach ($trxstatus as $a)
-                                                        @if ($datapengajuan->id == $a->pengajuan_id)
-                                                            <li>
-                                                                <div
-                                                                    class="timeline-dots timeline-dot1 border-primary text-primary">
-                                                                </div>
-                                                                @foreach ($status as $item)
-                                                                    @if ($a->status_id == $item->id)
-                                                                        <h6 class="float-left mb-1">
-                                                                            {{ $item->namastatus }}</h6>
-                                                                    @endif
-                                                                @endforeach
-
-                                                                <?php
-                                        foreach($user as $p){
-                                            if($a->created_by == $p->id){?>
-                                                                <div class="d-inline-block w-100">
-                                                                    <p>
-                                                                        Created by {{ $p->name }}<br>
-                                                                        {{ $a->created_at }}</p>
-                                                                </div>
-                                                                <?php }
-                                        }
-                                        ?>
-
-                                                            </li>
+                                            @foreach ($trxstatus as $a)
+                                                @if ($datapengajuan->id == $a->pengajuan_id)
+                                                    @foreach ($status as $b)
+                                                        @if ($a->status_id == $b->id)
+                                                            <?php $belumada_status = '<div class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modalstatus' . $datapengajuan->id . '"id="#modalstatus' . $datapengajuan->id . '"> Validasi </div>'; ?>
                                                         @endif
                                                     @endforeach
-                                                </ul>
+
+                                                    @foreach ($status as $b)
+                                                        @if ($a->status_id == $b->id)
+                                                            @if ($b->namastatus == 'Dokumen Selesai direview BPU')
+                                                                <?php $belumada_status = ' <div class="btn btn-outline-primary btn-sm"> <i class="fa fa-check-circle"></i>Selesai</div>';
+                                                                
+                                                                ?>
+                                                            @endif
+                                                        @endif
+                                                    @endforeach
+                                                @endif
+                                            @endforeach
+                                            <?= $belumada_status ?>
+
+                                            {{-- Modal Edit Status --}}
+                                            <div class="modal fade" id="modalstatus{{ $datapengajuan->id }}"
+                                                tabindex="-1" role="dialog" aria-labelledby="staticBackdropLiveLabel"
+                                                aria-hidden="true" style="text-align: left">
+                                                <div class="modal-dialog modal-dialog-scrollable" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="staticBackdropLiveLabel">
+                                                                Verifikasi Pengajuan</h5>
+                                                            <button type="button" class="btn-close"
+                                                                data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div class="row d-flex justify-content-center">
+                                                                <div class="col-md-12">
+                                                                    <div class="card">
+                                                                        <div class="card-body">
+                                                                            <form action="/insertnewstatus"
+                                                                                method="POST"
+                                                                                enctype="multipart/form-data"
+                                                                                class="forms-sample">
+                                                                                @csrf
+
+                                                                                <div class="form-group">
+                                                                                    <label class="form-label"
+                                                                                        for="exampleInputText1">Update
+                                                                                        Status
+                                                                                    </label>
+
+                                                                                    <?php $tombol = '<div class="custom-control custom-radio custom-radio-color-checked "><input type="radio" name="status_id" id="gembel" value="2"> <label for="gembel"> Dokumen direview BPU </label></div>'; ?>
+                                                                                    {{-- <p>Pilih salah satu untuk
+                                                                                        memperbarui status:</p> --}}
+                                                                                    @foreach ($trxstatus as $a)
+                                                                                        @if ($a->pengajuan_id == $datapengajuan->id)
+                                                                                            @for ($s = 1; $s < 3; $s++)
+                                                                                                @if ($a->status_id == $status[$s]->id)
+                                                                                                    @if ($status[$s]->namastatus === 'Dokumen direview BPU')
+                                                                                                        <?php $tombol = '<div class="custom-control custom-radio custom-radio-color-checked "><input type="radio" name="status_id" value="3"> <label>Dokumen Selesai direview BPU</label> </div>'; ?>
+                                                                                                    @endif
+                                                                                                @endif
+                                                                                            @endfor
+                                                                                        @endif
+                                                                                    @endforeach
+                                                                                    <?= $tombol ?>
+                                                                                    <br />
+                                                                                    <div class="form-group">
+                                                                                        <label class="form-label"
+                                                                                            for="exampleInputText1">Catatan
+                                                                                        </label>
+                                                                                        <input type="text"
+                                                                                            class="form-control"
+                                                                                            id="exampleInputText1"
+                                                                                            name="catatan">
+                                                                                    </div>
+                                                                                    <div class="form-group">
+                                                                                        <label class="form-label"
+                                                                                            for="exampleInputText1">Status
+                                                                                            Dokumen </label>
+                                                                                        <input type="text"
+                                                                                            class="form-control"
+                                                                                            id="exampleInputText1"
+                                                                                            name="status_dokumen">
+                                                                                    </div>
+                                                                                    {{-- <div class="custom-file">
+                                                                <input type="file" name="dokumen" placeholder="Choose file" id="file">
+                                                            </div> --}}
+                                                                                </div>
+
+                                                                                <input type="hidden"
+                                                                                    name="pengajuan_id"
+                                                                                    value={{ $datapengajuan->id }}>
+                                                                                <input type="hidden"
+                                                                                    name="created_by"
+                                                                                    value={{ Auth::user()->id }}>
+                                                                                <input type="hidden"
+                                                                                    name="created_by"
+                                                                                    value={{ Auth::user()->id }}>
+
+                                                                                <button type="submit"
+                                                                                    class="btn btn-primary next action-button float-end"
+                                                                                    value="Submit">Submit</button>
+
+                                                                            </form>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+
+
+                                        </td>
+
+
+
+
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
-        @endforeach
-        </tr>
-        @endforeach
-
-
-        </tbody>
-        </table>
+        </div>
     </div>
 </div>
 
 
-{{-- alert Delete Pengajuan --}}
-<script>
-    $('.hapus').click(function() {
-        var pengajuanid = $(this).attr('data-id');
-        var namapengajuan = $(this).attr('data-nama');
-        swal({
-            title: "Apakah kamu yakin??",
-            text: "Menghapus data pengajuan dengan mitra " + namapengajuan + " ",
-            icon: "warning",
-            buttons: true,
-            dangerMode: true
-        }).then((willDelete) => {
-            if (willDelete) {
-                window.location = "/hapuspengajuan/" + pengajuanid + ""
-                swal("Data berhasil Dihapus!", {
-                    icon: "success"
-                });
-            } else {
-                swal("Data tidak berhasil dihapus");
-            }
-        });
-    });
-</script>
+
 
 
 

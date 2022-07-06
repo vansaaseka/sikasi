@@ -45,28 +45,27 @@ Route::get('/layoutAdmin', function () {
 //     return view('home');
 // });
 
+Route::get('/dashboardadmin', function () {
+return view('admin.dashboard');
+});
+
+Route::get('/dashboarddosen', function () {
+return view('dosen.dashboard');
+});
+
+Route::get('/dashboardreviewer', function () {
+return view('reviewer.dashboard');
+});
+
+Route::get('/dashboardverifikator', function () {
+return view('verifikator.dashboard');
+});
 
 route::get('/redirects',[HomeController::class,"index"]);
 
 Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
-
-//Draf Kerjasama
-route::get('/draf',[DrafController::class,"index"])->name('draf');
-
-route::get('/tambahdraf',[DrafController::class,"tambahdraf"])->name('tambahdraf');
-
-// route::post('/insertdraf', 'App\Http\Controllers\DrafController@insertdraf');
-route::post('/insertdraf',[DrafController::class,"insertdraf"])->name('insertdraf');
-
-route::get('/editdraf/{id}',[DrafController::class,"editdraf"])->name('editdraf');
-
-route::post('/updatedraf/{id}',[DrafController::class,"updatedraf"])->name('updatedraf');
-
-route::get('/hapusdraf/{id}',[DrafController::class,"hapusdraf"])->name('hapusdraf');
-
-Route::get('data/{id}/download', [DrafController::class,"download"])->name('data.download');
 
 
 //Manajemen User
@@ -114,6 +113,10 @@ route::get('/editpengajuan/{id}',[PengajuanController::class,"editpengajuan"])->
 route::post('/updatepengajuan/{id}',[PengajuanController::class,"updatepengajuan"])->name('updatepengajuan');
 route::get('/hapuspengajuan/{id}',[PengajuanController::class,"hapuspengajuan"])->name('hapuspengajuan');
 
+//Admin Pengajuan
+route::get('/datapengajuan',[StatusController::class,"dataajuan"])->name('dataajuan');
+route::get('/cetakpengajuan',[StatusController::class,"cetakpengajuan"])->name('cetakpengajuan');
+
 //Status Verifikasi
 route::get('/verifikasi',[StatusController::class,"verifikasi"])->name('verifikasi');
 route::get('/newstatus',[StatusController::class,"newstatus"])->name('newstatus');
@@ -160,6 +163,8 @@ route::get('/hapusruanglingkup/{id}',[RuanglingkupController::class,"hapusruangl
 //Unggah Dokumen
 route::post('/insertdokumen',[DokumenController::class,"insertdokumen"])->name('insertdokumen');
 route::post('/updatedokumen/{id}',[DokumenController::class,"updatedokumen"])->name('updatedokumen');
+
+//Detail Pengajuan Admin
 
 route::get('/email',[EmailController::class,"kirim"]);
 route::get('/pesan',[EmailController::class,"notif"]);

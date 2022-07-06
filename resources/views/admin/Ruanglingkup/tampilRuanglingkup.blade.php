@@ -19,7 +19,7 @@
                         </a>
                     </div>
                 </div>
-                <div class="card-body p-0">
+                <div class="card-body">
                     <div class="table-responsive mt-4">
                         <table id="basic-table" class="table table-striped mb-0" role="grid">
                             <thead>
@@ -67,7 +67,8 @@
                                                 <a class="btn btn-sm btn-icon btn-danger delete"
                                                     data-id="{{ $data->id }}"
                                                     data-nama="{{ $data->ruanglingkup }}" data-toggle="tooltip"
-                                                    data-placement="top" title="" data-original-title="Delete" href="#">
+                                                    data-placement="top" title="" data-original-title="Delete"
+                                                    href="#">
                                                     <span class="btn-inner">
                                                         <svg width="20" viewBox="0 0 24 24" fill="none"
                                                             xmlns="http://www.w3.org/2000/svg" stroke="currentColor">
