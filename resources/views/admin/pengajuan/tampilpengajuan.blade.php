@@ -66,11 +66,16 @@
 
                                         <td>{{ $datapengajuan->mitra->namamitra }}</td>
                                         <td>
-                                            <button type="button" class="btn btn-outline-info dropdown-toggle"
-                                                data-bs-toggle="modal"
-                                                data-bs-target="#status{{ $datapengajuan->id }}"
-                                                id="#status{{ $datapengajuan->id }}">
-                                                Status
+                                            @foreach ($trxstatus as $a)
+                                                @if ($datapengajuan->id == $a->pengajuan_id)
+                                                    @foreach ($status as $b)
+                                                        @if ($a->status_id == $b->id)
+                                                            <?php $belumada_status = '<div class="btn btn-outline-primary btn-sm dropdown-toggle ' . $datapengajuan->id . '" data-bs-toggle="modal" data-bs-target="#status' . $datapengajuan->id . '"id="#status' . $datapengajuan->id . '"> ' . $b->namastatus . ' </div>'; ?>
+                                                        @endif
+                                                    @endforeach
+                                                @endif
+                                            @endforeach
+                                            <?= $belumada_status ?>
 
                                             </button>
                                             <i class="fa fa-edit" data-bs-toggle="modal"
@@ -206,8 +211,7 @@
                                                                                 <input type="hidden"
                                                                                     name="pengajuan_id"
                                                                                     value={{ $datapengajuan->id }}>
-                                                                                <input type="hidden"
-                                                                                    name="created_by"
+                                                                                <input type="hidden" name="created_by"
                                                                                     value={{ Auth::user()->id }}>
                                                                                 <input type="hidden"
                                                                                     name="created_by"

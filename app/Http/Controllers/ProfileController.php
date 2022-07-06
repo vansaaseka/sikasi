@@ -19,13 +19,13 @@ class ProfileController extends Controller
     }   
 
     public function insertprofile(Request $request){
+  
 
          if($request->hasFile('photo')){
             $photo = $request->file('photo');
             $namaphoto = $photo->getClientOriginalName();
             $photo->move('photodosen/') ;
-        
-
+   
         $user =Auth::user();
         $user->name = $request['name'];
         $user->email = $request['email'];

@@ -71,17 +71,12 @@
                                                 @if ($datapengajuan->id == $a->pengajuan_id)
                                                     @foreach ($status as $b)
                                                         @if ($a->status_id == $b->id)
-                                                            <button type="button"
-                                                                class="btn btn-outline-info dropdown-toggle"
-                                                                data-bs-toggle="modal"
-                                                                data-bs-target="#status{{ $datapengajuan->id }}"
-                                                                id="#status{{ $datapengajuan->id }}">
-                                                                {{ $b->namastatus }}
-                                                            </button>
+                                                            <?php $belumada_status = '<div class="btn btn-outline-primary btn-sm dropdown-toggle ' . $datapengajuan->id . '" data-bs-toggle="modal" data-bs-target="#status' . $datapengajuan->id . '"id="#status' . $datapengajuan->id . '"> ' . $b->namastatus . ' </div>'; ?>
                                                         @endif
                                                     @endforeach
                                                 @endif
                                             @endforeach
+                                            <?= $belumada_status ?>
 
 
                                             {{-- Modal Tampil Status --}}
@@ -259,13 +254,13 @@
 
                                         <td>
                                             {{ $datapengajuan->id }}
-                                            <?php $belumada_status = '<div class="btn btn-outline-primary btn-sm ' . $datapengajuan->id . '" data-bs-toggle="modal" data-bs-target="#modalstatus' . $datapengajuan->id . '"id="#modalstatus' . $datapengajuan->id . '"> Verifikasi </div>'; ?>
+                                            <?php $belumada_status = '<div class="btn btn-primary btn-sm ' . $datapengajuan->id . '" data-bs-toggle="modal" data-bs-target="#modalstatus' . $datapengajuan->id . '"id="#modalstatus' . $datapengajuan->id . '"> Verifikasi </div>'; ?>
 
                                             @foreach ($trxstatus as $a)
                                                 @if ($datapengajuan->id == $a->pengajuan_id)
                                                     @foreach ($status as $b)
                                                         @if ($a->status_id == $b->id)
-                                                            <?php $belumada_status = '<div class="btn btn-outline-primary btn-sm ' . $datapengajuan->id . '" data-bs-toggle="modal" data-bs-target="#modalstatus' . $datapengajuan->id . '"id="#modalstatus' . $datapengajuan->id . '"> Verifikasi </div>'; ?>
+                                                            <?php $belumada_status = '<div class="btn btn-primary btn-sm ' . $datapengajuan->id . '" data-bs-toggle="modal" data-bs-target="#modalstatus' . $datapengajuan->id . '"id="#modalstatus' . $datapengajuan->id . '"> Verifikasi </div>'; ?>
                                                         @endif
                                                     @endforeach
 

@@ -54,14 +54,18 @@
                                             <td>{{ $datapengajuan->mitra->namamitra }}</td>
 
                                             <td>
-                                                <button type="button" class="btn btn-outline-info dropdown-toggle"
-                                                    data-bs-toggle="modal"
-                                                    data-bs-target="#status{{ $datapengajuan->id }}"
-                                                    id="#status{{ $datapengajuan->id }}">
-                                                    Status
-                                                </button>
-                                                {{-- Modal Status --}}
+                                                @foreach ($trxstatus as $a)
+                                                    @if ($datapengajuan->id == $a->pengajuan_id)
+                                                        @foreach ($status as $b)
+                                                            @if ($a->status_id == $b->id)
+                                                                <?php $belumada_status = '<div class="btn btn-outline-primary btn-sm dropdown-toggle ' . $datapengajuan->id . '" data-bs-toggle="modal" data-bs-target="#status' . $datapengajuan->id . '"id="#status' . $datapengajuan->id . '"> ' . $b->namastatus . ' </div>'; ?>
+                                                            @endif
+                                                        @endforeach
+                                                    @endif
+                                                @endforeach
+                                                <?= $belumada_status ?>
 
+                                                {{-- Modal Status --}}
                                                 <div class="modal fade" id="status{{ $datapengajuan->id }}"
                                                     tabindex="-1" role="dialog"
                                                     aria-labelledby="staticBackdropLiveLabel" aria-hidden="true">
