@@ -4,6 +4,9 @@
 
 @include('dosen/layoutsDosen/navbar')
 
+
+
+
 <div class="conatiner-fluid content-inner mt-n5 py-0">
     <div class="conatiner-fluid content-inner mt-n5 py-0">
         <div>
@@ -24,16 +27,21 @@
                                         @if ($data->id == Auth::user()->id)
                                             <div class="form-group">
                                                 <div class="profile-img-edit position-relative">
-                                                    <img class="profile-pic rounded avatar-100"
-                                                        src="HOPE/assets/images/avatars/01.png">
-
+                                                    @if ($data->photo == null)
+                                                        <img class="profile-pic rounded avatar-100"
+                                                            src="HOPE/assets/images/avatars/01.png">
+                                                    @else
+                                                        <img class="profile-pic rounded avatar-100"
+                                                            src="{{ Storage::url('photoprofil/') . $data->photo }}">
+                                                    @endif
                                                     <div class="upload-icone bg-primary">
-                                                        <svg class="upload-button" width="14" height="14"
-                                                            viewBox="0 0 24 24">
+                                                        <svg class="upload-button" name="photo" width="14"
+                                                            height="14" viewBox="0 0 24 24">
                                                             <path fill="#ffffff"
                                                                 d="M14.06,9L15,9.94L5.92,19H5V18.08L14.06,9M17.66,3C17.41,3 17.15,3.1 16.96,3.29L15.13,5.12L18.88,8.87L20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18.17,3.09 17.92,3 17.66,3M14.06,6.19L3,17.25V21H6.75L17.81,9.94L14.06,6.19Z" />
                                                         </svg>
-                                                        <input class="file-upload" type="file" accept="image/*">
+                                                        <input class="file-upload" type="file" name="photo"
+                                                            accept="image/*">
                                                     </div>
                                                 </div>
                                                 <div class="img-extension mt-3">
@@ -49,7 +57,8 @@
                                             <div class="form-group">
                                                 <label class="form-label" for="furl">Nama Lengkap</label>
                                                 <input type="text" class="form-control" id="namalengkap"
-                                                    name="name" value=<?= Auth::user()->name ?>>
+                                                    name="name" value=<?= Auth::user()->name ?>
+                                                    value="{{ old('name', $data->name) }}">
                                             </div>
                                             <div class="form-group">
                                                 <label class="form-label" for="turl">Email:</label>

@@ -49,7 +49,7 @@
 
 
                                 @foreach ($pengajuan as $datapengajuan)
-                                    <tr role="row" class="">
+                                    <tr role="row" class="odd text-center">
                                         <td scope="row">{{ $no++ }}</td>
 
                                         <td>{{ $datapengajuan->user->name }}</td>

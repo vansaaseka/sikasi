@@ -253,7 +253,7 @@
                                         </td>
 
                                         <td>
-                                            {{ $datapengajuan->id }}
+
                                             <?php $belumada_status = '<div class="btn btn-primary btn-sm ' . $datapengajuan->id . '" data-bs-toggle="modal" data-bs-target="#modalstatus' . $datapengajuan->id . '"id="#modalstatus' . $datapengajuan->id . '"> Verifikasi </div>'; ?>
 
                                             @foreach ($trxstatus as $a)

@@ -232,9 +232,7 @@
                                                     </div>
                                                 </div>
 
-
                                             </td>
-
 
 
                                             <td>
@@ -287,7 +285,8 @@
                                                 <!-- Modal Detail -->
                                                 <div class="modal fade" id="pengajuan" data-bs-backdrop="static"
                                                     data-bs-keyboard="false" tabindex="-1" role="dialog"
-                                                    aria-labelledby="staticBackdropLiveLabel" aria-hidden="true">
+                                                    aria-labelledby="staticBackdropLiveLabel" aria-hidden="true"
+                                                    style="text-align: left">
                                                     <div class="modal-dialog">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
