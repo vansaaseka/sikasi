@@ -23,16 +23,16 @@
                                 class="forms-sample">
                                 @csrf
                                 <div class="form-group">
-                                    @foreach ($profil as $data)
-                                        @if ($data->id == Auth::user()->id)
+                                    {{-- @foreach ($profil as $data) --}}
+                                        {{-- @if ($data->id == Auth::user()->id) --}}
                                             <div class="form-group">
                                                 <div class="profile-img-edit position-relative">
-                                                    @if ($data->photo == null)
+                                                    @if (is_null($profil->photo))
                                                         <img class="profile-pic rounded avatar-100"
                                                             src="HOPE/assets/images/avatars/01.png">
                                                     @else
                                                         <img class="profile-pic rounded avatar-100"
-                                                            src="{{ Storage::url('photoprofil/') . $data->photo }}">
+                                                            src="{{ asset($profil->photo) }}">
                                                     @endif
                                                     <div class="upload-icone bg-primary">
                                                         <svg class="upload-button" name="photo" width="14"
@@ -58,7 +58,7 @@
                                                 <label class="form-label" for="furl">Nama Lengkap</label>
                                                 <input type="text" class="form-control" id="namalengkap"
                                                     name="name" value=<?= Auth::user()->name ?>
-                                                    value="{{ old('name', $data->name) }}">
+                                                    value="{{ old('name', $profil->name) }}">
                                             </div>
                                             <div class="form-group">
                                                 <label class="form-label" for="turl">Email:</label>
@@ -99,8 +99,8 @@
 
                                             <br />
                                             <button type="submit" class="btn btn-primary">Submit</button>
-                                        @endif
-                                    @endforeach
+                                        {{-- @endif --}}
+                                    {{-- @endforeach --}}
                             </form>
                         </div>
                     </div>
