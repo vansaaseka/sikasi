@@ -19,13 +19,13 @@ class Pengajuan extends Migration
             $table->foreignId('user_id')->nullable()->default(null)->constrained('users')->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('mitra_id')->nullable()->default(null)->constrained('mitra')->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('kategori_id')->nullable()->default(null)->constrained('kategori')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreignId('ruanglingkup_id')->nullable()->default(null)->constrained('ruanglingkup')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreignId('proditerlibat_id')->nullable()->default(null)->constrained('prodis')->onDelete('cascade')->onUpdate('cascade');
+            $table->longText('ruanglingkup_id')->nullable()->default(null);
+            $table->longText('proditerlibat_id')->nullable();
             $table->date('tanggalmulai')->nullable()->default(null);
             $table->date('tanggalakhir')->nullable()->default(null);
             $table->timestamps();
 
-        
+
 
         });
     }

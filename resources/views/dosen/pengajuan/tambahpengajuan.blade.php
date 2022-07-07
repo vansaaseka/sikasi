@@ -98,11 +98,11 @@
                                             <label class="form-label">Nama Dagang Mitra
                                             </label>
                                             <input type="text"
-                                                class="form-control @error('namadagangmitra') is-invalid @enderror"
-                                                name="namadagangmitra">
-                                            @error('namadagangmitra')
+                                                class="form-control"
+                                                name="namadagangmitra" required>
+                                            {{-- @error('namadagangmitra')
                                                 <div class="invalid-feedback">Nama Dagang Mitra Harus Diisi</div>
-                                            @enderror
+                                            @enderror --}}
                                         </div>
                                     </div>
                                     <div class="col-md-6">
@@ -110,7 +110,7 @@
                                         <div class="form-group">
                                             <label class="form-label">Nama Mitra *</label>
                                             <input type="text" class="form-control" name="namamitra"
-                                                placeholder="" />
+                                                placeholder="" required/>
                                             {{-- @error('namamitra')
                                                 <div class="invalid-feedback">Nama Dagang Harus Diisi</div>
                                             @enderror --}}
@@ -119,7 +119,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="form-label">Logo Resmi Mitra *</label>
-                                            <input type="file" class="form-control" name="logo" placeholder="" />
+                                            <input type="file" class="form-control" name="logo" placeholder="" required/>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
@@ -127,7 +127,7 @@
                                             <label class="form-label" for="choices-single-default">Kategori
                                                 Mitra</label>
                                             <select class="form-select" data-trigger="data-trigger"
-                                                name="kategorimitra_id" id="choices-single-default">
+                                                name="kategorimitra_id" id="choices-single-default" required>
                                                 <option value="">--Pilih--</option>
                                                 @foreach ($kategorimitra as $item)
                                                     <option value="{{ $item->id }}">{{ $item->kategorimitra }}
@@ -143,42 +143,42 @@
                                         <div class="form-group">
                                             <label class="form-label">Alamat Lengkap Mitra *</label>
                                             <input type="text" class="form-control" name="alamat"
-                                                placeholder="" />
+                                                placeholder="" required/>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="form-label">Email Mitra *</label>
                                             <input type="email" class="form-control" name="email"
-                                                placeholder="" />
+                                                placeholder="" required/>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="form-label">Nama Lengkap Penadatanganan Mitra *</label>
                                             <input type="text" class="form-control" name="namapenandatangan"
-                                                placeholder="" />
+                                                placeholder="" required/>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="form-label">Jabatan Penandatangan Mitra *</label>
                                             <input type="text" class="form-control" name="jabatanpenandatangan"
-                                                placeholder="" />
+                                                placeholder="" required/>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="form-label">Nama Narahubung Mitra</label>
                                             <input type="text" class="form-control" name="narahubung"
-                                                placeholder="" />
+                                                placeholder="" required/>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="form-label">Nomor HP Narahubung Mitra *</label>
                                             <input type="text" class="form-control" name="no_hp"
-                                                placeholder="" />
+                                                placeholder="" required/>
                                         </div>
                                     </div>
                                 </div>
@@ -201,8 +201,8 @@
                                         <div class="form-group">
                                             <label for="MultipleSelect">Ruang Lingkup Perjanjian</label>
                                             {{-- <select class="js-example-basic-multiple" name="states[]" multiple="multiple"> --}}
-                                            <select class="form-control" name="ruanglingkup_id">
-                                                <option value="">--Pilih--</option>
+                                            <select class="select2-multiple form-control" name="ruanglingkup_id[]" multiple="multiple" id="select2Multiple" required>
+                                                {{-- <option value="">--Pilih--</option> --}}
                                                 @foreach ($ruanglingkup as $item)
                                                     <option value="{{ $item->id }}">{{ $item->ruanglingkup }}
                                                     </option>
@@ -214,8 +214,9 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="MultipleSelect">Prodi Yang Terlibat</label>
-                                            <select class="form-control" name="proditerlibat_id">
-                                                <option value="">--Pilih--</option>
+                                            {{-- <select class="form-control" name="proditerlibat_id" required> --}}
+                                                <select class="select2-multiple form-control" name="proditerlibat_id[]" multiple="multiple" id="select2Multiple" required>
+                                                {{-- <option value="">--Pilih--</option> --}}
                                                 @foreach ($prodi as $item)
                                                     <option value="{{ $item->id }}">{{ $item->namaprodi }}
                                                     </option>
@@ -229,7 +230,7 @@
                                             <label class="form-label" for="exampleInputdate">Tanggal Mulai
                                                 Kerjasama</label>
                                             <input name="tanggalmulai" type="date" class="form-control"
-                                                id="exampleInputdate" value="">
+                                                id="exampleInputdate" value="" required>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
@@ -237,7 +238,7 @@
                                             <label class="form-label" for="exampleInputdate">Tanggal Berakhir
                                                 Kerjasama</label>
                                             <input name="tanggalakhir" type="date" class="form-control"
-                                                id="exampleInputdate" value="">
+                                                id="exampleInputdate" value="" required>
                                         </div>
                                     </div>
                                     {{-- Input kategori --}}
@@ -247,8 +248,8 @@
                                 </div>
                             </div>
 
-                            <button type="submit" name="next"
-                                class="btn btn-primary next action-button float-end" value="Submit">Submit</button>
+
+                            <button type="button" name="next" class="btn btn-primary next action-button float-end" value="Next">Next</button>
                             <button type="button" name="previous"
                                 class="btn btn-dark previous action-button-previous float-end me-1"
                                 value="Previous">Previous</button>
@@ -269,7 +270,7 @@
                                     <input type="file" class="form-control" name="dokumen" ></div>
                             </div>
 
-                          
+
 
                             <button
                                 type="submit"
@@ -312,11 +313,27 @@
                                     </div>
                                 </div>
                             </div>
+                            <button type="submit" name="submit" class="btn btn-primary action-button float-end" value="Submit">Submit</button>
+                            <button type="button" name="previous" class="btn btn-dark previous action-button-previous float-end me-1"
+                                value="Previous">Previous</button>
                         </fieldset>
+                        {{-- <button type="submit" name="next" class="btn btn-primary next action-button float-end" value="Submit">Submit</button> --}}
                     </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script>
+        $(document).ready(function() {
+                // Select2 Multiple
+                $('.select2-multiple').select2({
+                    placeholder: "Select",
+                    allowClear: true
+                });
+
+            });
+
+    </script>
 @include('dosen/layoutsDosen/footer')

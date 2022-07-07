@@ -17,8 +17,8 @@ class ProfileController extends Controller
     public function editprofile(){
 
         $prodi = Prodi::all();
-        // $profil = User::all();
-        $profil = User::where('id', Auth::user()->id)->first();
+        $profil = User::all();
+        // $profil = User::where('id', Auth::user()->id)->first();
         return view('dosen\Profile\editprofile' , compact('prodi' , 'profil'));
     }
 

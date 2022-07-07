@@ -25,9 +25,10 @@ class PengajuanController extends Controller
         $dokumen = Dokumen::all();
         $status = Status::all();
         $trxstatus = Trxstatus::all();
+
         return view('dosen\Pengajuan\detailpengajuan' , compact('pengajuan' , 'mitra','dokumen', 'trxstatus', 'status','user'));
         }
-        
+
 
     public function tambahpengajuan(){
 if(empty(auth()->user()->nomorhp)){
@@ -48,17 +49,20 @@ return view('dosen\Pengajuan\tambahpengajuan' , compact('kategorimitra' , 'prodi
 
 public function insertpengajuan (Request $request){
 
-// $this->validate($request, [
-// 'namamitra' => 'required',
-// 'namadagangmitra' => 'required',
-// 'logo' => 'required|mimes:jpg,jif,jpeg,png',
-// 'alamat' => 'required',
-// 'email' => 'required',
-// 'namapenandatangan' => 'required',
-// 'jabatanpenandatangan' => 'required',
-// 'narahubung' => 'required',
-// 'no_hp' => 'required',
-// ]);
+    $request->validate([
+    'namamitra' => 'required',
+    'namadagangmitra' => 'required',
+    'logo' => 'required',
+    'kategorimitra_id' => 'required',
+    'alamat' => 'required',
+    'email' => 'required',
+    'namapenandatangan' => 'required',
+    'jabatanpenandatangan' => 'required',
+    'narahubung' => 'required',
+    'no_hp' => 'required',
+    'tanggalmulai' => 'required',
+    'tanggalakhir' => 'required'
+    ]);
 
 //mengambil data file yang diupload
 $logo = $request->file('logo');
@@ -82,7 +86,7 @@ $path = $request->file('logo')->storeAs('logomitra/', $foto_file);
 // $logo->move('logomitra/') ;
 // $dokumen->move('dokumenkerjasama/');
 
-$data = $request->all();
+// $data = $request->all();
 
 $mitra = new Mitra;
 $kategorimitra = new KategoriMitra;
@@ -104,16 +108,17 @@ $kategorimitra = new KategoriMitra;
 
 
 
-$mitra->namamitra = $data['namamitra'];
-$mitra->namadagangmitra = $data['namadagangmitra'];
+$mitra->namamitra = $request->namamitra;
+$mitra->namadagangmitra = $request->namadagangmitra;
 $mitra->logo = $foto_file;
 $mitra->kategorimitra_id = $request->kategorimitra_id;
-$mitra->alamat = $data['alamat'];
-$mitra->email = $data['email'];
-$mitra->namapenandatangan = $data['namapenandatangan'];
-$mitra->jabatanpenandatangan = $data['jabatanpenandatangan'];
-$mitra->narahubung = $data['narahubung'];
-$mitra->no_hp = $data['no_hp'];
+$mitra->alamat = $request->alamat;
+$mitra->email = $request->email;
+$mitra->namapenandatangan = $request->namapenandatangan;
+$mitra->jabatanpenandatangan = $request->jabatanpenandatangan;
+$mitra->narahubung = $request->narahubung;
+$mitra->no_hp = $request->no_hp;
+
 $mitra->save();
 
 
@@ -125,13 +130,43 @@ $prodi = new Prodi;
 
 $pengajuan = new Pengajuan;
 $pengajuan->user_id = Auth::user()->id;
+
+        $ruanglingkup = $request->ruanglingkup_id;
+        if($ruanglingkup){
+            $i = 0;
+            foreach ($ruanglingkup as $item) {
+                // dd($item);
+                $dataa1[$i] = ([
+                    'id' => (int) $item,
+                ]);
+                $i++;
+            }
+        } else {
+            $dataa1 = [];
+        }
+
+        $proditerlibat = $request->proditerlibat_id;
+        if($proditerlibat){
+            $i = 0;
+            foreach ($proditerlibat as $item) {
+                // dd($item);
+                $dataa2[$i] = ([
+                    'id' => (int) $item,
+                ]);
+                $i++;
+            }
+        } else {
+            $dataa2 = [];
+        }
+
 $pengajuan->kategori_id = $request->kategori_id;
 $pengajuan->mitra_id = $mitra->id;
-$pengajuan->ruanglingkup_id = $request->ruanglingkup_id;
-$pengajuan->proditerlibat_id = $request->proditerlibat_id;
-$pengajuan->tanggalmulai = $data['tanggalmulai'];
-$pengajuan->tanggalakhir = $data['tanggalakhir'];
+$pengajuan->ruanglingkup_id = json_encode($dataa1);
+$pengajuan->proditerlibat_id = json_encode($dataa2);
+$pengajuan->tanggalmulai = $request->tanggalmulai;
+$pengajuan->tanggalakhir = $request->tanggalakhir;
 // $pengajuan->dokumen = $dokumen_file;
+
 $pengajuan->save();
 
 // Pengajuan::create([

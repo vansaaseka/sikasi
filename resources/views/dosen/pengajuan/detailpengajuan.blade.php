@@ -58,12 +58,12 @@
                                                     @if ($datapengajuan->id == $a->pengajuan_id)
                                                         @foreach ($status as $b)
                                                             @if ($a->status_id == $b->id)
-                                                                <?php $belumada_status = '<div class="btn btn-outline-primary btn-sm dropdown-toggle ' . $datapengajuan->id . '" data-bs-toggle="modal" data-bs-target="#status' . $datapengajuan->id . '"id="#status' . $datapengajuan->id . '"> ' . $b->namastatus . ' </div>'; ?>
+                                                                <?php echo $belumada_status = '<div class="btn btn-outline-primary btn-sm dropdown-toggle ' . $datapengajuan->id . '" data-bs-toggle="modal" data-bs-target="#status' . $datapengajuan->id . '"id="#status' . $datapengajuan->id . '"> ' . $b->namastatus . ' </div>'; ?>
                                                             @endif
                                                         @endforeach
                                                     @endif
                                                 @endforeach
-                                                <?= $belumada_status ?>
+
 
                                                 {{-- Modal Status --}}
                                                 <div class="modal fade" id="status{{ $datapengajuan->id }}"
@@ -144,7 +144,7 @@
                                                     if ($d->pengajuan_id == $datapengajuan->id) {
                                                         $sudahUnggah += 1;
                                                     }
-                                            
+
                                                     if ($d->pengajuan_id == $datapengajuan->id) {
                                                         $unggah = 1;
                                                         $namadok = $d->dokumen;
@@ -173,7 +173,7 @@
 
                                                 @if ($sudahUnggah == 1)
                                                     <a
-                                                        href="dokumenkerjasama/{{ $d->dokumen }}">{{ $namadok . ' id dok : ' . $iddok }}</a>
+                                                        href="dokumenkerjasama/{{ $d->dokumen }}">{{ $namadok . ' id dok : ' . $iddok = $d->id }}</a>
                                                 @endif
                                                 {{-- Modal Dokumen --}}
                                                 <div class="modal fade" id="modaldokumen{{ $datapengajuan->id }}"
@@ -247,7 +247,7 @@
 
                                                 @if ($sudahUnggah == 1)
                                                     <?php
-                                                    
+
                                                     foreach ($trxstatus as $s) {
                                                         if ($datapengajuan->id == $s->pengajuan_id) {
                                                             if ($s->status_id >= 2) {
@@ -257,7 +257,7 @@
                                                             }
                                                         }
                                                     }
-                                                    
+
                                                     ?>
 
                                                     <button type="button" class="btn btn-info btn-sm"
@@ -268,7 +268,7 @@
 
                                                     <a class="btn btn-primary btn-sm {{ $statusDisable }}">
                                                         <i class="fa fa-edit" data-bs-toggle="modal"
-                                                            data-bs-target="#modaleditdokumen{{ $iddok }}"
+                                                            data-bs-target="#modaleditdokumen{{ $iddok = $d->id }}"
                                                             id="#modaleditdokumen{{ $d->id }}">
                                                         </i>
                                                     </a>
@@ -361,7 +361,7 @@
                                                 </div>
 
                                                 {{-- Modal Edit Dokumen --}}
-                                                <div class="modal fade" id="modaleditdokumen{{ $iddok }}"
+                                                <div class="modal fade" id="modaleditdokumen{{ $iddok = $datapengajuan->id }}"
                                                     tabindex="-1" role="dialog"
                                                     aria-labelledby="staticBackdropLiveLabel" aria-hidden="true">
                                                     <div class="modal-dialog modal-dialog-scrollable" role="document">
@@ -369,7 +369,7 @@
                                                             <div class="modal-header">
                                                                 <h5 class="modal-title" id="staticBackdropLiveLabel">
                                                                     Edit Dokumen
-                                                                    Pengajuan {{ 'id dok : ' . $iddok }}
+                                                                    Pengajuan {{ 'id dok : ' . $iddok = $datapengajuan->id }}
                                                                 </h5>
 
                                                                 <button type="button" class="btn-close"
@@ -403,7 +403,7 @@
                                                                         <div class="card">
                                                                             <div class="card-body">
                                                                                 <form
-                                                                                    action="/updatedokumen/{{ $d->id }}"
+                                                                                    action="/updatedokumen/{{ $datapengajuan->id }}"
                                                                                     method="POST"
                                                                                     enctype="multipart/form-data"
                                                                                     class="forms-sample">
