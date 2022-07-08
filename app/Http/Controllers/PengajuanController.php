@@ -15,6 +15,8 @@ use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Http\Request;
 use App\Models\KategoriMitra;
 use Illuminate\Support\Facades\Validator;
+use App\Exports\PengajuanExport;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Auth;
 
 class PengajuanController extends Controller
@@ -419,6 +421,9 @@ $pengajuan->delete();
 return redirect()->route('pengajuan')->with('toast_success','Data Berhasil Dihapus');
 }
 
-
+	public function export_excel()
+	{
+		return Excel::download(new PengajuanExport, 'pengajuan.xlsx');
+	}
 
 }

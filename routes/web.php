@@ -97,7 +97,7 @@ route::post('/updateakun/{id}',[AkunController::class,"updateakun"])->name('upda
 Route::resource('template', TemplateController::class);
 route::get('/hapustemplate/{id}',[TemplateController::class,"hapustemplate"])->name('hapustemplate');
 
-//Profile 
+//Profile
 route::get('/editprofile',[ProfileController::class,"editprofile"])->name('editprofile');
 route::post('/insertprofile',[ProfileController::class,"insertprofile"])->name('insertprofile');
 
@@ -116,6 +116,7 @@ route::get('/hapuspengajuan/{id}',[PengajuanController::class,"hapuspengajuan"])
 //Admin Pengajuan
 route::get('/datapengajuan',[StatusController::class,"dataajuan"])->name('dataajuan');
 route::get('/cetakpengajuan',[StatusController::class,"cetakpengajuan"])->name('cetakpengajuan');
+route::get('/export_pengajuan', [PengajuanController::class, 'export_excel'])->name('export_pengajuan');
 
 //Status Verifikasi
 route::get('/verifikasi',[StatusController::class,"verifikasi"])->name('verifikasi');
