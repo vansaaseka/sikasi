@@ -11,9 +11,10 @@ use App\Models\Kategori;
 use App\Models\Pengajuan;
 use App\Models\Trxstatus;
 use App\Models\RuangLingkup;
-
+use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Http\Request;
 use App\Models\KategoriMitra;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 
 class PengajuanController extends Controller
@@ -49,21 +50,25 @@ return view('dosen\Pengajuan\tambahpengajuan' , compact('kategorimitra' , 'prodi
 
 public function insertpengajuan (Request $request){
 
-    $request->validate([
-    'namamitra' => 'required',
-    'namadagangmitra' => 'required',
-    'logo' => 'required',
-    'kategorimitra_id' => 'required',
-    'alamat' => 'required',
-    'email' => 'required',
-    'namapenandatangan' => 'required',
-    'jabatanpenandatangan' => 'required',
-    'narahubung' => 'required',
-    'no_hp' => 'required',
-    'tanggalmulai' => 'required',
-    'tanggalakhir' => 'required'
-    ]);
+    $validasi = Validator::make($request->all(),[
+            'namamitra' => 'required',
+            'namadagangmitra' => 'required',
+            'logo' => 'required',
+            'kategorimitra_id' => 'required',
+            'alamat' => 'required',
+            'email' => 'required',
+            'namapenandatangan' => 'required',
+            'jabatanpenandatangan' => 'required',
+            'narahubung' => 'required',
+            'no_hp' => 'required',
+            'tanggalmulai' => 'required',
+            'tanggalakhir' => 'required'
+            ]);
 
+    if($validasi->fails()){
+       Alert::warning('Warning', 'Mohon isikan data secara lengkap!');
+       return redirect()->back();
+    }else{
 //mengambil data file yang diupload
 $logo = $request->file('logo');
 // $dokumen = $request->file('dokumen');
@@ -381,10 +386,11 @@ $text = $section->addText($request->get('number'),array('name'=>'Arial','size' =
 // $section->addImage("./images/Krunal.jpg");
 $objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'Word2007');
 $objWriter->save('PKS2022.docx');
+Alert::success('Sukses', 'Data berhasil diinput!');
 return response()->download(public_path('PKS2022.docx'));
 // return redirect()->route('pengajuan');
 
-
+    }
 
 
 }
