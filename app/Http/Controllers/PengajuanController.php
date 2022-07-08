@@ -421,9 +421,10 @@ $pengajuan->delete();
 return redirect()->route('pengajuan')->with('toast_success','Data Berhasil Dihapus');
 }
 
-	public function export_excel()
+	public function export_excel(Request $request)
 	{
 		return Excel::download(new PengajuanExport, 'pengajuan.xlsx');
-	}
 
+
+    }
 }

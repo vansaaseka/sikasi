@@ -12,4 +12,9 @@ class Prodi extends Model
     protected $fillable = ['namaprodi'];
     protected $guarded = [];
     use HasFactory;
+
+    public function pengajuan()
+    {
+        return $this->belongsTo(Pengajuan::class, 'proditerlibat_id');
+    }
 }

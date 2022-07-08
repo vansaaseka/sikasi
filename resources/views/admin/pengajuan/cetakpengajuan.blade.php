@@ -13,6 +13,10 @@
                     <div class="header-title">
                         <h4 class="card-title">Pengajuan Kerjasama</h4>
                     </div>
+                    <div id="dataTableHover_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                        <a href="{{route('export_pengajuan')}}" type="button" class="btn btn-success">Export
+                        </a>
+                    </div>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive mt-4">
