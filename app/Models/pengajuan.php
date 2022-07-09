@@ -14,19 +14,20 @@ class Pengajuan extends Model
     use HasFactory;
 
     public function kategori(){
-        return $this->belongsTo('App\Models\Kategori');
+        return $this->belongsTo(Kategori::class);
     }
-    public function user(){
-        return $this->belongsTo('App\Models\User');
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
     public function mitra(){
-        return $this->belongsTo('App\Models\Mitra');
+        return $this->belongsTo(Mitra::class);
     }
     public function ruanglingkup(){
-        return $this->belongsTo('App\Models\RuangLingkup');
+        return $this->hasMany('App\Models\RuangLingkup');
     }
-    public function Prodi(){
-        return $this->belongsTo('App\Models\Prodi');
+    public function prodi(){
+        return $this->hasMany(Prodi::class,'id');
     }
     public function status(){
         return $this->belongsTo('App\Models\Status');

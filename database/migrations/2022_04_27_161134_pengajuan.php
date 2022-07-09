@@ -19,8 +19,8 @@ class Pengajuan extends Migration
             $table->foreignId('user_id')->nullable()->default(null)->constrained('users')->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('mitra_id')->nullable()->default(null)->constrained('mitra')->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('kategori_id')->nullable()->default(null)->constrained('kategori')->onDelete('cascade')->onUpdate('cascade');
-            $table->longText('ruanglingkup_id')->nullable()->default(null);
-            $table->longText('proditerlibat_id')->nullable();
+            $table->json('ruanglingkup_id')->nullable()->default(null);
+            $table->json('proditerlibat_id')->nullable();
             $table->date('tanggalmulai')->nullable()->default(null);
             $table->date('tanggalakhir')->nullable()->default(null);
             $table->timestamps();
