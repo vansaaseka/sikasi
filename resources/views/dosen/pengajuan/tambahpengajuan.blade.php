@@ -19,7 +19,7 @@
                         enctype="multipart/form-data">
                         @csrf
                         <ul id="top-tab-list" class="p-0 row list-inline">
-                            <li class="col-lg-4 col-md-6 text-start mb-2 active" id="account">
+                            <li class="col-lg-6 col-md-6 text-start mb-2 active" id="account">
                                 <a href="javascript:void();">
                                     <div class="iq-icon me-3">
                                         <svg class="svg-icon" xmlns="http://www.w3.org/2000/svg" height="20"
@@ -31,7 +31,7 @@
                                     <span>Mitra</span>
                                 </a>
                             </li>
-                            <li id="personal" class="col-lg-4 col-md-6 mb-2 text-start">
+                            <li id="personal" class="col-lg-6 col-md-6 mb-2 text-start">
                                 <a href="javascript:void();">
                                     <div class="iq-icon me-3">
                                         <svg xmlns="http://www.w3.org/2000/svg" height="20" width="20"
@@ -43,32 +43,8 @@
                                     <span>Informasi Perjanjian</span>
                                 </a>
                             </li>
-                            {{-- <li id="payment" class="col-lg-3 col-md-6 mb-2 text-start">
-                                <a href="javascript:void();">
-                                    <div class="iq-icon me-3">
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            height="20"
-                                            width="20"
-                                            fill="none"
-                                            viewbox="0 0 24 24"
-                                            stroke="currentColor">
-                                            <path
-                                                stroke-linecap="round"
-                                                stroke-linejoin="round"
-                                                stroke-width="2"
-                                                d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/>
-                                            <path
-                                                stroke-linecap="round"
-                                                stroke-linejoin="round"
-                                                stroke-width="2"
-                                                d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/>
-                                        </svg>
-                                    </div>
-                                    <span>Dokumen</span>
-                                </a>
-                            </li> --}}
-                            <li id="confirm" class="col-lg-4 col-md-6 mb-2 text-start">
+
+                            {{-- <li id="confirm" class="col-lg-4 col-md-6 mb-2 text-start">
                                 <a href="javascript:void();">
                                     <div class="iq-icon me-3">
                                         <svg xmlns="http://www.w3.org/2000/svg" height="20" width="20"
@@ -79,7 +55,7 @@
                                     </div>
                                     <span>Finish</span>
                                 </a>
-                            </li>
+                            </li> --}}
                         </ul>
                         <!-- fieldsets -->
                         <fieldset>
@@ -88,18 +64,29 @@
                                     <div class="col-7">
                                         <h3 class="mb-4">Mitra</h3>
                                     </div>
-                                    <div class="col-5">
-                                        <h2 class="steps">Step 1 - 3</h2>
-                                    </div>
+
                                 </div>
                                 <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="form-label" for="choices-single-default">Kategori
+                                                Pengajuan</label>
+                                            <select class="form-select" data-trigger="data-trigger" name="kategori_id"
+                                                id="choices-single-default">
+                                                <option value="">--Pilih--</option>
+                                                @foreach ($kategori as $item)
+                                                    <option value="{{ $item->id }}">{{ $item->namakategori }}
+                                                    </option>
+                                                @endforeach
+
+                                            </select>
+                                        </div>
+                                    </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="form-label">Nama Dagang Mitra
                                             </label>
-                                            <input type="text"
-                                                class="form-control"
-                                                name="namadagangmitra">
+                                            <input type="text" class="form-control" name="namadagangmitra">
                                             {{-- @error('namadagangmitra')
                                                 <div class="invalid-feedback">Nama Dagang Mitra Harus Diisi</div>
                                             @enderror --}}
@@ -110,7 +97,7 @@
                                         <div class="form-group">
                                             <label class="form-label">Nama Mitra *</label>
                                             <input type="text" class="form-control" name="namamitra"
-                                                placeholder=""/>
+                                                placeholder="" />
                                             {{-- @error('namamitra')
                                                 <div class="invalid-feedback">Nama Dagang Harus Diisi</div>
                                             @enderror --}}
@@ -119,7 +106,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="form-label">Logo Resmi Mitra *</label>
-                                            <input type="file" class="form-control" name="logo" placeholder=""/>
+                                            <input type="file" class="form-control" name="logo" placeholder="" />
                                         </div>
                                     </div>
                                     <div class="col-md-6">
@@ -127,7 +114,7 @@
                                             <label class="form-label" for="choices-single-default">Kategori
                                                 Mitra</label>
                                             <select class="form-select" data-trigger="data-trigger"
-                                                name="kategorimitra_id" id="choices-single-default" >
+                                                name="kategorimitra_id" id="choices-single-default">
                                                 <option value="">--Pilih--</option>
                                                 @foreach ($kategorimitra as $item)
                                                     <option value="{{ $item->id }}">{{ $item->kategorimitra }}
@@ -142,15 +129,14 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="form-label">Alamat Lengkap Mitra *</label>
-                                            <input type="text" class="form-control" name="alamat"
-                                                placeholder=""/>
+                                            <input type="text" class="form-control" name="alamat" placeholder="" />
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="form-label">Email Mitra *</label>
                                             <input type="email" class="form-control" name="email"
-                                                placeholder=""/>
+                                                placeholder="" />
                                         </div>
                                     </div>
                                     <div class="col-md-6">
@@ -192,16 +178,15 @@
                                     <div class="col-7">
                                         <h3 class="mb-4">Informasi Perjanjian:</h3>
                                     </div>
-                                    <div class="col-5">
-                                        <h2 class="steps">Step 2 - 3</h2>
-                                    </div>
+
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="MultipleSelect">Ruang Lingkup Perjanjian</label>
                                             {{-- <select class="js-example-basic-multiple" name="states[]" multiple="multiple"> --}}
-                                            <select class="select2-multiple form-control" name="ruanglingkup_id[]" multiple="multiple" id="select2Multiple" >
+                                            <select class="select2-multiple form-control" name="ruanglingkup_id[]"
+                                                multiple="multiple" id="select2Multiple">
                                                 {{-- <option value="">--Pilih--</option> --}}
                                                 @foreach ($ruanglingkup as $item)
                                                     <option value="{{ $item->id }}">{{ $item->ruanglingkup }}
@@ -215,7 +200,8 @@
                                         <div class="form-group">
                                             <label for="MultipleSelect">Prodi Yang Terlibat</label>
                                             {{-- <select class="form-control" name="proditerlibat_id" required> --}}
-                                                <select class="select2-multiple form-control" name="proditerlibat_id[]" multiple="multiple" id="select2Multiple">
+                                            <select class="select2-multiple form-control" name="proditerlibat_id[]"
+                                                multiple="multiple" id="select2Multiple">
                                                 {{-- <option value="">--Pilih--</option> --}}
                                                 @foreach ($prodi as $item)
                                                     <option value="{{ $item->id }}">{{ $item->namaprodi }}
@@ -241,49 +227,20 @@
                                                 id="exampleInputdate" value="">
                                         </div>
                                     </div>
-                                    {{-- Input kategori --}}
-                                    <input name="kategori_id" type="hidden" value="1">
 
 
                                 </div>
                             </div>
 
 
-                            <button type="button" name="next" class="btn btn-primary next action-button float-end" value="Next">Next</button>
+                            <button type="submit" name="submit" class="btn btn-primary action-button float-end"
+                                value="Submit">Submit</button>
                             <button type="button" name="previous"
                                 class="btn btn-dark previous action-button-previous float-end me-1"
                                 value="Previous">Previous</button>
                         </fieldset>
+
                         {{-- <fieldset>
-                            <div class="form-card text-start">
-                                <div class="row">
-                                    <div class="col-7">
-                                        <h3 class="mb-4">Dokumen Kerjama:</h3>
-                                    </div>
-                                    <div class="col-5">
-                                        <h2 class="steps">Step 3 - 4</h2>
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label class="form-label">Dokumen Kerjasama:</label>
-                                    <input type="file" class="form-control" name="dokumen" ></div>
-                            </div>
-
-
-
-                            <button
-                                type="submit"
-                                name="next"
-                                class="btn btn-primary next action-button float-end"
-                                value="Submit">Submit</button>
-                            <button
-                                type="button"
-                                name="previous"
-                                class="btn btn-dark previous action-button-previous float-end me-1"
-                                value="Previous">Previous</button>
-                        </fieldset> --}}
-                        <fieldset>
                             <div class="form-card">
                                 <div class="row">
                                     <div class="col-7">
@@ -293,6 +250,7 @@
                                         <h2 class="steps">Step 3 - 3</h2>
                                     </div>
                                 </div>
+
                                 <br>
                                 <br>
                                 <h2 class="text-success text-center">
@@ -313,10 +271,12 @@
                                     </div>
                                 </div>
                             </div>
-                            <button type="submit" name="submit" class="btn btn-primary action-button float-end" value="Submit">Submit</button>
-                            <button type="button" name="previous" class="btn btn-dark previous action-button-previous float-end me-1"
+                            <button type="submit" name="submit" class="btn btn-primary action-button float-end"
+                                value="Submit">Submit</button>
+                            <button type="button" name="previous"
+                                class="btn btn-dark previous action-button-previous float-end me-1"
                                 value="Previous">Previous</button>
-                        </fieldset>
+                        </fieldset> --}}
                         {{-- <button type="submit" name="next" class="btn btn-primary next action-button float-end" value="Submit">Submit</button> --}}
                     </form>
                 </div>
@@ -326,14 +286,13 @@
 </div>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script>
-        $(document).ready(function() {
-                // Select2 Multiple
-                $('.select2-multiple').select2({
-                    placeholder: "Select",
-                    allowClear: true
-                });
+    $(document).ready(function() {
+        // Select2 Multiple
+        $('.select2-multiple').select2({
+            placeholder: "Select",
+            allowClear: true
+        });
 
-            });
-
-    </script>
+    });
+</script>
 @include('dosen/layoutsDosen/footer')

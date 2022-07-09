@@ -19,6 +19,7 @@
                             <thead>
                                 <tr class="odd text-center">
                                     <th>No</th>
+                                    <th>Jenis Kerjasama</th>
                                     <th>Pengusul</th>
                                     <th>Prodi</th>
                                     <th>Tahun Kerjasama</th>
@@ -33,6 +34,7 @@
                                 <tr class="odd text-center">
                                     <th>No</th>
                                     <th>Pengusul</th>
+                                    <th>Jenis Kerjasama</th>
                                     <th>Prodi</th>
                                     <th>Tahun Kerjasama</th>
                                     <th>Mitra</th>
@@ -51,7 +53,14 @@
                                 @foreach ($pengajuan as $datapengajuan)
                                     <tr role="row" class="odd text-center">
                                         <td scope="row">{{ $no++ }}</td>
-
+                                        <td>
+                                            <?php
+                                                    foreach($kategori as $ka){
+                                                        if($ka->id == $datapengajuan->kategori_id){?>
+                                            {{ $ka->namakategori }} <?php }
+                                                    }
+                                                ?>
+                                        </td>
                                         <td>{{ $datapengajuan->user->name }}</td>
                                         <td>
                                             <?php
@@ -64,6 +73,7 @@
 
                                         <td>{{ $datapengajuan->mitra->namamitra }}</td>
                                         <td>
+                                            <?php $belumada_status = '<div class="btn btn-outline-warning btn-sm"></i>Belum ada Status</div>'; ?>
                                             @foreach ($trxstatus as $a)
                                                 @if ($datapengajuan->id == $a->pengajuan_id)
                                                     @foreach ($status as $b)
@@ -168,7 +178,7 @@
                                             
                                             foreach ($trxstatus as $s) {
                                                 if ($datapengajuan->id == $s->pengajuan_id) {
-                                                    if ($s->status_id >= 2) {
+                                                    if ($s->status_id >= 3) {
                                                         $statusDisable = 'disabled';
                                                     } else {
                                                         $statusDisable = '';
@@ -251,21 +261,30 @@
 
                                         <td>
 
-
-                                            <?php $belumada_status = '<div class="btn btn-primary btn-sm ' . $datapengajuan->id . '" data-bs-toggle="modal" data-bs-target="#modalstatus' . $datapengajuan->id . '"id="#modalstatus' . $datapengajuan->id . '"> Validasi </div>'; ?>
+                                            <?php
+                                            $statusDisable2 = '';
+                                            
+                                            foreach ($trxstatus as $s2) {
+                                                if ($datapengajuan->id != $s2->pengajuan_id) {
+                                                    $statusDisable2 = 'disabled';
+                                                }
+                                            }
+                                            
+                                            ?>
+                                            <?php $belumada_validasi = '<div class="btn btn-outline-warning btn-sm"></i>Belum ada Validasi</div>'; ?>
 
                                             @foreach ($trxstatus as $trx)
                                                 @if ($datapengajuan->id == $trx->pengajuan_id)
                                                     @foreach ($status as $b)
                                                         @if ($trx->status_id == $b->id)
-                                                            <?php $belumada_status = '<div class="btn btn-primary btn-sm ' . $datapengajuan->id . '" data-bs-toggle="modal" data-bs-target="#modalstatus' . $datapengajuan->id . '"id="#modalstatus' . $datapengajuan->id . '"> Validasi </div>'; ?>
+                                                            <?php $belumada_validasi = '<div class="btn btn-primary btn-sm ' . $statusDisable2 . $datapengajuan->id . '" data-bs-toggle="modal" data-bs-target="#modalstatus' . $datapengajuan->id . '"id="#modalstatus' . $datapengajuan->id . '"> Validasi </div>'; ?>
                                                         @endif
                                                     @endforeach
 
                                                     @foreach ($status as $b)
                                                         @if ($trx->status_id == $b->id)
                                                             @if ($b->namastatus == 'Dokumen Selesai direview BPU')
-                                                                <?php $belumada_status = ' <div class="btn btn-outline-primary btn-sm"> <i class="fa fa-check-circle"></i>Selesai</div>';
+                                                                <?php $belumada_validasi = ' <div class="btn btn-outline-primary btn-sm"> <i class="fa fa-check-circle"></i>Selesai</div>';
                                                                 
                                                                 ?>
                                                             @endif
@@ -273,7 +292,7 @@
                                                     @endforeach
                                                 @endif
                                             @endforeach
-                                            <?= $belumada_status ?>
+                                            <?= $belumada_validasi ?>
 
                                             {{-- Modal Edit Status --}}
                                             <div class="modal fade" id="modalstatus{{ $datapengajuan->id }}"
@@ -349,9 +368,11 @@
                                                                                 <input type="hidden"
                                                                                     name="created_by"
                                                                                     value={{ Auth::user()->id }}>
-                                                                                <input type="hidden"
-                                                                                    name="created_by"
-                                                                                    value={{ Auth::user()->id }}>
+                                                                                <?php date_default_timezone_set('Asia/Jakarta'); ?>
+                                                                                {{ date('Y-m-d H:i:s') }}
+                                                                                <input name="created_at"
+                                                                                    id="created_at" type="hidden"
+                                                                                    value="{{ date('Y-m-d H:i:s') }}">
 
                                                                                 <button type="submit"
                                                                                     class="btn btn-primary next action-button float-end"

@@ -7,6 +7,7 @@ use App\Models\Prodi;
 use App\Models\Status;
 use App\Models\Dokumen;
 use App\Mail\KirimEmail;
+use App\Models\Kategori;
 use App\Models\Pengajuan;
 use App\Models\Trxstatus;
 use Illuminate\Http\Request;
@@ -14,7 +15,7 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Mail;
-
+use RealRashid\SweetAlert\Facades\Alert;
 
 
 
@@ -62,6 +63,7 @@ public function hapusStatus($id){
 }
 
     public function verifikasi(){
+        $kategori = Kategori::all();
         $pengajuan = Pengajuan::all();
         $mitra = Mitra::all();
         $status = Status::all();
@@ -69,7 +71,7 @@ public function hapusStatus($id){
         $dokumen = Dokumen::all();
         $trxstatus = Trxstatus::all();
         $user = User::all();
-        return view('verifikator\tampilverifikasi' , compact('pengajuan' , 'mitra', 'status','prodi', 'dokumen', 'trxstatus', 'user'));
+        return view('verifikator\tampilverifikasi' , compact('pengajuan' , 'mitra', 'status','prodi', 'dokumen', 'trxstatus', 'user', 'kategori' ));
     }
 
     public function dataajuan(){
@@ -104,6 +106,9 @@ public function hapusStatus($id){
     public function insertnewstatus(Request $request){
     $trxstatus = new Trxstatus;
     $user = User::all();
+    $pengajuan = Pengajuan::all();
+    $status = Status::all();
+    $trx = Trxstatus::all();
 
             $trxstatus->pengajuan_id = $request->input('pengajuan_id');
             $trxstatus->created_by = $request->input('created_by');
@@ -119,13 +124,40 @@ public function hapusStatus($id){
 
                
                 // $tujuan='derieri62@gmail.com';
-                
-                foreach($user as $a){
-                
-                    $tujuan= $a->email;
-                    \Mail::to($tujuan)->send(new KirimEmail());
-                    return back()->with('Email berhasil dikirm');
+                foreach($pengajuan as $datapengajuan){   
+                foreach($user as $a)
+             
+                if($datapengajuan->user_id == $a->id ){
+                    $nama = $a->name;
+                    $mitra = $datapengajuan->mitra->namamitra;
+
+
+                }}
+
+
+                foreach($pengajuan as $data){
+                foreach($trx as $s){
+                if($data->id == $s->pengajuan_id){
+                foreach($status as $b){
+                if($s->status_id == $b->id){
+                    $status = $b->namastatus;
                 }
+            }
+        }
+    
+                }}
+
+
+         
+            $data = [
+               'user' => $nama,
+               'mitra' => $mitra,
+               'status' => $status
+            ];
+                $tujuan= $a->email;
+                \Mail::to($tujuan)->send(new KirimEmail($data));
+                Alert::success('Sukses', 'Email berhasil dikirim!');
+                return back()->with('Email berhasil dikirm');
 }
 
 

@@ -36,13 +36,13 @@
 </head>
 
 <body class="  ">
-    {{-- <!-- loader Start -->
+    <!-- loader Start -->
     <div id="loading">
-      <div class="loader simple-loader">
-          <div class="loader-body"></div>
-      </div>    
+        <div class="loader simple-loader">
+            <div class="loader-body"></div>
+        </div>
     </div>
-    <!-- loader END --> --}}
+    <!-- loader END -->
 
     <aside class="sidebar sidebar-default navs-rounded-all ">
         <div class="sidebar-header d-flex align-items-center justify-content-start">

@@ -23,6 +23,7 @@
                             <thead>
                                 <tr class="odd text-center">
                                     <th>No</th>
+                                    <th>Jenis Kerjasama</th>
                                     <th>Tahun Kerjasama</th>
                                     <th>Mitra</th>
                                     <th>Status</th>
@@ -34,6 +35,7 @@
                             <tfoot>
                                 <tr class="odd text-center">
                                     <th>No</th>
+                                    <th>Jenis Kerjasama</th>
                                     <th>Tahun Kerjasama</th>
                                     <th>Mitra</th>
                                     <th>Status</th>
@@ -50,20 +52,30 @@
                                         <tr role="row" class="odd text-center">
                                             <td scope="row">{{ $no++ }}</td>
                                             <td>{{ date('Y', strtotime($datapengajuan->tanggalmulai)) }}</td>
-
+                                            <td>
+                                                <?php
+                                                    foreach($kategori as $ka){
+                                                        if($ka->id == $datapengajuan->kategori_id){?>
+                                                {{ $ka->namakategori }} <?php }
+                                                    }
+                                                ?>
+                                            </td>
                                             <td>{{ $datapengajuan->mitra->namamitra }}</td>
 
                                             <td>
+                                                <?php $belumada_status = '<div class="btn btn-outline-warning btn-sm"></i>Belum ada Status</div>'; ?>
                                                 @foreach ($trxstatus as $a)
                                                     @if ($datapengajuan->id == $a->pengajuan_id)
                                                         @foreach ($status as $b)
                                                             @if ($a->status_id == $b->id)
-                                                                @php echo $belumada_status = '<div class="btn btn-outline-primary btn-sm dropdown-toggle ' . $datapengajuan->id . '" data-bs-toggle="modal" data-bs-target="#status' . $datapengajuan->id . '"id="#status' . $datapengajuan->id . '"> ' . $b->namastatus . ' </div>'; @endphp
+                                                                <?php $belumada_status = '<div class="btn btn-outline-primary btn-sm dropdown-toggle ' . $datapengajuan->id . '" data-bs-toggle="modal" data-bs-target="#status' . $datapengajuan->id . '"id="#status' . $datapengajuan->id . '"> ' . $b->namastatus . ' </div>'; ?>
+                                                                {{-- @php echo $belumada_status = '<div class="btn btn-outline-primary btn-sm dropdown-toggle ' . $datapengajuan->id . '" data-bs-toggle="modal" data-bs-target="#status' . $datapengajuan->id . '"id="#status' . $datapengajuan->id . '"> ' . $b->namastatus . ' </div>'; @endphp --}}
                                                             @endif
                                                         @endforeach
                                                     @endif
                                                 @endforeach
-                                                @php $belumada_status @endphp
+                                                <?= $belumada_status ?>
+                                                {{-- @php $belumada_status @endphp --}}
 
                                                 {{-- Modal Status --}}
                                                 <div class="modal fade" id="status{{ $datapengajuan->id }}"
@@ -144,7 +156,7 @@
                                                     if ($d->pengajuan_id == $datapengajuan->id) {
                                                         $sudahUnggah += 1;
                                                     }
-
+                                            
                                                     if ($d->pengajuan_id == $datapengajuan->id) {
                                                         $unggah = 1;
                                                         $namadok = $d->dokumen;
@@ -155,8 +167,7 @@
                                             ?>
 
                                             <td>
-                                                {{ $datapengajuan->id }}
-                                                {{ $sudahUnggah }}
+
                                                 @if ($sudahUnggah == 0)
                                                     <button type="button" class="btn btn-secondary btn-sm"
                                                         data-bs-toggle="modal"
@@ -173,7 +184,7 @@
 
                                                 @if ($sudahUnggah == 1)
                                                     <a
-                                                        href="dokumenkerjasama/{{ $d->dokumen }}">{{ $namadok . ' id dok : ' . $iddok = $d->id }}</a>
+                                                        href="dokumenkerjasama/{{ $d->dokumen }}">{{ $namadok . ' id dok : ' . ($iddok = $d->id) }}</a>
                                                 @endif
                                                 {{-- Modal Dokumen --}}
                                                 <div class="modal fade" id="modaldokumen{{ $datapengajuan->id }}"
@@ -247,7 +258,8 @@
 
                                                 @if ($sudahUnggah == 1)
                                                     <?php
-
+                                                    $statusDisable = '';
+                                                    
                                                     foreach ($trxstatus as $s) {
                                                         if ($datapengajuan->id == $s->pengajuan_id) {
                                                             if ($s->status_id >= 2) {
@@ -257,7 +269,7 @@
                                                             }
                                                         }
                                                     }
-
+                                                    
                                                     ?>
 
                                                     <button type="button" class="btn btn-info btn-sm"
@@ -361,7 +373,8 @@
                                                 </div>
 
                                                 {{-- Modal Edit Dokumen --}}
-                                                <div class="modal fade" id="modaleditdokumen{{ $iddok = $datapengajuan->id }}"
+                                                <div class="modal fade"
+                                                    id="modaleditdokumen{{ $iddok = $datapengajuan->id }}"
                                                     tabindex="-1" role="dialog"
                                                     aria-labelledby="staticBackdropLiveLabel" aria-hidden="true">
                                                     <div class="modal-dialog modal-dialog-scrollable" role="document">
@@ -369,7 +382,8 @@
                                                             <div class="modal-header">
                                                                 <h5 class="modal-title" id="staticBackdropLiveLabel">
                                                                     Edit Dokumen
-                                                                    Pengajuan {{ 'id dok : ' . $iddok = $datapengajuan->id }}
+                                                                    Pengajuan
+                                                                    {{ 'id dok : ' . ($iddok = $datapengajuan->id) }}
                                                                 </h5>
 
                                                                 <button type="button" class="btn-close"

@@ -1,12 +1,11 @@
 @component('mail::message')
-# Introduction
+    SIKASI (SISTEM INFORMASI PENGAJUAN KERJASAMA SEKOLAH VOKASI)
 
-The body of your message.
+    Hallo, {{ $data['user'] }}
 
-@component('mail::button', ['url' => ''])
-Button Text
-@endcomponent
+    Peengajuan anda dengan mitra {{ $data['mitra'] }} sedang dalam status {{ $data['status'] }}
 
-Thanks,<br>
-{{ config('app.name') }}
+
+    Thanks,
+    {{ config('app.name') }}
 @endcomponent

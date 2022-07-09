@@ -1,6 +1,8 @@
 @include('verifikator/layoutsVerifikator/header')
 @include('verifikator/layoutsVerifikator/sidebar')
 @include('verifikator/layoutsVerifikator/navbar')
+@include('sweetalert::alert')
+
 <!-- DataTable with Hover -->
 
 <div class="conatiner-fluid content-inner mt-n5 py-0">
@@ -18,6 +20,7 @@
                             <thead>
                                 <tr class="odd text-center">
                                     <th>No</th>
+                                    <th>Jenis Kerjasama</th>
                                     <th>Pengusul</th>
                                     <th>Prodi</th>
                                     <th>Tahun Kerjasama</th>
@@ -31,6 +34,7 @@
                             <tfoot>
                                 <tr class="odd text-center">
                                     <th>No</th>
+                                    <th>Jenis Kerjasama</th>
                                     <th>Pengusul</th>
                                     <th>Prodi</th>
                                     <th>Tahun Kerjasama</th>
@@ -50,7 +54,14 @@
                                 @foreach ($pengajuan as $datapengajuan)
                                     <tr role="row" class="odd text-center">
                                         <td scope="row">{{ $no++ }}</td>
-
+                                        <td>
+                                            <?php
+                                                    foreach($kategori as $ka){
+                                                        if($ka->id == $datapengajuan->kategori_id){?>
+                                            {{ $ka->namakategori }} <?php }
+                                                    }
+                                                ?>
+                                        </td>
                                         <td>{{ $datapengajuan->user->name }}</td>
 
                                         <?php
@@ -66,7 +77,7 @@
                                         <td>{{ $datapengajuan->mitra->namamitra }}</td>
 
                                         <td>
-
+                                            <?php $belumada_status = '<div class="btn btn-outline-warning btn-sm"></i>Belum ada Status</div>'; ?>
                                             @foreach ($trxstatus as $a)
                                                 @if ($datapengajuan->id == $a->pengajuan_id)
                                                     @foreach ($status as $b)
@@ -233,6 +244,11 @@
                                                                                             <input type="hidden"
                                                                                                 name="user_id"
                                                                                                 value={{ Auth::user()->id }}>
+                                                                                            <?php date_default_timezone_set('Asia/Jakarta'); ?>
+                                                                                            <input name="created_at"
+                                                                                                id="created_at"
+                                                                                                type="hidden"
+                                                                                                value="{{ date('Y-m-d H:i:s') }}">
                                                                                         @endif
                                                                                     @endforeach
                                                                                     <br />
@@ -254,20 +270,20 @@
 
                                         <td>
 
-                                            <?php $belumada_status = '<div class="btn btn-primary btn-sm ' . $datapengajuan->id . '" data-bs-toggle="modal" data-bs-target="#modalstatus' . $datapengajuan->id . '"id="#modalstatus' . $datapengajuan->id . '"> Verifikasi </div>'; ?>
+                                            <?php $belumada_verif = '<div class="btn btn-primary btn-sm ' . $datapengajuan->id . '" data-bs-toggle="modal" data-bs-target="#modalstatus' . $datapengajuan->id . '"id="#modalstatus' . $datapengajuan->id . '"> Verifikasi </div>'; ?>
 
                                             @foreach ($trxstatus as $a)
                                                 @if ($datapengajuan->id == $a->pengajuan_id)
                                                     @foreach ($status as $b)
                                                         @if ($a->status_id == $b->id)
-                                                            <?php $belumada_status = '<div class="btn btn-primary btn-sm ' . $datapengajuan->id . '" data-bs-toggle="modal" data-bs-target="#modalstatus' . $datapengajuan->id . '"id="#modalstatus' . $datapengajuan->id . '"> Verifikasi </div>'; ?>
+                                                            <?php $belumada_verif = '<div class="btn btn-primary btn-sm ' . $datapengajuan->id . '" data-bs-toggle="modal" data-bs-target="#modalstatus' . $datapengajuan->id . '"id="#modalstatus' . $datapengajuan->id . '"> Verifikasi </div>'; ?>
                                                         @endif
                                                     @endforeach
 
                                                     @foreach ($status as $b)
                                                         @if ($a->status_id == $b->id)
                                                             @if ($b->namastatus == 'Selesai')
-                                                                <?php $belumada_status = ' <div class="btn btn-outline-primary btn-sm"> <i class="fa fa-check-circle"></i>Selesai</div>';
+                                                                <?php $belumada_verifi = ' <div class="btn btn-outline-primary btn-sm"> <i class="fa fa-check-circle"></i>Selesai</div>';
                                                                 
                                                                 ?>
                                                             @endif
@@ -275,7 +291,7 @@
                                                     @endforeach
                                                 @endif
                                             @endforeach
-                                            <?= $belumada_status ?>
+                                            <?= $belumada_verif ?>
 
                                             {{-- Modal Edit Status --}}
                                             <div class="modal fade" id="modalstatus{{ $datapengajuan->id }}"
@@ -357,9 +373,7 @@
                                                                                             id="exampleInputText1"
                                                                                             name="status_dokumen">
                                                                                     </div>
-                                                                                    {{-- <div class="custom-file">
-                                                                <input type="file" name="dokumen" placeholder="Choose file" id="file">
-                                                            </div> --}}
+
                                                                                 </div>
 
                                                                                 <input type="hidden"
@@ -375,6 +389,7 @@
                                                                                 <button type="submit"
                                                                                     class="btn btn-primary next action-button float-end"
                                                                                     value="Submit">Submit</button>
+
 
                                                                             </form>
                                                                         </div>

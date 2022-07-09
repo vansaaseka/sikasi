@@ -51,6 +51,14 @@
                                 @foreach ($pengajuan as $datapengajuan)
                                     <tr role="row" class="odd text-center">
                                         <td scope="row">{{ $no++ }}</td>
+                                        <td>
+                                            <?php
+                                                    foreach($kategori as $ka){
+                                                        if($ka->id == $datapengajuan->kategori_id){?>
+                                            {{ $ka->namakategori }} <?php }
+                                                    }
+                                                ?>
+                                        </td>
 
                                         <td>{{ $datapengajuan->user->name }}</td>
 
@@ -211,7 +219,8 @@
                                                                                 <input type="hidden"
                                                                                     name="pengajuan_id"
                                                                                     value={{ $datapengajuan->id }}>
-                                                                                <input type="hidden" name="created_by"
+                                                                                <input type="hidden"
+                                                                                    name="created_by"
                                                                                     value={{ Auth::user()->id }}>
                                                                                 <input type="hidden"
                                                                                     name="created_by"
