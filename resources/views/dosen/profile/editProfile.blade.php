@@ -2,9 +2,12 @@
 
 @include('dosen/layoutsDosen/sidebar')
 
+
 @include('dosen/layoutsDosen/navbar')
 
+
 @include('sweetalert::alert')
+
 
 
 <div class="conatiner-fluid content-inner mt-n5 py-0">
@@ -12,13 +15,96 @@
         <div>
             <div class="row">
                 <div class="col-lg-12 mb-4">
+
                     <div class="card">
+
                         <div class="card-header d-flex justify-content-between">
                             <div class="header-title">
-                                <h4 class="card-title">Add New User</h4>
+                                <h4 class="card-title">Edit Profil</h4>
+                            </div>
+
+                            <div id="dataTableHover_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                    data-bs-target="#modalimport" id="#modalimport">
+                                    Ubah Password
+                                </button>
+                            </div>
+
+                        </div>
+                        {{-- Modal Import Data User --}}
+                        <div class="modal fade" id="modalimport" tabindex="-1" role="dialog"
+                            aria-labelledby="staticBackdropLiveLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-scrollable" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="staticBackdropLiveLabel">
+                                            Ubah Password
+                                        </h5>
+
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+
+                                        <div class="row d-flex justify-content">
+                                            <div class="col-md-12">
+                                                <div class="card">
+                                                    <div class="card-body">
+                                                        <form action="/ubahpassword" method="POST"
+                                                            enctype="multipart/form-data" class="forms-sample">
+                                                            @csrf
+
+                                                            <div class="form-group">
+                                                                <label>Password Saat Ini</label>
+                                                                <input type="password"
+                                                                    class="form-control @error('current_password') is-invalid @enderror"
+                                                                    id="current_password" name="current_password"
+                                                                    required="required" autocomplete="current_password">
+                                                                @error('current_password')
+                                                                    <div class="invalid-feedback">{{ $message }}</div>
+                                                                @enderror
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>Password</label>
+                                                                <input type="password"
+                                                                    class="form-control @error('password') is-invalid @enderror"
+                                                                    value="{{ old('password') }}"
+                                                                    id="exampleInputPassword" name="password"
+                                                                    required="required" autocomplete="password">
+                                                                @error('password')
+                                                                    <div class="invalid-feedback">{{ $message }}</div>
+                                                                @enderror
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>Repeat Password</label>
+                                                                <input type="password"
+                                                                    class="form-control @error('password_confirmation') is-invalid @enderror"
+                                                                    value="{{ old('password_confirmation') }}"
+                                                                    id="exampleInputPasswordRepeat"
+                                                                    name="password_confirmation" required="required"
+                                                                    autocomplete="new-password">
+                                                                @error('password_confirmation')
+                                                                    <div class="invalid-feedback">{{ $message }}</div>
+                                                                @enderror
+                                                            </div>
+
+
+                                                            <button type="submit"
+                                                                class="btn btn-primary next action-button float-end"
+                                                                value="Submit">Submit</button>
+
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
+
                         <div class="card-body">
+
                             <form action="/insertprofile" method="POST" enctype="multipart/form-data"
                                 class="forms-sample">
                                 @csrf
@@ -62,13 +148,13 @@
                                             </div>
                                             <div class="form-group">
                                                 <label class="form-label" for="turl">Email:</label>
-                                                <input type="text" class="form-control" id="email" name="email"
-                                                    value=<?= Auth::user()->email ?>>
+                                                <input type="text" class="form-control" id="email"
+                                                    name="email" value=<?= Auth::user()->email ?>>
                                             </div>
                                             <div class="form-group">
                                                 <label class="form-label" for="instaurl">Nomor HP</label>
-                                                <input type="text" class="form-control" id="nomorhp" name="nomorhp"
-                                                    value=<?= Auth::user()->nomorhp ?>>
+                                                <input type="text" class="form-control" id="nomorhp"
+                                                    name="nomorhp" value=<?= Auth::user()->nomorhp ?>>
                                             </div>
                                             {{-- <div class="form-group">
                                                 <label class="form-label">Asal Prodi</label>

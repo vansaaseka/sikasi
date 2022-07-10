@@ -11,6 +11,8 @@ use Maatwebsite\Excel\Facades\Excel;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Validation\ValidationException;
+use RealRashid\SweetAlert\Facades\Alert;
 
 
 class AkunController extends Controller
@@ -162,16 +164,34 @@ class AkunController extends Controller
 
         }
 
-public function import_excel(Request $request)
-    {
-$data = $request->file('file');
-$namafile = $data->getClientOriginalName();
-$data->move('DataDosen', $namafile);
+            public function import_excel(Request $request)
+                {
+            $data = $request->file('file');
+            $namafile = $data->getClientOriginalName();
+            $data->move('DataDosen', $namafile);
 
-Excel::import(new DosenImport, \public_path('/DataDosen/'.$namafile));
-return back()->with('toast_success', 'Data Berhasil Diimpor');
+            Excel::import(new DosenImport, \public_path('/DataDosen/'.$namafile));
+            return back()->with('toast_success', 'Data Berhasil Diimpor');
 
-    }
+        }
 
-    
+        public function ubahpassword(Request $request)
+        {
+            $request->validate([
+            'current_password' => ['required'],
+            'password' => ['required', 'min:8', 'confirmed'],
+                        ]);
+                        
+            if (Hash::check($request->current_password, auth()->user()->password)){
+                auth()->user()->update(['password' =>Hash::make($request->password)]);
+                Alert::success('Sukses', 'Password Berhasil Diubah');
+                return back();
+            }
+
+    throw ValidationException::withMessages([
+        'current_password' => 'Password tidak sesuai dengan data password'
+        
+    ]);
+  
+        }
     }

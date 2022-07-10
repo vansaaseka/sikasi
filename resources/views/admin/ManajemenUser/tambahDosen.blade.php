@@ -68,7 +68,7 @@
                                 class="form-control @error('password_confirmation') is-invalid @enderror"
                                 value="{{ old('password_confirmation') }}" id="exampleInputPasswordRepeat"
                                 name="password_confirmation" required="required" autocomplete="new-password">
-                            @error('namakategori')
+                            @error('password_confirmation')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>

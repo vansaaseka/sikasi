@@ -104,7 +104,7 @@ route::get('/profileVerifikator',[ProfileController::class,"profileVerifikator"]
 route::get('/profileReviewer',[ProfileController::class,"profileReviewer"])->name('profileReviewer');
 route::get('/profileAdmin',[ProfileController::class,"profileAdmin"])->name('profileAdmin');
 route::post('/insertprofile',[ProfileController::class,"insertprofile"])->name('insertprofile');
-
+route::post('/ubahpassword',[AkunController::class,"ubahpassword"])->name('ubahpassword');
 
 //Unduh Template
 route::get('/unduhtemplate',[TemplateController::class,"unduhtemplate"])->name('unduhtemplate');
