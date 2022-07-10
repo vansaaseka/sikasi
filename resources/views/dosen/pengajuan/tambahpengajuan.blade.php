@@ -216,7 +216,7 @@
                                             <label class="form-label" for="exampleInputdate">Tanggal Mulai
                                                 Kerjasama</label>
                                             <input name="tanggalmulai" type="date" class="form-control"
-                                                id="exampleInputdate" value="">
+                                                id="tanggalmulai" value="">
                                         </div>
                                     </div>
                                     <div class="col-md-6">
@@ -224,7 +224,7 @@
                                             <label class="form-label" for="exampleInputdate">Tanggal Berakhir
                                                 Kerjasama</label>
                                             <input name="tanggalakhir" type="date" class="form-control"
-                                                id="exampleInputdate" value="">
+                                                id="tanggalakhir" value="">
                                         </div>
                                     </div>
 
@@ -240,45 +240,7 @@
                                 value="Previous">Previous</button>
                         </fieldset>
 
-                        {{-- <fieldset>
-                            <div class="form-card">
-                                <div class="row">
-                                    <div class="col-7">
-                                        <h3 class="mb-4 text-left">Finish:</h3>
-                                    </div>
-                                    <div class="col-5">
-                                        <h2 class="steps">Step 3 - 3</h2>
-                                    </div>
-                                </div>
 
-                                <br>
-                                <br>
-                                <h2 class="text-success text-center">
-                                    <strong>SUCCESS !</strong>
-                                </h2>
-                                <br>
-                                <div class="row justify-content-center">
-                                    <div class="col-3">
-                                        <img src="{{ asset('HOPE/assets/images/pages/img-success.png') }}"
-                                            class="img-fluid" alt="fit-image">
-                                    </div>
-                                </div>
-                                <br>
-                                <br>
-                                <div class="row justify-content-center">
-                                    <div class="col-7 text-center">
-                                        <h5 class="purple-text text-center">You Have Successfully Signed Up</h5>
-                                    </div>
-                                </div>
-                            </div>
-                            <button type="submit" name="submit" class="btn btn-primary action-button float-end"
-                                value="Submit">Submit</button>
-                            <button type="button" name="previous"
-                                class="btn btn-dark previous action-button-previous float-end me-1"
-                                value="Previous">Previous</button>
-                        </fieldset> --}}
-                        {{-- <button type="submit" name="next" class="btn btn-primary next action-button float-end" value="Submit">Submit</button> --}}
-                    </form>
                 </div>
             </div>
         </div>
@@ -296,6 +258,8 @@
     });
 </script>
 
+
+@include('dosen/layoutsDosen/footer')
 <script>
     $('#tanggalmulai').on('input', function() {
         $('#tanggalakhir').attr('min', this.value);
@@ -304,5 +268,3 @@
         $('#tanggalmulai').attr('max', this.value);
     });
 </script>
-
-@include('dosen/layoutsDosen/footer')

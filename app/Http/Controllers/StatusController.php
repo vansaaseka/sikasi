@@ -105,6 +105,35 @@ public function hapusStatus($id){
     return view('verifikator\updatestatus', compact('status' ,'pengajuan'));
     }
 
+    public function filter(Request $request){
+    $user = User::all();
+
+    $kategori = Kategori::all();
+    $mitra = Mitra::all();
+    $trxstatus = Trxstatus::all();
+    $prodi = Prodi::all();
+    $dokumen = Dokumen::all();
+   
+
+    $startDate = ($request->tanggalawal);
+    $endDate = ($request->tanggalakhir);
+
+
+    $pengajuan = Pengajuan::all()
+    ->whereBetween('created_at', [$startDate, $endDate]);
+
+    return view('admin.pengajuan.cetakpengajuan' , compact('pengajuan' , 'mitra','prodi', 'dokumen',
+    'trxstatus', 'user', 'kategori'));
+
+    // if (Auth()->user()->role == 0){
+    // return view('pelakuusaha.datalaporan', compact('users','laporans','limbah','perusahaans', 'sumberlimbah', 'pihakketiga',
+    // 'trx_limbah', 'trx_pihakketiga'));
+    // }
+    // else{
+    // abort(403);
+    // }
+
+}
     public function insertnewstatus(Request $request){
     $trxstatus = new Trxstatus;
     $user = User::all();

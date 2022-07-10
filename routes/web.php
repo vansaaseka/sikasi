@@ -119,6 +119,7 @@ route::get('/hapuspengajuan/{id}',[PengajuanController::class,"hapuspengajuan"])
 //Admin Pengajuan
 route::get('/datapengajuan',[StatusController::class,"dataajuan"])->name('dataajuan');
 route::get('/cetakpengajuan',[StatusController::class,"cetakpengajuan"])->name('cetakpengajuan');
+route::post('/filter',[StatusController::class,"filter"])->name('filter');
 route::get('/export_pengajuan', [PengajuanController::class, 'export_excel'])->name('export_pengajuan');
 
 //Status Verifikasi

@@ -20,15 +20,52 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive mt-4">
+                        <form action="/filter" method="post">
+                            @csrf
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div div class="form-group">
+                                                <label class="form-label" for="exampleInputdate"> Tanggal Awal</label>
+                                                <input type="date" name="tanggalmulai" id="tanggalmulai"
+                                                    value="{{ old('tanggalmulai') }}" class="form-control" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label class="form-label" for="exampleInputdate"> Tanggal Akhir</label>
+                                                <input type="date" name="tanggalakhir"
+                                                    value="{{ old('tanggalakhir') }}" id="tanggalakhir"
+                                                    class="form-control" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label class="form-label" for="search" style="color: white"> .</label>
+                                            <div id="dataTableHover_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                                                <button class="btn btn-primary " type="submit" name="submit"
+                                                    value="table">Search</button>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                        </form>
+                        <br />
+                        <br />
                         {{-- <table id="datatable" class="table table-striped" data-toggle="data-table"> --}}
                         <table id="examples" class="table-border display nowrap" style="width:100%">
                             <thead>
                                 <tr class="odd text-center">
                                     <th>No</th>
-                                    <th>kategori Pengajuan</th>
+                                    <th>Kategori Pengajuan</th>
                                     <th>Pengusul</th>
                                     <th>Prodi</th>
                                     <th>Tanggal Pengajuan</th>
+                                    <th>Tanggal Mulai Kerjasama</th>
+                                    <th>Tanggal Akhir Kerjasama</th>
+                                    <th>Status Kerjasama</th>
                                     <th>Mitra</th>
                                     <th>Dokumen Kerjasama</th>
                                 </tr>
@@ -40,6 +77,9 @@
                                     <th>Pengusul</th>
                                     <th>Prodi</th>
                                     <th>Tanggal Pengajuan</th>
+                                    <th>Tanggal Mulai Kerjasama</th>
+                                    <th>Tanggal Akhir Kerjasama</th>
+                                    <th>Status Kerjasama</th>
                                     <th>Mitra</th>
                                     <th>Dokumen Kerjasama</th>
                                 </tr>
@@ -74,11 +114,11 @@
                                                     }
                                                     ?>
                                         <td>{{ date('Y-m-d', strtotime($datapengajuan->created_at)) }}</td>
-                                        {{-- <td>{{ date('Y-m-d', strtotime($datapengajuan->tanggalmulai)) }}</td> --}}
-
+                                        <td>{{ date('Y-m-d', strtotime($datapengajuan->tanggalmulai)) }}</td>
+                                        <td>{{ date('Y-m-d', strtotime($datapengajuan->tanggalakhir)) }}</td>
                                         <td>{{ $datapengajuan->mitra->namamitra }}</td>
 
-
+                                        <td></td>
 
                                         <td>
                                             <?php
@@ -105,30 +145,16 @@
 
 @include('admin/layoutsAdmin/footer')
 
-
-{{-- alert Delete Pengajuan --}}
 <script>
-    $('.hapus').click(function() {
-        var pengajuanid = $(this).attr('data-id');
-        var namapengajuan = $(this).attr('data-nama');
-        swal({
-            title: "Apakah kamu yakin??",
-            text: "Menghapus data pengajuan dengan mitra " + namapengajuan + " ",
-            icon: "warning",
-            buttons: true,
-            dangerMode: true
-        }).then((willDelete) => {
-            if (willDelete) {
-                window.location = "/hapuspengajuan/" + pengajuanid + ""
-                swal("Data berhasil Dihapus!", {
-                    icon: "success"
-                });
-            } else {
-                swal("Data tidak berhasil dihapus");
-            }
-        });
+    $('#tanggalmulai').on('input', function() {
+        $('#tanggalakhir').attr('min', this.value);
+    });
+    $('#tanggalakhir').on('input', function() {
+        $('#tanggalmulai').attr('max', this.value);
     });
 </script>
+
+
 
 {{-- Cetak Data --}}
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
