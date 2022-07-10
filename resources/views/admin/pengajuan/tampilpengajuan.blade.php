@@ -272,8 +272,7 @@
                                         </td>
 
                                         <td>
-                                            <?php foreach($dokumen as $item){
-                                            if($item->pengajuan_id == $datapengajuan->id){?>
+
                                             <a class="btn btn-primary btn-sm">
                                                 <i class="fa fa-edit" data-bs-toggle="modal"
                                                     data-bs-target="#modaleditdokumen{{ $item->id }}"
@@ -349,7 +348,6 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <?php }} ?>
                                         </td>
                                     </tr>
                                 @endforeach

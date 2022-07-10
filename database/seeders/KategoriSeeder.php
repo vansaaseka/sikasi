@@ -12,11 +12,22 @@ class KategoriSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
-    {
-        DB::table('kategori')->insert([
-            'namakategori' => 'Mou',
-            'deskripsi' => 'Momerandum',
-        ]);
-    }
+
+     public function run()
+     {
+     $posts = [
+     [
+     'namakategori' => 'Perjanjian Kerjasama (PKS)',
+     ],
+     [
+     'namakategori' => 'Memorandum of Understanding (MoU)',
+     ],
+    
+
+     ];
+
+     DB::table('kategori')->insert($posts);
+     }
+
+    
 }

@@ -151,6 +151,7 @@
                                             <?php
                                             $sudahUnggah = 0;
                                             $unggah = 0;
+                                            $iddok = '';
                                             if (!empty($dokumen)) {
                                                 foreach ($dokumen as $d) {
                                                     if ($d->pengajuan_id == $datapengajuan->id) {
@@ -184,7 +185,7 @@
 
                                                 @if ($sudahUnggah == 1)
                                                     <a
-                                                        href="dokumenkerjasama/{{ $d->dokumen }}">{{ $namadok . ' id dok : ' . ($iddok = $d->id) }}</a>
+                                                        href="dokumenkerjasama/{{ $d->dokumen }}">{{ $namadok . ' id dok : ' . $iddok }}</a>
                                                 @endif
                                                 {{-- Modal Dokumen --}}
                                                 <div class="modal fade" id="modaldokumen{{ $datapengajuan->id }}"
@@ -273,14 +274,15 @@
                                                     ?>
 
                                                     <button type="button" class="btn btn-info btn-sm"
-                                                        data-bs-toggle="modal" data-bs-target="#pengajuan"
-                                                        id="#modalCenter{{ $datapengajuan->id }}">
+                                                        data-bs-toggle="modal"
+                                                        data-bs-target="#modaldetail{{ $datapengajuan->id }}"
+                                                        id="#modaldetail{{ $datapengajuan->id }}">
                                                         <i class="fa fa-info-circle"></i>
                                                     </button>
 
                                                     <a class="btn btn-primary btn-sm {{ $statusDisable }}">
                                                         <i class="fa fa-edit" data-bs-toggle="modal"
-                                                            data-bs-target="#modaleditdokumen{{ $iddok = $d->id }}"
+                                                            data-bs-target="#modaleditdokumen{{ $iddok }}"
                                                             id="#modaleditdokumen{{ $d->id }}">
                                                         </i>
                                                     </a>
@@ -295,10 +297,10 @@
                                                 @endif
 
                                                 <!-- Modal Detail -->
-                                                <div class="modal fade" id="pengajuan" data-bs-backdrop="static"
-                                                    data-bs-keyboard="false" tabindex="-1" role="dialog"
-                                                    aria-labelledby="staticBackdropLiveLabel" aria-hidden="true"
-                                                    style="text-align: left">
+                                                <div class="modal fade" id="modaldetail{{ $datapengajuan->id }}"
+                                                    data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                                                    role="dialog" aria-labelledby="staticBackdropLiveLabel"
+                                                    aria-hidden="true" style="text-align: left">
                                                     <div class="modal-dialog">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
@@ -318,6 +320,14 @@
                                                                             {{ $datapengajuan->id }}
                                                                             <tr>
                                                                                 <td class="font-size:3">
+                                                                                    Mitra
+                                                                                </td>
+                                                                                <td>:</td>
+                                                                                <td>{{ $datapengajuan->mitra->namamitra }}
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td class="font-size:3">
                                                                                     Nomor Dokumen
                                                                                 </td>
                                                                                 <td>:</td>
@@ -328,21 +338,24 @@
                                                                                     Tanggal Ajuan
                                                                                 </td>
                                                                                 <td>:</td>
-                                                                                <td>28 Maret 2022</td>
+                                                                                <td>{{ $datapengajuan->created_at->formatLocalized('%A, %d %B %Y') }}
+                                                                                </td>
                                                                             </tr>
                                                                             <tr>
                                                                                 <td>
                                                                                     Tanggal Mulai Kerjasama
                                                                                 </td>
                                                                                 <td>:</td>
-                                                                                <td>28 Agustus 2022</td>
+                                                                                <td>{{ date('Y-m-d', strtotime($datapengajuan->tanggalmulai)) }}
+                                                                                </td>
                                                                             </tr>
                                                                             <tr>
                                                                                 <td>
                                                                                     Tanggal Berakhir Kerjasama
                                                                                 </td>
                                                                                 <td>:</td>
-                                                                                <td>31 Desember 2022</td>
+                                                                                <td>{{ date('Y-m-d', strtotime($datapengajuan->tanggalakhir)) }}
+                                                                                </td>
                                                                             </tr>
                                                                             <tr>
                                                                                 <td>
@@ -350,7 +363,8 @@
                                                                                 </td>
                                                                                 <td>:</td>
                                                                                 <td style="color: red">
-                                                                                    Aktif (4 Bulan 3 Hari )</td>
+                                                                                    {{ $diff = Carbon\Carbon::parse($datapengajuan->tanggalakhir)->diffForHumans() }}
+                                                                                </td>
                                                                             </tr>
                                                                             <tr>
                                                                                 <td>
@@ -373,8 +387,7 @@
                                                 </div>
 
                                                 {{-- Modal Edit Dokumen --}}
-                                                <div class="modal fade"
-                                                    id="modaleditdokumen{{ $iddok = $datapengajuan->id }}"
+                                                <div class="modal fade" id="modaleditdokumen{{ $iddok }}"
                                                     tabindex="-1" role="dialog"
                                                     aria-labelledby="staticBackdropLiveLabel" aria-hidden="true">
                                                     <div class="modal-dialog modal-dialog-scrollable" role="document">
@@ -383,7 +396,7 @@
                                                                 <h5 class="modal-title" id="staticBackdropLiveLabel">
                                                                     Edit Dokumen
                                                                     Pengajuan
-                                                                    {{ 'id dok : ' . ($iddok = $datapengajuan->id) }}
+                                                                    {{ 'id dok : ' . $iddok }}
                                                                 </h5>
 
                                                                 <button type="button" class="btn-close"

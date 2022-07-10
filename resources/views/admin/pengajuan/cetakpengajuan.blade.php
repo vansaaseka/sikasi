@@ -1,6 +1,7 @@
 @include('admin/layoutsAdmin/header')
 @include('admin/layoutsAdmin/sidebar')
 @include('admin/layoutsAdmin/navbar')
+
 <!-- DataTable with Hover -->
 <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
 <link href="https://cdn.datatables.net/buttons/2.2.3/css/buttons.dataTables.min.css" rel="stylesheet" />
@@ -52,7 +53,7 @@
 
                                 </div>
                         </form>
-                        <br />
+
                         <br />
                         {{-- <table id="datatable" class="table table-striped" data-toggle="data-table"> --}}
                         <table id="examples" class="table-border display nowrap" style="width:100%">
@@ -65,7 +66,7 @@
                                     <th>Tanggal Pengajuan</th>
                                     <th>Tanggal Mulai Kerjasama</th>
                                     <th>Tanggal Akhir Kerjasama</th>
-                                    <th>Status Kerjasama</th>
+                                    <th>Masa Berlaku</th>
                                     <th>Mitra</th>
                                     <th>Dokumen Kerjasama</th>
                                 </tr>
@@ -73,13 +74,13 @@
                             <tfoot>
                                 <tr class="odd text-center">
                                     <th>No</th>
-                                    <th>kategori Pengajuan</th>
+                                    <th>Kategori Pengajuan</th>
                                     <th>Pengusul</th>
                                     <th>Prodi</th>
                                     <th>Tanggal Pengajuan</th>
                                     <th>Tanggal Mulai Kerjasama</th>
                                     <th>Tanggal Akhir Kerjasama</th>
-                                    <th>Status Kerjasama</th>
+                                    <th>Masa Berlaku</th>
                                     <th>Mitra</th>
                                     <th>Dokumen Kerjasama</th>
                                 </tr>
@@ -113,12 +114,13 @@
                                         <?php }
                                                     }
                                                     ?>
-                                        <td>{{ date('Y-m-d', strtotime($datapengajuan->created_at)) }}</td>
+                                        <td>{{ $datapengajuan->created_at->formatLocalized('%A, %d %B %Y') }}</td>
                                         <td>{{ date('Y-m-d', strtotime($datapengajuan->tanggalmulai)) }}</td>
                                         <td>{{ date('Y-m-d', strtotime($datapengajuan->tanggalakhir)) }}</td>
+                                        <td>
+                                            {{ $diff = Carbon\Carbon::parse($datapengajuan->tanggalakhir)->diffForHumans() }}
+                                        </td>
                                         <td>{{ $datapengajuan->mitra->namamitra }}</td>
-
-                                        <td></td>
 
                                         <td>
                                             <?php
