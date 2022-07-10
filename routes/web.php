@@ -98,7 +98,10 @@ Route::resource('template', TemplateController::class);
 route::get('/hapustemplate/{id}',[TemplateController::class,"hapustemplate"])->name('hapustemplate');
 
 //Profile
-route::get('/editprofile',[ProfileController::class,"editprofile"])->name('editprofile');
+route::get('/profileDosen',[ProfileController::class,"profileDosen"])->name('profileDosen');
+route::get('/profileVerifikator',[ProfileController::class,"profileVerifikator"])->name('profileVerifikator');
+route::get('/profileReviewer',[ProfileController::class,"profileReviewer"])->name('profileReviewer');
+route::get('/profileAdmin',[ProfileController::class,"profileAdmin"])->name('profileAdmin');
 route::post('/insertprofile',[ProfileController::class,"insertprofile"])->name('insertprofile');
 
 
@@ -164,8 +167,3 @@ route::get('/hapusruanglingkup/{id}',[RuanglingkupController::class,"hapusruangl
 //Unggah Dokumen
 route::post('/insertdokumen',[DokumenController::class,"insertdokumen"])->name('insertdokumen');
 route::post('/updatedokumen/{id}',[DokumenController::class,"updatedokumen"])->name('updatedokumen');
-
-//Detail Pengajuan Admin
-
-route::get('/email',[EmailController::class,"kirim"]);
-route::get('/pesan',[EmailController::class,"notif"]);

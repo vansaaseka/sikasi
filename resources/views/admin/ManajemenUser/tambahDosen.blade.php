@@ -12,74 +12,64 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <form
-                        action="/insertakun"
-                        method="POST"
-                        enctype="multipart/form-data"
-                        class="forms-sample">
+                    <form action="/insertakun" method="POST" enctype="multipart/form-data" class="forms-sample">
                         @csrf
 
-                        <br/>
+                        <br />
 
                         <div class="form-group">
                             <label for="exampleInputUsername">Username</label>
-                            <input
-                                type="text"
-                                name="name"
+                            <input type="text" name="name"
                                 class="form-control @error('namakategori') is-invalid @enderror"
-                                value="{{ old('name') }}"
-                                id="name"
-                                required="required"
-                                autocomplete="name"
+                                value="{{ old('name') }}" id="name" required="required" autocomplete="name"
                                 autofocus="autofocus">
                             @error('name')
-                            <div class="invalid-feedback">{{ $message }}</div>
+                                <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
 
                         <div class="form-group">
                             <label for="exampleInputEmail1">Email</label>
-                            <input
-                                type="email"
-                                name="email"
-                                class="form-control @error('email') is-invalid @enderror"
-                                value="{{ old('email') }}"
-                                id="email"
-                                aria-describedby="emailHelp"
-                                required="required"
-                                autocomplete="email">
+                            <input type="email" name="email"
+                                class="form-control @error('email') is-invalid @enderror" value="{{ old('email') }}"
+                                id="email" aria-describedby="emailHelp" required="required" autocomplete="email">
                             @error('email')
-                            <div class="invalid-feedback">{{ $message }}</div>
+                                <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputUsername">Asal Prodi</label>
+                            <select name="prodi_id" class="selectpicker form-control" data-style="py-0">
+                                <option value="">--Pilih--</option>
+                                @foreach ($prodi as $item)
+                                    <option value="{{ $item->id }}">
+                                        {{ $item->namaprodi }}
+                                    </option>
+                                @endforeach
+                                @error('prodi_id')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </select>
                         </div>
 
                         <div class="form-group">
                             <label>Password</label>
-                            <input
-                                type="password"
-                                class="form-control @error('password') is-invalid @enderror"
-                                value="{{ old('password') }}"
-                                id="exampleInputPassword"
-                                name="password"
-                                required="required"
-                                autocomplete="password">
+                            <input type="password" class="form-control @error('password') is-invalid @enderror"
+                                value="{{ old('password') }}" id="exampleInputPassword" name="password"
+                                required="required" autocomplete="password">
                             @error('password')
-                            <div class="invalid-feedback">{{ $message }}</div>
+                                <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
 
                         <div class="form-group">
                             <label>Repeat Password</label>
-                            <input
-                                type="password"
+                            <input type="password"
                                 class="form-control @error('password_confirmation') is-invalid @enderror"
-                                value="{{ old('password_confirmation') }}"
-                                id="exampleInputPasswordRepeat"
-                                name="password_confirmation"
-                                required="required"
-                                autocomplete="new-password">
+                                value="{{ old('password_confirmation') }}" id="exampleInputPasswordRepeat"
+                                name="password_confirmation" required="required" autocomplete="new-password">
                             @error('namakategori')
-                            <div class="invalid-feedback">{{ $message }}</div>
+                                <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
 

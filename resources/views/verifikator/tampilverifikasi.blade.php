@@ -355,7 +355,9 @@
                                                                                     @endforeach
                                                                                     <?= $tombol ?>
                                                                                     <br />
-                                                                                    <div class="form-group">
+
+
+                                                                                    <div class="form-group ">
                                                                                         <label class="form-label"
                                                                                             for="exampleInputText1">Catatan
                                                                                         </label>
@@ -385,9 +387,22 @@
                                                                                 <input type="hidden"
                                                                                     name="created_by"
                                                                                     value={{ Auth::user()->id }}>
-
+                                                                                <?php
+                                                                                $Disable = '';
+                                                                                
+                                                                                foreach ($trxstatus as $p) {
+                                                                                    if ($datapengajuan->id == $p->pengajuan_id) {
+                                                                                        if ($p->status_id <= 3 && $p->status_id >= 1) {
+                                                                                            $Disable = 'disabled';
+                                                                                        } else {
+                                                                                            $Disable = '';
+                                                                                        }
+                                                                                    }
+                                                                                }
+                                                                                
+                                                                                ?>
                                                                                 <button type="submit"
-                                                                                    class="btn btn-primary next action-button float-end"
+                                                                                    class="btn btn-primary next action-button float-end {{ $Disable }}"
                                                                                     value="Submit">Submit</button>
 
 

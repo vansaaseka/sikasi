@@ -75,6 +75,7 @@ public function hapusStatus($id){
     }
 
     public function dataajuan(){
+        $kategori = Kategori::all();
     $pengajuan = Pengajuan::all();
     $mitra = Mitra::all();
     $status = Status::all();
@@ -83,18 +84,19 @@ public function hapusStatus($id){
     $trxstatus = Trxstatus::all();
     $user = User::all();
     return view('admin.pengajuan.tampilpengajuan' , compact('pengajuan' , 'mitra', 'status','prodi', 'dokumen',
-    'trxstatus', 'user'));
+    'trxstatus', 'user', 'kategori'));
     }
 
     public function cetakpengajuan(){
+    $kategori = Kategori::all();
     $pengajuan = Pengajuan::all();
     $mitra = Mitra::all();
-   $trxstatus = Trxstatus::all();
+    $trxstatus = Trxstatus::all();
     $prodi = Prodi::all();
     $dokumen = Dokumen::all();
     $user = User::all();
     return view('admin.pengajuan.cetakpengajuan' , compact('pengajuan' , 'mitra','prodi', 'dokumen',
-    'trxstatus', 'user'));
+    'trxstatus', 'user', 'kategori'));
     }
 
     public function newstatus(){

@@ -14,7 +14,7 @@
                         <h4 class="card-title">Pengajuan Kerjasama</h4>
                     </div>
                     <div id="dataTableHover_wrapper" class="dataTables_wrapper dt-bootstrap4">
-                        <a href="{{route('export_pengajuan')}}" type="button" class="btn btn-success">Export
+                        <a href="{{ route('export_pengajuan') }}" type="button" class="btn btn-success">Export
                         </a>
                     </div>
                 </div>
@@ -25,22 +25,22 @@
                             <thead>
                                 <tr class="odd text-center">
                                     <th>No</th>
+                                    <th>kategori Pengajuan</th>
                                     <th>Pengusul</th>
                                     <th>Prodi</th>
-                                    <th>Tahun Kerjasama</th>
+                                    <th>Tanggal Pengajuan</th>
                                     <th>Mitra</th>
-                                    <th>Catatan</th>
                                     <th>Dokumen Kerjasama</th>
                                 </tr>
                             </thead>
                             <tfoot>
                                 <tr class="odd text-center">
                                     <th>No</th>
+                                    <th>kategori Pengajuan</th>
                                     <th>Pengusul</th>
                                     <th>Prodi</th>
-                                    <th>Tahun Kerjasama</th>
+                                    <th>Tanggal Pengajuan</th>
                                     <th>Mitra</th>
-                                    <th>Catatan</th>
                                     <th>Dokumen Kerjasama</th>
                                 </tr>
 
@@ -55,6 +55,14 @@
                                 @foreach ($pengajuan as $datapengajuan)
                                     <tr role="row" class="">
                                         <td scope="row">{{ $no++ }}</td>
+                                        <td>
+                                            <?php
+                                                    foreach($kategori as $ka){
+                                                        if($ka->id == $datapengajuan->kategori_id){?>
+                                            {{ $ka->namakategori }} <?php }
+                                                    }
+                                                ?>
+                                        </td>
 
                                         <td>{{ $datapengajuan->user->name }}</td>
 
@@ -65,22 +73,13 @@
                                         <?php }
                                                     }
                                                     ?>
-
-                                        <td>{{ date('Y', strtotime($datapengajuan->tanggalmulai)) }}</td>
+                                        <td>{{ date('Y-m-d', strtotime($datapengajuan->created_at)) }}</td>
+                                        {{-- <td>{{ date('Y-m-d', strtotime($datapengajuan->tanggalmulai)) }}</td> --}}
 
                                         <td>{{ $datapengajuan->mitra->namamitra }}</td>
 
 
-                                        <td>
-                                            {{-- {{  $datapengajuan->trxstatus->catatan}} --}}
-                                            <?php
-                                                foreach($trxstatus as $p){
-                                                    if($p->pengajuan_id == $datapengajuan->id){?>
-                                            {{ $p->catatan }}
-                                            <?php }
-                                                }
-                                                ?>
-                                        </td>
+
                                         <td>
                                             <?php
                                                 foreach($dokumen as $d){

@@ -1,11 +1,10 @@
-@include('dosen/layoutsDosen/header')
+@include('reviewer/layoutsReviewer/header')
 
-@include('dosen/layoutsDosen/sidebar')
+@include('reviewer/layoutsReviewer/sidebar')
 
-@include('dosen/layoutsDosen/navbar')
+@include('reviewer/layoutsReviewer/navbar')
 
 @include('sweetalert::alert')
-
 
 <div class="conatiner-fluid content-inner mt-n5 py-0">
     <div class="conatiner-fluid content-inner mt-n5 py-0">
@@ -112,4 +111,4 @@
 
 </div>
 
-@include('dosen/layoutsDosen/footer')
+@include('reviewer/layoutsReviewer/footer')

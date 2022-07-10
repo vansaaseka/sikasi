@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Dokumen extends Model
 {
-    public $timestamps = false;
+    public $timestamps = true;
     use HasFactory;
     protected $fillable = ['pengajuan_id','user_id','dokumen','nodokumen'];
     protected $table = 'dokumen';

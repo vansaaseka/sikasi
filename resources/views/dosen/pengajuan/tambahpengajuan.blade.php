@@ -295,4 +295,14 @@
 
     });
 </script>
+
+<script>
+    $('#tanggalmulai').on('input', function() {
+        $('#tanggalakhir').attr('min', this.value);
+    });
+    $('#tanggalakhir').on('input', function() {
+        $('#tanggalmulai').attr('max', this.value);
+    });
+</script>
+
 @include('dosen/layoutsDosen/footer')

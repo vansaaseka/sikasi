@@ -1,13 +1,14 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Http\Controllers\Controller;
-use Illuminate\Foundation\Auth\RegistersUsers;
-use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Prodi;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Foundation\Auth\RegistersUsers;
 
 
 class AkunController extends Controller
@@ -43,7 +44,8 @@ class AkunController extends Controller
         return view('admin\ManajemenUser\tambahadmin');
     }
     public function tambahdosen(){
-        return view('admin\ManajemenUser\tambahdosen');
+        $prodi = Prodi::all();
+        return view('admin\ManajemenUser\tambahdosen', compact('prodi'));
     }
     public function tambahverifikator(){
         return view('admin\ManajemenUser\tambahverifikator');
@@ -74,6 +76,7 @@ class AkunController extends Controller
                         'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
                         'role' => ['required', 'string', 'max:255'],
                         'password' => ['required', 'string', 'min:8', 'confirmed'],
+                        'prodi_id' => ['required']
                 ]
                 );
 
@@ -81,6 +84,7 @@ class AkunController extends Controller
                 $akun->name = $request->input('name');
                 $akun->email = $request->input('email');
                 $akun->role = $request->input('role');
+                $akun->prodi_id = $request->input('prodi_id');
                 $akun->password = Hash::make($request->password);
 
                 $akun->save();

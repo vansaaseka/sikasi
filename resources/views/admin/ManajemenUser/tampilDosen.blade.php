@@ -60,12 +60,11 @@
                                             </td>
                                             <td>
                                                 {{-- a href=/hapuskategori/{{ $kategori->id}} --}}
-
-                                                <a href="/editakun/{{ $account->id }}" class="btn btn-info">
+                                                <a href="/editakun/{{ $account->id }}" class="btn btn-primary btn-sm">
                                                     <i class="fa fa-edit"></i>
                                                 </a>
-                                                <a href="#" class="btn btn-danger delete" data-id="{{ $account->id }}"
-                                                    data-nama="{{ $account->name }}">
+                                                <a href="#" class="btn btn-danger delete btn-sm"
+                                                    data-id="{{ $account->id }}" data-nama="{{ $account->name }}">
                                                     <i class="fa fa-trash"></i>
                                                 </a>
                                             </td>

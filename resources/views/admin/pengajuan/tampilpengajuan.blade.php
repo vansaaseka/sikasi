@@ -19,6 +19,7 @@
                             <thead>
                                 <tr class="odd text-center">
                                     <th>No</th>
+                                    <th>kategori Pengajuan</th>
                                     <th>Pengusul</th>
                                     <th>Prodi</th>
                                     <th>Tahun Kerjasama</th>
@@ -32,6 +33,7 @@
                             <tfoot>
                                 <tr class="odd text-center">
                                     <th>No</th>
+                                    <th>kategori Pengajuan</th>
                                     <th>Pengusul</th>
                                     <th>Prodi</th>
                                     <th>Tahun Kerjasama</th>
@@ -74,23 +76,25 @@
 
                                         <td>{{ $datapengajuan->mitra->namamitra }}</td>
                                         <td>
+                                            <?php $belumada_status = '<div class="btn btn-outline-warning btn-sm"></i>Belum ada Status</div>'; ?>
                                             @foreach ($trxstatus as $a)
                                                 @if ($datapengajuan->id == $a->pengajuan_id)
                                                     @foreach ($status as $b)
                                                         @if ($a->status_id == $b->id)
-                                                            @php $belumada_status = '<div class="btn btn-outline-primary btn-sm dropdown-toggle ' . $datapengajuan->id . '" data-bs-toggle="modal" data-bs-target="#status' . $datapengajuan->id . '"id="#status' . $datapengajuan->id . '"> ' . $b->namastatus . ' </div>'; @endphp
+                                                            <?php $belumada_status = '<div class="btn btn-outline-primary btn-sm dropdown-toggle ' . $datapengajuan->id . '" data-bs-toggle="modal" data-bs-target="#status' . $datapengajuan->id . '"id="#status' . $datapengajuan->id . '"> ' . $b->namastatus . ' </div>'; ?>
+                                                            {{-- @php echo $belumada_status = '<div class="btn btn-outline-primary btn-sm dropdown-toggle ' . $datapengajuan->id . '" data-bs-toggle="modal" data-bs-target="#status' . $datapengajuan->id . '"id="#status' . $datapengajuan->id . '"> ' . $b->namastatus . ' </div>'; @endphp --}}
                                                         @endif
                                                     @endforeach
                                                 @endif
                                             @endforeach
-                                            @php $belumada_status @endphp
-
+                                            <?= $belumada_status ?>
+                                            {{-- @php $belumada_status @endphp --}}
                                             </button>
                                             <i class="fa fa-edit" data-bs-toggle="modal"
                                                 data-bs-target="#modalstatus{{ $datapengajuan->id }}"
                                                 id="#modalstatus{{ $datapengajuan->id }}">
                                             </i>
-                                            {{-- Modal Tampil Status --}}
+                                            {{-- Modal Status --}}
                                             <div class="modal fade" id="status{{ $datapengajuan->id }}" tabindex="-1"
                                                 role="dialog" aria-labelledby="staticBackdropLiveLabel"
                                                 aria-hidden="true">
@@ -98,7 +102,8 @@
                                                     <div class="modal-content">
                                                         <div class="modal-header">
                                                             <h5 class="modal-title" id="staticBackdropLiveLabel">
-                                                                Status Pengajuan</h5>
+                                                                Status Pengajuan
+                                                            </h5>
                                                             <button type="button" class="btn-close"
                                                                 data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
@@ -126,17 +131,20 @@
                                                                                                 @endforeach
 
                                                                                                 <?php
-                                                                                                        foreach($user as $p){
-                                                                                                            if($a->created_by == $p->id){?>
+                                                                                                            foreach($user as $p){
+                                                                                                                if($a->created_by == $p->id){?>
                                                                                                 <div
                                                                                                     class="d-inline-block w-100">
                                                                                                     <p>
-                                                                                                        Created by
+                                                                                                        Created
+                                                                                                        by
                                                                                                         {{ $p->name }}<br>
                                                                                                         {{ $a->created_at }}
                                                                                                     </p>
                                                                                                 </div>
-                                                                                                <?php }}?>
+                                                                                                <?php }
+                                                                                                                        }
+                                                                                                                        ?>
 
                                                                                             </li>
                                                                                         @endif
@@ -151,11 +159,13 @@
                                                     </div>
                                                 </div>
                                             </div>
+
                                             {{-- Modal Edit Status --}}
                                             <div class="modal fade" id="modalstatus{{ $datapengajuan->id }}"
                                                 tabindex="-1" role="dialog" aria-labelledby="staticBackdropLiveLabel"
                                                 aria-hidden="true">
-                                                <div class="modal-dialog modal-dialog-scrollable" role="document">
+                                                <div class="modal-dialog modal-dialog-scrollable" role="document"
+                                                    style="text-align: left">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
                                                             <h5 class="modal-title" id="staticBackdropLiveLabel">
@@ -270,6 +280,13 @@
                                                     id="#modaleditdokumen{{ $item->id }}">
                                                 </i>
                                             </a>
+                                            <a class="btn btn-danger delete btn-sm hapus  "
+                                                id-data="{{ $datapengajuan->id }}"
+                                                nama-data="{{ $datapengajuan->mitra->namamitra }}"
+                                                data-toggle="tooltip" data-placement="top" title=""
+                                                data-original-title="Delete" href="#">
+                                                <i class="fa fa-trash"></i>
+                                            </a>
                                             {{-- Modal Edit Dokumen --}}
                                             <div class="modal fade" id="modaleditdokumen{{ $item->id }}"
                                                 tabindex="-1" role="dialog"
@@ -352,8 +369,8 @@
 {{-- alert Delete Pengajuan --}}
 <script>
     $('.hapus').click(function() {
-        var pengajuanid = $(this).attr('data-id');
-        var namapengajuan = $(this).attr('data-nama');
+        var pengajuanid = $(this).attr('id-data');
+        var namapengajuan = $(this).attr('nama-data');
         swal({
             title: "Apakah kamu yakin??",
             text: "Menghapus data pengajuan dengan mitra " + namapengajuan + " ",
