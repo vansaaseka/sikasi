@@ -76,6 +76,7 @@ route::get('/tambahadmin',[AkunController::class,"tambahadmin"])->name('tambahad
 // Dosen
 route::get('/tampildosen',[AkunController::class,"tampildosen"])->name('tampildosen');
 route::get('/tambahdosen',[AkunController::class,"tambahdosen"])->name('tambahdosen');
+route::post('/import_dosen', [AkunController::class, 'import_excel'])->name('import_dosen');
 
 // Verifikator
 route::get('/tampilverifikator',[AkunController::class,"tampilverifikator"])->name('tampilverifikator');
@@ -121,6 +122,7 @@ route::get('/datapengajuan',[StatusController::class,"dataajuan"])->name('dataaj
 route::get('/cetakpengajuan',[StatusController::class,"cetakpengajuan"])->name('cetakpengajuan');
 route::post('/filter',[StatusController::class,"filter"])->name('filter');
 route::get('/export_pengajuan', [PengajuanController::class, 'export_excel'])->name('export_pengajuan');
+
 
 //Status Verifikasi
 route::get('/verifikasi',[StatusController::class,"verifikasi"])->name('verifikasi');

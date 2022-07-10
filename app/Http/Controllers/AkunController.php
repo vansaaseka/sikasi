@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Prodi;
+use App\Imports\DosenImport;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
+use Maatwebsite\Excel\Facades\Excel;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -160,13 +162,16 @@ class AkunController extends Controller
 
         }
 
-        // public function ubahstatus(Request $request)
-        // {
-        //     $accoounts = Akun::find($request->account_id);
-        //     $accoounts->status = $request->status;
-        //     $accoounts->save();
-           
-        // }
+public function import_excel(Request $request)
+    {
+$data = $request->file('file');
+$namafile = $data->getClientOriginalName();
+$data->move('DataDosen', $namafile);
+
+Excel::import(new DosenImport, \public_path('/DataDosen/'.$namafile));
+return back()->with('toast_success', 'Data Berhasil Diimpor');
+
+    }
 
     
     }

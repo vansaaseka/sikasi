@@ -32,11 +32,11 @@
 
 <body class="  ">
     <!-- loader Start -->
-    <div id="loading">
+    {{-- <div id="loading">
         <div class="loader simple-loader">
             <div class="loader-body"></div>
         </div>
-    </div>
+    </div> --}}
     <!-- loader END -->
 
     <aside class="sidebar sidebar-default navs-rounded-all ">
