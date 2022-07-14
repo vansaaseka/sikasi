@@ -24,8 +24,8 @@ class ProfileController extends Controller
              Alert::warning('Warning', 'Lengkapi Data Profil, untuk bisa menambahkan pengajuan !!');
              }
             return view('dosen\Profile\editprofile' , compact('prodi' , 'profil'));
-  
-                 
+
+
         }
         public function profileVerifikator(){
 
@@ -48,8 +48,8 @@ class ProfileController extends Controller
           // $profil = User::where('id', Auth::user()->id)->first();
           return view('admin\Profile\editprofile' , compact('prodi' , 'profil'));
           }
-  
-  
+
+
     public function insertprofile(Request $request)
     {
         // $user = User::where('id', Auth::user()->id);
@@ -68,7 +68,7 @@ class ProfileController extends Controller
             $txt = "storage/profile/". $file_name;
             $request->photo->storeAs('public/profile', $file_name);
         } else {
-            $file_name = null;
+            $txt = null;
         }
 
         $user->name = $request->name;
@@ -78,8 +78,8 @@ class ProfileController extends Controller
         $user->alamat = $request->alamat;
         $user->photo = $txt;
         $user->save();
-       
-      
+
+
         return back()->with('toast_success', 'Data Berhasil Tersimpan');
 
 
