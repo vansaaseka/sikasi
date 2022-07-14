@@ -2,7 +2,7 @@
 
 @include('dosen/layoutsDosen/sidebar')
 
-@include('dosen/layoutsDosen/navbar')
+@include('navbardashboard')
 
 
 <div class="conatiner-fluid content-inner mt-n5 py-0">

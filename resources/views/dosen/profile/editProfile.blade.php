@@ -53,13 +53,12 @@
                                                         <form action="/ubahpassword" method="POST"
                                                             enctype="multipart/form-data" class="forms-sample">
                                                             @csrf
-
                                                             <div class="form-group">
                                                                 <label>Password Saat Ini</label>
                                                                 <input type="password"
                                                                     class="form-control @error('current_password') is-invalid @enderror"
-                                                                    id="current_password" name="current_password"
-                                                                    required="required" autocomplete="current_password">
+                                                                    id="exampleInputPassword" name="current_password"
+                                                                    required="required" autocomplete="password">
                                                                 @error('current_password')
                                                                     <div class="invalid-feedback">{{ $message }}</div>
                                                                 @enderror
@@ -68,18 +67,17 @@
                                                                 <label>Password</label>
                                                                 <input type="password"
                                                                     class="form-control @error('password') is-invalid @enderror"
-                                                                    value="{{ old('password') }}"
                                                                     id="exampleInputPassword" name="password"
                                                                     required="required" autocomplete="password">
                                                                 @error('password')
                                                                     <div class="invalid-feedback">{{ $message }}</div>
                                                                 @enderror
                                                             </div>
+
                                                             <div class="form-group">
                                                                 <label>Repeat Password</label>
                                                                 <input type="password"
                                                                     class="form-control @error('password_confirmation') is-invalid @enderror"
-                                                                    value="{{ old('password_confirmation') }}"
                                                                     id="exampleInputPasswordRepeat"
                                                                     name="password_confirmation" required="required"
                                                                     autocomplete="new-password">
@@ -87,7 +85,6 @@
                                                                     <div class="invalid-feedback">{{ $message }}</div>
                                                                 @enderror
                                                             </div>
-
 
                                                             <button type="submit"
                                                                 class="btn btn-primary next action-button float-end"

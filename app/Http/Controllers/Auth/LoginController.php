@@ -72,21 +72,21 @@ class LoginController extends Controller
       
          
             if (empty(auth()->user()->nomorhp) && auth()->user()->role == 3 && auth()->user()->status == 1) {
-                return view('reviewer/layoutReviewer');
+                return view('reviewer/dashboard');
             } elseif (auth()->user()->role == 3 && auth()->user()->status == 0) {
                 (auth()->logout());
             } elseif (auth()->user()->role == 1 && auth()->user()->status == 1) {
-                return view('admin/layoutAdmin');
+                return view('admin/dashboard');
             } elseif (auth()->user()->role == 1 && auth()->user()->status == 0) {
                 (auth()->logout());
             } elseif ( empty(auth()->user()->nomorhp) && auth()->user()->role == 0 && auth()->user()->status == 1) {
                 return view('dosen\Profile\editprofile', compact( 'profil' ,'prodi'));
             } elseif ( !empty(auth()->user()->nomorhp) && auth()->user()->role == 0 && auth()->user()->status == 1) {
-                return view('dosen/layoutDosen');
+                return view('dosen/dashboard');
             } elseif (auth()->user()->role == 0 && auth()->user()->status == 0) {
                 (auth()->logout());
             }  elseif (auth()->user()->role == 2 && auth()->user()->status == 1) {
-                return view('verifikator/layoutVerifikator');
+                return view('verifikator/dashboard');
             } elseif (auth()->user()->role == 2 && auth()->user()->status == 0) {
                 (auth()->logout());
            

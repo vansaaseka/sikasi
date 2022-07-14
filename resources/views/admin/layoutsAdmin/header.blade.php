@@ -7,7 +7,8 @@
     <title>SIKASI</title>
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="{{ asset('HOPE/assets/images/favicon.ico') }}">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+
 
     <!-- Library / Plugin Css Build -->
     <link rel="stylesheet" href="{{ asset('HOPE/assets/css/core/libs.min.css') }}">

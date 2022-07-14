@@ -2,7 +2,8 @@
 
 @include('reviewer/layoutsReviewer/sidebar')
 
-@include('reviewer/layoutsReviewer/navbar')
+@include('navbardashboard')
+
 
 
 <div class="conatiner-fluid content-inner mt-n5 py-0">

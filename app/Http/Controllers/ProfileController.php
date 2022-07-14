@@ -19,7 +19,13 @@ class ProfileController extends Controller
             $prodi = Prodi::all();
             $profil = User::all();
             // $profil = User::where('id', Auth::user()->id)->first();
+             if(empty(auth()->user()->nomorhp))
+              {
+             Alert::warning('Warning', 'Lengkapi Data Profil, untuk bisa menambahkan pengajuan !!');
+             }
             return view('dosen\Profile\editprofile' , compact('prodi' , 'profil'));
+  
+                 
         }
         public function profileVerifikator(){
 

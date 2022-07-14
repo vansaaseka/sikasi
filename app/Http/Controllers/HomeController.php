@@ -14,19 +14,19 @@ class HomeController extends Controller
            $role=Auth::user()->role;
            if($role=='1')
            {
-               return view('admin/layoutAdmin');
+               return view('admin/dashboard');
            }
            if($role=='2')
            {
-               return view('verifikator/layoutVerifikator');
+               return view('verifikator/dashboard');
            }
            if($role=='3')
            {
-               return view('reviewer/layoutReviewer');
+               return view('reviewer/dashboard');
            }
            else
            {
-               return view('dosen/layoutDosen');
+               return view('dosen/dashboard');
            }
        }
     

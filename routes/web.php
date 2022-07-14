@@ -45,19 +45,19 @@ Route::get('/layoutAdmin', function () {
 //     return view('home');
 // });
 
-Route::get('/dashboardadmin', function () {
+Route::get('/admin', function () {
 return view('admin.dashboard');
 });
 
-Route::get('/dashboarddosen', function () {
+Route::get('/dosen', function () {
 return view('dosen.dashboard');
 });
 
-Route::get('/dashboardreviewer', function () {
+Route::get('/reviewer', function () {
 return view('reviewer.dashboard');
 });
 
-Route::get('/dashboardverifikator', function () {
+Route::get('/verifikator', function () {
 return view('verifikator.dashboard');
 });
 

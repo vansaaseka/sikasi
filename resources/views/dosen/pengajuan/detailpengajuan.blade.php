@@ -51,7 +51,6 @@
                                     @if ($datapengajuan->user_id == Auth::user()->id)
                                         <tr role="row" class="odd text-center">
                                             <td scope="row">{{ $no++ }}</td>
-                                            <td>{{ date('Y', strtotime($datapengajuan->tanggalmulai)) }}</td>
                                             <td>
                                                 <?php
                                                     foreach($kategori as $ka){
@@ -60,6 +59,8 @@
                                                     }
                                                 ?>
                                             </td>
+                                            <td>{{ date('Y', strtotime($datapengajuan->tanggalmulai)) }}</td>
+
                                             <td>{{ $datapengajuan->mitra->namamitra }}</td>
 
                                             <td>
@@ -249,7 +250,6 @@
 
                                             <td>
 
-                                                {{ $datapengajuan->id }}
                                                 @if ($sudahUnggah == 0)
                                                     <i class="fa fa-info-circle" data-bs-toggle="tooltip"
                                                         data-bs-placement="top"

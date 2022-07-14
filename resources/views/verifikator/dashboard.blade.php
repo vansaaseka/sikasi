@@ -2,7 +2,8 @@
 
 @include('verifikator/layoutsVerifikator/sidebar')
 
-@include('verifikator/layoutsVerifikator/navbar')
+@include('navbardashboard')
+
 
 <div class="conatiner-fluid content-inner mt-n5 py-0">
     <div class="row">

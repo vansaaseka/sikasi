@@ -13,7 +13,7 @@
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="{{ asset('HOPE/assets/images/favicon.ico') }}">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 
     <!-- Library / Plugin Css Build -->
     <link rel="stylesheet" href="{{ asset('HOPE/assets/css/core/libs.min.css') }}">
@@ -47,7 +47,11 @@
     <aside class="sidebar sidebar-default navs-rounded-all ">
         <div class="sidebar-header d-flex align-items-center justify-content-start">
             <a class="navbar-brand">
-                <img src="SIKASI.png" width="162" height="75">
+                <img width="32" class="text-primary" viewBox="0 0 30 30" fill="none" src="logosv.png">
+
+                {{-- <img src="logosv.png" class="img-fluid avatar avatar-50 avatar-rounded"> --}}
+                <!--logo End-->
+                <h4 class="logo-title">SIKASI</h4>
             </a>
             <div class="sidebar-toggle" data-toggle="sidebar" data-active="true">
                 <i class="icon">

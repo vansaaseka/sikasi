@@ -84,7 +84,7 @@
                                                     @enderror
                                                 </div>
                                             </div>
-                                            <div class="col-lg-12 d-flex justify-content-between">
+                                            {{-- <div class="col-lg-12 d-flex justify-content-between">
                                                 <div class="form-check mb-3">
                                                     <input type="checkbox" class="form-check-input" id="customCheck1"
                                                         {{ old('remember') ? 'checked' : '' }}>
@@ -94,7 +94,7 @@
                                                 @if (Route::has('password.request'))
                                                     <a href="{{ route('password.request') }}">Forgot Password?</a>
                                                 @endif
-                                            </div>
+                                            </div> --}}
                                         </div>
                                         <div class="d-flex justify-content-center">
                                             <button type="submit" class="btn btn-primary">Sign In</button>

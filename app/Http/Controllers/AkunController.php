@@ -177,18 +177,19 @@ class AkunController extends Controller
 
         public function ubahpassword(Request $request)
         {
-            $request->validate([
-            'current_password' => ['required'],
-            'password' => ['required', 'min:8', 'confirmed'],
-                        ]);
-                        
+              $this->validate($request, [
+           
+              'password' => ['required', 'string', 'min:8', 'confirmed'],
+              'current_password' => ['required']
+              ]);
+
             if (Hash::check($request->current_password, auth()->user()->password)){
                 auth()->user()->update(['password' =>Hash::make($request->password)]);
                 Alert::success('Sukses', 'Password Berhasil Diubah');
                 return back();
             }
 
-    throw ValidationException::withMessages([
+        throw ValidationException::withMessages([
         'current_password' => 'Password tidak sesuai dengan data password'
         
     ]);

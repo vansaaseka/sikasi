@@ -13,7 +13,8 @@
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="{{ asset('HOPE/assets/images/favicon.ico') }}">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+
 
     <!-- Library / Plugin Css Build -->
     <link rel="stylesheet" href="{{ asset('HOPE/assets/css/core/libs.min.css') }}">
