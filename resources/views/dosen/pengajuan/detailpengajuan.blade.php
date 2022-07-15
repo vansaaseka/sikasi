@@ -48,7 +48,7 @@
                                 @php $no = 1; @endphp
 
                                 @foreach ($pengajuan as $datapengajuan)
-                                    @if ($datapengajuan->user_id == Auth::user()->id)
+                                    @if ($datapengajuan->prodiid == Auth::user()->prodi_id)
                                         <tr role="row" class="odd text-center">
                                             <td scope="row">{{ $no++ }}</td>
                                             <td>
@@ -201,6 +201,27 @@
                                                                     data-bs-dismiss="modal" aria-label="Close"></button>
                                                             </div>
                                                             <div class="modal-body">
+                                                                <div class="table-responsive">
+                                                                    <table
+                                                                        class="table align-items table-flush table-hover"
+                                                                        id="dataTableHover">
+
+                                                                        <tbody>
+
+                                                                            <tr>
+                                                                                <td class="font-size:3">
+                                                                                    Unggah Dokumen Pengajuan
+                                                                                    dengan Mitra
+                                                                                    :
+                                                                                    {{ $datapengajuan->mitra->namamitra }}
+                                                                                </td>
+
+
+                                                                            </tr>
+
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
                                                                 <div class="row d-flex justify-content">
                                                                     <div class="col-md-12">
                                                                         <div class="card">
@@ -250,6 +271,7 @@
 
                                             <td>
 
+                                                {{ $datapengajuan->id }}
                                                 @if ($sudahUnggah == 0)
                                                     <i class="fa fa-info-circle" data-bs-toggle="tooltip"
                                                         data-bs-placement="top"

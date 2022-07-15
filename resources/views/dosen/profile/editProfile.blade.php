@@ -138,14 +138,14 @@
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label class="form-label" for="furl">Nama Lengkap</label>
+                                                <label class="form-label" for="instaurl">Nama Lengkap</label>
                                                 <input type="text" class="form-control" id="namalengkap"
-                                                    name="name" value=<?= Auth::user()->name ?>
-                                                    value="{{ old('name', $data->name) }}">
+                                                    name="name" value=<?= Auth::user()->name ?>>
                                             </div>
+
                                             <div class="form-group">
                                                 <label class="form-label" for="turl">Email:</label>
-                                                <input type="text" class="form-control" id="email"
+                                                <input type="email" class="form-control" id="email"
                                                     name="email" value=<?= Auth::user()->email ?>>
                                             </div>
                                             <div class="form-group">
@@ -153,10 +153,20 @@
                                                 <input type="text" class="form-control" id="nomorhp"
                                                     name="nomorhp" value=<?= Auth::user()->nomorhp ?>>
                                             </div>
-                                            {{-- <div class="form-group">
+                                            <?php
+                                            $statusDisable = '';
+                                            
+                                            if (!empty(auth()->user()->prodi_id)) {
+                                                $statusDisable = 'disabled';
+                                            } else {
+                                                $statusDisable = '';
+                                            }
+                                            
+                                            ?>
+                                            <div class="form-group">
                                                 <label class="form-label">Asal Prodi</label>
                                                 <select name="prodi_id" class="selectpicker form-control"
-                                                    data-style="py-0">
+                                                    data-style="py-0" {{ $statusDisable }}>
                                                     <option value="">--Pilih--</option>
                                                     @foreach ($prodi as $item)
                                                         <option value="{{ $item->id }}" selected>
@@ -168,7 +178,9 @@
                                                         <div class="invalid-feedback"></div>
                                                     @enderror
                                                 </select>
-                                            </div> --}}
+                                            </div>
+
+
                                             <div class="form-group mb-0">
                                                 <label class="form-label" for="lurl">Alamat</label>
                                                 <input type="text" class="form-control" id="alamat"

@@ -19,7 +19,7 @@
                         enctype="multipart/form-data">
                         @csrf
                         <ul id="top-tab-list" class="p-0 row list-inline">
-                            <li class="col-lg-6 col-md-6 text-start mb-2 active" id="account">
+                            <li class="col-lg-4 col-md-6 text-start mb-2 active" id="account">
                                 <a href="javascript:void();">
                                     <div class="iq-icon me-3">
                                         <svg class="svg-icon" xmlns="http://www.w3.org/2000/svg" height="20"
@@ -31,7 +31,7 @@
                                     <span>Mitra</span>
                                 </a>
                             </li>
-                            <li id="personal" class="col-lg-6 col-md-6 mb-2 text-start">
+                            <li id="personal" class="col-lg-4 col-md-6 mb-2 text-start">
                                 <a href="javascript:void();">
                                     <div class="iq-icon me-3">
                                         <svg xmlns="http://www.w3.org/2000/svg" height="20" width="20"
@@ -44,7 +44,7 @@
                                 </a>
                             </li>
 
-                            {{-- <li id="confirm" class="col-lg-4 col-md-6 mb-2 text-start">
+                            <li id="confirm" class="col-lg-4 col-md-6 mb-2 text-start">
                                 <a href="javascript:void();">
                                     <div class="iq-icon me-3">
                                         <svg xmlns="http://www.w3.org/2000/svg" height="20" width="20"
@@ -55,7 +55,7 @@
                                     </div>
                                     <span>Finish</span>
                                 </a>
-                            </li> --}}
+                            </li>
                         </ul>
                         <!-- fieldsets -->
                         <fieldset>
@@ -129,7 +129,8 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="form-label">Alamat Lengkap Mitra *</label>
-                                            <input type="text" class="form-control" name="alamat" placeholder="" />
+                                            <input type="text" class="form-control" name="alamat"
+                                                placeholder="" />
                                         </div>
                                     </div>
                                     <div class="col-md-6">
@@ -227,17 +228,49 @@
                                                 id="tanggalakhir" value="">
                                         </div>
                                     </div>
-
+                                    <input type="hidden" name="prodiid" value="{{ Auth::user()->prodi_id }}">
 
                                 </div>
                             </div>
 
 
-                            <button type="submit" name="submit" class="btn btn-primary action-button float-end"
-                                value="Submit">Submit</button>
+                            <button type="submit" name="submit"
+                                class="btn btn-primary next action-button float-end" value="Submit">Next</button>
+                            {{-- <button type="button" name="next"
+                                class="btn btn-primary next action-button float-end" value="Next">Next</button> --}}
                             <button type="button" name="previous"
                                 class="btn btn-dark previous action-button-previous float-end me-1"
                                 value="Previous">Previous</button>
+                        </fieldset>
+                        <fieldset>
+                            <div class="form-card">
+
+                                <br>
+                                <div id="dataTableHover_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                                    <a href="/pengajuan" type="button" class="btn btn-secondary">Kembali Ke Halaman
+                                        Pengajuan
+                                    </a>
+                                </div>
+                                <br />
+
+                                <h2 class="text-success text-center">
+                                    <strong>SUCCESS !</strong>
+                                </h2>
+                                <br>
+                                <div class="row justify-content-center">
+                                    <div class="col-3">
+                                        <img src="{{ asset('HOPE/assets/images/pages/img-success.png') }}"
+                                            class="img-fluid" alt="fit-image">
+                                    </div>
+                                </div>
+                                <br>
+                                <br>
+                                <div class="row justify-content-center">
+                                    <div class="col-7 text-center">
+                                        <h5 class="purple-text text-center">Data berhasil Ditambahkan</h5>
+                                    </div>
+                                </div>
+                            </div>
                         </fieldset>
 
 

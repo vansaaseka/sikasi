@@ -50,7 +50,7 @@
                                 <img src="{{ asset(Auth::user()->photo) }}" alt="User-Profile"
                                     class="img-fluid avatar avatar-50 avatar-rounded">
 
-                                <?php } ?>>
+                                <?php } ?>
                                 <div class="caption ms-3 d-none d-md-block ">
                                     <h6 class="mb-0 caption-title"><?= Auth::user()->name ?></h6>
                                     <p class="mb-0 caption-sub-title">Reviewer</p>
@@ -58,23 +58,20 @@
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="/profileReviewer">Profile</a></li>
-                                <li><a class="dropdown-item"
-                                        href="{{ asset('HOPE/dashboard/app/user-privacy-setting.html') }}">Privacy
-                                        Setting</a></li>
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-                                <li><a class="dropdown-item"
-                                        onclick="event.preventDefault();
-                  document.getElementById('logout-form').submit();">
-                                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                        Logout
-                                    </a></li>
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                    @csrf
-                                </form>
-                            </ul>
+
+                                <hr class="dropdown-divider">
                         </li>
+                        <li><a class="dropdown-item"
+                                onclick="event.preventDefault();
+                  document.getElementById('logout-form').submit();">
+                                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                Logout
+                            </a></li>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                            @csrf
+                        </form>
+                    </ul>
+                    </li>
                     </ul>
                 </div>
             </div>
@@ -92,7 +89,7 @@
                     </div>
                 </div>
             </div>
-        </div>>
+        </div>
     </div> <!-- Nav Header Component End -->
     <!--Nav End-->
     </div>

@@ -47,11 +47,8 @@
     <aside class="sidebar sidebar-default navs-rounded-all ">
         <div class="sidebar-header d-flex align-items-center justify-content-start">
             <a class="navbar-brand">
-                <img width="32" class="text-primary" viewBox="0 0 30 30" fill="none" src="logosv.png">
+                <img src="SIKASI.png" width="162" height="75">
 
-                {{-- <img src="logosv.png" class="img-fluid avatar avatar-50 avatar-rounded"> --}}
-                <!--logo End-->
-                <h4 class="logo-title">SIKASI</h4>
             </a>
             <div class="sidebar-toggle" data-toggle="sidebar" data-active="true">
                 <i class="icon">

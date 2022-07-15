@@ -10,6 +10,8 @@ use App\Mail\KirimEmail;
 use App\Models\Kategori;
 use App\Models\Pengajuan;
 use App\Models\Trxstatus;
+use App\Models\RuangLingkup;
+use App\Models\KategoriMitra;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
@@ -87,17 +89,7 @@ public function hapusStatus($id){
     'trxstatus', 'user', 'kategori'));
     }
 
-    public function cetakpengajuan(){
-    $kategori = Kategori::all();
-    $pengajuan = Pengajuan::all();
-    $mitra = Mitra::all();
-    $trxstatus = Trxstatus::all();
-    $prodi = Prodi::all();
-    $dokumen = Dokumen::all();
-    $user = User::all();
-    return view('admin.pengajuan.cetakpengajuan' , compact('pengajuan' , 'mitra','prodi', 'dokumen',
-    'trxstatus', 'user', 'kategori'));
-    }
+   
 
     public function newstatus(){
     $pengajuan = Pengajuan::all();
@@ -134,6 +126,20 @@ public function hapusStatus($id){
     // }
 
 }
+
+        public function cetakpengajuan(){
+            $ruanglingkup = RuangLingkup::all();
+            $kategorimitra = KategoriMitra::all();
+            $kategori = Kategori::all();
+            $pengajuan = Pengajuan::all();
+            $mitra = Mitra::all();
+            $trxstatus = Trxstatus::all();
+            $prodi = Prodi::all();
+            $dokumen = Dokumen::all();
+            $user = User::all();
+            return view('admin.pengajuan.cetakpengajuan' , compact('pengajuan' , 'mitra','prodi', 'dokumen',
+            'trxstatus', 'user', 'kategori', 'ruanglingkup', 'kategorimitra'));
+        }
     public function insertnewstatus(Request $request){
     $trxstatus = new Trxstatus;
     $user = User::all();
@@ -166,12 +172,12 @@ public function hapusStatus($id){
                 }}
 
 
-                foreach($pengajuan as $data){
+                foreach($pengajuan as $ajuan){
                 foreach($trx as $s){
-                if($data->id == $s->pengajuan_id){
+                if($ajuan->id == $s->pengajuan_id){
                 foreach($status as $b){
                 if($s->status_id == $b->id){
-                    $status = $b->namastatus;
+                    $namas = $b->namastatus;
                 }
             }
         }
@@ -183,7 +189,7 @@ public function hapusStatus($id){
             $data = [
                'user' => $nama,
                'mitra' => $mitra,
-               'status' => $status
+               'status' => $namas
             ];
                 $tujuan= $a->email;
                 \Mail::to($tujuan)->send(new KirimEmail($data));
@@ -197,13 +203,14 @@ public function hapusStatus($id){
 public function validasi(){
 $pengajuan = Pengajuan::all();
 $mitra = Mitra::all();
+$kategori = Kategori::all();
 $status = Status::all();
 $prodi = Prodi::all();
 $dokumen = Dokumen::all();
 $trxstatus = Trxstatus::all();
 $user = User::all();
 return view('reviewer.tampilvalidasi' , compact('pengajuan' , 'mitra', 'status','prodi', 'dokumen',
-'trxstatus', 'user'));
+'trxstatus', 'user', 'kategori'));
 }
 
 }

@@ -155,6 +155,7 @@ $pengajuan->ruanglingkup_id = json_encode($dataa1);
 $pengajuan->proditerlibat_id = json_encode($dataa2);
 $pengajuan->tanggalmulai = $request->tanggalmulai;
 $pengajuan->tanggalakhir = $request->tanggalakhir;
+$pengajuan->prodiid = $request->prodiid;
 // $pengajuan->dokumen = $dokumen_file;
 
 $pengajuan->save();
@@ -362,10 +363,9 @@ $objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'Word2007');
 $objWriter->save('PKS2022.docx');
 
 
-
-// return response()->download(public_path('PKS2022.docx'));
-Alert::success('Sukses', 'Data berhasil diinput!');
-return redirect()->route('pengajuan');
+// Alert::success('Sukses', 'Data berhasil diinput!');
+return response()->download(public_path('PKS2022.docx'));
+// return redirect()->route('pengajuan');
 
     }
 

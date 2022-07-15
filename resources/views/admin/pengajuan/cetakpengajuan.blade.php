@@ -68,6 +68,8 @@
                                     <th>Tanggal Akhir Kerjasama</th>
                                     <th>Masa Berlaku</th>
                                     <th>Mitra</th>
+                                    <th>Ruanglingkup Mitra</th>
+                                    <th>Kategori Mitra</th>
                                     <th>Dokumen Kerjasama</th>
                                 </tr>
                             </thead>
@@ -82,6 +84,8 @@
                                     <th>Tanggal Akhir Kerjasama</th>
                                     <th>Masa Berlaku</th>
                                     <th>Mitra</th>
+                                    <th>Ruanglingkup Mitra</th>
+                                    <th>Kategori Mitra</th>
                                     <th>Dokumen Kerjasama</th>
                                 </tr>
 
@@ -121,6 +125,24 @@
                                             {{ $diff = Carbon\Carbon::parse($datapengajuan->tanggalakhir)->diffForHumans() }}
                                         </td>
                                         <td>{{ $datapengajuan->mitra->namamitra }}</td>
+                                        {{-- <td>
+                                            <?php
+                                                        foreach($ruanglingkup as $rl){
+                                                            if($rl->id == $datapengajuan->proditerlibat_id){?>
+                                            {{ $rl->ruanglingkup }} <?php }
+                                                        }
+                                                    ?>
+                                        </td> --}}
+                                        <td></td>
+                                        <td>
+                                            <?php
+                                                        foreach($kategorimitra as $km){
+                                                            if($km->id == $datapengajuan->mitra->kategorimitra_id){?>
+                                            {{ $km->kategorimitra }} <?php }
+                                                        }
+                                                    ?>
+                                        </td>
+
 
                                         <td>
                                             <?php

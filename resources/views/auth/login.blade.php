@@ -7,7 +7,7 @@
     <title>SIKASI LOGIN</title>
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="HOPE/assets/images/favicon.ico" />
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 
     <!-- Library / Plugin Css Build -->
     <link rel="stylesheet" href="HOPE/assets/css/core/libs.min.css" />
@@ -97,7 +97,7 @@
                                             </div> --}}
                                         </div>
                                         <div class="d-flex justify-content-center">
-                                            <button type="submit" class="btn btn-primary">Sign In</button>
+                                            <button type="submit" class="btn btn-primary">Login</button>
                                         </div>
                                         {{-- <p class="text-center my-3">or sign in with other accounts?</p>
                               <div class="d-flex justify-content-center">

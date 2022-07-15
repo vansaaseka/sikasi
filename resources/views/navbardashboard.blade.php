@@ -55,29 +55,26 @@
 
                                 <div class="caption ms-3 d-none d-md-block ">
                                     <h6 class="mb-0 caption-title"><?= Auth::user()->name ?></h6>
-                                    <p class="mb-0 caption-sub-title">Dosen</p>
+
                                 </div>
 
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="/profileDosen">Profile</a></li>
-                                <li><a class="dropdown-item"
-                                        href="{{ asset('HOPE/dashboard/app/user-privacy-setting.html') }}">Privacy
-                                        Setting</a></li>
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-                                <li><a class="dropdown-item"
-                                        onclick="event.preventDefault();
-                  document.getElementById('logout-form').submit();">
-                                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                        Logout
-                                    </a></li>
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                    @csrf
-                                </form>
-                            </ul>
+
+                                <hr class="dropdown-divider">
                         </li>
+                        <li><a class="dropdown-item"
+                                onclick="event.preventDefault();
+                  document.getElementById('logout-form').submit();">
+                                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                Logout
+                            </a></li>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                            @csrf
+                        </form>
+                    </ul>
+                    </li>
                     </ul>
                 </div>
             </div>
@@ -91,12 +88,13 @@
                     <div class="col-md-12">
                         <div class="d-flex justify-content-between align-items-center flex-wrap">
                             <div>
+                                <br />
                                 <h4>Sistem Informasi Kerjasama Sekolah Vokasi
                                 </h4>
-                                <br />
-                                <h5>
-                                    Hallo <?= Auth::user()->name ?></h1>
+                                <hr class="dropdown-divider">
 
+                                <h5 style="text-align: center">
+                                    Selamat Datang <?= Auth::user()->name ?></h5>
                             </div>
                             <div></div>
                         </div>
