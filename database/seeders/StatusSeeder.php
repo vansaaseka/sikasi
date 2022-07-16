@@ -27,7 +27,7 @@ class StatusSeeder extends Seeder
                 ],
                 
                 [
-                    'namastatus' => 'Tanda tangan Dekan',
+                    'namastatus' => 'Proses Tanda tangan Dekan',
                 ],
                 [
                     'namastatus' => 'Dokumen telah ditandatangani Dekan',
@@ -45,12 +45,26 @@ class StatusSeeder extends Seeder
                     'namastatus' => 'Dokumen direview DKPI',
                 ],
                 [
-                    'namastatus' => 'Tanda tangan WR 4',
+                    'namastatus' => 'Proses Tanda tangan WR 4',
                 ],
                 [
                     'namastatus' => 'Selesai',
                 ],
-                
+                [
+                   'namastatus' => 'Ajuan Diterima',
+                ], 
+                [
+                   'namastatus' => 'Pengajuan DKPI',
+                ],
+                [
+                   'namastatus' => 'Dokumen direview DKPI',
+                ],
+                [
+                  'namastatus' => ' Proses Tanda tangan WR 4',
+                ],
+                [
+                  'namastatus' => 'Selesai',
+                ],
                 
             ];
     

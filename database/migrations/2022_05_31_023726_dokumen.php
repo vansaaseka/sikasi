@@ -14,14 +14,14 @@ class Dokumen extends Migration
     public function up()
     {
         Schema::create('dokumen', function (Blueprint $table) {
-            $table->id()->nullable();
+            $table->id();
             $table->foreignId('pengajuan_id')->nullable()->default(null)->constrained('pengajuan')->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('user_id')->nullable()->default(null)->constrained('users')->onDelete('cascade')->onUpdate('cascade');
             $table->string('dokumen')->nullable();
             $table->string('nodokumen')->nullable();
             $table->timestamps();
         });
-            
+
     }
 
     /**

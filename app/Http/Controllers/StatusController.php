@@ -161,6 +161,7 @@ public function hapusStatus($id){
 
                
                 // $tujuan='derieri62@gmail.com';
+            
                 foreach($pengajuan as $datapengajuan){   
                 foreach($user as $a)
              
@@ -170,26 +171,27 @@ public function hapusStatus($id){
 
 
                 }}
-
-
+                
+                
                 foreach($pengajuan as $ajuan){
                 foreach($trx as $s){
                 if($ajuan->id == $s->pengajuan_id){
                 foreach($status as $b){
                 if($s->status_id == $b->id){
-                    $namas = $b->namastatus;
+                    
+                    $aksi = $b->namastatus;
                 }
             }
         }
     
                 }}
 
-
+         
          
             $data = [
                'user' => $nama,
                'mitra' => $mitra,
-               'status' => $namas
+               'aksi' => $aksi
             ];
                 $tujuan= $a->email;
                 \Mail::to($tujuan)->send(new KirimEmail($data));

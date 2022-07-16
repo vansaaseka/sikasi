@@ -23,6 +23,7 @@
                             <thead>
                                 <tr class="odd text-center">
                                     <th>No</th>
+                                    <th>Pengusul</th>
                                     <th>Jenis Kerjasama</th>
                                     <th>Tahun Kerjasama</th>
                                     <th>Mitra</th>
@@ -35,6 +36,7 @@
                             <tfoot>
                                 <tr class="odd text-center">
                                     <th>No</th>
+                                    <th>Pengusul</th>
                                     <th>Jenis Kerjasama</th>
                                     <th>Tahun Kerjasama</th>
                                     <th>Mitra</th>
@@ -51,6 +53,7 @@
                                     @if ($datapengajuan->prodiid == Auth::user()->prodi_id)
                                         <tr role="row" class="odd text-center">
                                             <td scope="row">{{ $no++ }}</td>
+                                            <td>{{ $datapengajuan->user->name }}</td>
                                             <td>
                                                 <?php
                                                     foreach($kategori as $ka){
@@ -70,13 +73,12 @@
                                                         @foreach ($status as $b)
                                                             @if ($a->status_id == $b->id)
                                                                 <?php $belumada_status = '<div class="btn btn-outline-primary btn-sm dropdown-toggle ' . $datapengajuan->id . '" data-bs-toggle="modal" data-bs-target="#status' . $datapengajuan->id . '"id="#status' . $datapengajuan->id . '"> ' . $b->namastatus . ' </div>'; ?>
-                                                                {{-- @php echo $belumada_status = '<div class="btn btn-outline-primary btn-sm dropdown-toggle ' . $datapengajuan->id . '" data-bs-toggle="modal" data-bs-target="#status' . $datapengajuan->id . '"id="#status' . $datapengajuan->id . '"> ' . $b->namastatus . ' </div>'; @endphp --}}
                                                             @endif
                                                         @endforeach
                                                     @endif
                                                 @endforeach
                                                 <?= $belumada_status ?>
-                                                {{-- @php $belumada_status @endphp --}}
+
 
                                                 {{-- Modal Status --}}
                                                 <div class="modal fade" id="status{{ $datapengajuan->id }}"
@@ -145,8 +147,14 @@
                                                 </div>
 
                                             </td>
-
-                                            <td>- </td>
+                                            <td> <?php
+                                      foreach($trxstatus as $ts){
+                                          if($ts->pengajuan_id == $datapengajuan->id){?>
+                                                {{ $ts->catatan }}
+                                                <?php }
+                                      }
+                                      ?>
+                                            </td>
 
 
                                             <?php

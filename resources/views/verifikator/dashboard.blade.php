@@ -24,7 +24,7 @@
                                     </div>
                                     <div class="progress-detail">
                                         <p class="mb-2">Total Pengajuan</p>
-                                        <h4 class="counter">5</h4>
+                                        <h4 class="counter"></h4>
                                     </div>
                                 </div>
                             </div>
@@ -42,7 +42,7 @@
                                     </div>
                                     <div class="progress-detail">
                                         <p class="mb-2">Selesai Pengajuan</p>
-                                        <h4 class="counter">3</h4>
+                                        <h4 class="counter"></h4>
                                     </div>
                                 </div>
                             </div>
@@ -60,7 +60,7 @@
                                     </div>
                                     <div class="progress-detail">
                                         <p class="mb-2">Proses Pengajuan</p>
-                                        <h4 class="counter">2</h4>
+                                        <h4 class="counter"> </h4>
                                     </div>
                                 </div>
                             </div>
@@ -73,6 +73,7 @@
                 </div>
             </div>
         </div>
+
     </div>
 </div>
 

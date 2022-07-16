@@ -3,16 +3,17 @@
 namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Prodi;
+use App\Models\Pengajuan;
 use App\Imports\DosenImport;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Providers\RouteServiceProvider;
+use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Validation\ValidationException;
-use RealRashid\SweetAlert\Facades\Alert;
 
 
 class AkunController extends Controller
@@ -32,7 +33,9 @@ class AkunController extends Controller
     }
     public function tampildosen(){
         $dosen = User::all();
-        return view('admin\ManajemenUser\tampilDosen', compact('dosen'));
+        $prodi = Prodi::all();
+        $pengajuan = Pengajuan::all();
+        return view('admin\ManajemenUser\tampilDosen', compact('dosen', 'prodi', 'pengajuan'));
     }
     public function tampilverifikator(){
         $verifikator = User::all();

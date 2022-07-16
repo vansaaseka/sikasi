@@ -14,10 +14,7 @@ class RuanglingkupController extends Controller
       return view('admin\Ruanglingkup\tampilRuanglingkup', compact('ruanglingkup'));
       // yang bertanda dolar harus sama dengan isi compact
       }
-      public function tambahruanglingkup(){
-      return view('admin\Ruanglingkup\tambahRuanglingkup');
-      }
-
+  
       public function insertruanglingkup(Request $request){
       // dd($request->all());
       $this->validate($request, [
@@ -27,11 +24,7 @@ class RuanglingkupController extends Controller
       return redirect()->route('ruanglingkup')->with('success', 'Data Berhasil Ditambahkan');
       }
 
-      public function editruanglingkup($id){
-      $ruanglingkup = RuangLingkup::find($id);
-      //dd($ruanglingkup);
-      return view('admin\Ruanglingkup\editRuanglingkup', compact('ruanglingkup'));
-      }
+    
 
       public function updateruanglingkup(Request $request, $id){
       $this->validate($request, [

@@ -289,7 +289,8 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <?php }} ?>
+                                            </div>
+                                            <?php }} ?>
                                         </td>
 
                                         <td>
@@ -413,11 +414,12 @@
                                                                                     name="created_by"
                                                                                     value={{ Auth::user()->id }}>
                                                                                 <?php
+                                                                                
                                                                                 $Disable = '';
                                                                                 
                                                                                 foreach ($trxstatus as $p) {
                                                                                     if ($datapengajuan->id == $p->pengajuan_id) {
-                                                                                        if ($p->status_id <= 3 && $p->status_id >= 1) {
+                                                                                        if ($p->status_id < 3 && $p->status_id >= 1) {
                                                                                             $Disable = 'disabled';
                                                                                         } else {
                                                                                             $Disable = '';

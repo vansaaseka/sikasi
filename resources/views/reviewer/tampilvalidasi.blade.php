@@ -4,6 +4,8 @@
 
 @include('reviewer/layoutsReviewer/navbar')
 
+@include('sweetalert::alert')
+
 <div class="conatiner-fluid content-inner mt-n5 py-0">
     <div class="row">
         <div class="col-lg-12 mb-4">
@@ -285,28 +287,28 @@
 
                                         <td>
 
-                                            <?php
-                                            $statusDisable2 = '';
+                                            {{-- <?php
+                                            $Disabled = '';
                                             
-                                            foreach ($trxstatus as $s2) {
-                                                if ($datapengajuan->id != $s2->pengajuan_id) {
-                                                    $statusDisable2 = 'disabled';
+                                            foreach ($trxstatus as $disable) {
+                                                if ($datapengajuan->id != $disable->pengajuan_id) {
+                                                    $Disable = 'disabled';
                                                 }
-                                                if ($datapengajuan->id == $s2->pengajuan_id) {
-                                                    $statusDisable2 = '';
+                                                if ($datapengajuan->id == $disable->pengajuan_id) {
+                                                    $Disabled = '';
                                                 }
                                             }
-                                            // echo $statusDisable2;
-                                            ?>
+                                            dd($Disabled);
+                                            echo $Disabled;
+                                            ?> --}}
 
-
-                                            <?php $belumada_validasi = '<div class="btn btn-primary btn-sm ' . $statusDisable2 . $datapengajuan->id . '" data-bs-toggle="modal" data-bs-target="#modalstatus' . $datapengajuan->id . '"id="#modalstatus' . $datapengajuan->id . '"> Validasi </div>'; ?>
+                                            <?php $belumada_validasi = '<div class="btn btn-outline-primary btn-sm"></i>Belum ada Validasi</div>'; ?>
 
                                             @foreach ($trxstatus as $trx)
                                                 @if ($datapengajuan->id == $trx->pengajuan_id)
                                                     @foreach ($status as $b)
                                                         @if ($trx->status_id == $b->id)
-                                                            <?php $belumada_validasi = '<div class="btn btn-primary btn-sm ' . $statusDisable2 . $datapengajuan->id . '" data-bs-toggle="modal" data-bs-target="#modalstatus' . $datapengajuan->id . '"id="#modalstatus' . $datapengajuan->id . '"> Validasi </div>'; ?>
+                                                            <?php $belumada_validasi = '<div class="btn btn-primary btn-sm ' . $datapengajuan->id . '" data-bs-toggle="modal" data-bs-target="#modalstatus' . $datapengajuan->id . '"id="#modalstatus' . $datapengajuan->id . '"> Validasi </div>'; ?>
                                                         @endif
                                                     @endforeach
 
@@ -322,17 +324,18 @@
                                                 @endif
                                             @endforeach
 
-                                            <div class="btn btn-primary btn-sm {{ $statusDisable2 }}"
+                                            <?= $belumada_validasi ?>
+
+                                            {{-- <div class="btn btn-primary btn-sm {{ $statusDisable2 }}"
                                                 data-bs-toggle="modal"
                                                 data-bs-target="#modalstatus' . $datapengajuan->id . '"id="#modalstatus' . $datapengajuan->id . '">
-                                                Validasi </div>
+                                                Validasi </div> --}}
 
 
                                             {{-- Modal Edit Status --}}
                                             <div class="modal fade" id="modalstatus{{ $datapengajuan->id }}"
-                                                tabindex="-1" role="dialog"
-                                                aria-labelledby="staticBackdropLiveLabel" aria-hidden="true"
-                                                style="text-align: left">
+                                                tabindex="-1" role="dialog" aria-labelledby="staticBackdropLiveLabel"
+                                                aria-hidden="true" style="text-align: left">
                                                 <div class="modal-dialog modal-dialog-scrollable" role="document">
                                                     <div class="modal-content">
                                                         <div class="modal-header">

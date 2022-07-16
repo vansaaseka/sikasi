@@ -3,7 +3,7 @@
 
     Hallo, {{ $data['user'] }}
 
-    Peengajuan anda dengan mitra {{ $data['mitra'] }} sedang dalam status {{ $data['status'] }}
+    Pengajuan anda dengan mitra {{ $data['mitra'] }} sedang dalam status {{ $data['aksi'] }}
 
 
     Thanks,

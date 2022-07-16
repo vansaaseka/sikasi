@@ -8,7 +8,7 @@
             <div class="card">
                 <div class="card-header d-flex justify-content-between">
                     <div class="header-title">
-                        <h4 class="card-title">Form Akun Dosen</h4>
+                        <h4 class="card-title">Tambah Akun Dosen</h4>
                     </div>
                 </div>
                 <div class="card-body">
@@ -20,9 +20,8 @@
                         <div class="form-group">
                             <label for="exampleInputUsername">Username</label>
                             <input type="text" name="name"
-                                class="form-control @error('namakategori') is-invalid @enderror"
-                                value="{{ old('name') }}" id="name" required="required" autocomplete="name"
-                                autofocus="autofocus">
+                                class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}"
+                                id="name" required="required" autocomplete="name" autofocus="autofocus">
                             @error('name')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
@@ -40,7 +39,7 @@
                         <div class="form-group">
                             <label for="exampleInputUsername">Asal Prodi</label>
                             <select name="prodi_id" class="selectpicker form-control" data-style="py-0">
-                                <option value="">--Pilih--</option>
+                                <option value="{{ old('prodi_id') }}">--Pilih--</option>
                                 @foreach ($prodi as $item)
                                     <option value="{{ $item->id }}">
                                         {{ $item->namaprodi }}

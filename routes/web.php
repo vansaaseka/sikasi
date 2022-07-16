@@ -45,27 +45,14 @@ Route::get('/layoutAdmin', function () {
 //     return view('home');
 // });
 
-Route::get('/admin', function () {
-return view('admin.dashboard');
-});
 
-Route::get('/dosen', function () {
-return view('dosen.dashboard');
-});
 
-Route::get('/reviewer', function () {
-return view('reviewer.dashboard');
-});
-
-Route::get('/verifikator', function () {
-return view('verifikator.dashboard');
-});
-
-route::get('/redirects',[HomeController::class,"index"]);
+route::get('/dashboard',[HomeController::class,"index"]);
 
 Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
+
 
 
 //Manajemen User
@@ -144,26 +131,20 @@ route::post('/insertupdate',[StatusController::class,"insertupdate"])->name('ins
 
 //Tambah Prodi Admin
 route::get('/prodi',[ProdiController::class,"index"])->name('prodi');
-route::get('/tambahprodi',[ProdiController::class,"tambahprodi"])->name('tambahprodi');
 route::post('/insertprodi',[ProdiController::class,"insertprodi"])->name('insertprodi');
-route::get('/editprodi/{id}',[ProdiController::class,"editprodi"])->name('editprodi');
 route::post('/updateprodi/{id}',[ProdiController::class,"updateprodi"])->name('updateprodi');
 route::get('/hapusprodi/{id}',[prodiController::class,"hapusprodi"])->name('hapusprodi');
 
 
 //Tambah Kategori Mitra Admin
 route::get('/kategorimitra',[KategorimitraController::class,"index"])->name('kategorimitra');
-route::get('/tambahkategorimitra',[KategorimitraController::class,"tambahkategorimitra"])->name('tambahkategorimitra');
 route::post('/insertkategorimitra',[KategorimitraController::class,"insertkategorimitra"])->name('insertkategorimitra');
-route::get('/editkategorimitra/{id}',[KategorimitraController::class,"editkategorimitra"])->name('editkategorimitra');
 route::post('/updatekategorimitra/{id}',[KategorimitraController::class,"updatekategorimitra"])->name('updatekategorimitra');
 route::get('/hapuskategorimitra/{id}',[KategorimitraController::class,"hapuskategorimitra"])->name('hapuskategorimitra');
 
 //Tambah RuangLingkup Mitra Admin
 route::get('/ruanglingkup',[RuanglingkupController::class,"index"])->name('ruanglingkup');
-route::get('/tambahruanglingkup',[RuanglingkupController::class,"tambahruanglingkup"])->name('tambahruanglingkup');
 route::post('/insertruanglingkup',[RuanglingkupController::class,"insertruanglingkup"])->name('insertruanglingkup');
-route::get('/editruanglingkup/{id}',[RuanglingkupController::class,"editruanglingkup"])->name('editruanglingkup');
 route::post('/updateruanglingkup/{id}',[RuanglingkupController::class,"updateruanglingkup"])->name('updateruanglingkup');
 route::get('/hapusruanglingkup/{id}',[RuanglingkupController::class,"hapusruanglingkup"])->name('hapusruanglingkup');
 

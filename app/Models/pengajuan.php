@@ -9,7 +9,7 @@ class Pengajuan extends Model
 {
     public $timestamps = true;
     protected $table = 'pengajuan';
-    protected $fillable = ['user_id', 'kategori_id' , 'mitra_id' , 'ruanglingkup_id', 'proditerlibat_id' , 'status_id', 'tanggalmulai' , 'tanggalakhir', 'nomordokumen', 'dokumen'];
+    protected $fillable = ['user_id', 'kategori_id' , 'mitra_id' , 'ruanglingkup_id', 'proditerlibat_id' , 'status_id', 'tanggalmulai' , 'tanggalakhir', 'nomordokumen', 'dokumen', 'prodiid'];
     protected $guarded = [];
     use HasFactory;
 

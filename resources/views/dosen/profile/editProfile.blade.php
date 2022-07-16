@@ -163,7 +163,7 @@
                                             }
                                             
                                             ?>
-                                            <div class="form-group">
+                                            {{-- <div class="form-group">
                                                 <label class="form-label">Asal Prodi</label>
                                                 <select name="prodi_id" class="selectpicker form-control"
                                                     data-style="py-0" {{ $statusDisable }}>
@@ -178,7 +178,7 @@
                                                         <div class="invalid-feedback"></div>
                                                     @enderror
                                                 </select>
-                                            </div>
+                                            </div> --}}
 
 
                                             <div class="form-group mb-0">

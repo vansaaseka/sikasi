@@ -14,9 +14,7 @@ class ProdiController extends Controller
                 return view('admin\Prodi\tampilprodi', compact('prodi'));
                 // yang bertanda dolar harus sama dengan isi compact
             }
-            public function tambahprodi(){
-                return view('admin\Prodi\tambahprodi');
-            }
+           
 
             public function insertprodi(Request $request){
                 // dd($request->all());
@@ -27,11 +25,7 @@ class ProdiController extends Controller
                 return redirect()->route('prodi')->with('success', 'Data Berhasil Ditambahkan');
             }
 
-            public function editprodi($id){
-                $prodi = Prodi::find($id);
-                //dd($prodi);
-                return view('admin\Prodi\editprodi', compact('prodi'));
-            }
+          
 
             public function updateprodi(Request $request, $id){
                 $this->validate($request, [
