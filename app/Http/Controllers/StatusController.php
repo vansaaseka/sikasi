@@ -125,8 +125,9 @@ public function hapusStatus($id){
     // abort(403);
     // }
 
-}
+} 
 
+               
         public function cetakpengajuan(){
             $ruanglingkup = RuangLingkup::all();
             $kategorimitra = KategoriMitra::all();
@@ -163,20 +164,21 @@ public function hapusStatus($id){
                 // $tujuan='derieri62@gmail.com';
             
                 foreach($pengajuan as $datapengajuan){   
-                foreach($user as $a)
+                foreach($user as $to)
              
-                if($datapengajuan->user_id == $a->id ){
-                    $nama = $a->name;
+                if($datapengajuan->user_id == $to->id ){
+                    $nama = $to->name;
                     $mitra = $datapengajuan->mitra->namamitra;
-
+                    $tujuan= $to->email;
 
                 }}
                 
-                
+              
                 foreach($pengajuan as $ajuan){
                 foreach($trx as $s){
                 if($ajuan->id == $s->pengajuan_id){
                 foreach($status as $b){
+                     
                 if($s->status_id == $b->id){
                     
                     $aksi = $b->namastatus;
@@ -193,7 +195,7 @@ public function hapusStatus($id){
                'mitra' => $mitra,
                'aksi' => $aksi
             ];
-                $tujuan= $a->email;
+                
                 \Mail::to($tujuan)->send(new KirimEmail($data));
                 Alert::success('Sukses', 'Email berhasil dikirim!');
                 return back()->with('Email berhasil dikirm');
@@ -202,17 +204,17 @@ public function hapusStatus($id){
 
 
 
-public function validasi(){
-$pengajuan = Pengajuan::all();
-$mitra = Mitra::all();
-$kategori = Kategori::all();
-$status = Status::all();
-$prodi = Prodi::all();
-$dokumen = Dokumen::all();
-$trxstatus = Trxstatus::all();
-$user = User::all();
-return view('reviewer.tampilvalidasi' , compact('pengajuan' , 'mitra', 'status','prodi', 'dokumen',
-'trxstatus', 'user', 'kategori'));
-}
+            public function validasi(){
+            $pengajuan = Pengajuan::all();
+            $mitra = Mitra::all();
+            $kategori = Kategori::all();
+            $status = Status::all();
+            $prodi = Prodi::all();
+            $dokumen = Dokumen::all();
+            $trxstatus = Trxstatus::all();
+            $user = User::all();
+            return view('reviewer.tampilvalidasi' , compact('pengajuan' , 'mitra', 'status','prodi', 'dokumen',
+            'trxstatus', 'user', 'kategori'));
+            }
 
 }

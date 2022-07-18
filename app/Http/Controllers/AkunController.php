@@ -16,6 +16,7 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Validation\ValidationException;
 
 
+
 class AkunController extends Controller
 {
    
@@ -61,20 +62,6 @@ class AkunController extends Controller
         return view('admin\ManajemenUser\tambahreviewer');
     }
 
-     //FormEdit
-     public function editakun($id){
-        $data = User::find($id);
-        //dd($kategori);
-        if ($data->role == 0){
-        return view('admin/ManajemenUser/editDosen', compact('data'));
-        }   elseif ($data->role == 1){
-            return view('admin/ManajemenUser/editAdmin', compact('data'));
-        }   elseif ($data->role == 2){
-            return view('admin/ManajemenUser/editVerifikator', compact('data'));
-        }   elseif ($data->role == 2){
-            return view('admin/ManajemenUser/editReviewer', compact('data'));
-        }
-    }
 
     protected function insertakun(request $request)
         {

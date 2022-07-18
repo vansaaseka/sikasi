@@ -19,7 +19,7 @@ class DokumenController extends Controller
             // ddd($request);
             //membuat validasi, jika tidak diisi maka akan menampilkan pesan error
             $this->validate($request, [
-                'dokumen'=> 'mimes:doc,docx,pdf,xls,xlxs',
+                'dokumen'=> 'mimes:doc,docx,pdf',
             ],
        
         );
@@ -32,8 +32,8 @@ class DokumenController extends Controller
             $dokumens = new Dokumen;
             $dokumens->pengajuan_id = $request->input('pengajuan_id');
             $dokumens->user_id = $request->input('user_id');
-            $dokumens->dokumen       = $nama_dokumen;
-           
+            $dokumens->dokumen = $nama_dokumen;
+            $dokumens->user_id = $request->input('nodokumen');
             //menyimpan data ke database
             $dokumens->save();
     

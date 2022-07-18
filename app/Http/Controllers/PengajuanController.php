@@ -59,15 +59,15 @@ class PengajuanController extends Controller
     {
         $validasi = Validator::make($request->all(),[
             'namamitra' => 'required',
-            'namadagangmitra' => 'required',
-            'logo' => 'required',
+            // 'namadagangmitra' => 'required',
+            'logo' => 'required|image|mimes:jpg,png,jpeg' ,
             'kategorimitra_id' => 'required',
             'alamat' => 'required',
-            'email' => 'required',
+            'email' => 'required|email',
             'namapenandatangan' => 'required',
             'jabatanpenandatangan' => 'required',
-            'narahubung' => 'required',
-            'no_hp' => 'required',
+            // 'narahubung' => 'required',
+            'no_hp' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
             'tanggalmulai' => 'required',
             'tanggalakhir' => 'required',
             'kategori_id' => 'required',
@@ -76,7 +76,7 @@ class PengajuanController extends Controller
             ]);
 
         if($validasi->fails()) {
-            Alert::warning('Warning', 'Mohon isikan data secara lengkap!');
+            Alert::warning('Warning', 'Mohon isikan data secara lengkap dan benar!');
             return redirect()->back();
         } else {
         //mengambil data file yang diupload
@@ -173,7 +173,10 @@ class PengajuanController extends Controller
 
         $alphabetIndex = range('a', 'z');
         $startDateParsed = \Carbon\Carbon::parse($pengajuan->tanggalmulai);
-        $startDateParsedFormatted = $startDateParsed->format('d-m-Y');
+        $startDateHari = $startDateParsed->translatedFormat('l');
+        $startDateDay = $startDateParsed->translatedFormat('d');
+        $startDateMonth = $startDateParsed->translatedFormat('F');
+        $startDateYear = $startDateParsed->translatedFormat('Y');
         $endDateParsed = \Carbon\Carbon::parse($pengajuan->tanggalakhir);
 
 
@@ -186,7 +189,7 @@ class PengajuanController extends Controller
             $section->addText('PERJANJIAN KERJA SAMA', array('bold' => true, 'size' => 11), array("align" => "center"));
             $section->addText($mitra->namamitra, array('bold' => true, 'size' => 11), array("align" => "center"));
             $section->addText('DENGAN', array('bold' => true, 'size' => 11), array("align" => "center"));
-            $section->addText('FAKULTAS / LEMBAGA ............................', array('bold' => true, 'size' => 11), array("align" => "center"));
+            $section->addText('SEKOLAH VOKASI', array('bold' => true, 'size' => 11), array("align" => "center"));
             $section->addText('UNIVERSITAS SEBELAS MARET', array('bold' => true, 'size' => 11), array("align" => "center"));
             $section->addTextBreak();
             $section->addText('Nomor:....../UN27....../KS/2021', array('bold' => true, 'size' => 11), array("align" => "center"));
@@ -195,14 +198,14 @@ class PengajuanController extends Controller
             $section->addText('............................................', array('bold' => true, 'size' => 11), array("align" => "center"));
             $section->addText('............................................', array('bold' => true, 'size' => 11), array("align" => "center"));
             $section->addTextBreak();
-            $section->addText('Pada hari ini, ............. tanggal .......... bulan ........... tahun ................, ' . $startDateParsedFormatted . ' kami yang bertanda tangan dibawah ini:', array('size' => 11), array("align" => "thaiDistribute"));
+            $section->addText('Pada hari ini, ' . $startDateHari . ' tanggal ' . $startDateDay . ' bulan ' . $startDateMonth . ' tahun ' . $startDateYear. ', kami yang bertanda tangan dibawah ini:', array('size' => 11), array("align" => "thaiDistribute"));
             $table = $section->addTable();
             $table->addRow();
-            $table->addCell(5000)->addText('I. ...........................', array('bold' => true, 'size' => 11));
-            $table->addCell(5000)->addText(': Dekan Fakultas ............./ Ketua ....………../ Kepala ……………/ Direktur ………… Universitas Sebelas Maret, dalam hal ini bertindak untuk dan atas nama  Fakultas/ Lembaga/ Unit, yang berkedudukan di Jl. Ir. Sutami 36A, Kentingan Surakarta, Jawa Tengah, selanjutnya disebut PIHAK KESATU.', array('size' => 11), array("align" => "thaiDistribute"));
+            $table->addCell(5000)->addText('I. Drs. Santoso Tri Hananto, M,Acc., Ak', array('bold' => true, 'size' => 11));
+            $table->addCell(5000)->addText(': Dekan Sekolah Vokasi Universitas Sebelas Maret, yang berkedudukan di Jl. Kol Sutarto No. 150K Jebres Surakarta, Jawa Tengah, selanjutnya disebut PIHAK KESATU.', array('size' => 11), array("align" => "thaiDistribute"));
             $table->addRow();
-            $table->addCell(5000)->addText('II. ...........................', array('bold' => true, 'size' => 11));
-            $table->addCell(5000)->addText(': …………………………….., yang diangkat berdasarkan ………… Nomor ……… tanggal …….. tentang …………., dalam hal ini bertindak untuk dan atas nama ……………………, yang berkedudukan di ……………, selanjutnya disebut PIHAK KEDUA;', array('size' => 11), array("align" => "thaiDistribute"));
+            $table->addCell(5000)->addText('II. '. $mitra->namapenandatangan, array('bold' => true, 'size' => 11));
+            $table->addCell(5000)->addText(': ' . $mitra->jabatanpenandatangan . ', dalam hal ini bertindak untuk dan atas nama ' . $mitra->namamitra . ', yang berkedudukan di ' . $mitra->alamat . ', selanjutnya disebut PIHAK KEDUA;', array('size' => 11), array("align" => "thaiDistribute"));
 
             $section->addTextBreak();
             $pageOneMixedStyle = $section->createTextRun();
@@ -251,14 +254,15 @@ class PengajuanController extends Controller
             $section->addText('RUANG LINGKUP', array('bold' => true, 'size' => 11), array("align" => "center"));
             $section->addTextBreak();
             $section->addText('(1) Ruang Lingkup Perjanjian Kerja Sama Kerja Sama ini adalah :', array('size' => 11), array("align" => "left"));
-
-            for ($i=0; $i < count($relatedMajor) ; $i++) {
-                $section->addText($alphabetIndex[$i] .  ') ' . $relatedMajor[$i]->namaprodi, array('size' => 11), array("align" => "left"));
-            }
+            $section->addText('a) ……………..', array('size' => 11), array("align" => "left"));
+            $section->addText('b) …………….., dst', array('size' => 11), array("align" => "left"));
+            // for ($i=0; $i < count($relatedMajor) ; $i++) {
+            //     $section->addText($alphabetIndex[$i] .  ') ' . $relatedMajor[$i]->namaprodi, array('size' => 11), array("align" => "left"));
+            // }
 
             $section->addText('(2) Detail lingkup pekerjaan yang dilaksanakan adalah sebagai berikut:', array('size' => 11), array("align" => "left"));
             $section->addText('a) ……………..', array('size' => 11), array("align" => "left"));
-            $section->addText('b) ……………..', array('size' => 11), array("align" => "left"));
+            $section->addText('b) ……………..,dst', array('size' => 11), array("align" => "left"));
 
 
             $section->addTextBreak();
@@ -322,18 +326,18 @@ class PengajuanController extends Controller
             $section->addText('KORESPONDENSI', array('bold' => true, 'size' => 11), array("align" => "center"));
             $section->addTextBreak();
             $section->addText('Setiap pemberitahuan dan/atau surat-menyurat akan dialamatkan sebagai berikut:', array('size' => 11), array("align" => "left"));
-            $section->addText('PIHAK KESATU :', array('size' => 11), array("align" => "left"));
-            $section->addText('UNIVERSITAS SEBELAS MARET', array('size' => 11), array("align" => "left"));
-            $section->addText('U.p : ………………………………………………..', array('size' => 11), array("align" => "left"));
-            $section->addText('Alamat : Universitas Universitas Sebelas Maret, Jl. Sutami No. 36 A, Kentingan, Surakarta 57126', array('size' => 11), array("align" => "left"));
-            $section->addText('Telepon : (0271) 646994 Ext. …………..', array('size' => 11), array("align" => "left"));
-            $section->addText('Email : …………………..', array('size' => 11), array("align" => "left"));
-            $section->addText('PIHAK KEDUA:', array('size' => 11), array("align" => "left"));
-            $section->addText('.............................', array('size' => 11), array("align" => "left"));
-            $section->addText('U.p : ' . $mitra->namamitra, array('size' => 11), array("align" => "left"));
-            $section->addText('Alamat : ' . $mitra->alamat, array('size' => 11), array("align" => "left"));
-            $section->addText('Telepon : ' . $mitra->email, array('size' => 11), array("align" => "left"));
-            $section->addText('Email : ' . $mitra->no_hp, array('size' => 11), array("align" => "left"));
+            $section->addText('PIHAK KESATU :', array('bold'=>true, 'size' => 11), array("align" => "left"));
+            $section->addText('SEKOLAH VOKASI UNIVERSITAS SEBELAS MARET', array('size' => 11), array("align" => "left"));
+            $section->addText('U.p : ' . $user->name, array('size' => 11), array("align" => "left"));
+            $section->addText('Alamat : Jl. KolSutarro No.150k Jebres Surakarta 57126', array('size' => 11), array("align" => "left"));
+            $section->addText('Telepon :'. $user->nomorhp, array( 'size' => 11), array("align" => "left"));
+            $section->addText('Email :'. $user->email, array('size' => 11), array("align" => "left"));
+            $section->addText('PIHAK KEDUA:', array('bold' => true, 'size' => 11), array("align" => "left"));
+            $section->addText($mitra->namamitra, array('size' => 11), array("align" => "left"));
+            $section->addText('U.p : ' . $mitra->jabatanpenandatangan, array('size' => 11),array("align" => "left"));
+            $section->addText('Alamat : ' . $mitra->alamat, array('size' => 11), array("align" =>"left"));
+            $section->addText('Telepon : ' . $mitra->no_hp, array('size' => 11), array("align" =>"left"));
+            $section->addText('Email : ' . $mitra->email, array('size' => 11), array("align" => "left"));
 
 
             $section->addTextBreak();
@@ -415,7 +419,7 @@ class PengajuanController extends Controller
             $section->addText('Nomor:..................../2021', array('bold' => true, 'size' => 11), array("align" => "center"));
             $section->addText('tentang', array('size' => 11), array("align" => "center"));
             $section->addText('PENYELENGGARAAN TRI DHARMA PERGURUAN TINGGI DAN PENYELENGGARAAN MERDEKA BELAJAR – KAMPUS MERDEKA', array('bold' => true, 'size' => 11), array("align" => "center"));
-            $section->addText('Pada hari ini, ............. tanggal .......... bulan ........... tahun ................, ' . $startDateParsedFormatted . ' kami yang bertanda tangan dibawah ini:', array('size' => 11), array("align" => "thaiDistribute"));
+            $section->addText('Pada hari ini, ' . $startDateHari . ' tanggal ' . $startDateDay . ' bulan ' . $startDateMonth . ' tahun ' . $startDateYear. ' kami yang bertanda tangan dibawah ini:', array('size' =>11), array("align" => "thaiDistribute"));
 
             $section->addTextBreak();
             $table = $section->addTable();

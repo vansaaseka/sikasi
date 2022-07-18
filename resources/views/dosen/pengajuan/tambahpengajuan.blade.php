@@ -70,7 +70,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label class="form-label" for="choices-single-default">Kategori
-                                                Pengajuan</label>
+                                                Pengajuan *</label>
                                             <select class="form-select" data-trigger="data-trigger" name="kategori_id"
                                                 id="choices-single-default">
                                                 <option value="">--Pilih--</option>
@@ -106,13 +106,14 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="form-label">Logo Resmi Mitra *</label>
-                                            <input type="file" class="form-control" name="logo" placeholder="" />
+                                            <input type="file" class="form-control" name="logo"
+                                                placeholder="Logo dengan format jpg,png,jpeg" />
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="form-label" for="choices-single-default">Kategori
-                                                Mitra</label>
+                                                Mitra *</label>
                                             <select class="form-select" data-trigger="data-trigger"
                                                 name="kategorimitra_id" id="choices-single-default">
                                                 <option value="">--Pilih--</option>
@@ -142,16 +143,17 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label class="form-label">Nama Lengkap Penadatanganan Mitra *</label>
+                                            <label class="form-label">Nama Lengkap Penadatanganan
+                                                Mitra *</label>
                                             <input type="text" class="form-control" name="namapenandatangan"
-                                                placeholder="" />
+                                                placeholder="Contoh: Drs. Santoso Tri Hananto, M,Acc., Ak" />
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="form-label">Jabatan Penandatangan Mitra *</label>
                                             <input type="text" class="form-control" name="jabatanpenandatangan"
-                                                placeholder="" />
+                                                placeholder="Contoh: Dekan Sekolah Vokasi UNS" />
                                         </div>
                                     </div>
                                     <div class="col-md-6">
@@ -165,7 +167,7 @@
                                         <div class="form-group">
                                             <label class="form-label">Nomor HP Narahubung Mitra *</label>
                                             <input type="text" class="form-control" name="no_hp"
-                                                placeholder="" />
+                                                placeholder="Contoh: 0856789876211" />
                                         </div>
                                     </div>
                                 </div>

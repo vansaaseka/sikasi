@@ -175,10 +175,10 @@
                                                 }
                                                 ?>
                                             <?php
-                                            
+                                            $statusDisable = '';
                                             foreach ($trxstatus as $s) {
                                                 if ($datapengajuan->id == $s->pengajuan_id) {
-                                                    if ($s->status_id >= 12) {
+                                                    if ($s->status_id == 11 || $s->status_id == 16) {
                                                         $statusDisable = 'disabled';
                                                     } else {
                                                         $statusDisable = '';
@@ -189,7 +189,7 @@
                                             ?>
                                             <?php foreach($dokumen as $item){
                                             if($item->pengajuan_id == $datapengajuan->id){?>
-                                            <a class="btn btn-sm btn-icon btn-primary">
+                                            <a class="btn btn-sm btn-icon btn-primary {{ $statusDisable }}">
                                                 <i class="fa fa-file-pen" data-bs-toggle="modal"
                                                     data-bs-target="#modaleditdokumen{{ $item->id }}"
                                                     id="#modaleditdokumen{{ $item->id }}">
@@ -306,12 +306,12 @@
                                                     @endforeach
 
                                                     @foreach ($status as $b)
-                                                        @if ($a->status_id == $b->id)
-                                                            @if ($b->namastatus == 'Selesai')
-                                                                <?php $belumada_verifi = ' <div class="btn btn-outline-primary btn-sm"> <i class="fa fa-check-circle"></i>Selesai</div>';
-                                                                
-                                                                ?>
-                                                            @endif
+                                                        @if ($s->status_id == 11 || $s->status_id == 16)
+                                                            {{-- @if ($a->status_id == $b->id) --}}
+                                                            {{-- @if ($b->namastatus == 'Selesai') --}}
+                                                            <?php $belumada_verif = ' <div class="btn btn-outline-primary btn-sm"> <i class="fa fa-check-circle"></i>Selesai</div>';
+                                                            ?>
+                                                            {{-- @endif --}}
                                                         @endif
                                                     @endforeach
                                                 @endif
@@ -347,40 +347,63 @@
                                                                                         for="exampleInputText1">Update
                                                                                         Status
                                                                                     </label>
-
-                                                                                    <?php $tombol = '<div class="custom-control custom-radio custom-radio-color-checked "><input type="radio" name="status_id" id="gembel" value="1"> <label for="gembel"> Ajuan Diterima</label></div>'; ?>
-
-                                                                                    @foreach ($trxstatus as $a)
-                                                                                        @if ($a->pengajuan_id == $datapengajuan->id)
-                                                                                            @for ($s = 0; $s < count($status); $s++)
-                                                                                                @if ($a->status_id == $status[$s]->id)
-                                                                                                    @if ($status[$s]->namastatus === 'Ajuan Diterima')
-                                                                                                        <?php $tombol = '<div class="custom-control custom-radio custom-radio-color-checked "><input type="radio" disabled name="status_id" value="2"> <label>Dokumen direview BPU</label> </div>'; ?>
-                                                                                                    @elseif($status[$s]->namastatus === 'Dokumen direview BPU')
-                                                                                                        <?php $tombol = '<div class="custom-control custom-radio custom-radio-color-checked "><input type="radio" disabled name="status_id" value="3"> <label>Dokumen Selesai direview BPU</label> </div>'; ?>
-                                                                                                    @elseif($status[$s]->namastatus === 'Dokumen Selesai direview BPU')
-                                                                                                        <?php $tombol = '<div class="custom-control custom-radio custom-radio-color-checked "><input type="radio" name="status_id" value="4"> <label>Tanda tangan Dekan</label> </div>'; ?>
-                                                                                                    @elseif($status[$s]->namastatus === 'Tanda tangan Dekan')
-                                                                                                        <?php $tombol = '<div class="custom-control custom-radio custom-radio-color-checked "><input type="radio" name="status_id" value="5"> <label>Dokumen telah ditandatangani Dekan</label> </div>'; ?>
-                                                                                                    @elseif($status[$s]->namastatus === 'Dokumen telah ditandatangani Dekan')
-                                                                                                        <?php $tombol = '<div class="custom-control custom-radio custom-radio-color-checked "><input type="radio" name="status_id" value="6"> <label>Tanda tangan Mitra</label> </div>'; ?>
-                                                                                                    @elseif($status[$s]->namastatus === 'Tanda tangan Mitra')
-                                                                                                        <?php $tombol = '<div class="custom-control custom-radio custom-radio-color-checked "><input type="radio" name="status_id" value="7"> <label>Dokumen telah ditandatangani Mitra</label> </div>'; ?>
-                                                                                                    @elseif($status[$s]->namastatus === 'Dokumen telah ditandatangani Mitra')
-                                                                                                        <?php $tombol = '<div class="custom-control custom-radio custom-radio-color-checked "><input type="radio" name="status_id" value="8"> <label>Pengajuan tanda tangan WR 4</label> </div>'; ?>
-                                                                                                    @elseif($status[$s]->namastatus === 'Pengajuan tanda tangan WR 4')
-                                                                                                        <?php $tombol = '<div class="custom-control custom-radio custom-radio-color-checked "><input type="radio" name="status_id" value="9"> <label>Dokumen direview DKPI</label> </div>'; ?>
-                                                                                                    @elseif($status[$s]->namastatus === 'Dokumen direview DKPI')
-                                                                                                        <?php $tombol = '<div class="custom-control custom-radio custom-radio-color-checked "><input type="radio" name="status_id" value="10"> <label>Tanda tangan WR 4</label> </div>'; ?>
-                                                                                                    @elseif($status[$s]->namastatus === 'Tanda tangan WR 4')
-                                                                                                        <?php $tombol = '<div class="custom-control custom-radio custom-radio-color-checked "><input type="radio" name="status_id" value="11"> <label>Selesai</label> </div>'; ?>
+                                                                                    @if ($datapengajuan->kategori_id == 1)
+                                                                                        <?php $tombol = '<div class="custom-control custom-radio custom-radio-color-checked "><input type="radio" name="status_id" id="gembel" value="1"> <label for="gembel"> Ajuan Diterima</label></div>'; ?>
+                                                                                        @foreach ($trxstatus as $a)
+                                                                                            @if ($a->pengajuan_id == $datapengajuan->id)
+                                                                                                @for ($s = 0; $s < count($status); $s++)
+                                                                                                    @if ($a->status_id == $status[$s]->id)
+                                                                                                        @if ($status[$s]->namastatus === 'Ajuan Diterima')
+                                                                                                            <?php $tombol = '<div class="custom-control custom-radio custom-radio-color-checked "><input type="radio" disabled name="status_id" value="2"> <label>Dokumen direview BPU</label> </div>'; ?>
+                                                                                                        @elseif($status[$s]->namastatus === 'Dokumen direview BPU')
+                                                                                                            <?php $tombol = '<div class="custom-control custom-radio custom-radio-color-checked "><input type="radio" disabled name="status_id" value="3"> <label>Dokumen Selesai direview BPU</label> </div>'; ?>
+                                                                                                        @elseif($status[$s]->namastatus === 'Dokumen Selesai direview BPU')
+                                                                                                            <?php $tombol = '<div class="custom-control custom-radio custom-radio-color-checked "><input type="radio" name="status_id" value="4"> <label>Proses Tanda tangan Dekan</label> </div>'; ?>
+                                                                                                        @elseif($status[$s]->namastatus === 'Proses Tanda tangan Dekan')
+                                                                                                            <?php $tombol = '<div class="custom-control custom-radio custom-radio-color-checked "><input type="radio" name="status_id" value="5"> <label>Dokumen telah ditandatangani Dekan</label> </div>'; ?>
+                                                                                                        @elseif($status[$s]->namastatus === 'Dokumen telah ditandatangani Dekan')
+                                                                                                            <?php $tombol = '<div class="custom-control custom-radio custom-radio-color-checked "><input type="radio" name="status_id" value="6"> <label>Tanda tangan Mitra</label> </div>'; ?>
+                                                                                                        @elseif($status[$s]->namastatus === 'Tanda tangan Mitra')
+                                                                                                            <?php $tombol = '<div class="custom-control custom-radio custom-radio-color-checked "><input type="radio" name="status_id" value="7"> <label>Dokumen telah ditandatangani Mitra</label> </div>'; ?>
+                                                                                                        @elseif($status[$s]->namastatus === 'Dokumen telah ditandatangani Mitra')
+                                                                                                            <?php $tombol = '<div class="custom-control custom-radio custom-radio-color-checked "><input type="radio" name="status_id" value="8"> <label>Pengajuan tanda tangan WR 4</label> </div>'; ?>
+                                                                                                        @elseif($status[$s]->namastatus === 'Pengajuan tanda tangan WR 4')
+                                                                                                            <?php $tombol = '<div class="custom-control custom-radio custom-radio-color-checked "><input type="radio" name="status_id" value="9"> <label>Dokumen direview DKPI</label> </div>'; ?>
+                                                                                                        @elseif($status[$s]->namastatus === 'Dokumen direview DKPI')
+                                                                                                            <?php $tombol = '<div class="custom-control custom-radio custom-radio-color-checked "><input type="radio" name="status_id" value="10"> <label>Proses Tanda tangan WR 4</label> </div>'; ?>
+                                                                                                        @elseif($status[$s]->namastatus === 'Proses Tanda tangan WR 4')
+                                                                                                            <?php $tombol = '<div class="custom-control custom-radio custom-radio-color-checked "><input type="radio" name="status_id" value="11"> <label>Selesai</label> </div>'; ?>
+                                                                                                        @endif
                                                                                                     @endif
-                                                                                                @endif
-                                                                                            @endfor
-                                                                                        @endif
-                                                                                    @endforeach
-                                                                                    <?= $tombol ?>
-                                                                                    <br />
+                                                                                                @endfor
+                                                                                            @endif
+                                                                                        @endforeach
+                                                                                        <?= $tombol ?>
+                                                                                        <br />
+                                                                                    @endif
+
+                                                                                    @if ($datapengajuan->kategori_id == 2)
+                                                                                        <?php $tombol = '<div class="custom-control custom-radio custom-radio-color-checked "><input type="radio" name="status_id" id="gembel" value="12"> <label for="gembel"> Ajuan Diterima</label></div>'; ?>
+                                                                                        @foreach ($trxstatus as $a)
+                                                                                            @if ($a->pengajuan_id == $datapengajuan->id)
+                                                                                                @for ($s = 11; $s < count($status); $s++)
+                                                                                                    @if ($a->status_id == $status[$s]->id)
+                                                                                                        @if ($status[$s]->namastatus === 'Ajuan Diterima')
+                                                                                                            <?php $tombol = '<div class="custom-control custom-radio custom-radio-color-checked "><input type="radio" disabled name="status_id" value="13"> <label>Pengajuan DKPI</label> </div>'; ?>
+                                                                                                        @elseif($status[$s]->namastatus === 'Pengajuan DKPI')
+                                                                                                            <?php $tombol = '<div class="custom-control custom-radio custom-radio-color-checked "><input type="radio" disabled name="status_id" value="14"> <label></label>Dokumen direview DKPI</div>'; ?>
+                                                                                                        @elseif($status[$s]->namastatus === 'Dokumen direview DKPI')
+                                                                                                            <?php $tombol = '<div class="custom-control custom-radio custom-radio-color-checked "><input type="radio" name="status_id" value="15"> <label></label>Tanda Tangan WR 4</div>'; ?>
+                                                                                                        @elseif($status[$s]->namastatus === 'Tanda tangan WR 4')
+                                                                                                            <?php $tombol = '<div class="custom-control custom-radio custom-radio-color-checked "><input type="radio" name="status_id" value="16"> <label>Selesai</label> </div>'; ?>
+                                                                                                        @endif
+                                                                                                    @endif
+                                                                                                @endfor
+                                                                                            @endif
+                                                                                        @endforeach
+                                                                                        <?= $tombol ?>
+                                                                                        <br />
+                                                                                    @endif
 
 
                                                                                     <div class="form-group ">

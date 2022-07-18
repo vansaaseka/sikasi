@@ -26,6 +26,7 @@
                                     <th>Mitra</th>
                                     <th>Status</th>
                                     <th>Catatan</th>
+                                    <th>Nomor Dokumen</th>
                                     <th>Dokumen Kerjasama</th>
                                     <th>Aksi</th>
                                 </tr>
@@ -40,6 +41,7 @@
                                     <th>Mitra</th>
                                     <th>Status</th>
                                     <th>Catatan</th>
+                                    <th>Nomor Dokumen</th>
                                     <th>Dokumen Kerjasama</th>
                                     <th>Aksi</th>
                             </tfoot>
@@ -189,56 +191,67 @@
                                                                                         for="exampleInputText1">Update
                                                                                         Status
                                                                                     </label>
-                                                                                    @foreach ($status as $s)
-                                                                                        <div class="form-check">
-                                                                                            <input type="radio"
-                                                                                                name="{{ $s->id }}"
-                                                                                                class="form-check-input"
-                                                                                                id="{{ $s->id }}"
-                                                                                                value="{{ $s->namastatus }}">
-                                                                                            <label
-                                                                                                class="form-check-label"
-                                                                                                for="exampleRadio1">{{ $s->namastatus }}</label>
-                                                                                        </div>
-                                                                                    @endforeach
+                                                                                    <div class="form-group"><label
+                                                                                            class="col-lg-5 control-label">Status</label>
+                                                                                        <br />
+                                                                                        <?php foreach($status as $s){
+                                                                                            ?>
+                                                                                        <div class="col-lg-10">
+                                                                                            <div class="form-check">
+                                                                                                <label
+                                                                                                    class="form-check-label">
+                                                                                                    <input
+                                                                                                        type="radio"
+                                                                                                        class="form-check-input"
+                                                                                                        name="status_id"
+                                                                                                        id="status_id"
+                                                                                                        value="{{ $s->id }}">
 
-                                                                                    <br />
-                                                                                    <div class="form-group">
-                                                                                        <label class="form-label"
-                                                                                            for="exampleInputText1">Catatan
-                                                                                        </label>
-                                                                                        <input type="text"
-                                                                                            class="form-control"
-                                                                                            id="exampleInputText1"
-                                                                                            name="catatan">
-                                                                                    </div>
-                                                                                    <div class="form-group">
-                                                                                        <label class="form-label"
-                                                                                            for="exampleInputText1">Status
-                                                                                            Dokumen </label>
-                                                                                        <input type="text"
-                                                                                            class="form-control"
-                                                                                            id="exampleInputText1"
-                                                                                            name="status_dokumen">
-                                                                                    </div>
-                                                                                    {{-- <div class="custom-file">
+                                                                                                    {{ $s->namastatus }}
+                                                                                                </label>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        {{-- </div> --}}
+                                                                                        <?php 
+                                                                                                             }?>
+
+                                                                                        <br />
+                                                                                        <div class="form-group">
+                                                                                            <label class="form-label"
+                                                                                                for="exampleInputText1">Catatan
+                                                                                            </label>
+                                                                                            <input type="text"
+                                                                                                class="form-control"
+                                                                                                id="exampleInputText1"
+                                                                                                name="catatan">
+                                                                                        </div>
+                                                                                        <div class="form-group">
+                                                                                            <label class="form-label"
+                                                                                                for="exampleInputText1">Status
+                                                                                                Dokumen </label>
+                                                                                            <input type="text"
+                                                                                                class="form-control"
+                                                                                                id="exampleInputText1"
+                                                                                                name="status_dokumen">
+                                                                                        </div>
+                                                                                        {{-- <div class="custom-file">
                                                                 <input type="file" name="dokumen" placeholder="Choose file" id="file">
                                                             </div> --}}
-                                                                                </div>
+                                                                                    </div>
 
-                                                                                <input type="hidden"
-                                                                                    name="pengajuan_id"
-                                                                                    value={{ $datapengajuan->id }}>
-                                                                                <input type="hidden"
-                                                                                    name="created_by"
-                                                                                    value={{ Auth::user()->id }}>
-                                                                                <input type="hidden"
-                                                                                    name="created_by"
-                                                                                    value={{ Auth::user()->id }}>
+                                                                                    <input type="hidden"
+                                                                                        name="pengajuan_id"
+                                                                                        value={{ $datapengajuan->id }}>
+                                                                                    <input type="hidden"
+                                                                                        name="created_by"
+                                                                                        value={{ Auth::user()->id }}>
+                                                                                    <input type="hidden"
+                                                                                        name="created_by"
+                                                                                        value={{ Auth::user()->id }}>
 
-                                                                                <button type="submit"
-                                                                                    class="btn btn-primary next action-button float-end"
-                                                                                    value="Submit">Submit</button>
+                                                                                    <button type="submit"
+                                                                                        class="btn btn-primary next action-button float-end"
+                                                                                        value="Submit">Submit</button>
 
                                                                             </form>
                                                                         </div>
@@ -252,7 +265,6 @@
                                         </td>
 
                                         <td>
-                                            {{-- {{  $datapengajuan->trxstatus->catatan}} --}}
                                             <?php
                                                 foreach($trxstatus as $p){
                                                     if($p->pengajuan_id == $datapengajuan->id){?>
@@ -261,6 +273,99 @@
                                                 }
                                                 ?>
                                         </td>
+                                        
+
+
+                                        
+
+                                        <td>
+                                                
+                                        @if ($datapengajuan->id == $dokumen->pengajuan_id)
+                                        @if (empty($dokumen->nodokumen))
+                                            <button type="button" class="btn btn-secondary btn-sm"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#modalnodok{{ $datapengajuan->id }}"
+                                                id="#modalnodok{{ $datapengajuan->id }}">
+                                                Input
+                                            </button>
+                                        @else
+                                           {{ $dokumen->nomordokumen}}
+                                        @endif
+                                        @endif
+
+                                            {{-- Modal Nomor Dokumen --}}
+                                            <div class="modal fade" id="modalnodok{{ $datapengajuan->id }}"
+                                                tabindex="-1" role="dialog"
+                                                aria-labelledby="staticBackdropLiveLabel" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-scrollable" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="staticBackdropLiveLabel">
+                                                                Input Nomor Dokumen Pengajuan</h5>
+                                                            <button type="button" class="btn-close"
+                                                                data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div class="table-responsive">
+                                                                <table
+                                                                    class="table align-items table-flush table-hover"
+                                                                    id="dataTableHover">
+
+                                                                    <tbody>
+
+                                                                        <tr>
+                                                                            <td class="font-size:3">
+                                                                                Mitra
+                                                                                :
+                                                                                {{ $datapengajuan->mitra->namamitra }}
+                                                                            </td>
+
+
+                                                                        </tr>
+
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                            <div class="row d-flex justify-content">
+                                                                <div class="col-md-12">
+                                                                    <div class="card">
+                                                                        <form
+                                                                            action="/updatedokumen/{{ $datapengajuan->id }}"
+                                                                            method="POST"
+                                                                            enctype="multipart/form-data"
+                                                                            class="forms-sample">
+                                                                            @csrf
+
+                                                                            <div class="form-group">
+                                                                                <div class="form-group">
+                                                                                    <div class="form-group">
+
+                                                                                        <input type="text"
+                                                                                            name="nodokumen"
+                                                                                            id="customFile"
+                                                                                            class="form-control"
+                                                                                            value="{{ old('nodokumen') }}"
+                                                                                            autofocus>
+
+                                                                                    </div>
+                                                                                </div>
+
+
+                                                                                <button type="submit"
+                                                                                    class="btn btn-primary next action-button float-end"
+                                                                                    value="Submit">Submit</button>
+
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </td>
+
                                         <td>
                                             <?php
                                                 foreach($dokumen as $d){

@@ -194,7 +194,8 @@
 
                                                 @if ($sudahUnggah == 1)
                                                     <a
-                                                        href="dokumenkerjasama/{{ $d->dokumen }}">{{ $namadok . ' id dok : ' . $iddok }}</a>
+                                                        href="dokumenkerjasama/{{ $d->dokumen }}">{{ $namadok }}</a>
+                                                    {{-- href="dokumenkerjasama/{{ $d->dokumen }}">{{ $namadok . ' id dok : ' . $iddok }}</a> --}}
                                                 @endif
                                                 {{-- Modal Dokumen --}}
                                                 <div class="modal fade" id="modaldokumen{{ $datapengajuan->id }}"
@@ -218,8 +219,7 @@
 
                                                                             <tr>
                                                                                 <td class="font-size:3">
-                                                                                    Unggah Dokumen Pengajuan
-                                                                                    dengan Mitra
+                                                                                    Mitra
                                                                                     :
                                                                                     {{ $datapengajuan->mitra->namamitra }}
                                                                                 </td>
@@ -279,7 +279,7 @@
 
                                             <td>
 
-                                                {{ $datapengajuan->id }}
+                                                {{-- {{ $datapengajuan->id }} --}}
                                                 @if ($sudahUnggah == 0)
                                                     <i class="fa fa-info-circle" data-bs-toggle="tooltip"
                                                         data-bs-placement="top"
@@ -293,10 +293,14 @@
                                                     
                                                     foreach ($trxstatus as $s) {
                                                         if ($datapengajuan->id == $s->pengajuan_id) {
-                                                            if ($s->status_id >= 2) {
-                                                                $statusDisable = 'disabled';
-                                                            } else {
-                                                                $statusDisable = '';
+                                                            foreach ($status as $xy) {
+                                                                if ($s->status_id == $xy->id) {
+                                                                    if ($xy->namastatus != 'Ajuan Diterima') {
+                                                                        $statusDisable = 'disabled';
+                                                                    } else {
+                                                                        $statusDisable = '';
+                                                                    }
+                                                                }
                                                             }
                                                         }
                                                     }
@@ -347,7 +351,7 @@
                                                                         id="dataTableHover">
                                                                         <thead></thead>
                                                                         <tbody>
-                                                                            {{ $datapengajuan->id }}
+                                                                            {{-- {{ $datapengajuan->id }} --}}
                                                                             <tr>
                                                                                 <td class="font-size:3">
                                                                                     Mitra
@@ -361,7 +365,13 @@
                                                                                     Nomor Dokumen
                                                                                 </td>
                                                                                 <td>:</td>
-                                                                                <td>52/UN27/KS/2021</td>
+                                                                                <td>
+                                                                                    @foreach ($dokumen as $doc)
+                                                                                        @if ($datapengajuan->id == $doc->pengajuan_id)
+                                                                                            {{ $doc->nodokumen }}
+                                                                                        @endif
+                                                                                    @endforeach
+                                                                                </td>
                                                                             </tr>
                                                                             <tr>
                                                                                 <td>
@@ -376,7 +386,7 @@
                                                                                     Tanggal Mulai Kerjasama
                                                                                 </td>
                                                                                 <td>:</td>
-                                                                                <td>{{ date('Y-m-d', strtotime($datapengajuan->tanggalmulai)) }}
+                                                                                <td>{{ date('l, d-m-Y', strtotime($datapengajuan->tanggalmulai)) }}
                                                                                 </td>
                                                                             </tr>
                                                                             <tr>
@@ -384,7 +394,7 @@
                                                                                     Tanggal Berakhir Kerjasama
                                                                                 </td>
                                                                                 <td>:</td>
-                                                                                <td>{{ date('Y-m-d', strtotime($datapengajuan->tanggalakhir)) }}
+                                                                                <td>{{ date('l, d-m-Y', strtotime($datapengajuan->tanggalakhir)) }}
                                                                                 </td>
                                                                             </tr>
                                                                             <tr>
@@ -393,124 +403,129 @@
                                                                                 </td>
                                                                                 <td>:</td>
                                                                                 <td style="color: red">
-                                                                                    {{ $diff = Carbon\Carbon::parse($datapengajuan->tanggalakhir)->diffForHumans() }}
+                                                                                    @foreach ($trxstatus as $tr)
+                                                                                        @if ($datapengajuan->id == $tr->pengajuan_id)
+                                                                                            @foreach ($status as $s)
+                                                                                                @if ($tr->status_id == $s->id)
+                                                                                                    @if ($s->namastatus == 'Selesai')
+                                                                                                        {{ $diff = Carbon\Carbon::parse($datapengajuan->tanggalakhir)->diffForHumans() }}
+                                                                                                    @else
+                                                                                                        Belum Disetujui
+                                                                                                    @endif
+                                                                                                @endif
+                                                                                            @endforeach
+                                                                                        @endif
+                                                                                    @endforeach
                                                                                 </td>
                                                                             </tr>
+
                                                                             <tr>
                                                                                 <td>
                                                                                     Status Dokumen
                                                                                 </td>
                                                                                 <td>:</td>
-                                                                                <td>Dibawa Prodi</td>
-                                                                            </tr>
-                                                                        </tbody>
-                                                                    </table>
-                                                                </div>
-
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-outline-primary"
-                                                                    data-bs-dismiss="modal">Close</button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                {{-- Modal Edit Dokumen --}}
-                                                <div class="modal fade" id="modaleditdokumen{{ $iddok }}"
-                                                    tabindex="-1" role="dialog"
-                                                    aria-labelledby="staticBackdropLiveLabel" aria-hidden="true">
-                                                    <div class="modal-dialog modal-dialog-scrollable" role="document">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h5 class="modal-title" id="staticBackdropLiveLabel">
-                                                                    Edit Dokumen
-                                                                    Pengajuan
-                                                                    {{ 'id dok : ' . $iddok }}
-                                                                </h5>
-
-                                                                <button type="button" class="btn-close"
-                                                                    data-bs-dismiss="modal"
-                                                                    aria-label="Close"></button>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <div class="table-responsive">
-                                                                    <table
-                                                                        class="table align-items table-flush table-hover"
-                                                                        id="dataTableHover">
-
-                                                                        <tbody>
-
-                                                                            <tr>
-                                                                                <td class="font-size:3">
-                                                                                    Edit Dokumen Pengajuan
-                                                                                    dengan Mitra
-                                                                                    :
-                                                                                    {{ $datapengajuan->mitra->namamitra }}
+                                                                                <td>
+                                                                                    @foreach ($trxstatus as $x)
+                                                                                        @if ($datapengajuan->id == $x->pengajuan_id)
+                                                                                            {{ $x->status_dokumen }}
+                                                                                        @endif
+                                                                                    @endforeach
                                                                                 </td>
-
-
-                                                                            </tr>
-
-                                                                        </tbody>
-                                                                    </table>
-                                                                </div>
-                                                                <div class="row d-flex justify-content">
-                                                                    <div class="col-md-12">
-                                                                        <div class="card">
-                                                                            <div class="card-body">
-                                                                                <form
-                                                                                    action="/updatedokumen/{{ $datapengajuan->id }}"
-                                                                                    method="POST"
-                                                                                    enctype="multipart/form-data"
-                                                                                    class="forms-sample">
-                                                                                    @csrf
-
-                                                                                    <div class="form-group">
-                                                                                        <div class="form-group">
-                                                                                            {{-- <label class="form-label" for="exampleInputText1">Unggah Dokumen </label> --}}
-                                                                                            <div class="form-group">
-                                                                                                <div
-                                                                                                    class="custom-file">
-                                                                                                    <input
-                                                                                                        type="file"
-                                                                                                        name="dokumen"
-                                                                                                        id="customFile"
-                                                                                                        class="form-control"
-                                                                                                        value="{{ old('dokumen') }}"
-                                                                                                        autofocus>
-                                                                                                </div>
-                                                                                            </div>
-                                                                                        </div>
-
-
-                                                                                        <button type="submit"
-                                                                                            class="btn btn-primary next action-button float-end"
-                                                                                            value="Submit">Submit</button>
-
-                                                                                </form>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
                                             </td>
-
-
                                         </tr>
-                                    @endif
-                                @endforeach
                             </tbody>
                         </table>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{-- Modal Edit Dokumen --}}
+    <div class="modal fade" id="modaleditdokumen{{ $iddok }}" tabindex="-1" role="dialog"
+        aria-labelledby="staticBackdropLiveLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLiveLabel">
+                        Edit Dokumen
+                        Pengajuan
+                        {{ 'id dok : ' . $iddok }}
+                    </h5>
+
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="table-responsive">
+                        <table class="table align-items table-flush table-hover" id="dataTableHover">
+
+                            <tbody>
+
+                                <tr>
+                                    <td class="font-size:3">
+                                        Mitra
+                                        :
+                                        {{ $datapengajuan->mitra->namamitra }}
+                                    </td>
+
+
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="row d-flex justify-content">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <form action="/updatedokumen/{{ $datapengajuan->id }}" method="POST"
+                                        enctype="multipart/form-data" class="forms-sample">
+                                        @csrf
+
+                                        <div class="form-group">
+                                            <div class="form-group">
+                                                {{-- <label class="form-label" for="exampleInputText1">Unggah Dokumen </label> --}}
+                                                <div class="form-group">
+                                                    <div class="custom-file">
+                                                        <input type="file" name="dokumen" id="customFile"
+                                                            class="form-control" value="{{ old('dokumen') }}"
+                                                            autofocus>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                            <button type="submit"
+                                                class="btn btn-primary next action-button float-end"
+                                                value="Submit">Submit</button>
+
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    </td>
+
+
+    </tr>
+    @endif
+    @endforeach
+    </tbody>
+    </table>
+</div>
+</div>
+</div>
+</div>
+</div>
 </div>
 
 

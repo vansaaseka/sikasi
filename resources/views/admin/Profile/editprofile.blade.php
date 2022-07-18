@@ -92,11 +92,11 @@
                                                 @error('alamat')
                                                     <div class="invalid-feedback"></div>
                                                 @enderror
-                                            </div>{{-- Input Confirmation --}}
-                                            <input name="confirmation" type="hidden" value="1">
 
-                                            <br />
-                                            <button type="submit" class="btn btn-primary">Submit</button>
+
+
+                                                <br />
+                                                <button type="submit" class="btn btn-primary">Submit</button>
                                         @endif
                                     @endforeach
                             </form>
