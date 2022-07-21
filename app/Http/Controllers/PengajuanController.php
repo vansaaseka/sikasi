@@ -60,7 +60,7 @@ class PengajuanController extends Controller
     {
         $validasi = Validator::make($request->all(),[
             'namamitra' => 'required',
-            'namadagangmitra' => 'required',
+            // 'namadagangmitra' => 'required',
             'logo' => 'required|image|mimes:jpg,png,jpeg' ,
             'kategorimitra_id' => 'required',
             'alamat' => 'required',
@@ -150,7 +150,7 @@ class PengajuanController extends Controller
         $pengajuan->proditerlibat_id = json_encode($dataa2);
         $pengajuan->tanggalmulai = $request->tanggalmulai;
         $pengajuan->tanggalakhir = $request->tanggalakhir;
-        // $pengajuan->prodiid = $request->prodiid;
+        $pengajuan->prodiid = $request->prodiid;
         $pengajuan->save();
 
 
@@ -170,6 +170,9 @@ class PengajuanController extends Controller
         $endDateParsed = \Carbon\Carbon::parse($pengajuan->tanggalakhir);
 
         $dataTemplate = [
+            'nama_dosen' => Auth::user()->name,
+            'telepon_dosen' => Auth::user()->nomorhp,
+            'email_dosen' => Auth::user()->email,
             'mitra' => $mitra->namamitra,
             'alamat_mitra' => $mitra->alamat,
             'email_mitra' => $mitra->email,

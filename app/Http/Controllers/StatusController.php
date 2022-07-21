@@ -162,6 +162,7 @@ public function hapusStatus($id){
 
                
                 // $tujuan='derieri62@gmail.com';
+                // $aksi = '';
             
                 foreach($pengajuan as $datapengajuan){   
                 foreach($user as $to)
