@@ -80,7 +80,7 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link {{ 'status' == request()->path() ? 'active' : '' }}" href="/status">
+                <a class="nav-link {{ 'draftemplate' == request()->path() ? 'active' : '' }}" href="/draftemplate">
                     <i class="icon">
                         <svg width="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path
@@ -91,7 +91,7 @@
                                 fill="currentColor"></path>
                         </svg>
                     </i>
-                    <span class="item-name">Status Verifikasi</span>
+                    <span class="item-name">Template</span>
                 </a>
             </li>
 

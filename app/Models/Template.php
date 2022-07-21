@@ -9,13 +9,9 @@ class Template extends Model
 {
     use HasFactory;
     protected $table = 'template';
-    protected $fillable = [];
+    protected $fillable = ['namatemplate', 'template'];
     protected $guarded = [];
 
-    public function kategori(){
-        return $this->belongsTo('App\Models\Kategori');
-
-    }
 
 
 }

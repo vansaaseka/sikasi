@@ -1,98 +1,55 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Kategori;
 use App\Models\Template;
 use Illuminate\Http\Request;
 
 class TemplateController extends Controller
 {
-    //Tampil template
-    public function index()
-    {
-        $template = Template::all();
-        return view('admin\Template\tampiltemplate', 
-        compact('template'));
-    }
-
-  //tampiltambahtemplate
-    public function create()
-    {
-        $category = Kategori::all();
-        return view('admin\Template\tambahtemplate', compact('category'));
-    }
-
-   //post tambah template
-    public function store(Request $request)
-    {
-        // $this->validate($request, [
-        //     'namadraf' => 'required',
-        //     'filedraf' => 'required|mimes:doc,docx,rtf',
-        //     'deskripsi' => 'required',
-        // ]);
-
-        $draf = Template::create($request->all());
-        if ($request->hasFile('filedraf')) {
-            $request->file('filedraf')->move('templatekerjasama/', $request->file('filedraf')->getClientOriginalName());
-            $draf->filedraf = $request->file('filedraf')->getClientOriginalName();
-            $draf->save();
-    
-        }
-        return redirect('template')->with('toast_success','Data Berhasil Diupdate');
-    }
-        
-    
-
-
-//Detail
-    public function show(Template $template)
-    {
-    
-    }
-
-    //tampil edit template
-    public function edit(Template $template)
-    {   $category = Kategori::all();
-        return view('admin\Template\edittemplate', compact('template','category'));
-    }
-
-   //post edit template
-    public function update(Request $request, Template $template)
-    {
-        $this->validate($request, [
-            'kategori_id' => 'required',
-            'filedraf' => 'required|mimes:doc,docx,rtf',
-            'deskripsi' => 'required',
-        ]);
-
-        $draf = Template::find($template->id);
-        $draf->update($request->all());
-        if ($request->hasFile('filedraf')) 
-            {
-                $request->file('filedraf')->move('filedrafkerjasama/', $request->file('filedraf')->getClientOriginalName());
-                $draf->filedraf = $request->file('filedraf')->getClientOriginalName();
-                $draf->save();
-            }
-        return redirect('template')->with('toast_success','Data Berhasil Diupdate');
-        }
-        
    
-    // public function destroy(Template $template)
-    // {
-    //     // $template->delete();
-    //     Template::destroy($template->id);
-    //     return redirect('template')->with('toast_success','Data Berhasil Dihapus');
-    // }
+   public function index(){
 
-    public function hapustemplate($id){
-        $template = Template::find($id);
-        $template->delete();
-        return redirect('template')->with('toast_success','Data Berhasil Dihapus');
-        }
+   // dokumen tanpa dolar = nama database
+   $template = Template::all();
+   return view('admin\template\tampiltemplate', compact('template'));
+   // yang bertanda dolar harus sama dengan isi compact
+   }
+
+   public function inserttemplate(Request $request){
    
-        public function unduhtemplate()
-        {
-            $template = Template::all();
-            return view('dosen/unduhtemplate/unduh', compact('template'));
-        }
+   $this->validate($request, [
+    'namatemplate'=>'required',
+    'template'=> 'required',
+   ],
+
+   );
+   
+   $template = $request->file('template');
+  
+   $nama_template = $template->getClientOriginalName();
+ 
+   $template->move('template', $template->getClientOriginalName());
+   $template = new Template;
+   $template->template = $nama_template;
+   $template->namatemplate = $request->input('namatemplate');
+   
+   $template->save();
+
+   
+   return back()->with('toast_success', 'Data Berhasil Tersimpan');
+
+   }
+
+   public function updatetemplate(Request $request, $id){
+    $template = Template::find($id);
+    $template->update($request->all());
+   if ($request->hasFile('template'))
+   {
+    $request->file('template')->move('template/', $request->file('template')->getClientOriginalName());
+    $template->template = $request->file('template')->getClientOriginalName();
+    $template->save();
+   }
+   return back()->with('toast_success','Data Berhasil Diupdate');
+   }
+
 }

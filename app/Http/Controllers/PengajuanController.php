@@ -8,17 +8,18 @@ use App\Models\Prodi;
 use App\Models\Status;
 use App\Models\Dokumen;
 use App\Models\Kategori;
+use App\Models\Template;
 use App\Models\Pengajuan;
 use App\Models\Trxstatus;
 use App\Models\RuangLingkup;
-use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Http\Request;
 use App\Models\KategoriMitra;
-use Illuminate\Support\Facades\Validator;
 use App\Exports\PengajuanExport;
-use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
 use PhpOffice\PhpWord\TemplateProcessor;
+use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Facades\Validator;
 
 class PengajuanController extends Controller
 {
@@ -49,12 +50,7 @@ class PengajuanController extends Controller
         return view('dosen\Pengajuan\tambahpengajuan' , compact('kategorimitra' , 'prodi' , 'ruanglingkup', 'kategori'));
     }
 
-    public function editdokumen($id)
-    {
-        $draf = Pengajuan::find($id);
-        $dokumen = Dokumen::where('pengajuan_id', $id)->first();
-        return view('admin\Draf\editdokumen', compact('draf', 'dokumen'));
-    }
+  
 
     public function insertpengajuan (Request $request)
     {
@@ -188,7 +184,9 @@ class PengajuanController extends Controller
 
         if($pengajuan->kategori_id == 1){
             #generate template pks
-            $templateProcessor = new TemplateProcessor('pks.docx');
+            $path = Template::where('template', 'pks.docx')->get();
+            $templateProcessor = new TemplateProcessor(public_path('template/'.$path->template));
+            // $templateProcessor = new TemplateProcessor('pks.docx');
             $templateProcessor->setValues($dataTemplate);
             $templateProcessor->setImageValue('logo', public_path('logomitra/'.$name_file));
             $fileName = 'PKS '.$mitra->namamitra.' Tahun '. $startDateYear;
@@ -213,25 +211,9 @@ class PengajuanController extends Controller
         }
     }
 
-    public function editpengajuan($id)
-    {
-        $pengajuan = Pengajuan::find($id);
-        //dd($draf);
-        return view('dosen\pengajuan\editpengajuan', compact('pengajuan'));
-    }
+   
 
-    public function updatepengajuan(Request $request, $id)
-    {
-        $pengajuan = Pengajuan::find($id);
-        $pengajuan->update($request->all());
-        if ($request->hasFile('dokumen')) {
-        $request->file('dokumen')->move('dokumenkerjasama/', $request->file('dokumen')->getClientOriginalName());
-        $pengajuan->dokumen = $request->file('dokumen')->getClientOriginalName();
-        $pengajuan->save();
-        }
-
-        return redirect()->route('pengajuan')->with('toast_success','Data Berhasil Diupdate');
-    }
+   
 
     public function hapuspengajuan($id){
         $pengajuan = Pengajuan::find($id);

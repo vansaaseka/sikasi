@@ -82,8 +82,11 @@ route::get('/editakun/{id}',[AkunController::class,"editakun"])->name('editakun'
 route::post('/updateakun/{id}',[AkunController::class,"updateakun"])->name('updateakun');
 
 //Template
-Route::resource('template', TemplateController::class);
-route::get('/hapustemplate/{id}',[TemplateController::class,"hapustemplate"])->name('hapustemplate');
+route::get('/draftemplate', [TemplateController::class, "index"])->name('template');
+route::post('/inserttemplate',[TemplateController::class,"inserttemplate"])->name('inserttemplate');
+route::post('/updatetemplate/{id}',[TemplateController::class,"updatetemplate"])->name('updatetemplate');
+
+
 
 //Profile
 route::get('/profileDosen',[ProfileController::class,"profileDosen"])->name('profileDosen');
@@ -100,7 +103,6 @@ route::get('/unduhtemplate',[TemplateController::class,"unduhtemplate"])->name('
 route::get('/pengajuan',[PengajuanController::class,"index"])->name('pengajuan');
 route::get('/tambahpengajuan',[PengajuanController::class,"tambahpengajuan"])->name('tambahpengajuan');
 route::post('/insertpengajuan',[PengajuanController::class,"insertpengajuan"])->name('insertpengajuan');
-route::get('/editpengajuan/{id}',[PengajuanController::class,"editpengajuan"])->name('editpengajuan');
 route::post('/updatepengajuan/{id}',[PengajuanController::class,"updatepengajuan"])->name('updatepengajuan');
 route::get('/hapuspengajuan/{id}',[PengajuanController::class,"hapuspengajuan"])->name('hapuspengajuan');
 

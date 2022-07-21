@@ -273,26 +273,26 @@
                                                 }
                                                 ?>
                                         </td>
-                                        
 
 
-                                        
+
+
 
                                         <td>
-                                                
-                                        @if ($datapengajuan->id == $dokumen->pengajuan_id)
-                                        @if (empty($dokumen->nodokumen))
-                                            <button type="button" class="btn btn-secondary btn-sm"
-                                                data-bs-toggle="modal"
-                                                data-bs-target="#modalnodok{{ $datapengajuan->id }}"
-                                                id="#modalnodok{{ $datapengajuan->id }}">
-                                                Input
-                                            </button>
-                                        @else
-                                           {{ $dokumen->nomordokumen}}
-                                        @endif
-                                        @endif
-
+                                            @foreach ($dokumen as $doc)
+                                                @if ($datapengajuan->id == $doc->pengajuan_id)
+                                                    @if (empty($dokumen->nodokumen))
+                                                        <button type="button" class="btn btn-secondary btn-sm"
+                                                            data-bs-toggle="modal"
+                                                            data-bs-target="#modalnodok{{ $datapengajuan->id }}"
+                                                            id="#modalnodok{{ $datapengajuan->id }}">
+                                                            Input
+                                                        </button>
+                                                    @else
+                                                        {{ $dokumen->nomordokumen }}
+                                                    @endif
+                                                @endif
+                                            @endforeach
                                             {{-- Modal Nomor Dokumen --}}
                                             <div class="modal fade" id="modalnodok{{ $datapengajuan->id }}"
                                                 tabindex="-1" role="dialog"
