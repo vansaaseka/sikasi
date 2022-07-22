@@ -143,9 +143,6 @@ public function hapusStatus($id){
         }
     public function insertnewstatus(Request $request){
     $trxstatus = new Trxstatus;
-    $user = User::all();
-    $pengajuan = Pengajuan::all();
-    $status = Status::all();
     $trx = Trxstatus::all();
 
             $trxstatus->pengajuan_id = $request->input('pengajuan_id');
@@ -155,39 +152,14 @@ public function hapusStatus($id){
             $trxstatus->status_dokumen = $request['status_dokumen'];
             $trxstatus->save();
  
-            // \Mail::raw('Hallo'.$user->name, function ($message) use($user) {
-            //     $message->to($user->email,$user->name);
-            //     $message->subject('Pendaftaran');
-            // });
+            $pengajuan = Pengajuan::find($request->input('pengajuan_id'));
+            $status = Status::find($request->input('status_id'));
 
-               
-                // $tujuan='derieri62@gmail.com';
-                // $aksi = '';
-            
-                foreach($pengajuan as $datapengajuan){   
-                foreach($user as $to)
-             
-                if($datapengajuan->user_id == $to->id ){
-                    $nama = $to->name;
-                    $mitra = $datapengajuan->mitra->namamitra;
-                    $tujuan= $to->email;
-
-                }}
+            $nama = $pengajuan->user->name;
+            $mitra = $pengajuan->mitra->namamitra;
+            $tujuan = $pengajuan->user->email;
+            $aksi = $status->namastatus;
                 
-              
-                foreach($pengajuan as $ajuan){
-                foreach($trx as $s){
-                if($ajuan->id == $s->pengajuan_id){
-                foreach($status as $b){
-                     
-                if($s->status_id == $b->id){
-                    
-                    $aksi = $b->namastatus;
-                }
-            }
-        }
-    
-                }}
 
          
          
@@ -196,6 +168,7 @@ public function hapusStatus($id){
                'mitra' => $mitra,
                'aksi' => $aksi
             ];
+            
                 
                 \Mail::to($tujuan)->send(new KirimEmail($data));
                 Alert::success('Sukses', 'Email berhasil dikirim!');

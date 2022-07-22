@@ -27,13 +27,13 @@ use App\Http\Controllers\KategorimitraController;
 */
 
 
-// Route::get('/', function () {
-//     return view('landingpage');
-// });
-
 Route::get('/', function () {
-    return view('auth/login');
+    return view('landingpage');
 });
+
+// Route::get('/', function () {
+//     return view('auth/login');
+// });
 
 Route::get('/layoutAdmin', function () {
     return view('admin/layoutAdmin');
