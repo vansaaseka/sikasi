@@ -55,20 +55,20 @@ class PengajuanController extends Controller
     public function insertpengajuan (Request $request)
     {
         $validasi = Validator::make($request->all(),[
-            'namamitra' => 'required',
-            // 'namadagangmitra' => 'required',
-            'logo' => 'required|image|mimes:jpg,png,jpeg' ,
-            'kategorimitra_id' => 'required',
-            'alamat' => 'required',
-            'email' => 'required|email',
-            'namapenandatangan' => 'required',
-            'jabatanpenandatangan' => 'required',
-            // 'narahubung' => 'required',
-            'no_hp' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
-            'tanggalmulai' => 'required',
-            'tanggalakhir' => 'required',
-            'kategori_id' => 'required',
-            'prodiid' => 'required'
+            // 'namamitra' => 'required',
+            // // 'namadagangmitra' => 'required',
+            // 'logo' => 'required|image|mimes:jpg,png,jpeg' ,
+            // 'kategorimitra_id' => 'required',
+            // 'alamat' => 'required',
+            // 'email' => 'required|email',
+            // 'namapenandatangan' => 'required',
+            // 'jabatanpenandatangan' => 'required',
+            // // 'narahubung' => 'required',
+            // 'no_hp' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
+            // 'tanggalmulai' => 'required',
+            // 'tanggalakhir' => 'required',
+            // 'kategori_id' => 'required',
+            // 'prodiid' => 'required'
 
             ]);
 
@@ -184,7 +184,8 @@ class PengajuanController extends Controller
 
         if($pengajuan->kategori_id == 1){
             #generate template pks
-            $path = Template::where('template', 'pks.docx')->get();
+            $path = Template::where('template', 'pks.docx')->first();
+
             $templateProcessor = new TemplateProcessor(public_path('template/'.$path->template));
             // $templateProcessor = new TemplateProcessor('pks.docx');
             $templateProcessor->setValues($dataTemplate);
