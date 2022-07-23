@@ -35,9 +35,9 @@ Route::get('/', function () {
 //     return view('auth/login');
 // });
 
-Route::get('/layoutAdmin', function () {
-    return view('admin/layoutAdmin');
-});
+// Route::get('/layoutAdmin', function () {
+//     return view('admin/layoutAdmin');
+// });
 
 
 

@@ -32,6 +32,12 @@ class PengajuanController extends Controller
         $status = Status::all();
         $trxstatus = Trxstatus::all();
         $kategori = Kategori::all();
+        // foreach ($pengajuan as $datapengajuan){
+        //   $trs = Trxstatus::orderBy('id', 'desc')
+        //   ->where('pengajuan_id', $datapengajuan->id)
+        //   ->first();
+        // }
+        // dd($maxdata);
 
         return view('dosen\Pengajuan\detailpengajuan' , compact('pengajuan' , 'mitra','dokumen', 'trxstatus', 'status','user', 'kategori'));
         }
@@ -55,20 +61,20 @@ class PengajuanController extends Controller
     public function insertpengajuan (Request $request)
     {
         $validasi = Validator::make($request->all(),[
-            // 'namamitra' => 'required',
-            // // 'namadagangmitra' => 'required',
-            // 'logo' => 'required|image|mimes:jpg,png,jpeg' ,
-            // 'kategorimitra_id' => 'required',
-            // 'alamat' => 'required',
-            // 'email' => 'required|email',
-            // 'namapenandatangan' => 'required',
-            // 'jabatanpenandatangan' => 'required',
-            // // 'narahubung' => 'required',
-            // 'no_hp' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
-            // 'tanggalmulai' => 'required',
-            // 'tanggalakhir' => 'required',
-            // 'kategori_id' => 'required',
-            // 'prodiid' => 'required'
+            'namamitra' => 'required',
+            // 'namadagangmitra' => 'required',
+            'logo' => 'required|image|mimes:jpg,png,jpeg' ,
+            'kategorimitra_id' => 'required',
+            'alamat' => 'required',
+            'email' => 'required|email',
+            'namapenandatangan' => 'required',
+            'jabatanpenandatangan' => 'required',
+            // 'narahubung' => 'required',
+            'no_hp' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
+            'tanggalmulai' => 'required',
+            'tanggalakhir' => 'required',
+            'kategori_id' => 'required',
+            'prodiid' => 'required'
 
             ]);
 
@@ -200,6 +206,9 @@ class PengajuanController extends Controller
 
         if($pengajuan->kategori_id == 2){
             #generate template mou
+            $path2 = Template::where('template', 'mou.docx')->first();
+
+            $templateProcessor = new TemplateProcessor(public_path('template/'.$path2->template));
             $templateProcessor = new TemplateProcessor('mou.docx');
             $templateProcessor->setValues($dataTemplate);
             $templateProcessor->setImageValue('logo', public_path('logomitra/'.$name_file));

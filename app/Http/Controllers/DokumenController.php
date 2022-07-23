@@ -33,7 +33,7 @@ class DokumenController extends Controller
             $dokumens->pengajuan_id = $request->input('pengajuan_id');
             $dokumens->user_id = $request->input('user_id');
             $dokumens->dokumen = $nama_dokumen;
-            $dokumens->user_id = $request->input('nodokumen');
+            $dokumens->nodokumen = $request->input('nodokumen');
             //menyimpan data ke database
             $dokumens->save();
     

@@ -9,13 +9,9 @@
     <meta content="" name="description">
     <meta content="" name="keywords">
 
-
-
-
-
     <!-- Favicons -->
     <link href="{{ asset('logosv.png') }}" rel="icon">
-    <link href="{{ asset('SIKASI.png') }}" rel="apple-touch-icon">
+    <link href="{{ asset('SIKASI2.png') }}" rel="apple-touch-icon">
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -34,12 +30,7 @@
 
     <!-- Variables CSS Files. Uncomment your preferred color scheme -->
     <link href="{{ asset('landingpage/assets/css/variables-blue.css') }}" rel="stylesheet">
-    <!-- <link href="assets/css/variables-blue.css" rel="stylesheet"> -->
-    <!-- <link href="assets/css/variables-green.css" rel="stylesheet"> -->
-    <!-- <link href="assets/css/variables-orange.css" rel="stylesheet"> -->
-    <!-- <link href="assets/css/variables-purple.css" rel="stylesheet"> -->
-    <!-- <link href="assets/css/variables-red.css" rel="stylesheet"> -->
-    <!-- <link href="assets/css/variables-pink.css" rel="stylesheet"> -->
+
 
     <!-- Template Main CSS File -->
     <link href="{{ asset('landingpage/assets/css/main.css') }}" rel="stylesheet">
@@ -54,12 +45,18 @@
 
 <body>
 
+    {{-- <div id="loading">
+        <div class="loader simple-loader">
+            <div class="loader-body"></div>
+        </div>
+    </div> --}}
+
     <!-- ======= Header ======= -->
     <header id="header" class="header fixed-top" data-scrollto-offset="0">
         <div class="container-fluid d-flex align-items-center justify-content-between">
 
             <a class="navbar-brand">
-                <img src="SIKASI.png" width="162" height="75">
+                <img src="SIKASI2.png" width="162" height="75">
             </a>
 
             <nav id="navbar" class="navbar">
@@ -68,10 +65,10 @@
 
                     <li><a class="nav-link scrollto" href="index.html#about">Tentang</a></li>
                     <li><a class="nav-link scrollto" href="index.html#onfocus">Ketentuan Umum</a></li>
-                    <li><a class="nav-link scrollto" href="index.html#portfolio">Alur Kerjasama</a></li>
                     <li><a class="nav-link scrollto" href="index.html#cta">Status Pengajuan</a></li>
-                    <li><a class="nav-link scrollto" href="index.html#faq">FAQ</a></li>
-                    <li><a class="nav-link scrollto" href="index.html#team">Team</a></li>
+                    {{-- <li><a class="nav-link scrollto" href="index.html#faq">FAQ</a></li>
+                    <li><a class="nav-link scrollto" href="index.html#team">Team</a></li> --}}
+                    <li><a class="nav-link scrollto" href="index.html#contact">Kontak</a></li>
                 </ul>
                 <i class="bi bi-list mobile-nav-toggle d-none"></i>
             </nav><!-- .navbar -->
@@ -88,7 +85,7 @@
             <h2>Selamat Datang di SIKASI</h2>
             <p>Sistem Informasi Kerjasama Sekolah Vokasi</p>
             <div class="d-flex">
-                <a href="/login" class="btn-get-started scrollto">Login</a>
+                <a href="/login" class="btn-get-started scrollto">Pengajuan Kerjasama</a>
 
             </div>
         </div>
@@ -226,7 +223,8 @@
                         <div class="card">
                             <div class="card-header d-flex justify-content-between">
                                 <div class="header-title">
-                                    <h4 class="card-title">Status Pengajuan PKS</h4>
+                                    <h4 class="card-title">Status Pengajuan PKS
+                                    </h4>
                                 </div>
                             </div>
                             <div class="card-body">
@@ -241,10 +239,10 @@
                                                     </path>
                                                 </svg>
                                             </div>
-                                            <h6 class="float-left mb-1">Mengajukan Kerjasama PKS </h6>
+                                            <p class="float-left mb-1">Mengajukan Kerjasama PKS </p>
 
                                             <div class="d-inline-block w-100">
-                                                <p>Dosen mengajukan kerjasama melalui website SIKASI</p>
+                                                <h6>Dosen mengajukan kerjasama melalui website SIKASI</h6>
                                             </div>
                                         </li>
                                         <li>
@@ -255,10 +253,10 @@
                                                     </path>
                                                 </svg>
                                             </div>
-                                            <h6 class="float-left mb-1">Pengajuan Kerjasama Diterima</h6>
+                                            <p class="float-left mb-1">Pengajuan Kerjasama Diterima</p>
 
                                             <div class="d-inline-block w-100">
-                                                <p>Proses pengajuan diterima, masuk kedalam daftar antrian</p>
+                                                <h6>Proses pengajuan diterima, masuk kedalam daftar antrian</h6>
                                             </div>
                                         </li>
                                         <li>
@@ -269,10 +267,10 @@
                                                     </path>
                                                 </svg>
                                             </div>
-                                            <h6 class="float-left mb-1">Dokumen Pengajuan Direview BPU</h6>
+                                            <p class="float-left mb-1">Dokumen Pengajuan Direview BPU</p>
 
                                             <div class="d-inline-block w-100">
-                                                <p>Dokumen pengajuan diperiksa kelengkapan oleh perwakilan BPU</p>
+                                                <h6>Dokumen pengajuan diperiksa kelengkapan oleh perwakilan BPU</h6>
                                             </div>
                                         </li>
                                         </li>
@@ -284,10 +282,10 @@
                                                     </path>
                                                 </svg>
                                             </div>
-                                            <h6 class="float-left mb-1">Dokumen Pengajuan Selesai Direview BPU</h6>
+                                            <p class="float-left mb-1">Dokumen Pengajuan Selesai Direview BPU</p>
 
                                             <div class="d-inline-block w-100">
-                                                <p>Dokumen telah diperiksa dan diperbaiki oleh BPU</p>
+                                                <h6>Dokumen telah diperiksa dan diperbaiki oleh BPU</h6>
                                             </div>
                                         </li>
                                         <li>
@@ -298,11 +296,11 @@
                                                     </path>
                                                 </svg>
                                             </div>
-                                            <h6 class="float-left mb-1">Proses Tanda Tangan Dekan</h6>
+                                            <p class="float-left mb-1">Proses Tanda Tangan Dekan</p>
 
                                             <div class="d-inline-block w-100">
-                                                <p>Dokumen kerjasama dalam proses pengajuan tanda tangan Dekan Sekolah
-                                                    Vokasi UNS</p>
+                                                <h6>Dokumen kerjasama dalam proses pengajuan tanda tangan Dekan Sekolah
+                                                    Vokasi UNS</h6>
                                             </div>
                                         </li>
                                         <li>
@@ -313,12 +311,12 @@
                                                     </path>
                                                 </svg>
                                             </div>
-                                            <h6 class="float-left mb-1">Dokumen Telah Ditandatangani Dekan</h6>
+                                            <p class="float-left mb-1">Dokumen Telah Ditandatangani Dekan</p>
 
                                             <div class="d-inline-block w-100">
-                                                <p>Dokumen hardcopy kerjasama telah disetujui Dekan, kemudian
+                                                <h6>Dokumen hardcopy kerjasama telah disetujui Dekan, kemudian
                                                     diambil oleh perwakilan pihak
-                                                    prodi untuk proses pegajuan tandatangan dengan mitra</p>
+                                                    prodi untuk proses pegajuan tandatangan dengan mitra</h6>
                                             </div>
                                         </li>
                                         <li>
@@ -329,11 +327,11 @@
                                                     </path>
                                                 </svg>
                                             </div>
-                                            <h6 class="float-left mb-1">Proses Pengajuan Tanda Tangan Mitra</h6>
+                                            <p class="float-left mb-1">Proses Pengajuan Tanda Tangan Mitra</p>
 
                                             <div class="d-inline-block w-100">
-                                                <p>Perwakilan pihak prodi mengajukan proses tanda tangan dengan mitra
-                                                </p>
+                                                <h6>Perwakilan pihak prodi mengajukan proses tanda tangan dengan mitra
+                                                </h6>
                                             </div>
                                         </li>
                                         <li>
@@ -344,10 +342,10 @@
                                                     </path>
                                                 </svg>
                                             </div>
-                                            <h6 class="float-left mb-1">Dokumen Telah Ditandatangani Mitra</h6>
+                                            <p class="float-left mb-1">Dokumen Telah Ditandatangani Mitra</p>
 
                                             <div class="d-inline-block w-100">
-                                                <p>Dokumen hardcopy telah ditandatangani oleh pihak mitra dan
+                                                <h6>Dokumen hardcopy telah ditandatangani oleh pihak mitra dan
                                                     dikembalikan ke pihak BPU
                                             </div>
                                         </li>
@@ -359,11 +357,10 @@
                                                     </path>
                                                 </svg>
                                             </div>
-                                            <h6 class="float-left mb-1">Proses Pengajuan Tanda Tangan WR 4</h6>
+                                            <p class="float-left mb-1">Proses Pengajuan Tanda Tangan WR 4</p>
 
                                             <div class="d-inline-block w-100">
-                                                <p>Dokumen hardcopy telah ditandatangani oleh pihak mitra dan
-                                                    dikembalikan ke pihak BPU
+                                                <h6>BPU sekolah vokasi mengajukan dokumen ke DKPI
                                             </div>
                                         </li>
 
@@ -375,11 +372,10 @@
                                                     </path>
                                                 </svg>
                                             </div>
-                                            <h6 class="float-left mb-1">Dokumen Direview DKPI</h6>
+                                            <p class="float-left mb-1">Dokumen Direview DKPI</p>
 
                                             <div class="d-inline-block w-100">
-                                                <p>Dokumen hardcopy telah ditandatangani oleh pihak mitra dan
-                                                    dikembalikan ke pihak BPU
+                                                <h6>Dokumen diperiksa oleh DKPI
                                             </div>
                                         </li>
                                         <li>
@@ -391,11 +387,10 @@
                                                     </path>
                                                 </svg>
                                             </div>
-                                            <h6 class="float-left mb-1">Proses Tanda Tanga WR4</h6>
+                                            <p class="float-left mb-1">Proses Tanda Tanga WR4</p>
 
                                             <div class="d-inline-block w-100">
-                                                <p>Dokumen hardcopy telah ditandatangani oleh pihak mitra dan
-                                                    dikembalikan ke pihak BPU
+                                                <h6>Proses Pengajuan Tanda Tangan oleh Wakil REKTOR 4
                                             </div>
                                         </li>
                                         <li>
@@ -407,11 +402,11 @@
                                                     </path>
                                                 </svg>
                                             </div>
-                                            <h6 class="float-left mb-1">Selesai</h6>
+                                            <p class="float-left mb-1">Selesai</p>
 
                                             <div class="d-inline-block w-100">
-                                                <p>Dokumen hardcopy telah ditandatangani oleh pihak mitra dan
-                                                    dikembalikan ke pihak BPU
+                                                <h6> Proses Pengajuan Kerjasama Telah Selesai, hardcopy dokumen bisa
+                                                    diambil oleh perwakilan prdo</h6>
                                             </div>
                                         </li>
                                     </ul>
@@ -512,7 +507,7 @@
 
 
 
-        <!-- ======= F.A.Q Section ======= -->
+        {{-- <!-- ======= F.A.Q Section ======= -->
         <section id="faq" class="faq">
             <div class="container-fluid" data-aos="fade-up">
 
@@ -635,11 +630,11 @@
                 </div>
 
             </div>
-        </section><!-- End F.A.Q Section -->
+        </section><!-- End F.A.Q Section --> --}}
 
 
 
-        <!-- ======= Team Section ======= -->
+        {{-- <!-- ======= Team Section ======= -->
         <section id="team" class="team">
             <div class="container" data-aos="fade-up">
 
@@ -708,7 +703,7 @@
                 </div>
 
             </div>
-        </section><!-- End Team Section -->
+        </section><!-- End Team Section --> --}}
 
 
 
@@ -717,16 +712,14 @@
             <div class="container">
 
                 <div class="section-header">
-                    <h2>Contact Us</h2>
-                    <p>Ea vitae aspernatur deserunt voluptatem impedit deserunt magnam occaecati dssumenda quas ut ad
-                        dolores adipisci aliquam.</p>
+                    <h2>Sekolah Vokasi Universitas Sebelas Maret</h2>
                 </div>
 
             </div>
 
             <div class="map">
                 <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12097.433213460943!2d-74.0062269!3d40.7101282!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xb89d1fe6bc499443!2sDowntown+Conference+Center!5e0!3m2!1smk!2sbg!4v1539943755621"
+                    src="https://maps.google.com/maps?width=300&amp;height=200&amp;hl=en&amp;q=Jalan%20Kolonel%20Sutarto%20Nomor%20150K%2C%20Jebres%2C%20Surakarta%20City%2C%20Central%20Java%2057126+(Sekolah%20Vokasi)&amp;ie=UTF8&amp;t=&amp;z=12&amp;iwloc=B&amp;output=embed"
                     frameborder="0" allowfullscreen></iframe>
             </div><!-- End Google Maps -->
 
@@ -737,15 +730,15 @@
                     <div class="col-lg-4">
 
                         <div class="info">
-                            <h3>Get in touch</h3>
-                            <p>Et id eius voluptates atque nihil voluptatem enim in tempore minima sit ad mollitia
-                                commodi minus.</p>
+                            <h3>Hubungi Kami</h3>
+
 
                             <div class="info-item d-flex">
                                 <i class="bi bi-geo-alt flex-shrink-0"></i>
                                 <div>
-                                    <h4>Location:</h4>
-                                    <p>A108 Adam Street, New York, NY 535022</p>
+                                    <h4>Lokasi:</h4>
+                                    <p>Kampus Tirtomoyo, Universitas Sebelas Maret
+                                        Jl. Kolonel Sutarto 150 K, Jebres, Surakarta</p>
                                 </div>
                             </div><!-- End Info Item -->
 
@@ -753,15 +746,15 @@
                                 <i class="bi bi-envelope flex-shrink-0"></i>
                                 <div>
                                     <h4>Email:</h4>
-                                    <p>info@example.com</p>
+                                    <p>vokasi@unit.uns.ac.id</p>
                                 </div>
                             </div><!-- End Info Item -->
 
                             <div class="info-item d-flex">
                                 <i class="bi bi-phone flex-shrink-0"></i>
                                 <div>
-                                    <h4>Call:</h4>
-                                    <p>+1 5589 55488 55</p>
+                                    <h4>Telepon:</h4>
+                                    <p>0271-664126</p>
                                 </div>
                             </div><!-- End Info Item -->
 
@@ -814,23 +807,19 @@
 
                 <div class="d-flex flex-column align-items-center align-items-lg-start">
                     <div class="copyright">
-                        &copy; Copyright <strong><span>HeroBiz</span></strong>. All Rights Reserved
+                        &copy; Copyright <strong><span>Sekolah Vokasi | UNS</span></strong>.
                     </div>
-                    <div class="credits">
-                        <!-- All the links in the footer should remain intact. -->
-                        <!-- You can delete the links only if you purchased the pro version. -->
-                        <!-- Licensing information: https://bootstrapmade.com/license/ -->
-                        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/herobiz-bootstrap-business-template/ -->
-                        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-                    </div>
+
                 </div>
 
                 <div class="social-links order-first order-lg-last mb-3 mb-lg-0">
-                    <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
-                    <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
-                    <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
-                    <a href="#" class="google-plus"><i class="bi bi-skype"></i></a>
-                    <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+                    <a href="https://twitter.com/vokasi_uns" class="twitter"><i class="bi bi-twitter"></i></a>
+                    <a href="https://www.facebook.com/vokasi.uns" class="facebook"><i class="bi bi-facebook"></i></a>
+                    <a href="https://www.instagram.com/vokasiuns" class="instagram"><i
+                            class="bi bi-instagram"></i></a>
+                    <a href="https://www.youtube.com/channel/UCz7StIjWe4osVgpG_ErbvWQ" class="youtube"><i
+                            class="bi bi-youtube"></i></a>
+
                 </div>
 
             </div>
@@ -841,7 +830,8 @@
     <a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i
             class="bi bi-arrow-up-short"></i></a>
 
-    <div id="preloader"></div>
+    {{-- <div id="preloader"></div> --}}
+
 
     <!-- Vendor JS Files -->
     <script src="{{ asset('landingpage/assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
