@@ -72,21 +72,37 @@ class LoginController extends Controller
       
          
             if (empty(auth()->user()->nomorhp) && auth()->user()->role == 3 && auth()->user()->status == 1) {
+<<<<<<< HEAD
                 return redirect()->route('dashboard');
             } elseif (auth()->user()->role == 3 && auth()->user()->status == 0) {
                 (auth()->logout());
             } elseif (auth()->user()->role == 1 && auth()->user()->status == 1) {
                 return redirect()->route('dashboard');
+=======
+                return redirect(url('dashboard'));
+            } elseif (auth()->user()->role == 3 && auth()->user()->status == 0) {
+                (auth()->logout());
+            } elseif (auth()->user()->role == 1 && auth()->user()->status == 1) {
+                return redirect(url('dashboard'));
+>>>>>>> efb3b2d6a8ffdaed5966cde8d9b9fea075fd01ff
             } elseif (auth()->user()->role == 1 && auth()->user()->status == 0) {
                 (auth()->logout());
             } elseif ( empty(auth()->user()->nomorhp) && auth()->user()->role == 0 && auth()->user()->status == 1) {
                 return view('dosen\Profile\editprofile', compact( 'profil' ,'prodi'));
             } elseif ( !empty(auth()->user()->nomorhp) && auth()->user()->role == 0 && auth()->user()->status == 1) {
+<<<<<<< HEAD
                 return redirect()->route('dashboard');
             } elseif (auth()->user()->role == 0 && auth()->user()->status == 0) {
                 (auth()->logout());
             }  elseif (auth()->user()->role == 2 && auth()->user()->status == 1) {
                  return redirect()->route('dashboard');
+=======
+                return redirect(url('dashboard'));
+            } elseif (auth()->user()->role == 0 && auth()->user()->status == 0) {
+                (auth()->logout());
+            }  elseif (auth()->user()->role == 2 && auth()->user()->status == 1) {
+                return redirect(url('dashboard'));
+>>>>>>> efb3b2d6a8ffdaed5966cde8d9b9fea075fd01ff
             } elseif (auth()->user()->role == 2 && auth()->user()->status == 0) {
                 (auth()->logout());
            
