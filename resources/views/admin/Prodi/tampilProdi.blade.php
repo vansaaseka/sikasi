@@ -4,6 +4,7 @@
 
 @include('admin/layoutsAdmin/navbar')
 
+@include('sweetalert::alert')
 
 <div class="conatiner-fluid content-inner mt-n5 py-0">
     <div class="row">
@@ -161,8 +162,7 @@
                                                     </div>
                                                 </div>
                                                 <a href="#" class="btn btn-sm btn-icon btn-danger delete"
-                                                    data-id="{{ $data->id }}"
-                                                    data-nama="{{ $data->namaprodi }}">
+                                                    data-id="{{ $data->id }}" data-nama="{{ $data->namaprodi }}">
                                                     <i class="fa fa-trash"></i>
                                                 </a>
 

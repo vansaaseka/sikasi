@@ -22,7 +22,7 @@ class ProdiController extends Controller
                  'namaprodi' => 'required',
                 ]);
                 Prodi::create($request->all());
-                return redirect()->route('prodi')->with('success', 'Data Berhasil Ditambahkan');
+                return redirect()->route('prodi')->with('toast_success', 'Data Berhasil Ditambahkan');
             }
 
           

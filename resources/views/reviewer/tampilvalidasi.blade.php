@@ -318,7 +318,8 @@
 
                                                         @foreach ($status as $b)
                                                             @if ($trx->status_id == $b->id)
-                                                                @if ($b->namastatus == 'Dokumen direview BPU')
+                                                                @if ($b->id >= 3)
+                                                                    {{-- @if ($b->namastatus == 'Dokumen selesai direview BPU') --}}
                                                                     <?php $belumada_validasi = ' <div class="btn btn-outline-primary btn-sm"> <i class="fa fa-check-circle"></i>Selesai</div>';
                                                                     
                                                                     ?>
@@ -375,7 +376,7 @@
                                                                                                 @for ($s = 1; $s < 3; $s++)
                                                                                                     @if ($a->status_id == $status[$s]->id)
                                                                                                         @if ($status[$s]->namastatus === 'Dokumen direview BPU')
-                                                                                                            <?php $tombol = '<div class="custom-control custom-radio custom-radio-color-checked "><input type="radio" name="status_id" value="3"> <label>Dokumen Selesai direview BPU</label> </div>'; ?>
+                                                                                                            <?php $tombol = '<div class="custom-control custom-radio custom-radio-color-checked "><input type="radio" name="status_id" value="3"> <label>Dokumen selesai direview BPU</label> </div>'; ?>
                                                                                                         @endif
                                                                                                     @endif
                                                                                                 @endfor
@@ -413,7 +414,7 @@
                                                                                         name="created_by"
                                                                                         value={{ Auth::user()->id }}>
                                                                                     <?php date_default_timezone_set('Asia/Jakarta'); ?>
-                                                                                    {{ date('Y-m-d H:i:s') }}
+
                                                                                     <input name="created_at"
                                                                                         id="created_at" type="hidden"
                                                                                         value="{{ date('Y-m-d H:i:s') }}">

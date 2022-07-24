@@ -1,6 +1,7 @@
 @include('admin/layoutsAdmin/header')
 @include('admin/layoutsAdmin/sidebar')
 @include('admin/layoutsAdmin/navbar')
+@include('sweetalert::alert')
 <!-- DataTable with Hover -->
 
 

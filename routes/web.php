@@ -31,9 +31,9 @@ Route::get('/', function () {
     return view('landingpage');
 });
 
-// Route::get('/', function () {
-//     return view('auth/login');
-// });
+Route::get('/login', function () {
+    return view('auth/login');
+});
 
 // Route::get('/layoutAdmin', function () {
 //     return view('admin/layoutAdmin');
@@ -47,11 +47,11 @@ Route::get('/', function () {
 
 
 
-route::get('/dashboard',[HomeController::class,"index"]);
+route::get('/dashboard',[HomeController::class,"index"])->name('dashboard');
 
 Auth::routes();
 
-Route::get('/home', [HomeController::class, 'index'])->name('home');
+// Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 
 

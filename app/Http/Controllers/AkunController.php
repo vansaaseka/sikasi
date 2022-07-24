@@ -70,7 +70,7 @@ class AkunController extends Controller
                         'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
                         'role' => ['required', 'string', 'max:255'],
                         'password' => ['required', 'string', 'min:8', 'confirmed'],
-                        'prodi_id' => ['required']
+                        // 'prodi_id' => ['required']
                 ]
                 );
 
@@ -111,13 +111,13 @@ class AkunController extends Controller
             $data = User::find($id);
             $data->update($request->all());
              if ($data->role == 0){
-                    return redirect()->route('tampildosen')->with('sukses','Data Berhasil Diupdate');
+                    return redirect()->route('tampildosen')->with('toast_success','Data Berhasil Diupdate');
                     }elseif ($data->role == 1){
-                        return redirect()->route('tampiladmin')->with('sukses','Data Berhasil Diupdate');
+                        return redirect()->route('tampiladmin')->with('toast_success','Data Berhasil Diupdate');
                     }elseif ($data->role == 2){
-                        return redirect()->route('tampilverifikator')->with('sukses','Data Berhasil Diupdate');
+                        return redirect()->route('tampilverifikator')->with('toast_success','Data Berhasil Diupdate');
                     }elseif ($data->role == 3){
-                        return redirect()->route('tampilreviewer')->with('sukses','Data Berhasil Diupdate');
+                        return redirect()->route('tampilreviewer')->with('toast_success','Data Berhasil Diupdate');
                     }
     
         }

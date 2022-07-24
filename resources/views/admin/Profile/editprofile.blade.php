@@ -53,18 +53,18 @@
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label class="form-label" for="furl">Nama Lengkap</label>
-                                                <input type="text" class="form-control" id="namalengkap"
-                                                    name="name" value=<?= Auth::user()->name ?>
+                                                <label class="form-label" for="nama">Nama Lengkap</label>
+                                                <input type="text" class="form-control" id="nama" name="name"
+                                                    value=<?= Auth::user()->name ?>
                                                     value="{{ old('name', $data->name) }}">
                                             </div>
                                             <div class="form-group">
-                                                <label class="form-label" for="turl">Email:</label>
+                                                <label class="form-label" for="email">Email:</label>
                                                 <input type="text" class="form-control" id="email" name="email"
                                                     value=<?= Auth::user()->email ?>>
                                             </div>
                                             <div class="form-group">
-                                                <label class="form-label" for="instaurl">Nomor HP</label>
+                                                <label class="form-label" for="nomorhp">Nomor HP</label>
                                                 <input type="text" class="form-control" id="nomorhp" name="nomorhp"
                                                     value=<?= Auth::user()->nomorhp ?>>
                                             </div>
@@ -85,10 +85,9 @@
                                                 </select>
                                             </div> --}}
                                             <div class="form-group mb-0">
-                                                <label class="form-label" for="lurl">Alamat</label>
-                                                <input type="text" class="form-control" id="alamat"
-                                                    placeholder="Alamat" name="alamat"
-                                                    value=<?= Auth::user()->alamat ?>>
+                                                <label class="form-label" for="alamat">Alamat</label>
+                                                <input type="text" class="form-control" id="alamat" placeholder=""
+                                                    name="alamat" value=<?= Auth::user()->alamat ?>>
                                                 @error('alamat')
                                                     <div class="invalid-feedback"></div>
                                                 @enderror
@@ -99,6 +98,7 @@
                                                 <button type="submit" class="btn btn-primary">Submit</button>
                                         @endif
                                     @endforeach
+                                </div>
                             </form>
                         </div>
                     </div>

@@ -1,6 +1,7 @@
 @include('admin/layoutsAdmin/header')
 @include('admin/layoutsAdmin/sidebar')
 @include('admin/layoutsAdmin/navbar')
+@include('sweetalert::alert')
 
 <div class="conatiner-fluid content-inner mt-n5 py-0">
     <div class="row">
@@ -20,9 +21,8 @@
                         <div class="form-group">
                             <label for="exampleInputUsername">Username</label>
                             <input type="text" name="name"
-                                class="form-control @error('namakategori') is-invalid @enderror"
-                                value="{{ old('name') }}" id="name" required="required" autocomplete="name"
-                                autofocus="autofocus">
+                                class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}"
+                                id="name" required="required" autocomplete="name" autofocus="autofocus">
                             @error('name')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
@@ -54,7 +54,7 @@
                                 class="form-control @error('password_confirmation') is-invalid @enderror"
                                 value="{{ old('password_confirmation') }}" id="exampleInputPasswordRepeat"
                                 name="password_confirmation" required="required" autocomplete="new-password">
-                            @error('namakategori')
+                            @error('password_confirmation')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>

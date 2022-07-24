@@ -23,29 +23,29 @@ class StatusSeeder extends Seeder
                   'namastatus' => 'Dokumen direview BPU',
                 ],
                 [
-                  'namastatus' => 'Dokumen Selesai direview BPU',
+                  'namastatus' => 'Dokumen selesai direview BPU',
                 ],
                 
                 [
-                    'namastatus' => 'Proses Tanda tangan Dekan',
+                    'namastatus' => 'Proses tanda tangan Dekan',
                 ],
                 [
                     'namastatus' => 'Dokumen telah ditandatangani Dekan',
                 ],
                 [
-                    'namastatus' => 'Tanda tangan Mitra',
+                    'namastatus' => 'Proses tanda tangan Mitra',
                 ],
                 [
                     'namastatus' => 'Dokumen telah ditandatangani Mitra',
                 ],
                 [
-                    'namastatus' => 'Pengajuan tanda tangan WR 4',
+                    'namastatus' => 'Pengajuan DKPI',
                 ],
                 [
                     'namastatus' => 'Dokumen direview DKPI',
                 ],
                 [
-                    'namastatus' => 'Proses Tanda tangan WR 4',
+                    'namastatus' => 'Proses tanda tangan WR 4',
                 ],
                 [
                     'namastatus' => 'Selesai',
@@ -60,7 +60,7 @@ class StatusSeeder extends Seeder
                    'namastatus' => 'Dokumen direview DKPI',
                 ],
                 [
-                  'namastatus' => ' Proses Tanda tangan WR 4',
+                  'namastatus' => ' Proses tanda tangan WR 4',
                 ],
                 [
                   'namastatus' => 'Selesai',

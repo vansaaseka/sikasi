@@ -1,6 +1,7 @@
 @include('admin/layoutsAdmin/header')
 @include('admin/layoutsAdmin/sidebar')
 @include('admin/layoutsAdmin/navbar')
+@include('sweetalert::alert')
 
 <div class="conatiner-fluid content-inner mt-n5 py-0">
     <div class="row">

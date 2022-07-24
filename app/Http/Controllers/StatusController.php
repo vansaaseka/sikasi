@@ -40,7 +40,7 @@ public function insertstatus(Request $request){
         'status' => 'required',
     ]);
     Status::create($request->all());
-    return redirect()->route('status')->with('success', 'Data Berhasil Ditambahkan');
+    return redirect()->route('status')->with('toast_success', 'Data Berhasil Ditambahkan');
 }
 
 public function editstatus($id){
@@ -172,7 +172,7 @@ public function hapusStatus($id){
                 
                 \Mail::to($tujuan)->send(new KirimEmail($data));
                 Alert::success('Sukses', 'Email berhasil dikirim!');
-                return back()->with('Email berhasil dikirm');
+                return back();
 }
 
 

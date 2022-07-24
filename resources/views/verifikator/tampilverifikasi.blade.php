@@ -27,6 +27,7 @@
                                     <th>Mitra</th>
                                     <th>Status</th>
                                     <th>Catatan</th>
+                                    <th>Status Dokumen</th>
                                     <th>Dokumen Kerjasama</th>
                                     <th>Verifikasi</th>
                                 </tr>
@@ -41,6 +42,7 @@
                                     <th>Mitra</th>
                                     <th>Status</th>
                                     <th>Catatan</th>
+                                    <th>Status Dokumen</th>
                                     <th>Dokumen Kerjasama</th>
                                     <th>Verifikasi</th>
                             </tfoot>
@@ -154,8 +156,6 @@
                                             </div>
                                         </td>
 
-
-
                                         <td>
 
                                             <?php
@@ -166,6 +166,18 @@
                                                 }
                                                 ?>
                                         </td>
+
+
+                                        <td>
+                                            @foreach ($trxstatus as $x)
+                                                @if ($datapengajuan->id == $x->pengajuan_id)
+                                                    {{ $x->status_dokumen }}
+                                                @endif
+                                            @endforeach
+                                        </td>
+
+
+
                                         <td>
                                             <?php
                                                 foreach($dokumen as $d){
@@ -221,8 +233,7 @@
 
                                                                             <tr>
                                                                                 <td class="font-size:3">
-                                                                                    Edit Dokumen Pengajuan
-                                                                                    dengan Mitra
+                                                                                    Mitra
                                                                                     :
                                                                                     {{ $datapengajuan->mitra->namamitra }}
                                                                                 </td>
@@ -331,6 +342,23 @@
                                                             <button type="button" class="btn-close"
                                                                 data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
+                                                        <div class="table-responsive">
+                                                            <table class="table align-items table-flush table-hover"
+                                                                id="dataTableHover">
+
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td class="font-size:3"
+                                                                            style="text-align:center">
+                                                                            Mitra
+                                                                            :
+                                                                            {{ $datapengajuan->mitra->namamitra }}
+                                                                        </td>
+                                                                    </tr>
+
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
                                                         <div class="modal-body">
                                                             <div class="row d-flex justify-content-center">
                                                                 <div class="col-md-12">
@@ -356,22 +384,22 @@
                                                                                                         @if ($status[$s]->namastatus === 'Ajuan Diterima')
                                                                                                             <?php $tombol = '<div class="custom-control custom-radio custom-radio-color-checked "><input type="radio" disabled name="status_id" value="2"> <label>Dokumen direview BPU</label> </div>'; ?>
                                                                                                         @elseif($status[$s]->namastatus === 'Dokumen direview BPU')
-                                                                                                            <?php $tombol = '<div class="custom-control custom-radio custom-radio-color-checked "><input type="radio" disabled name="status_id" value="3"> <label>Dokumen Selesai direview BPU</label> </div>'; ?>
-                                                                                                        @elseif($status[$s]->namastatus === 'Dokumen Selesai direview BPU')
-                                                                                                            <?php $tombol = '<div class="custom-control custom-radio custom-radio-color-checked "><input type="radio" name="status_id" value="4"> <label>Proses Tanda tangan Dekan</label> </div>'; ?>
-                                                                                                        @elseif($status[$s]->namastatus === 'Proses Tanda tangan Dekan')
+                                                                                                            <?php $tombol = '<div class="custom-control custom-radio custom-radio-color-checked "><input type="radio" disabled name="status_id" value="3"> <label>Dokumen selesai direview BPU</label> </div>'; ?>
+                                                                                                        @elseif($status[$s]->namastatus === 'Dokumen selesai direview BPU')
+                                                                                                            <?php $tombol = '<div class="custom-control custom-radio custom-radio-color-checked "><input type="radio" name="status_id" value="4"> <label>Proses tanda tangan Dekan</label> </div>'; ?>
+                                                                                                        @elseif($status[$s]->namastatus === 'Proses tanda tangan Dekan')
                                                                                                             <?php $tombol = '<div class="custom-control custom-radio custom-radio-color-checked "><input type="radio" name="status_id" value="5"> <label>Dokumen telah ditandatangani Dekan</label> </div>'; ?>
                                                                                                         @elseif($status[$s]->namastatus === 'Dokumen telah ditandatangani Dekan')
-                                                                                                            <?php $tombol = '<div class="custom-control custom-radio custom-radio-color-checked "><input type="radio" name="status_id" value="6"> <label>Tanda tangan Mitra</label> </div>'; ?>
-                                                                                                        @elseif($status[$s]->namastatus === 'Tanda tangan Mitra')
+                                                                                                            <?php $tombol = '<div class="custom-control custom-radio custom-radio-color-checked "><input type="radio" name="status_id" value="6"> <label>Proses tanda tangan Mitra</label> </div>'; ?>
+                                                                                                        @elseif($status[$s]->namastatus === 'Proses tanda tangan Mitra')
                                                                                                             <?php $tombol = '<div class="custom-control custom-radio custom-radio-color-checked "><input type="radio" name="status_id" value="7"> <label>Dokumen telah ditandatangani Mitra</label> </div>'; ?>
                                                                                                         @elseif($status[$s]->namastatus === 'Dokumen telah ditandatangani Mitra')
-                                                                                                            <?php $tombol = '<div class="custom-control custom-radio custom-radio-color-checked "><input type="radio" name="status_id" value="8"> <label>Pengajuan tanda tangan WR 4</label> </div>'; ?>
-                                                                                                        @elseif($status[$s]->namastatus === 'Pengajuan tanda tangan WR 4')
+                                                                                                            <?php $tombol = '<div class="custom-control custom-radio custom-radio-color-checked "><input type="radio" name="status_id" value="8"> <label>Pengajuan DKPI</label> </div>'; ?>
+                                                                                                        @elseif($status[$s]->namastatus === 'Pengajuan DKPI')
                                                                                                             <?php $tombol = '<div class="custom-control custom-radio custom-radio-color-checked "><input type="radio" name="status_id" value="9"> <label>Dokumen direview DKPI</label> </div>'; ?>
                                                                                                         @elseif($status[$s]->namastatus === 'Dokumen direview DKPI')
-                                                                                                            <?php $tombol = '<div class="custom-control custom-radio custom-radio-color-checked "><input type="radio" name="status_id" value="10"> <label>Proses Tanda tangan WR 4</label> </div>'; ?>
-                                                                                                        @elseif($status[$s]->namastatus === 'Proses Tanda tangan WR 4')
+                                                                                                            <?php $tombol = '<div class="custom-control custom-radio custom-radio-color-checked "><input type="radio" name="status_id" value="10"> <label>Proses tanda tangan WR 4</label> </div>'; ?>
+                                                                                                        @elseif($status[$s]->namastatus === 'Proses tanda tangan WR 4')
                                                                                                             <?php $tombol = '<div class="custom-control custom-radio custom-radio-color-checked "><input type="radio" name="status_id" value="11"> <label>Selesai</label> </div>'; ?>
                                                                                                         @endif
                                                                                                     @endif
@@ -389,12 +417,12 @@
                                                                                                 @for ($s = 11; $s < count($status); $s++)
                                                                                                     @if ($a->status_id == $status[$s]->id)
                                                                                                         @if ($status[$s]->namastatus === 'Ajuan Diterima')
-                                                                                                            <?php $tombol = '<div class="custom-control custom-radio custom-radio-color-checked "><input type="radio" disabled name="status_id" value="13"> <label>Pengajuan DKPI</label> </div>'; ?>
+                                                                                                            <?php $tombol = '<div class="custom-control custom-radio custom-radio-color-checked "><input type="radio"  name="status_id" value="13"> <label>Pengajuan DKPI</label> </div>'; ?>
                                                                                                         @elseif($status[$s]->namastatus === 'Pengajuan DKPI')
-                                                                                                            <?php $tombol = '<div class="custom-control custom-radio custom-radio-color-checked "><input type="radio" disabled name="status_id" value="14"> <label></label>Dokumen direview DKPI</div>'; ?>
+                                                                                                            <?php $tombol = '<div class="custom-control custom-radio custom-radio-color-checked "><input type="radio"  name="status_id" value="14"> <label></label>Dokumen direview DKPI</div>'; ?>
                                                                                                         @elseif($status[$s]->namastatus === 'Dokumen direview DKPI')
-                                                                                                            <?php $tombol = '<div class="custom-control custom-radio custom-radio-color-checked "><input type="radio" name="status_id" value="15"> <label></label>Tanda Tangan WR 4</div>'; ?>
-                                                                                                        @elseif($status[$s]->namastatus === 'Tanda tangan WR 4')
+                                                                                                            <?php $tombol = '<div class="custom-control custom-radio custom-radio-color-checked "><input type="radio" name="status_id" value="15"> <label></label>Proses tanda tangan WR 4</div>'; ?>
+                                                                                                        @elseif($status[$s]->namastatus === 'Proses tanda tangan WR 4')
                                                                                                             <?php $tombol = '<div class="custom-control custom-radio custom-radio-color-checked "><input type="radio" name="status_id" value="16"> <label>Selesai</label> </div>'; ?>
                                                                                                         @endif
                                                                                                     @endif
