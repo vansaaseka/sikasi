@@ -403,7 +403,23 @@
                                                                                 </td>
                                                                                 <td>:</td>
                                                                                 <td style="color: red">
-                                                                                    @foreach ($trxstatus as $tr)
+
+                                                                                    @php
+                                                                                        $tr = App\Models\Trxstatus::where('pengajuan_id', $datapengajuan->id)
+                                                                                            ->orderBy('id', 'desc')
+                                                                                            ->first();
+                                                                                    @endphp
+                                                                                    @isset($tr)
+                                                                                        @foreach (App\Models\Status::where('id', $tr->status_id)->get() as $st)
+                                                                                            @if ($st->namastatus == 'Selesai')
+                                                                                                {{ $diff = Carbon\Carbon::parse($datapengajuan->tanggalakhir)->diffForHumans() }}
+                                                                                            @else
+                                                                                                Belum Disetujui
+                                                                                            @endif
+                                                                                        @endforeach
+                                                                                    @endisset
+
+                                                                                    {{-- @foreach ($trxstatus as $tr)
                                                                                         @if ($datapengajuan->id == $tr->pengajuan_id)
                                                                                             @foreach ($status as $s)
                                                                                                 @if ($tr->status_id == $s->id)
@@ -415,7 +431,7 @@
                                                                                                 @endif
                                                                                             @endforeach
                                                                                         @endif
-                                                                                    @endforeach
+                                                                                    @endforeach --}}
                                                                                 </td>
                                                                             </tr>
 

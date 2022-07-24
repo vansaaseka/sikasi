@@ -281,7 +281,7 @@
                                         <td>
                                             @foreach ($dokumen as $doc)
                                                 @if ($datapengajuan->id == $doc->pengajuan_id)
-                                                    @if (empty($dokumen->nodokumen))
+                                                    @if (empty($doc->nodokumen))
                                                         <button type="button" class="btn btn-secondary btn-sm"
                                                             data-bs-toggle="modal"
                                                             data-bs-target="#modalnodok{{ $datapengajuan->id }}"
@@ -289,7 +289,7 @@
                                                             Input
                                                         </button>
                                                     @else
-                                                        {{ $dokumen->nomordokumen }}
+                                                        {{ $doc->nodokumen }}
                                                     @endif
                                                 @endif
                                             @endforeach
@@ -337,6 +337,7 @@
                                                                             @csrf
 
                                                                             <div class="form-group">
+
                                                                                 <div class="form-group">
                                                                                     <div class="form-group">
 
@@ -344,8 +345,7 @@
                                                                                             name="nodokumen"
                                                                                             id="customFile"
                                                                                             class="form-control"
-                                                                                            value="{{ old('nodokumen') }}"
-                                                                                            autofocus>
+                                                                                            value="" autofocus>
 
                                                                                     </div>
                                                                                 </div>
