@@ -60,7 +60,7 @@ class PengajuanController extends Controller
 
     public function insertpengajuan (Request $request)
     {
-        $validasi = Validator::make($request->all(),[
+        $rule = [
             'namamitra' => 'required',
             // 'namadagangmitra' => 'required',
             'logo' => 'required|image|mimes:jpg,png,jpeg' ,
@@ -74,22 +74,32 @@ class PengajuanController extends Controller
             'tanggalmulai' => 'required',
             'tanggalakhir' => 'required',
             'kategori_id' => 'required',
-            'prodiid' => 'required'
+            // 'prodiid' => 'required'
 
-            ]);
+        ];
+        if ($request->id) {
+            unset($rule['logo']);
+        }
+        $validasi = Validator::make($request->all(),$rule);
 
         if($validasi->fails()) {
+            return $validasi->errors();
             Alert::warning('Warning', 'Mohon isikan data secara lengkap dan benar!');
             return redirect()->back();
         } else {
-        
+
+         
         #untuk upload file logo mitra
         $path = 'logomitra/';
 
+        if (!$request->id) {
         $file = $request->file('logo');
         $name_file = time() . '.' . $file->extension();
         $file->move($path, $name_file);
-
+        }else{
+            $mit = Mitra::find($request->id);
+            $name_file =  $mit->logo;
+        }
 
         $mitra = new Mitra;
         $kategorimitra = new KategoriMitra;
@@ -106,7 +116,10 @@ class PengajuanController extends Controller
         $mitra->narahubung = $request->narahubung;
         $mitra->no_hp = $request->no_hp;
 
-        $mitra->save();
+        if (!$request->id) {
+            $mitra->save();
+        }
+
 
 
 
@@ -234,5 +247,15 @@ class PengajuanController extends Controller
 	public function export_excel(Request $request)
 	{
 		return Excel::download(new PengajuanExport, 'pengajuan.xlsx');
+    }
+
+    public function getMitra(Request $request)
+    {
+        return Mitra::where('namamitra','like','%'.$request->q.'%')->get();
+    }
+
+    public function getDetailMitra(Request $request)
+    {
+        return Mitra::find($request->id);
     }
 }

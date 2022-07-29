@@ -100,6 +100,8 @@ route::post('/ubahpassword',[AkunController::class,"ubahpassword"])->name('ubahp
 route::get('/unduhtemplate',[TemplateController::class,"unduhtemplate"])->name('unduhtemplate');
 
 //Pengajuan
+route::get('/select-mitra',[PengajuanController::class,"getMitra"])->name('select.mitra');
+route::get('/get-mitra',[PengajuanController::class,"getDetailMitra"])->name('get.mitra');
 route::get('/pengajuan',[PengajuanController::class,"index"])->name('pengajuan');
 route::get('/tambahpengajuan',[PengajuanController::class,"tambahpengajuan"])->name('tambahpengajuan');
 route::post('/insertpengajuan',[PengajuanController::class,"insertpengajuan"])->name('insertpengajuan');
