@@ -84,6 +84,7 @@
                                             </select>
                                         </div>
                                     </div>
+
                                     <div class="col-md-6">
 
                                         <div class="form-group">
@@ -99,7 +100,6 @@
                                             @enderror --}}
                                         </div>
                                     </div>
-
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="form-label">Nama Dagang Mitra
@@ -113,10 +113,9 @@
 
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label class="form-label">Logo Resmi Mitra *</label>
-                                            <input type="file" class="form-control" name="logo"
-                                                placeholder="Logo dengan format jpg,png,jpeg" />
-                                            <div id="logoM"></div>
+                                            <label class="form-label">Logo Resmi Mitra * - format
+                                                .jpg .png .jpeg</label>
+                                            <input type="file" class="form-control" name="logo" />
                                         </div>
                                     </div>
                                     <div class="col-md-6">
@@ -164,7 +163,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label class="form-label">Nama Narahubung Mitra</label>
+                                            <label class="form-label">Nama Narahubung Mitra *</label>
                                             <input type="text" class="form-control" name="narahubung" placeholder="" />
                                         </div>
                                     </div>
@@ -237,7 +236,14 @@
                                         </div>
                                     </div>
                                     <input type="hidden" name="prodiid" value="{{ Auth::user()->prodi_id }}">
-
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="form-label">Pengajuan Tentang
+                                            </label>
+                                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="2"
+                                                name="tentang"></textarea>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 

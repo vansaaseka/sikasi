@@ -34,6 +34,7 @@ class ProfileController extends Controller
         // $profil = User::where('id', Auth::user()->id)->first();
         return view('verifikator\Profile\editprofile' , compact('prodi' , 'profil'));
         }
+        
          public function profileReviewer(){
 
          $prodi = Prodi::all();

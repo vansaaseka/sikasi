@@ -22,7 +22,7 @@ class ProdiController extends Controller
                  'namaprodi' => 'required',
                 ]);
                 Prodi::create($request->all());
-                return redirect()->route('prodi')->with('success', 'Data Berhasil Ditambahkan');
+                return redirect()->route('prodi')->with('toast_success', 'Data Berhasil Ditambahkan');
             }
 
           
@@ -39,6 +39,6 @@ class ProdiController extends Controller
             public function hapusProdi($id){
             $prodi = Prodi::find($id);
             $prodi->delete();
-            return redirect()->route('prodi')->with('toast_success','Data Berhasil Dihapus');
+            return redirect()->route('prodi');
             }
             }

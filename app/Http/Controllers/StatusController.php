@@ -40,7 +40,7 @@ public function insertstatus(Request $request){
         'status' => 'required',
     ]);
     Status::create($request->all());
-    return redirect()->route('status')->with('success', 'Data Berhasil Ditambahkan');
+    return redirect()->route('status')->with('toast_success', 'Data Berhasil Ditambahkan');
 }
 
 public function editstatus($id){
@@ -64,6 +64,8 @@ public function hapusStatus($id){
     return redirect()->route('status')->with('toast_success','Data Berhasil Dihapus');
 }
 
+// =============================================
+
     public function verifikasi(){
         $kategori = Kategori::all();
         $pengajuan = Pengajuan::all();
@@ -73,7 +75,35 @@ public function hapusStatus($id){
         $dokumen = Dokumen::all();
         $trxstatus = Trxstatus::all();
         $user = User::all();
-        return view('verifikator\tampilverifikasi' , compact('pengajuan' , 'mitra', 'status','prodi', 'dokumen', 'trxstatus', 'user', 'kategori' ));
+       
+        
+      if (Auth()->user()->role == 2){
+      return view('verifikator\tampilverifikasi' , compact('pengajuan' , 'mitra', 'status','prodi', 'dokumen',
+      'trxstatus', 'user', 'kategori' ));
+      }
+      else{
+      abort(403);
+      }
+    }
+
+    public function riwayatverifikasi(){
+    $kategori = Kategori::all();
+    $pengajuan = Pengajuan::all();
+    $mitra = Mitra::all();
+    $status = Status::all();
+    $prodi = Prodi::all();
+    $dokumen = Dokumen::all();
+    $trxstatus = Trxstatus::all();
+    $user = User::all();
+
+
+    if (Auth()->user()->role == 2){
+    return view('verifikator\selesaiverifikasi' , compact('pengajuan' , 'mitra', 'status','prodi', 'dokumen',
+    'trxstatus', 'user', 'kategori' ));
+    }
+    else{
+    abort(403);
+    }
     }
 
     public function dataajuan(){
@@ -85,9 +115,15 @@ public function hapusStatus($id){
     $dokumen = Dokumen::all();
     $trxstatus = Trxstatus::all();
     $user = User::all();
-    return view('admin.pengajuan.tampilpengajuan' , compact('pengajuan' , 'mitra', 'status','prodi', 'dokumen',
-    'trxstatus', 'user', 'kategori'));
-    }
+   
+     if (Auth()->user()->role == 1){
+     return view('admin.pengajuan.tampilpengajuan' , compact('pengajuan' , 'mitra', 'status','prodi', 'dokumen',
+     'trxstatus', 'user', 'kategori'));
+     }
+     else{
+     abort(403);
+     }
+}
 
    
 
@@ -97,35 +133,33 @@ public function hapusStatus($id){
     return view('verifikator\updatestatus', compact('status' ,'pengajuan'));
     }
 
-    public function filter(Request $request){
-    $user = User::all();
+//     public function filter(Request $request){
+//     $user = User::all();
 
-    $kategori = Kategori::all();
-    $mitra = Mitra::all();
-    $trxstatus = Trxstatus::all();
-    $prodi = Prodi::all();
-    $dokumen = Dokumen::all();
+//     $kategori = Kategori::all();
+//     $mitra = Mitra::all();
+//     $trxstatus = Trxstatus::all();
+//     $prodi = Prodi::all();
+//     $dokumen = Dokumen::all();
    
 
-    $startDate = ($request->tanggalawal);
-    $endDate = ($request->tanggalakhir);
+//     $startDate = ($request->tanggalawal);
+//     $endDate = ($request->tanggalakhir);
 
 
-    $pengajuan = Pengajuan::all()
-    ->whereBetween('created_at', [$startDate, $endDate]);
+//     $pengajuan = Pengajuan::all()
+//     ->whereBetween('created_at', [$startDate, $endDate]);
 
-    return view('admin.pengajuan.cetakpengajuan' , compact('pengajuan' , 'mitra','prodi', 'dokumen',
-    'trxstatus', 'user', 'kategori'));
 
-    // if (Auth()->user()->role == 0){
-    // return view('pelakuusaha.datalaporan', compact('users','laporans','limbah','perusahaans', 'sumberlimbah', 'pihakketiga',
-    // 'trx_limbah', 'trx_pihakketiga'));
-    // }
-    // else{
-    // abort(403);
-    // }
+//     if (Auth()->user()->role == 1){
+//     return view('admin.pengajuan.cetakpengajuan' , compact('pengajuan' , 'mitra','prodi', 'dokumen',
+//   'trxstatus', 'user', 'kategori'));
+//     }
+//     else{
+//     abort(403);
+//     }
 
-} 
+// } 
 
                
         public function cetakpengajuan(){
@@ -138,8 +172,15 @@ public function hapusStatus($id){
             $prodi = Prodi::all();
             $dokumen = Dokumen::all();
             $user = User::all();
+
+             if (Auth()->user()->role == 1){
             return view('admin.pengajuan.cetakpengajuan' , compact('pengajuan' , 'mitra','prodi', 'dokumen',
             'trxstatus', 'user', 'kategori', 'ruanglingkup', 'kategorimitra'));
+             }
+             else{
+             abort(403);
+             }
+           
         }
     public function insertnewstatus(Request $request){
     $trxstatus = new Trxstatus;
@@ -148,17 +189,23 @@ public function hapusStatus($id){
             $trxstatus->pengajuan_id = $request->input('pengajuan_id');
             $trxstatus->created_by = $request->input('created_by');
             $trxstatus->status_id = $request->input('status_id');
-            $trxstatus->catatan = $request['catatan'];
+            $trxstatus->catatan = $request->input('catatan');
+            // $trxstatus->catatan = $request['catatan'];
             $trxstatus->status_dokumen = $request['status_dokumen'];
             $trxstatus->save();
  
+          
             $pengajuan = Pengajuan::find($request->input('pengajuan_id'));
             $status = Status::find($request->input('status_id'));
+            $trxstatus = Trxstatus::find($request->input('catatan'));
+          
 
             $nama = $pengajuan->user->name;
             $mitra = $pengajuan->mitra->namamitra;
             $tujuan = $pengajuan->user->email;
             $aksi = $status->namastatus;
+            $tentang = $pengajuan->tentang;
+
                 
 
          
@@ -166,17 +213,17 @@ public function hapusStatus($id){
             $data = [
                'user' => $nama,
                'mitra' => $mitra,
-               'aksi' => $aksi
+               'aksi' => $aksi,
+               'tentang' => $tentang,
+            //    'catatan' => $catatan
+             
             ];
             
                 
                 \Mail::to($tujuan)->send(new KirimEmail($data));
                 Alert::success('Sukses', 'Email berhasil dikirim!');
-                return back()->with('Email berhasil dikirm');
+                return back();
 }
-
-
-
 
             public function validasi(){
             $pengajuan = Pengajuan::all();
@@ -187,8 +234,33 @@ public function hapusStatus($id){
             $dokumen = Dokumen::all();
             $trxstatus = Trxstatus::all();
             $user = User::all();
+            
+            if (Auth()->user()->role == 3){
             return view('reviewer.tampilvalidasi' , compact('pengajuan' , 'mitra', 'status','prodi', 'dokumen',
             'trxstatus', 'user', 'kategori'));
             }
+            else{
+            abort(403);
+            }
+        }
+
+         public function riwayatvalidasi(){
+         $pengajuan = Pengajuan::all();
+         $mitra = Mitra::all();
+         $kategori = Kategori::all();
+         $status = Status::all();
+         $prodi = Prodi::all();
+         $dokumen = Dokumen::all();
+         $trxstatus = Trxstatus::all();
+         $user = User::all();
+
+         if (Auth()->user()->role == 3){
+         return view('reviewer.selesaivalidasi' , compact('pengajuan' , 'mitra', 'status','prodi', 'dokumen',
+         'trxstatus', 'user', 'kategori'));
+         }
+         else{
+         abort(403);
+         }
+         }
 
 }

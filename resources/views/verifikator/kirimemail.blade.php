@@ -3,9 +3,10 @@
 
     Hallo, {{ $data['user'] }}
 
-    Pengajuan anda dengan mitra {{ $data['mitra'] }} sedang dalam status {{ $data['aksi'] }}
+    Pengajuan anda dengan mitra {{ $data['mitra'] }} tentang {{ $data['tentang'] }} dalam status {{ $data['aksi'] }}
 
+    {{-- Catatan : {{ $data['catatan'] }} --}}
 
-    Thanks,
+    Terimaksih,
     {{ config('app.name') }}
 @endcomponent

@@ -42,7 +42,7 @@
                                     </div>
                                     <div class="progress-detail">
                                         <p class="mb-2">Proses Pengajuan</p>
-                                        <h4 class="counter">{{ $totalproses }}</h4>
+                                        <h4 class="counter">{{ $proses_pengajuan }}</h4>
                                     </div>
                                 </div>
                             </div>

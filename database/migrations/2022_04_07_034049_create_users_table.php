@@ -20,7 +20,6 @@ class CreateUsersTable extends Migration
             $table->string('photo')->nullable()->default(null);
             $table->string('nomorhp')->nullable()->default(null);
             $table->foreignId('prodi_id')->nullable()->constrained('prodis')->onDelete('cascade')->onUpdate('cascade');
-            $table->string('unit')->nullable()->default(null);
             $table->string('alamat')->nullable()->default(null);
             $table->string('status')->default(0);
             $table->string('role')->default(0);

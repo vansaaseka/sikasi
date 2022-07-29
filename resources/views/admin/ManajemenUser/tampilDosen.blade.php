@@ -132,128 +132,115 @@
                                                     class="bbtn btn-sm btn-danger">Non-Aktif</a>
                                             @endif
                                         </td>
+
                                         <td>
                                             <a class="btn btn-primary btn-sm" data-bs-toggle="modal"
                                                 data-bs-target="#modaleditdosen{{ $account->id }}"
                                                 id="#modaleditdosen{{ $account->id }}">
                                                 <i class="fa fa-edit"></i>
                                             </a>
-                                            {{-- Modal --}}
-                                            <div class="modal fade" id="modaleditdosen{{ $account->id }}"
-                                                tabindex="-1" role="dialog" aria-labelledby="staticBackdropLiveLabel"
-                                                aria-hidden="true" style="text-align: left">
-                                                <div class="modal-dialog modal-dialog-scrollable" role="document">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title" id="staticBackdropLiveLabel">
-                                                                Edit
-                                                                Data Dosen</h5>
-                                                            <button type="button" class="btn-close"
-                                                                data-bs-dismiss="modal" aria-label="Close"></button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <div class="modal-body">
-                                                                <div class="row d-flex justify-content">
-                                                                    <div class="col-md-12">
-                                                                        <div class="card">
-                                                                            <div class="card-body">
-                                                                                <form
-                                                                                    action="/updateakun/{{ $account->id }}"
-                                                                                    method="POST"
-                                                                                    enctype="multipart/form-data"
-                                                                                    class="forms-sample">
-                                                                                    @csrf
 
-                                                                                    <div class="form-group">
-                                                                                        <label
-                                                                                            for="exampleInputUsername">Username</label>
-                                                                                        <input type="text"
-                                                                                            name="name"
-                                                                                            class="form-control @error('email') is-invalid @enderror"
-                                                                                            id="name"
-                                                                                            placeholder="Input Username"
-                                                                                            name="name" required
-                                                                                            autocomplete="name"
-                                                                                            autofocus
-                                                                                            value="{{ $account->name }}">
-                                                                                        @error('name')
-                                                                                            <div class="invalid-feedback">
-                                                                                                {{ $message }}</div>
-                                                                                        @enderror
-                                                                                    </div>
-
-                                                                                    <div class="form-group">
-                                                                                        <label class="form-label">Asal
-                                                                                            Prodi</label>
-                                                                                        <select name="prodi_id"
-                                                                                            class="selectpicker form-control"
-                                                                                            data-style="py-0">
-                                                                                            <option value="">
-                                                                                                --Pilih--</option>
-                                                                                            @foreach ($prodi as $item)
-                                                                                                <option
-                                                                                                    value="{{ $item->id }}">
-                                                                                                    {{ $item->namaprodi }}
-                                                                                                </option>
-                                                                                            @endforeach
-
-                                                                                            @error('prodi_id')
-                                                                                                <div
-                                                                                                    class="invalid-feedback">
-                                                                                                </div>
-                                                                                            @enderror
-                                                                                        </select>
-                                                                                    </div>
-
-                                                                                    <div class="form-group">
-                                                                                        <label
-                                                                                            for="exampleInputEmail1">Email</label>
-                                                                                        <input type="email"
-                                                                                            name="email"
-                                                                                            class="form-control @error('email') is-invalid @enderror"
-                                                                                            id="email"
-                                                                                            aria-describedby="emailHelp"
-                                                                                            placeholder="Input Email"
-                                                                                            name="email" required
-                                                                                            autocomplete="email"
-                                                                                            value="{{ $account->email }}">
-                                                                                        @error('email')
-                                                                                            <div class="invalid-feedback">
-                                                                                                {{ $message }}</div>
-                                                                                        @enderror
-                                                                                    </div>
-
-                                                                                    <button type="submit"
-                                                                                        class="btn btn-primary next action-button float-end"
-                                                                                        value="Submit">Submit</button>
-                                                                            </div>
-                                                                            </form>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            <a href="#" class="btn btn-danger delete btn-sm"
+                                                data-id="{{ $account->id }}" data-nama="{{ $account->name }}">
+                                                <i class="fa fa-trash"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                @endif
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div>
-
-                <a href="#" class="btn btn-danger delete btn-sm" data-id="{{ $account->id }}"
-                    data-nama="{{ $account->name }}">
-                    <i class="fa fa-trash"></i>
-                </a>
-                </td>
-                </tr>
-                @endif
-                @endforeach
-                </tbody>
-                </table>
             </div>
         </div>
     </div>
 </div>
-</div>
-</div>
+@foreach ($dosen as $akun)
+    {{-- Modal --}}
+    <div class="modal fade" id="modaleditdosen{{ $akun->id }}" tabindex="-1" role="dialog"
+        aria-labelledby="staticBackdropLiveLabel" aria-hidden="true" style="text-align: left">
+        <div class="modal-dialog modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLiveLabel">
+                        Edit
+                        Data Dosen</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="modal-body">
+                        <div class="row d-flex justify-content">
+                            <div class="col-md-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <form action="/updateakun/{{ $akun->id }}" method="POST"
+                                            enctype="multipart/form-data" class="forms-sample">
+                                            @csrf
+
+                                            <div class="form-group">
+                                                <label for="exampleInputUsername">Username</label>
+                                                <input type="text" name="name"
+                                                    class="form-control @error('email') is-invalid @enderror"
+                                                    id="name" placeholder="Input Username" name="name"
+                                                    required autocomplete="name" autofocus
+                                                    value="{{ $akun->name }}">
+                                                @error('name')
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="form-label">Asal
+                                                    Prodi</label>
+                                                <select name="prodi_id" class="selectpicker form-control"
+                                                    data-style="py-0">
+                                                    <option value="">
+                                                        --Pilih--</option>
+                                                    @foreach ($prodi as $item)
+                                                        <option value="{{ $item->id }}"
+                                                            {{ old('prodi_id', $akun->prodi_id) == $item->id ? 'selected' : null }}>
+                                                            {{ $item->namaprodi }}
+                                                        </option>
+                                                    @endforeach
+
+                                                    @error('prodi_id')
+                                                        <div class="invalid-feedback">
+                                                        </div>
+                                                    @enderror
+                                                </select>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1">Email</label>
+                                                <input type="email" name="email"
+                                                    class="form-control @error('email') is-invalid @enderror"
+                                                    id="email" aria-describedby="emailHelp"
+                                                    placeholder="Input Email" name="email" required
+                                                    autocomplete="email" value="{{ $akun->email }}">
+                                                @error('email')
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
+                                            </div>
+
+                                            <button type="submit"
+                                                class="btn btn-primary next action-button float-end"
+                                                value="Submit">Submit</button>
+                                    </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+@endforeach
+
 
 
 @include('admin/layoutsAdmin/footer')

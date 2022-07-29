@@ -59,7 +59,7 @@
                                 </div>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="/profileAdmin">Profile</a></li>
+                                <li><a class="dropdown-item" href="/profile">Profile</a></li>
 
                                 <hr class="dropdown-divider">
                         </li>

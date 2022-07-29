@@ -21,7 +21,7 @@ class KategorimitraController extends Controller
            'kategorimitra' => 'required',
            ]);
            KategoriMitra::create($request->all());
-           return redirect()->route('kategorimitra')->with('success', 'Data Berhasil Ditambahkan');
+           return redirect()->route('kategorimitra')->with('toas_success', 'Data Berhasil Ditambahkan');
            }
 
         

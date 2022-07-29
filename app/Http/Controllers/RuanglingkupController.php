@@ -21,7 +21,7 @@ class RuanglingkupController extends Controller
       'ruanglingkup' => 'required',
       ]);
       RuangLingkup::create($request->all());
-      return redirect()->route('ruanglingkup')->with('success', 'Data Berhasil Ditambahkan');
+      return redirect()->route('ruanglingkup')->with('toast_success', 'Data Berhasil Ditambahkan');
       }
 
     

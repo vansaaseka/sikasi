@@ -11,6 +11,7 @@ use App\Models\Kategori;
 use App\Models\Template;
 use App\Models\Pengajuan;
 use App\Models\Trxstatus;
+use Illuminate\Support\Str;
 use App\Models\RuangLingkup;
 use Illuminate\Http\Request;
 use App\Models\KategoriMitra;
@@ -62,15 +63,15 @@ class PengajuanController extends Controller
     {
         $rule = [
             'namamitra' => 'required',
-            // 'namadagangmitra' => 'required',
             'logo' => 'required|image|mimes:jpg,png,jpeg' ,
             'kategorimitra_id' => 'required',
             'alamat' => 'required',
             'email' => 'required|email',
             'namapenandatangan' => 'required',
             'jabatanpenandatangan' => 'required',
-            // 'narahubung' => 'required',
+            'narahubung' => 'required',
             'no_hp' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
+            'tentang' => 'required',
             'tanggalmulai' => 'required',
             'tanggalakhir' => 'required',
             'kategori_id' => 'required',
@@ -105,7 +106,7 @@ class PengajuanController extends Controller
         $kategorimitra = new KategoriMitra;
 
 
-        $mitra->namamitra = $request->namamitra;
+        $mitra->namamitra = Str::upper($request->namamitra);
         $mitra->namadagangmitra = $request->namadagangmitra;
         $mitra->logo = $name_file;
         $mitra->kategorimitra_id = $request->kategorimitra_id;
@@ -163,8 +164,10 @@ class PengajuanController extends Controller
         $pengajuan->mitra_id = $mitra->id;
         $pengajuan->ruanglingkup_id = json_encode($dataa1);
         $pengajuan->proditerlibat_id = json_encode($dataa2);
+        $pengajuan->tentang = $request->tentang;
         $pengajuan->tanggalmulai = $request->tanggalmulai;
         $pengajuan->tanggalakhir = $request->tanggalakhir;
+        $pengajuan->tentang = $request->tentang;
         $pengajuan->prodiid = $request->prodiid;
         $pengajuan->save();
 
@@ -198,6 +201,7 @@ class PengajuanController extends Controller
             'tahun' => $startDateYear,
             'nama_lengkap_penandatangan' => $mitra->namapenandatangan,
             'jabatan_penandatangan_mitra' => $mitra->jabatanpenandatangan,
+            'tentang' => $pengajuan->tentang,
         ];
 
 

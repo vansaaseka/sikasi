@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\User;
 use App\Providers\RouteServiceProvider;
+use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 
@@ -72,27 +73,33 @@ class LoginController extends Controller
       
          
             if (empty(auth()->user()->nomorhp) && auth()->user()->role == 3 && auth()->user()->status == 1) {
-                return redirect(url('dashboard'));
+                return redirect()->route('dashboard');
             } elseif (auth()->user()->role == 3 && auth()->user()->status == 0) {
                 (auth()->logout());
             } elseif (auth()->user()->role == 1 && auth()->user()->status == 1) {
-                return redirect(url('dashboard'));
+                return redirect()->route('dashboard');
             } elseif (auth()->user()->role == 1 && auth()->user()->status == 0) {
                 (auth()->logout());
             } elseif ( empty(auth()->user()->nomorhp) && auth()->user()->role == 0 && auth()->user()->status == 1) {
                 return view('dosen\Profile\editprofile', compact( 'profil' ,'prodi'));
             } elseif ( !empty(auth()->user()->nomorhp) && auth()->user()->role == 0 && auth()->user()->status == 1) {
-                return redirect(url('dashboard'));
+                return redirect()->route('dashboard');
             } elseif (auth()->user()->role == 0 && auth()->user()->status == 0) {
+                // Alert::info('Info', 'Akun Anda belum di aktifkan');
+                //  return redirect()->route('login');
                 (auth()->logout());
+                Alert::info('Info', 'Akun Anda belum di aktifkan');
             }  elseif (auth()->user()->role == 2 && auth()->user()->status == 1) {
-                return redirect(url('dashboard'));
+                 return redirect()->route('dashboard');
             } elseif (auth()->user()->role == 2 && auth()->user()->status == 0) {
                 (auth()->logout());
            
             }
-        } else {
-            return redirect()->route('login')->with('error', 'Email and password are wrong');
+        } 
+   
+        else {
+            Alert::error('Error', 'Email atau Password dan Salah');
+            return redirect()->route('login');
         }
         
     }

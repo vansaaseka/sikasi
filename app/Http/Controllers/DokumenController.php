@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Dokumen;
+use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Facades\Validator;
 
 class DokumenController extends Controller
 {
@@ -18,11 +20,16 @@ class DokumenController extends Controller
     public function insertdokumen(Request $request){
             // ddd($request);
             //membuat validasi, jika tidak diisi maka akan menampilkan pesan error
-            $this->validate($request, [
-                'dokumen'=> 'mimes:doc,docx,pdf',
+           $validasi = Validator::make($request->all(),[
+                'dokumen'=> 'required|mimes:doc,docx,pdf',
             ],
        
         );
+         if($validasi->fails()) {
+         Alert::warning('Warning', 'Mohon isikan data secara benar!');
+         return redirect()->back();
+         } 
+         else {
              //mengambil data file yang diupload
              $dokumen           = $request->file('dokumen');
              //mengambil nama file
@@ -42,17 +49,25 @@ class DokumenController extends Controller
    
     // // return redirect()->route('pengajuan')->with('success', 'Data Berhasil Ditambahkan');
     }
-
-    public function editdokumen($id){
-    $draf = Draf::find($id);
-    //dd($draf);
-    return view('admin\Draf\editdraf', compact('draf'));
     }
 
+  
+
     public function updatedokumen(Request $request, $id){
-    $dokumen = Dokumen::find($id);
-    $dokumen->update($request->all());
-    if ($request->hasFile('dokumen')) 
+         $validasi = Validator::make($request->all(),[
+          'dokumen'=> 'mimes:doc,docx,pdf',
+          ],
+
+          );
+          if($validasi->fails()) {
+          Alert::warning('Warning', 'Mohon isikan data secara lengkap dan benar!');
+          return redirect()->back();
+          }
+          else {
+
+            $dokumen = Dokumen::find($id);
+            $dokumen->update($request->all());
+            if ($request->hasFile('dokumen')) 
         {
             $request->file('dokumen')->move('dokumenkerjasama/', $request->file('dokumen')->getClientOriginalName());
             $dokumen->dokumen = $request->file('dokumen')->getClientOriginalName();
@@ -60,12 +75,9 @@ class DokumenController extends Controller
         }
         return back()->with('toast_success','Data Berhasil Diupdate');
     }
-
-    public function hapusdraf($id){
-    $draf = Draf::find($id);
-    $draf->delete();
-    return redirect()->route('draf')->with('toast_success','Data Berhasil Dihapus');
     }
+
+
 
     public function download($id)
     {

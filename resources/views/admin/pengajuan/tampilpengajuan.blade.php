@@ -1,6 +1,7 @@
 @include('admin/layoutsAdmin/header')
 @include('admin/layoutsAdmin/sidebar')
 @include('admin/layoutsAdmin/navbar')
+@include('sweetalert::alert')
 <!-- DataTable with Hover -->
 
 
@@ -19,10 +20,11 @@
                             <thead>
                                 <tr class="odd text-center">
                                     <th>No</th>
-                                    <th>kategori Pengajuan</th>
+                                    <th>Tahun Kerjasama</th>
+                                    <th>Kategori Pengajuan</th>
                                     <th>Pengusul</th>
                                     <th>Prodi</th>
-                                    <th>Tahun Kerjasama</th>
+
                                     <th>Mitra</th>
                                     <th>Status</th>
                                     <th>Catatan</th>
@@ -34,10 +36,10 @@
                             <tfoot>
                                 <tr class="odd text-center">
                                     <th>No</th>
-                                    <th>kategori Pengajuan</th>
+                                    <th>Tahun Kerjasama</th>
+                                    <th>Kategori Pengajuan</th>
                                     <th>Pengusul</th>
                                     <th>Prodi</th>
-                                    <th>Tahun Kerjasama</th>
                                     <th>Mitra</th>
                                     <th>Status</th>
                                     <th>Catatan</th>
@@ -53,8 +55,11 @@
 
 
                                 @foreach ($pengajuan as $datapengajuan)
-                                    <tr role="row" class="odd text-center">
+                                    <tr role="row" class="">
                                         <td scope="row">{{ $no++ }}</td>
+                                        <td style="tex-align:center">
+                                            {{ date('Y', strtotime($datapengajuan->tanggalmulai)) }}</td>
+
                                         <td>
                                             <?php
                                                     foreach($kategori as $ka){
@@ -74,7 +79,7 @@
                                                     }
                                                     ?>
 
-                                        <td>{{ date('Y', strtotime($datapengajuan->tanggalmulai)) }}</td>
+
 
                                         <td>{{ $datapengajuan->mitra->namamitra }}</td>
                                         <td>
@@ -264,15 +269,17 @@
                                             </div>
                                         </td>
 
-                                        <td>
-                                            <?php
-                                                foreach($trxstatus as $p){
-                                                    if($p->pengajuan_id == $datapengajuan->id){?>
-                                            {{ $p->catatan }}
-                                            <?php }
-                                                }
-                                                ?>
+
+                                        <td> @php
+                                            $tsz = App\Models\Trxstatus::where('pengajuan_id', $datapengajuan->id)
+                                                ->orderBy('id', 'desc')
+                                                ->first();
+                                        @endphp
+                                            @isset($tsz)
+                                                {{ $tsz->catatan }}
+                                            @endisset
                                         </td>
+
 
 
 
@@ -314,7 +321,8 @@
                                                                     <tbody>
 
                                                                         <tr>
-                                                                            <td class="font-size:3">
+                                                                            <td class="font-size:3"
+                                                                                style="text-align:center">
                                                                                 Mitra
                                                                                 :
                                                                                 {{ $datapengajuan->mitra->namamitra }}
@@ -405,6 +413,27 @@
                                                                 data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
                                                         <div class="modal-body">
+                                                            <div class="table-responsive">
+                                                                <table
+                                                                    class="table align-items table-flush table-hover"
+                                                                    id="dataTableHover">
+
+                                                                    <tbody>
+
+                                                                        <tr>
+                                                                            <td class="font-size:3"
+                                                                                style="text-align:center">
+                                                                                Mitra
+                                                                                :
+                                                                                {{ $datapengajuan->mitra->namamitra }}
+                                                                            </td>
+
+
+                                                                        </tr>
+
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
                                                             <div class="row d-flex justify-content">
                                                                 <div class="col-md-12">
                                                                     <div class="card">
@@ -419,7 +448,12 @@
                                                                                 <div class="form-group">
                                                                                     <div class="form-group">
                                                                                         {{-- <label class="form-label" for="exampleInputText1">Unggah Dokumen </label> --}}
-                                                                                        <div class="form-group">
+                                                                                        <div class="form-group"
+                                                                                            style="text-align:center">
+                                                                                            <h6>Input dokumen dengan
+                                                                                                format .pdf .docx .doc
+                                                                                            </h6>
+                                                                                            <br />
                                                                                             <div class="custom-file">
                                                                                                 <input type="file"
                                                                                                     name="dokumen"
