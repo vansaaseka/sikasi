@@ -20,30 +20,30 @@
                             <thead>
                                 <tr class="odd text-center">
                                     <th>No</th>
+                                    <th>Tahun Kerjasama</th>
                                     <th>Jenis Kerjasama</th>
                                     <th>Pengusul</th>
                                     <th>Prodi</th>
-                                    <th>Tahun Kerjasama</th>
                                     <th>Mitra</th>
                                     <th>Status</th>
                                     <th>Catatan</th>
-                                    <th>Status Dokumen</th>
                                     <th>Dokumen Kerjasama</th>
+                                    <th>Detail</th>
                                     <th>Verifikasi</th>
                                 </tr>
                             </thead>
                             <tfoot>
                                 <tr class="odd text-center">
                                     <th>No</th>
+                                    <th>Tahun Kerjasama</th>
                                     <th>Jenis Kerjasama</th>
                                     <th>Pengusul</th>
                                     <th>Prodi</th>
-                                    <th>Tahun Kerjasama</th>
                                     <th>Mitra</th>
                                     <th>Status</th>
                                     <th>Catatan</th>
-                                    <th>Status Dokumen</th>
                                     <th>Dokumen Kerjasama</th>
+                                    <th>Detail</th>
                                     <th>Verifikasi</th>
                             </tfoot>
 
@@ -54,8 +54,11 @@
 
 
                                 @foreach ($pengajuan as $datapengajuan)
-                                    <tr role="row" class="odd text-center">
+                                    <tr role="row" class="">
                                         <td scope="row">{{ $no++ }}</td>
+                                        <td style="text-align:center">
+                                            {{ date('Y', strtotime($datapengajuan->tanggalmulai)) }}</td>
+
                                         <td>
                                             <?php
                                                     foreach($kategori as $ka){
@@ -74,7 +77,6 @@
                                                     }
                                                     ?>
 
-                                        <td>{{ date('Y', strtotime($datapengajuan->tanggalmulai)) }}</td>
 
                                         <td>{{ $datapengajuan->mitra->namamitra }}</td>
 
@@ -156,27 +158,15 @@
                                             </div>
                                         </td>
 
-                                        <td>
-
-                                            <?php
-                                                foreach($trxstatus as $p){
-                                                    if($p->pengajuan_id == $datapengajuan->id){?>
-                                            {{ $p->catatan }}
-                                            <?php }
-                                                }
-                                                ?>
+                                        <td> @php
+                                            $tsz = App\Models\Trxstatus::where('pengajuan_id', $datapengajuan->id)
+                                                ->orderBy('id', 'desc')
+                                                ->first();
+                                        @endphp
+                                            @isset($tsz)
+                                                {{ $tsz->catatan }}
+                                            @endisset
                                         </td>
-
-
-                                        <td>
-                                            @foreach ($trxstatus as $x)
-                                                @if ($datapengajuan->id == $x->pengajuan_id)
-                                                    {{ $x->status_dokumen }}
-                                                @endif
-                                            @endforeach
-                                        </td>
-
-
 
                                         <td>
                                             <?php
@@ -232,7 +222,8 @@
                                                                         <tbody>
 
                                                                             <tr>
-                                                                                <td class="font-size:3">
+                                                                                <td class="font-size:3"
+                                                                                    style="text-align:center">
                                                                                     Mitra
                                                                                     :
                                                                                     {{ $datapengajuan->mitra->namamitra }}
@@ -259,6 +250,11 @@
                                                                                         <div class="form-group">
                                                                                             {{-- <label class="form-label" for="exampleInputText1">Unggah Dokumen </label> --}}
                                                                                             <div class="form-group">
+                                                                                                <p> Unggah Dokumen
+                                                                                                    dalam
+                                                                                                    format .doc
+                                                                                                    .docx .pdf
+                                                                                                </p>
                                                                                                 <div
                                                                                                     class="custom-file">
                                                                                                     <input
@@ -302,6 +298,130 @@
                                                 </div>
                                             </div>
                                             <?php }} ?>
+                                        </td>
+
+                                        <td> <button type="button" class="btn btn-info btn-sm"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#modaldetail{{ $datapengajuan->id }}"
+                                                id="#modaldetail{{ $datapengajuan->id }}">
+                                                <i class="fa fa-info-circle"></i>
+                                            </button>
+                                            <!-- Modal Detail -->
+                                            <div class="modal fade" id="modaldetail{{ $datapengajuan->id }}"
+                                                data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                                                role="dialog" aria-labelledby="staticBackdropLiveLabel"
+                                                aria-hidden="true" style="text-align: left">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="staticBackdropLiveLabel">
+                                                                Detail Pengajuan</h5>
+                                                            <button type="button" class="btn-close"
+                                                                data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div class="table-responsive">
+                                                                <table
+                                                                    class="table align-items-center table-flush table-hover"
+                                                                    id="dataTableHover">
+                                                                    <thead></thead>
+                                                                    <tbody>
+                                                                        {{-- {{ $datapengajuan->id }} --}}
+                                                                        <tr>
+                                                                            <td class="font-size:3">
+                                                                                Mitra
+                                                                            </td>
+                                                                            <td>:</td>
+                                                                            <td>{{ $datapengajuan->mitra->namamitra }}
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td class="font-size:3">
+                                                                                Nomor Dokumen
+                                                                            </td>
+                                                                            <td>:</td>
+                                                                            <td>
+                                                                                @foreach ($dokumen as $doc)
+                                                                                    @if ($datapengajuan->id == $doc->pengajuan_id)
+                                                                                        {{ $doc->nodokumen }}
+                                                                                    @endif
+                                                                                @endforeach
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>
+                                                                                Tanggal Ajuan
+                                                                            </td>
+                                                                            <td>:</td>
+                                                                            <td>{{ $datapengajuan->created_at->formatLocalized('%A, %d %B %Y') }}
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>
+                                                                                Tanggal Mulai Kerjasama
+                                                                            </td>
+                                                                            <td>:</td>
+                                                                            <td>{{ date('l, d-m-Y', strtotime($datapengajuan->tanggalmulai)) }}
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>
+                                                                                Tanggal Berakhir Kerjasama
+                                                                            </td>
+                                                                            <td>:</td>
+                                                                            <td>{{ date('l, d-m-Y', strtotime($datapengajuan->tanggalakhir)) }}
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>
+                                                                                Masa Berlaku Kerjasama :
+                                                                            </td>
+                                                                            <td>:</td>
+                                                                            <td style="color: red">
+
+                                                                                @php
+                                                                                    $tr = App\Models\Trxstatus::where('pengajuan_id', $datapengajuan->id)
+                                                                                        ->orderBy('id', 'desc')
+                                                                                        ->first();
+                                                                                @endphp
+                                                                                @isset($tr)
+                                                                                    @foreach (App\Models\Status::where('id', $tr->status_id)->get() as $st)
+                                                                                        @if ($st->namastatus == 'Selesai')
+                                                                                            {{ $diff = Carbon\Carbon::parse($datapengajuan->tanggalakhir)->diffForHumans() }}
+                                                                                        @else
+                                                                                            Belum Disetujui
+                                                                                        @endif
+                                                                                    @endforeach
+                                                                                @endisset
+
+
+                                                                            </td>
+                                                                        </tr>
+
+                                                                        <tr>
+                                                                            <td>
+                                                                                Status Dokumen
+                                                                            </td>
+                                                                            <td>:</td>
+                                                                            <td>
+
+                                                                                @php
+                                                                                    $tst = App\Models\Trxstatus::where('pengajuan_id', $datapengajuan->id)
+                                                                                        ->orderBy('id', 'desc')
+                                                                                        ->first();
+                                                                                @endphp
+                                                                                @isset($tst)
+                                                                                    {{ $tst->status_dokumen }}
+                                                                                @endisset
+                                                                            </td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </td>
 
                                         <td>
@@ -411,25 +531,25 @@
                                                                                     @endif
 
                                                                                     @if ($datapengajuan->kategori_id == 2)
-                                                                                        <?php $tombol = '<div class="custom-control custom-radio custom-radio-color-checked "><input type="radio" name="status_id" id="gembel" value="12"> <label for="gembel"> Ajuan Diterima</label></div>'; ?>
+                                                                                        <?php $button = '<div class="custom-control custom-radio custom-radio-color-checked "><input type="radio" name="status_id" id="gembel" value="12"> <label for="gembel"> Ajuan Diterima</label></div>'; ?>
                                                                                         @foreach ($trxstatus as $a)
                                                                                             @if ($a->pengajuan_id == $datapengajuan->id)
                                                                                                 @for ($s = 11; $s < count($status); $s++)
                                                                                                     @if ($a->status_id == $status[$s]->id)
                                                                                                         @if ($status[$s]->namastatus === 'Ajuan Diterima')
-                                                                                                            <?php $tombol = '<div class="custom-control custom-radio custom-radio-color-checked "><input type="radio"  name="status_id" value="13"> <label>Pengajuan DKPI</label> </div>'; ?>
+                                                                                                            <?php $button = '<div class="custom-control custom-radio custom-radio-color-checked "><input type="radio" name="status_id" value="13"> <label>Pengajuan DKPI</label> </div>'; ?>
                                                                                                         @elseif($status[$s]->namastatus === 'Pengajuan DKPI')
-                                                                                                            <?php $tombol = '<div class="custom-control custom-radio custom-radio-color-checked "><input type="radio"  name="status_id" value="14"> <label></label>Dokumen direview DKPI</div>'; ?>
+                                                                                                            <?php $button = '<div class="custom-control custom-radio custom-radio-color-checked "><input type="radio" name="status_id" value="14"> <label>Dokumen direview DKPI</label> </div>'; ?>
                                                                                                         @elseif($status[$s]->namastatus === 'Dokumen direview DKPI')
-                                                                                                            <?php $tombol = '<div class="custom-control custom-radio custom-radio-color-checked "><input type="radio" name="status_id" value="15"> <label></label>Proses tanda tangan WR 4</div>'; ?>
+                                                                                                            <?php $button = '<div class="custom-control custom-radio custom-radio-color-checked "><input type="radio" name="status_id" value="15"> <label>Proses tanda tangan WR 4</label> </div>'; ?>
                                                                                                         @elseif($status[$s]->namastatus === 'Proses tanda tangan WR 4')
-                                                                                                            <?php $tombol = '<div class="custom-control custom-radio custom-radio-color-checked "><input type="radio" name="status_id" value="16"> <label>Selesai</label> </div>'; ?>
+                                                                                                            <?php $button = '<div class="custom-control custom-radio custom-radio-color-checked "><input type="radio" name="status_id" value="16"> <label>Selesai</label> </div>'; ?>
                                                                                                         @endif
                                                                                                     @endif
                                                                                                 @endfor
                                                                                             @endif
                                                                                         @endforeach
-                                                                                        <?= $tombol ?>
+                                                                                        <?= $button ?>
                                                                                         <br />
                                                                                     @endif
 

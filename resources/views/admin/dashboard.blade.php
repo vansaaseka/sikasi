@@ -731,9 +731,10 @@
                         colors: ['transparent']
                     },
                     xaxis: {
-                        categories: ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli",
+                        categories: ["Juli",
                             "Agustus", "September",
-                            "Oktober", "November", "Desember"
+                            "Oktober", "November", "Desember", "Januari", "Februari", "Maret", "April", "Mei",
+                            "Juni"
                         ],
                         labels: {
                             minHeight: 20,
@@ -745,7 +746,7 @@
                     },
                     yaxis: {
                         title: {
-                            text: 'Jumlah'
+                            text: ''
 
                         },
                         labels: {

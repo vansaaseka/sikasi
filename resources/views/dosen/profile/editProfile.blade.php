@@ -138,21 +138,56 @@
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label class="form-label" for="instaurl">Nama Lengkap</label>
-                                                <input type="text" class="form-control" id="namalengkap"
-                                                    name="name" value=<?= Auth::user()->name ?>>
+                                                <label class="form-label" for="turl">Nama Lengkap</label>
+                                                <input type="text"
+                                                    class="form-control @error('name') is-invalid @enderror"
+                                                    name="name" required autocomplete="name" autofocus
+                                                    value=<?= Auth::user()->name ?>>
+                                                @error('name')
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
                                             </div>
+
 
                                             <div class="form-group">
                                                 <label class="form-label" for="turl">Email:</label>
-                                                <input type="email" class="form-control" id="email"
-                                                    name="email" value=<?= Auth::user()->email ?>>
+                                                <input type="email"
+                                                    class="form-control @error('email') is-invalid @enderror"
+                                                    id="email" name="email" required autocomplete="email"
+                                                    autofocus value=<?= Auth::user()->email ?>>
+                                                @error('email')
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
                                             </div>
+
                                             <div class="form-group">
                                                 <label class="form-label" for="instaurl">Nomor HP</label>
-                                                <input type="text" class="form-control" id="nomorhp"
-                                                    name="nomorhp" value=<?= Auth::user()->nomorhp ?>>
+                                                <input type="text"
+                                                    class="form-control @error('nomorhp') is-invalid @enderror"
+                                                    id="nomorhp" name="nomorhp" required autocomplete="nomorhp"
+                                                    value=<?= Auth::user()->nomorhp ?>>
+                                                @error('nomorhp')
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
                                             </div>
+
+                                            <div class="form-group mb-0">
+                                                <label class="form-label" for="lurl">Alamat</label>
+                                                <input type="text"
+                                                    class="form-control @error('alamat') is-invalid @enderror"
+                                                    id="alamat" name="alamat" required autocomplete="alamat"
+                                                    value=<?= Auth::user()->alamat ?>>
+                                                @error('alamat')
+                                                    <div class="invalid-feedback"></div>
+                                                @enderror
+                                            </div>
+
                                             <?php
                                             $statusDisable = '';
                                             
@@ -179,18 +214,6 @@
                                                     @enderror
                                                 </select>
                                             </div> --}}
-
-
-                                            <div class="form-group mb-0">
-                                                <label class="form-label" for="lurl">Alamat</label>
-                                                <input type="text" class="form-control" id="alamat"
-                                                    placeholder="Alamat" name="alamat"
-                                                    value=<?= Auth::user()->alamat ?>>
-                                                @error('alamat')
-                                                    <div class="invalid-feedback"></div>
-                                                @enderror
-                                            </div>{{-- Input Confirmation --}}
-                                            <input name="confirmation" type="hidden" value="1">
 
                                             <br />
                                             <button type="submit" class="btn btn-primary">Submit</button>

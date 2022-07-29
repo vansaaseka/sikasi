@@ -36,7 +36,7 @@
                 </div>
             </div>
         </div>
-        <div class="row row-cols-1">
+        {{-- <div class="row row-cols-1">
             <div class="d-slider1 overflow-hidden ">
                 <ul class="swiper-wrapper list-inline m-0 p-0 mb-2">
                     <li class="swiper-slide card card-slide" data-aos="fade-up" data-aos-delay="700">
@@ -51,7 +51,7 @@
                                     </svg>
                                 </div>
                                 <div class="progress-detail">
-                                    <p class="mb-2">Belum Pengajuan</p>
+                                    <p class="mb-2">Belum Validasi</p>
                                     <h4 class="counter">{{ $belum_validasi }}</h4>
                                 </div>
                             </div>
@@ -97,7 +97,7 @@
                 <div class="swiper-button swiper-button-next"></div>
                 <div class="swiper-button swiper-button-prev"></div>
             </div>
-        </div>
+        </div> --}}
     </div>
 </div>
 </div>
@@ -105,7 +105,7 @@
 
 
 @include('reviewer/layoutsReviewer/footer')
-@include('verifikator/layoutsVerifikator/footer')
+
 <script>
     (function(jQuery) {
         "use strict";

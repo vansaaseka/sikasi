@@ -10,13 +10,93 @@
         <div>
             <div class="row">
                 <div class="col-lg-12 mb-4">
+
                     <div class="card">
+
                         <div class="card-header d-flex justify-content-between">
                             <div class="header-title">
-                                <h4 class="card-title">Add New User</h4>
+                                <h4 class="card-title">Edit Profil</h4>
+                            </div>
+
+                            <div id="dataTableHover_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                    data-bs-target="#modalimport" id="#modalimport">
+                                    Ubah Password
+                                </button>
+                            </div>
+
+                        </div>
+                        {{-- Modal Import Data User --}}
+                        <div class="modal fade" id="modalimport" tabindex="-1" role="dialog"
+                            aria-labelledby="staticBackdropLiveLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-scrollable" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="staticBackdropLiveLabel">
+                                            Ubah Password
+                                        </h5>
+
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+
+                                        <div class="row d-flex justify-content">
+                                            <div class="col-md-12">
+                                                <div class="card">
+                                                    <div class="card-body">
+                                                        <form action="/ubahpassword" method="POST"
+                                                            enctype="multipart/form-data" class="forms-sample">
+                                                            @csrf
+                                                            <div class="form-group">
+                                                                <label>Password Saat Ini</label>
+                                                                <input type="password"
+                                                                    class="form-control @error('current_password') is-invalid @enderror"
+                                                                    id="exampleInputPassword" name="current_password"
+                                                                    required="required" autocomplete="password">
+                                                                @error('current_password')
+                                                                    <div class="invalid-feedback">{{ $message }}</div>
+                                                                @enderror
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>Password</label>
+                                                                <input type="password"
+                                                                    class="form-control @error('password') is-invalid @enderror"
+                                                                    id="exampleInputPassword" name="password"
+                                                                    required="required" autocomplete="password">
+                                                                @error('password')
+                                                                    <div class="invalid-feedback">{{ $message }}</div>
+                                                                @enderror
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <label>Repeat Password</label>
+                                                                <input type="password"
+                                                                    class="form-control @error('password_confirmation') is-invalid @enderror"
+                                                                    id="exampleInputPasswordRepeat"
+                                                                    name="password_confirmation" required="required"
+                                                                    autocomplete="new-password">
+                                                                @error('password_confirmation')
+                                                                    <div class="invalid-feedback">{{ $message }}</div>
+                                                                @enderror
+                                                            </div>
+
+                                                            <button type="submit"
+                                                                class="btn btn-primary next action-button float-end"
+                                                                value="Submit">Submit</button>
+
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
+
                         <div class="card-body">
+
                             <form action="/insertprofile" method="POST" enctype="multipart/form-data"
                                 class="forms-sample">
                                 @csrf
@@ -53,21 +133,56 @@
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label class="form-label" for="nama">Nama Lengkap</label>
-                                                <input type="text" class="form-control" id="nama" name="name"
-                                                    value=<?= Auth::user()->name ?>
-                                                    value="{{ old('name', $data->name) }}">
+                                                <label class="form-label">Nama Lengkap</label>
+                                                <input type="text"
+                                                    class="form-control @error('name') is-invalid @enderror"
+                                                    name="name" required autocomplete="name" autofocus
+                                                    value=<?= Auth::user()->name ?>>
+                                                @error('name')
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
                                             </div>
+
+
                                             <div class="form-group">
-                                                <label class="form-label" for="email">Email:</label>
-                                                <input type="text" class="form-control" id="email" name="email"
-                                                    value=<?= Auth::user()->email ?>>
+                                                <label class="form-label" for="turl">Email:</label>
+                                                <input type="email"
+                                                    class="form-control @error('email') is-invalid @enderror"
+                                                    id="email" name="email" required autocomplete="email"
+                                                    autofocus value=<?= Auth::user()->email ?>>
+                                                @error('email')
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
                                             </div>
+
                                             <div class="form-group">
-                                                <label class="form-label" for="nomorhp">Nomor HP</label>
-                                                <input type="text" class="form-control" id="nomorhp" name="nomorhp"
+                                                <label class="form-label" for="instaurl">Nomor HP</label>
+                                                <input type="text"
+                                                    class="form-control @error('nomorhp') is-invalid @enderror"
+                                                    id="nomorhp" name="nomorhp" required autocomplete="nomorhp"
                                                     value=<?= Auth::user()->nomorhp ?>>
+                                                @error('nomorhp')
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
                                             </div>
+
+                                            <div class="form-group mb-0">
+                                                <label class="form-label" for="lurl">Alamat</label>
+                                                <input type="text"
+                                                    class="form-control @error('alamat') is-invalid @enderror"
+                                                    id="alamat" name="alamat" required autocomplete="alamat"
+                                                    value=<?= Auth::user()->alamat ?>>
+                                                @error('alamat')
+                                                    <div class="invalid-feedback"></div>
+                                                @enderror
+                                            </div>
+
                                             {{-- <div class="form-group">
                                                 <label class="form-label">Asal Prodi</label>
                                                 <select name="prodi_id" class="selectpicker form-control"
@@ -84,18 +199,10 @@
                                                     @enderror
                                                 </select>
                                             </div> --}}
-                                            <div class="form-group mb-0">
-                                                <label class="form-label" for="alamat">Alamat</label>
-                                                <input type="text" class="form-control" id="alamat" placeholder=""
-                                                    name="alamat" value=<?= Auth::user()->alamat ?>>
-                                                @error('alamat')
-                                                    <div class="invalid-feedback"></div>
-                                                @enderror
 
 
-
-                                                <br />
-                                                <button type="submit" class="btn btn-primary">Submit</button>
+                                            <br />
+                                            <button type="submit" class="btn btn-primary">Submit</button>
                                         @endif
                                     @endforeach
                                 </div>

@@ -1,6 +1,7 @@
 @include('dosen/layoutsDosen/header')
 @include('dosen/layoutsDosen/sidebar')
 @include('dosen/layoutsDosen/navbar')
+@include('sweetalert::alert')
 <!-- DataTable with Hover -->
 
 <div class="container-fluid content-inner mt-n5 py-0">
@@ -23,10 +24,11 @@
                             <thead>
                                 <tr class="odd text-center">
                                     <th>No</th>
+                                    <th>Tahun Kerjasama</th>
                                     <th>Pengusul</th>
                                     <th>Jenis Kerjasama</th>
-                                    <th>Tahun Kerjasama</th>
                                     <th>Mitra</th>
+                                    <th>Narahubung Mitra</th>
                                     <th>Status</th>
                                     <th>Catatan</th>
                                     <th>Dokumen Kerjasama</th>
@@ -36,10 +38,11 @@
                             <tfoot>
                                 <tr class="odd text-center">
                                     <th>No</th>
+                                    <th>Tahun Kerjasama</th>
                                     <th>Pengusul</th>
                                     <th>Jenis Kerjasama</th>
-                                    <th>Tahun Kerjasama</th>
                                     <th>Mitra</th>
+                                    <th>Narahubung Mitra</th>
                                     <th>Status</th>
                                     <th>Catatan</th>
                                     <th>Dokumen Kerjasama</th>
@@ -51,8 +54,10 @@
 
                                 @foreach ($pengajuan as $datapengajuan)
                                     @if ($datapengajuan->prodiid == Auth::user()->prodi_id)
-                                        <tr role="row" class="odd text-center">
+                                        <tr role="row" class="">
                                             <td scope="row">{{ $no++ }}</td>
+                                            <td style="text-align:center">
+                                                {{ date('Y', strtotime($datapengajuan->tanggalmulai)) }}</td>
                                             <td>{{ $datapengajuan->user->name }}</td>
                                             <td>
                                                 <?php
@@ -62,9 +67,12 @@
                                                     }
                                                 ?>
                                             </td>
-                                            <td>{{ date('Y', strtotime($datapengajuan->tanggalmulai)) }}</td>
+
 
                                             <td>{{ $datapengajuan->mitra->namamitra }}</td>
+
+                                            <td>{{ $datapengajuan->mitra->narahubung }} -
+                                                {{ $datapengajuan->mitra->no_hp }}</td>
 
                                             <td>
                                                 <?php $belumada_status = '<div class="btn btn-outline-warning btn-sm"></i>Belum ada Status</div>'; ?>
@@ -147,14 +155,26 @@
                                                 </div>
 
                                             </td>
-                                            <td> <?php
+
+                                            <td>
+                                                @php
+                                                    $tsr = App\Models\Trxstatus::where('pengajuan_id', $datapengajuan->id)
+                                                        ->orderBy('id', 'desc')
+                                                        ->first();
+                                                @endphp
+                                                @isset($tsr)
+                                                    {{ $tsr->catatan }}
+                                                @endisset
+                                            </td>
+                                            {{-- <td>
+                                                <?php
                                       foreach($trxstatus as $ts){
                                           if($ts->pengajuan_id == $datapengajuan->id){?>
                                                 {{ $ts->catatan }}
                                                 <?php }
                                       }
                                       ?>
-                                            </td>
+                                            </td> --}}
 
 
                                             <?php
@@ -218,7 +238,8 @@
                                                                         <tbody>
 
                                                                             <tr>
-                                                                                <td class="font-size:3">
+                                                                                <td class="font-size:3"
+                                                                                    style="text-align:center">
                                                                                     Mitra
                                                                                     :
                                                                                     {{ $datapengajuan->mitra->namamitra }}
@@ -241,6 +262,9 @@
                                                                                     @csrf
 
                                                                                     <div class="form-group">
+                                                                                        <p>Unggah dokumen dengan format
+                                                                                            .doc .docx .pdf</p>
+
                                                                                         <div class="form-group">
                                                                                             {{-- <label class="form-label" for="exampleInputText1">Unggah Dokumen </label> --}}
                                                                                             <input class="form-control"
@@ -441,12 +465,17 @@
                                                                                 </td>
                                                                                 <td>:</td>
                                                                                 <td>
-                                                                                    @foreach ($trxstatus as $x)
-                                                                                        @if ($datapengajuan->id == $x->pengajuan_id)
-                                                                                            {{ $x->status_dokumen }}
-                                                                                        @endif
-                                                                                    @endforeach
+                                                                                    @php
+                                                                                        $tsz = App\Models\Trxstatus::where('pengajuan_id', $datapengajuan->id)
+                                                                                            ->orderBy('id', 'desc')
+                                                                                            ->first();
+                                                                                    @endphp
+                                                                                    @isset($tsz)
+                                                                                        {{ $tsz->status_dokumen }}
+                                                                                    @endisset
                                                                                 </td>
+                                                                            </tr>
+                                                                        </tbody>
                                             </td>
                                         </tr>
                             </tbody>
@@ -470,7 +499,7 @@
                     <h5 class="modal-title" id="staticBackdropLiveLabel">
                         Edit Dokumen
                         Pengajuan
-                        {{ 'id dok : ' . $iddok }}
+                        {{-- {{ 'id dok : ' . $iddok }} --}}
                     </h5>
 
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -482,7 +511,7 @@
                             <tbody>
 
                                 <tr>
-                                    <td class="font-size:3">
+                                    <td class="font-size:3" style="text-align:center">
                                         Mitra
                                         :
                                         {{ $datapengajuan->mitra->namamitra }}
@@ -504,6 +533,8 @@
 
                                         <div class="form-group">
                                             <div class="form-group">
+                                                <p>Unggah dokumen dengan format .doc .docx .pdf</p>
+
                                                 {{-- <label class="form-label" for="exampleInputText1">Unggah Dokumen </label> --}}
                                                 <div class="form-group">
                                                     <div class="custom-file">

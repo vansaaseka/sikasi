@@ -154,10 +154,11 @@ class HomeController extends Controller
                   $total = Pengajuan::count();
                   $total_pks = Pengajuan::where('kategori_id', 1)->count();
                   $total_mou = Pengajuan::where('kategori_id', 2)->count();
-
-                  $belum_validasi = Trxstatus::where('status_id', 1)->count();
+                 
+                  
+                  $belum_validasi = Trxstatus::where('status_id', 1)->orderBy('id', 'desc')->get()->count();
                   $selesai_validasi = Trxstatus::where('status_id', 3)->count();
-                  $proses_validasi = $selesai_validasi - $belum_validasi;
+                  $proses_validasi = abs($selesai_validasi - $belum_validasi);
 
                   $selesai_pks = Trxstatus::where('status_id', 11)->count();
                   $selesai_mou = Trxstatus::where('status_id', 16)->count();

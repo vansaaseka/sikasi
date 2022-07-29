@@ -39,6 +39,6 @@ class ProdiController extends Controller
             public function hapusProdi($id){
             $prodi = Prodi::find($id);
             $prodi->delete();
-            return redirect()->route('prodi')->with('toast_success','Data Berhasil Dihapus');
+            return redirect()->route('prodi');
             }
             }

@@ -55,6 +55,9 @@
                                                                     @enderror
                                                                 </div>
                                                                 <div class="form-group">
+                                                                    <p style="text-align:center"> Dokumen hanya dalam
+                                                                        format .docx</p>
+
                                                                     <div class="custom-file">
                                                                         <input type="file" name="template"
                                                                             id="customFile" class="form-control"
@@ -140,6 +143,10 @@
 
                                                                                         <div class="form-group">
                                                                                             <div class="form-group">
+                                                                                                <p
+                                                                                                    style="text-align:center">
+                                                                                                    Dokumen hanya dalam
+                                                                                                    format .docx</p>
                                                                                                 <div
                                                                                                     class="custom-file">
                                                                                                     <input

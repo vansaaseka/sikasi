@@ -3,7 +3,6 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AkunController;
-use App\Http\Controllers\DrafController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\EmailController;
 use App\Http\Controllers\ProdiController;
@@ -115,11 +114,13 @@ route::get('/export_pengajuan', [PengajuanController::class, 'export_excel'])->n
 
 //Status Verifikasi
 route::get('/verifikasi',[StatusController::class,"verifikasi"])->name('verifikasi');
+route::get('/riwayatverifikasi',[StatusController::class,"riwayatverifikasi"])->name('riwayatverifikasi');
 route::get('/newstatus',[StatusController::class,"newstatus"])->name('newstatus');
 route::post('/insertnewstatus',[StatusController::class,"insertnewstatus"])->name('insertnewstatus');
 
 //Reviewer
 route::get('/validasi',[StatusController::class,"validasi"])->name('validasi');
+route::get('/riwayatvalidasi',[StatusController::class,"riwayatvalidasi"])->name('riwayatvalidasi');
 route::get('/newstatus',[StatusController::class,"newstatus"])->name('newstatus');
 route::post('/insertnewstatus',[StatusController::class,"insertnewstatus"])->name('insertnewstatus');
 

@@ -5,7 +5,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>SIKASI LOGIN</title>
-
     <!-- Favicon -->
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 
@@ -34,7 +33,6 @@
         </div>
     </div>
     <!-- loader END -->
-
     <div class="wrapper">
         <section class="login-content">
             <div class="row m-0 align-items-center bg-white vh-100">
@@ -130,6 +128,7 @@
                 </div>
             </div>
         </section>
+        @include('sweetalert::alert')
     </div>
 
     <!-- Library Bundle Script -->

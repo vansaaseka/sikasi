@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 use App\Models\Template;
 use Illuminate\Http\Request;
+use Validator;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class TemplateController extends Controller
 {
@@ -17,12 +19,18 @@ class TemplateController extends Controller
 
    public function inserttemplate(Request $request){
    
-   $this->validate($request, [
-    'namatemplate'=>'required',
-    'template'=> 'required',
+
+   $validasi = Validator::make($request->all(),[
+      'namatemplate'=>'required',
+      'template'=> 'required|mimes:docx',
    ],
 
    );
+   if($validasi->fails()) {
+   Alert::warning('Warning', 'Mohon isikan data dengan benar!');
+   return redirect()->back();
+   }
+   else {
    
    $template = $request->file('template');
   
@@ -39,8 +47,22 @@ class TemplateController extends Controller
    return back()->with('toast_success', 'Data Berhasil Tersimpan');
 
    }
+}
 
    public function updatetemplate(Request $request, $id){
+
+    $validasi = Validator::make($request->all(),[
+    
+    'template'=> 'required|mimes:docx',
+    ],
+
+         );
+         if($validasi->fails()) {
+         Alert::warning('Warning', 'Mohon isikan data dengan benar!');
+         return redirect()->back();
+         }
+         else {
+            
     $template = Template::find($id);
     $template->update($request->all());
    if ($request->hasFile('template'))
@@ -50,6 +72,6 @@ class TemplateController extends Controller
     $template->save();
    }
    return back()->with('toast_success','Data Berhasil Diupdate');
-   }
+   }}
 
 }

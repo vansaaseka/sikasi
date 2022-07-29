@@ -390,7 +390,7 @@
                                             <p class="float-left mb-1">Proses Tanda Tanga WR4</p>
 
                                             <div class="d-inline-block w-100">
-                                                <h6>Proses Pengajuan Tanda Tangan oleh Wakil REKTOR 4
+                                                <h6>Proses Pengajuan Tanda Tangan oleh Wakil Rektor 4
                                             </div>
                                         </li>
                                         <li>
@@ -406,7 +406,7 @@
 
                                             <div class="d-inline-block w-100">
                                                 <h6> Proses Pengajuan Kerjasama Telah Selesai, hardcopy dokumen bisa
-                                                    diambil oleh perwakilan prdo</h6>
+                                                    diambil oleh perwakilan prodi</h6>
                                             </div>
                                         </li>
                                     </ul>
@@ -430,65 +430,79 @@
                                             <div class="timeline-dots1 border-success text-success">
                                                 <svg width="20" height="20" viewBox="0 0 24 24">
                                                     <path fill="currentColor"
-                                                        d="M9.5,13.09L10.91,14.5L6.41,19H10V21H3V14H5V17.59L9.5,13.09M10.91,9.5L9.5,10.91L5,6.41V10H3V3H10V5H6.41L10.91,9.5M14.5,13.09L19,17.59V14H21V21H14V19H17.59L13.09,14.5L14.5,13.09M13.09,9.5L17.59,5H14V3H21V10H19V6.41L14.5,10.91L13.09,9.5Z">
+                                                        d="M19,3H5C3.89,3 3,3.89 3,5V9H5V5H19V19H5V15H3V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5C21,3.89 20.1,3 19,3M10.08,15.58L11.5,17L16.5,12L11.5,7L10.08,8.41L12.67,11H3V13H12.67L10.08,15.58Z">
                                                     </path>
                                                 </svg>
                                             </div>
                                             <h6 class="float-left mb-1">Mengajukan Kerjasama Mou</h6>
                                             <div class="d-inline-block w-100">
-                                                <p>Bonbon macaroon jelly beans gummi bears jelly lollipop apple</p>
+                                                <p>Dosen mengajukan kerjasama melalui website SIKASI</p>
                                             </div>
                                         </li>
                                         <li>
                                             <div class="timeline-dots1 border-success text-success">
                                                 <svg width="20" height="20" viewBox="0 0 24 24">
                                                     <path fill="currentColor"
-                                                        d="M9.5,13.09L10.91,14.5L6.41,19H10V21H3V14H5V17.59L9.5,13.09M10.91,9.5L9.5,10.91L5,6.41V10H3V3H10V5H6.41L10.91,9.5M14.5,13.09L19,17.59V14H21V21H14V19H17.59L13.09,14.5L14.5,13.09M13.09,9.5L17.59,5H14V3H21V10H19V6.41L14.5,10.91L13.09,9.5Z">
+                                                        d="M19,3H5C3.89,3 3,3.89 3,5V9H5V5H19V19H5V15H3V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5C21,3.89 20.1,3 19,3M10.08,15.58L11.5,17L16.5,12L11.5,7L10.08,8.41L12.67,11H3V13H12.67L10.08,15.58Z">
                                                     </path>
                                                 </svg>
                                             </div>
                                             <h6 class="float-left mb-1">Pengajuan Kerjasama Diterima</h6>
                                             <div class="d-inline-block w-100">
-                                                <p>Bonbon macaroon jelly beans gummi bears jelly lollipop apple</p>
+                                                <p>Pengajuan Kerjasama masuk ke dalam antrian</p>
                                             </div>
                                         </li>
                                         <li>
                                             <div class="timeline-dots1 border-success text-success">
                                                 <svg width="20" height="20" viewBox="0 0 24 24">
                                                     <path fill="currentColor"
-                                                        d="M9.5,13.09L10.91,14.5L6.41,19H10V21H3V14H5V17.59L9.5,13.09M10.91,9.5L9.5,10.91L5,6.41V10H3V3H10V5H6.41L10.91,9.5M14.5,13.09L19,17.59V14H21V21H14V19H17.59L13.09,14.5L14.5,13.09M13.09,9.5L17.59,5H14V3H21V10H19V6.41L14.5,10.91L13.09,9.5Z">
+                                                        d="M19,3H5C3.89,3 3,3.89 3,5V9H5V5H19V19H5V15H3V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5C21,3.89 20.1,3 19,3M10.08,15.58L11.5,17L16.5,12L11.5,7L10.08,8.41L12.67,11H3V13H12.67L10.08,15.58Z">
+                                                    </path>
+                                                </svg>
+                                            </div>
+                                            <h6 class="float-left mb-1">Pengajuan DKPI</h6>
+                                            <div class="d-inline-block w-100">
+                                                <p>Dokumen diajukan ke DKPI</p>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="timeline-dots1 border-success text-success">
+                                                <svg width="20" height="20" viewBox="0 0 24 24">
+                                                    <path fill="currentColor"
+                                                        d="M19,3H5C3.89,3 3,3.89 3,5V9H5V5H19V19H5V15H3V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5C21,3.89 20.1,3 19,3M10.08,15.58L11.5,17L16.5,12L11.5,7L10.08,8.41L12.67,11H3V13H12.67L10.08,15.58Z">
                                                     </path>
                                                 </svg>
                                             </div>
                                             <h6 class="float-left mb-1">Dokumen Direview DKPI</h6>
                                             <div class="d-inline-block w-100">
-                                                <p>Bonbon macaroon jelly beans gummi bears jelly lollipop apple</p>
+                                                <p>Dokumen dilakukan pengecekan oleh DKPI</p>
                                             </div>
                                         </li>
                                         <li>
                                             <div class="timeline-dots1 border-success text-success">
                                                 <svg width="20" height="20" viewBox="0 0 24 24">
                                                     <path fill="currentColor"
-                                                        d="M9.5,13.09L10.91,14.5L6.41,19H10V21H3V14H5V17.59L9.5,13.09M10.91,9.5L9.5,10.91L5,6.41V10H3V3H10V5H6.41L10.91,9.5M14.5,13.09L19,17.59V14H21V21H14V19H17.59L13.09,14.5L14.5,13.09M13.09,9.5L17.59,5H14V3H21V10H19V6.41L14.5,10.91L13.09,9.5Z">
+                                                        d="M19,3H5C3.89,3 3,3.89 3,5V9H5V5H19V19H5V15H3V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5C21,3.89 20.1,3 19,3M10.08,15.58L11.5,17L16.5,12L11.5,7L10.08,8.41L12.67,11H3V13H12.67L10.08,15.58Z">
                                                     </path>
                                                 </svg>
                                             </div>
                                             <h6 class="float-left mb-1">Proses TTD WR 4</h6>
                                             <div class="d-inline-block w-100">
-                                                <p>Bonbon macaroon jelly beans gummi bears jelly lollipop apple</p>
+                                                <p>Proses antrian ttd WR 4</p>
                                             </div>
                                         </li>
                                         <li>
                                             <div class="timeline-dots1 border-success text-success">
                                                 <svg width="20" height="20" viewBox="0 0 24 24">
                                                     <path fill="currentColor"
-                                                        d="M9.5,13.09L10.91,14.5L6.41,19H10V21H3V14H5V17.59L9.5,13.09M10.91,9.5L9.5,10.91L5,6.41V10H3V3H10V5H6.41L10.91,9.5M14.5,13.09L19,17.59V14H21V21H14V19H17.59L13.09,14.5L14.5,13.09M13.09,9.5L17.59,5H14V3H21V10H19V6.41L14.5,10.91L13.09,9.5Z">
+                                                        d="M19,3H5C3.89,3 3,3.89 3,5V9H5V5H19V19H5V15H3V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5C21,3.89 20.1,3 19,3M10.08,15.58L11.5,17L16.5,12L11.5,7L10.08,8.41L12.67,11H3V13H12.67L10.08,15.58Z">
                                                     </path>
                                                 </svg>
                                             </div>
-                                            <h6 class="float-left mb-1">Selesai</h6>4</h6>
+                                            <h6 class="float-left mb-1">Selesai</h6>
                                             <div class="d-inline-block w-100">
-                                                <p>Bonbon macaroon jelly beans gummi bears jelly lollipop apple</p>
+                                                <p>Proses Pengajuan Kerjasama Telah Selesai, hardcopy dokumen bisa
+                                                    diambil oleh perwakilan prodi</p>
                                             </div>
                                         </li>
                                     </ul>
