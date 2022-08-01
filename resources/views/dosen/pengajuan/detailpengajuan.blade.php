@@ -12,10 +12,24 @@
                     <div class="header-title">
                         <h4 class="card-title">Pengajuan Kerjasama</h4>
                     </div>
-                    <div id="dataTableHover_wrapper" class="dataTables_wrapper dt-bootstrap4">
-                        <a href="/tambahpengajuan" type="button" class="btn btn-success">Tambah
-                            <i class="fa fa-plus"></i>
-                        </a>
+                    <div class="row">
+
+                        <div class="col-md-6">
+                            <div id="dataTableHover_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                                <a href="https://drive.google.com/drive/folders/1pY9A5fi6mi2GcfuviWDb4ZeO19vzs2fi?usp=sharing' == request()->path() ? 'active' : '' }}"
+                                    href="https://drive.google.com/drive/folders/1pY9A5fi6mi2GcfuviWDb4ZeO19vzs2fi?usp=sharing"
+                                    target="_blank" type="button" class="btn btn-primary">Template
+
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div id="dataTableHover_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                                <a href="/tambahpengajuan" type="button" class="btn btn-success">Tambah
+
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="card-body">

@@ -13,6 +13,61 @@
                     <div class="header-title">
                         <h4 class="card-title">Pengajuan Kerjasama</h4>
                     </div>
+                    <div id="dataTableHover_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                        <a class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modaltambahprodi"
+                            id="#modaltambahprodi">Filter Data Prodi
+                        </a>
+                    </div>
+                    {{-- Modal Tambah --}}
+                    <div class="modal fade" id="modaltambahprodi" tabindex="-1" role="dialog"
+                        aria-labelledby="staticBackdropLiveLabel" aria-hidden="true" style="text-align: left">
+                        <div class="modal-dialog modal-dialog-scrollable" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="staticBackdropLiveLabel">
+                                        Filter</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="modal-body">
+                                        <div class="row d-flex justify-content">
+                                            <div class="col-md-12">
+                                                <div class="card">
+                                                    <div class="card-body">
+                                                        <form action="insertprodi" method="POST"
+                                                            enctype="multipart/form-data" class="forms-sample">
+                                                            @csrf
+
+                                                            <div class="form-group">
+
+                                                                <div class="form-group">
+                                                                    <label for="prodi">Nama Prodi</label>
+                                                                    <br />
+                                                                    <br />
+                                                                    <input type="text" name="namaprodi"
+                                                                        id="prodi" class="form-control"
+                                                                        autofocus="autofocus">
+                                                                    @error('namaprodi')
+                                                                        <div class="invalid-feedback">Example invalid form
+                                                                            file feedback</div>
+                                                                    @enderror
+                                                                </div>
+
+                                                                <button type="submit"
+                                                                    class="btn btn-primary next action-button float-end"
+                                                                    value="Submit">Submit</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive mt-4">
@@ -276,7 +331,8 @@
                                                                                                     name="user_id"
                                                                                                     value={{ Auth::user()->id }}>
                                                                                                 <?php date_default_timezone_set('Asia/Jakarta'); ?>
-                                                                                                <input name="created_at"
+                                                                                                <input
+                                                                                                    name="created_at"
                                                                                                     id="created_at"
                                                                                                     type="hidden"
                                                                                                     value="{{ date('Y-m-d H:i:s') }}">

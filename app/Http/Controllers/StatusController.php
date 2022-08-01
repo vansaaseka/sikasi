@@ -86,6 +86,20 @@ public function hapusStatus($id){
       }
     }
 
+    public function detail($id){
+        $kategori = Kategori::all();
+$pengajuan = Pengajuan::where('prodiid', $id)->get();
+    $mitra = Mitra::all();
+    $status = Status::all();
+    $prodi = Prodi::all();
+    $dokumen = Dokumen::all();
+    $trxstatus = Trxstatus::all();
+    $user = User::all();
+
+return view('admin.pengajuan.detailprodi', compact('pengajuan', 'kategori', 'mitra', 'status','prodi', 'dokumen',
+'trxstatus', 'user',));
+    }
+
     public function riwayatverifikasi(){
     $kategori = Kategori::all();
     $pengajuan = Pengajuan::all();
@@ -161,6 +175,46 @@ public function hapusStatus($id){
 
 // } 
 
+public function filter(Request $request){
+    {
+    if ($request->ajax()) {
+         $kategori = Kategori::all();
+         $pengajuan = Pengajuan::all();
+         $mitra = Mitra::all();
+         $status = Status::all();
+         $prodi = Prodi::all();
+         $dokumen = Dokumen::all();
+         $trxstatus = Trxstatus::all();
+         $data = User::select('*');
+
+    return Datatables::of($data, $kategori, $pengajuan, $mitra, $status, $prodi, $dokumen, $trxstatus)
+    ->addIndexColumn()
+    ->addColumn('status', function($row){
+    if($row->status){
+    return '<span class="badge badge-primary">Active</span>';
+    }else{
+    return '<span class="badge badge-danger">Deactive</span>';
+    }
+    })
+    ->filter(function ($instance) use ($request) {
+    if ($request->get('status') == '0' || $request->get('status') == '1') {
+    $instance->where('status', $request->get('status'));
+    }
+    if (!empty($request->get('search'))) {
+    $instance->where(function($w) use($request){
+    $search = $request->get('search');
+    $w->orWhere('name', 'LIKE', "%$search%")
+    ->orWhere('email', 'LIKE', "%$search%");
+    });
+    }
+    })
+    ->rawColumns(['status'])
+    ->make(true);
+    }
+
+    return view('users');
+    }
+}
                
         public function cetakpengajuan(){
             $ruanglingkup = RuangLingkup::all();
@@ -184,7 +238,7 @@ public function hapusStatus($id){
         }
     public function insertnewstatus(Request $request){
     $trxstatus = new Trxstatus;
-    $trx = Trxstatus::all();
+  
 
             $trxstatus->pengajuan_id = $request->input('pengajuan_id');
             $trxstatus->created_by = $request->input('created_by');

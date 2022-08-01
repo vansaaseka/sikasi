@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Mitra;
 
+use App\Models\Prodi;
 use App\Models\Status;
 use App\Models\Pengajuan;
 use App\Models\Trxstatus;
@@ -71,6 +72,7 @@ class HomeController extends Controller
             }
 
            $total_ajuan = Pengajuan::count();
+           $prodi = Prodi::all();
            $proses_pks = Pengajuan::where('kategori_id', 1)->count();
            $proses_mou = Pengajuan::where('kategori_id', 2)->count();
 
@@ -119,7 +121,7 @@ class HomeController extends Controller
                'kebidanan_4', 'k3', 'budidayaTernak', 'agribisnis', 'thp', 'pthp', 'mbisnis', 'mpemasaran',
                'mperdagangan', 'perpajakan', 'perbankan', 'akuntansi', 'pakuntansi', 'bInggris', 'bMandarin',
                'dkv', 'komter', 'upw', 'kategori1', 'kategori2', 'kategori3', 'kategori4', 'kategori5', 'kategori6',
-               'kategori7', 'kategori8', 'kategori9', 'kategori10', 'kategori11'
+               'kategori7', 'kategori8', 'kategori9', 'kategori10', 'kategori11', 'prodi'
             
             ));
            }
@@ -136,7 +138,7 @@ class HomeController extends Controller
              $proses = $total = $selesai;
              $proses_pks = $total_pks - $selesai_pks;
              $proses_mou = $total_mou - $selesai_mou;
-               return view('verifikator/dashboard', compact('total', 'total_pks', 'total_mou', 'selesai', 'selesai_pks', 'selesai_mou', 'proses', 'proses_pks', 'proses_mou'));
+               return view('verifikator/dashboard', compact('total', 'total_pks', 'total_mou', 'selesai', 'selesai_pks', 'selesai_mou', 'proses', 'proses_pks', 'proses_mou', ));
 
            }
            if($role=='3')

@@ -116,7 +116,8 @@ route::get('/export_pengajuan', [PengajuanController::class, 'export_excel'])->n
 
 //Status Verifikasi
 route::get('/verifikasi',[StatusController::class,"verifikasi"])->name('verifikasi');
-route::get('/riwayatverifikasi',[StatusController::class,"riwayatverifikasi"])->name('riwayatverifikasi');
+route::get('detail/{id}', [StatusController::class,"detail"])->name('detail');
+route::get('/filter',[StatusController::class,"filter"])->name('filter');
 route::get('/newstatus',[StatusController::class,"newstatus"])->name('newstatus');
 route::post('/insertnewstatus',[StatusController::class,"insertnewstatus"])->name('insertnewstatus');
 
