@@ -105,6 +105,10 @@ class PengajuanController extends Controller
         $mitra = new Mitra;
         $kategorimitra = new KategoriMitra;
 
+        if ($request->id) {
+            $mitra->id = $request->id;
+        }
+
 
         $mitra->namamitra = Str::upper($request->namamitra);
         $mitra->namadagangmitra = $request->namadagangmitra;
