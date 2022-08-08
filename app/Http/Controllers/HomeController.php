@@ -87,46 +87,17 @@ class HomeController extends Controller
             $kategori9 = Mitra::where('kategorimitra_id', 9)->count();
             $kategori10 = Mitra::where('kategorimitra_id',10)->count();
             $kategori11= Mitra::where('kategorimitra_id', 11)->count();
-
-           $tInformatika = Pengajuan::where('prodiid', 1)->count();
-           $tKimia = Pengajuan::where('prodiid', 2)->count();
-           $tMesin = Pengajuan::where('prodiid', 3)->count();
-           $tSipil = Pengajuan::where('prodiid', 4)->count();
-           $ptInformatika = Pengajuan::where('prodiid', 5)->count();
-           $farmasi = Pengajuan::where('prodiid', 6)->count();
-           $kebidanan_3 = Pengajuan::where('prodiid', 7)->count();
-           $kebidanan_4 = Pengajuan::where('prodiid', 8)->count();
-           $k3 = Pengajuan::where('prodiid', 9)->count();
-           $budidayaTernak = Pengajuan::where('prodiid', 10)->count();
-           $agribisnis = Pengajuan::where('prodiid', 11)->count();
-           $thp = Pengajuan::where('prodiid', 12)->count();
-           $pthp = Pengajuan::where('prodiid', 13)->count();
-           $mbisnis = Pengajuan::where('prodiid', 14)->count();
-           $mpemasaran = Pengajuan::where('prodiid', 15)->count();
-           $mperdagangan = Pengajuan::where('prodiid', 16)->count();
-           $perpajakan = Pengajuan::where('prodiid', 17)->count();
-           $perbankan = Pengajuan::where('prodiid', 18)->count();
-           $akuntansi = Pengajuan::where('prodiid', 19)->count();
-           $pakuntansi = Pengajuan::where('prodiid', 20)->count();
-           $bInggris = Pengajuan::where('prodiid', 21)->count();
-           $bMandarin = Pengajuan::where('prodiid', 22)->count();
-           $dkv = Pengajuan::where('prodiid', 23)->count();
-           $komter = Pengajuan::where('prodiid', 24)->count();
-           $upw = Pengajuan::where('prodiid', 25)->count();
                
            return view('admin.dashboard', compact('total_ajuan', 'total_juli', 'total_agus', 'total_sept',
                'total_okto', 'total_nove', 'total_dese', 'total_jan', 'total_feb', 'total_mar', 'total_apr',
-               'total_mei', 'total_jun','total_ajuan', 'proses_pks', 'proses_mou',
-               'tInformatika', 'tKimia', 'tMesin', 'tSipil', 'ptInformatika', 'farmasi', 'kebidanan_3',
-               'kebidanan_4', 'k3', 'budidayaTernak', 'agribisnis', 'thp', 'pthp', 'mbisnis', 'mpemasaran',
-               'mperdagangan', 'perpajakan', 'perbankan', 'akuntansi', 'pakuntansi', 'bInggris', 'bMandarin',
-               'dkv', 'komter', 'upw', 'kategori1', 'kategori2', 'kategori3', 'kategori4', 'kategori5', 'kategori6',
+               'total_mei', 'total_jun','total_ajuan', 'proses_pks', 'proses_mou', 'kategori1', 'kategori2', 'kategori3', 'kategori4', 'kategori5', 'kategori6',
                'kategori7', 'kategori8', 'kategori9', 'kategori10', 'kategori11', 'prodi'
             
             ));
            }
            if($role=='2')
            {
+            $prodi = Prodi::all();
             $total = Pengajuan::count();
             $total_pks = Pengajuan::where('kategori_id', 1)->count();
             $total_mou = Pengajuan::where('kategori_id', 2)->count();
@@ -138,7 +109,8 @@ class HomeController extends Controller
              $proses = $total = $selesai;
              $proses_pks = $total_pks - $selesai_pks;
              $proses_mou = $total_mou - $selesai_mou;
-               return view('verifikator/dashboard', compact('total', 'total_pks', 'total_mou', 'selesai', 'selesai_pks', 'selesai_mou', 'proses', 'proses_pks', 'proses_mou', ));
+
+               return view('verifikator/dashboard', compact('prodi', 'total', 'total_pks', 'total_mou', 'selesai', 'selesai_pks', 'selesai_mou', 'proses', 'proses_pks', 'proses_mou', ));
 
            }
            if($role=='3')

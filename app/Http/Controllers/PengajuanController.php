@@ -266,4 +266,11 @@ class PengajuanController extends Controller
     {
         return Mitra::find($request->id);
     }
+
+    public function datamitra(){
+           $mitra = Mitra::all();
+           $kategorimitra = KategoriMitra::all();
+          return view('admin\Mitra\datamitra' , compact('mitra', 'kategorimitra'));
+          
+    }
 }

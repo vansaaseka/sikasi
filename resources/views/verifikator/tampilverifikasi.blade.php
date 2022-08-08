@@ -35,23 +35,27 @@
                                             <div class="col-md-12">
                                                 <div class="card">
                                                     <div class="card-body">
-                                                        <form action="insertprodi" method="POST"
-                                                            enctype="multipart/form-data" class="forms-sample">
+
+                                                        <form action="/filter" method="post" class="forms-sample">
                                                             @csrf
 
                                                             <div class="form-group">
 
                                                                 <div class="form-group">
-                                                                    <label for="prodi">Nama Prodi</label>
-                                                                    <br />
-                                                                    <br />
-                                                                    <input type="text" name="namaprodi"
-                                                                        id="prodi" class="form-control"
-                                                                        autofocus="autofocus">
-                                                                    @error('namaprodi')
-                                                                        <div class="invalid-feedback">Example invalid form
-                                                                            file feedback</div>
-                                                                    @enderror
+                                                                    <label for="exampleInputUsername">Asal
+                                                                        Prodi</label>
+                                                                    <select name="select_prodi" id="select_prodi"
+                                                                        class="selectpicker form-control"
+                                                                        data-style="py-0">
+                                                                        <option value="all">--All--
+                                                                        </option>
+                                                                        @foreach ($prodi as $item)
+                                                                            <option value="{{ $item->id }}">
+                                                                                {{ $item->namaprodi }}
+                                                                            </option>
+                                                                        @endforeach
+
+                                                                    </select>
                                                                 </div>
 
                                                                 <button type="submit"
@@ -59,6 +63,7 @@
                                                                     value="Submit">Submit</button>
                                                             </div>
                                                         </form>
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -674,7 +679,6 @@
                                         </td>
                                     </tr>
                                 @endforeach
-
                             </tbody>
                         </table>
                     </div>

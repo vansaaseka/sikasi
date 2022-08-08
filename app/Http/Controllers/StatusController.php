@@ -77,6 +77,8 @@ public function hapusStatus($id){
         $user = User::all();
        
         
+   
+
       if (Auth()->user()->role == 2){
       return view('verifikator\tampilverifikasi' , compact('pengajuan' , 'mitra', 'status','prodi', 'dokumen',
       'trxstatus', 'user', 'kategori' ));
@@ -86,42 +88,34 @@ public function hapusStatus($id){
       }
     }
 
-    public function detail($id){
+    public function verifprodi($id)
+
+    {
         $kategori = Kategori::all();
-$pengajuan = Pengajuan::where('prodiid', $id)->get();
-    $mitra = Mitra::all();
-    $status = Status::all();
-    $prodi = Prodi::all();
-    $dokumen = Dokumen::all();
-    $trxstatus = Trxstatus::all();
-    $user = User::all();
-
-return view('admin.pengajuan.detailprodi', compact('pengajuan', 'kategori', 'mitra', 'status','prodi', 'dokumen',
-'trxstatus', 'user',));
-    }
-
-    public function riwayatverifikasi(){
-    $kategori = Kategori::all();
-    $pengajuan = Pengajuan::all();
-    $mitra = Mitra::all();
-    $status = Status::all();
-    $prodi = Prodi::all();
-    $dokumen = Dokumen::all();
-    $trxstatus = Trxstatus::all();
-    $user = User::all();
+        $pengajuan = Pengajuan::where('prodiid', $id)->get();
+        $mitra = Mitra::all();
+        $status = Status::all();
+        $prodi = Prodi::all();
+        $dokumen = Dokumen::all();
+        $trxstatus = Trxstatus::all();
+        $user = User::all();
 
 
-    if (Auth()->user()->role == 2){
-    return view('verifikator\selesaiverifikasi' , compact('pengajuan' , 'mitra', 'status','prodi', 'dokumen',
-    'trxstatus', 'user', 'kategori' ));
+
+
+        if (Auth()->user()->role == 2){
+        return view('verifikator\tampilverifikasi' , compact('pengajuan' , 'mitra', 'status','prodi', 'dokumen',
+        'trxstatus', 'user', 'kategori' ));
+        }
+        else{
+        abort(403);
+        }
     }
-    else{
-    abort(403);
-    }
-    }
+
+
 
     public function dataajuan(){
-        $kategori = Kategori::all();
+    $kategori = Kategori::all();
     $pengajuan = Pengajuan::all();
     $mitra = Mitra::all();
     $status = Status::all();
@@ -140,81 +134,65 @@ return view('admin.pengajuan.detailprodi', compact('pengajuan', 'kategori', 'mit
 }
 
    
+   public function detail($id){
+   $kategori = Kategori::all();
+   $pengajuan = Pengajuan::where('prodiid', $id)->get();
+   $mitra = Mitra::all();
+   $status = Status::all();
+   $prodi = Prodi::all();
+   $dokumen = Dokumen::all();
+   $trxstatus = Trxstatus::all();
+   $user = User::all();
 
-    public function newstatus(){
-    $pengajuan = Pengajuan::all();
-    $status = Status::all();
-    return view('verifikator\updatestatus', compact('status' ,'pengajuan'));
-    }
+   return view('admin.pengajuan.tampilpengajuan', compact('pengajuan', 'kategori', 'mitra', 'status','prodi',
+   'dokumen',
+   'trxstatus', 'user',));
+   }
+  
 
-//     public function filter(Request $request){
-//     $user = User::all();
+    public function filter(Request $request){
+        $kategori = Kategori::all();
+        $status = Status::all();
+        $prodi = Prodi::all();
+        $mitra = Mitra::all();
+        $dokumen = Dokumen::all();
+        $trxstatus = Trxstatus::all();
+        $user = User::all();
+        $pengajuan = Pengajuan::all();
+        //  if ($request->select_prodi) $prodi->whereId($request->select_prodi);
+        //  $prodi = $prodi->get();
+        foreach ($prodi->pluck('id') as $p){
+            if($p == $request->select_prodi){
+            $pp = Pengajuan::where('prodiid', $request->select_prodi)->get();
+            if (Auth()->user()->role == 2){
+            return view('verifikator\filterverifikasi' , compact('pp','pengajuan' , 'mitra', 'status','prodi',
+            'dokumen',
+            'trxstatus', 'user', 'kategori' ));
+            }
+            else{
+            abort(403);
+            }
+        }elseif ($request->select_prodi == "all"){
+             $pp = Pengajuan::get();
+             if (Auth()->user()->role == 2){
+             return view('verifikator\filterverifikasi' , compact('pp','pengajuan' , 'mitra', 'status','prodi',
+             'dokumen',
+             'trxstatus', 'user', 'kategori' ));
+             }
+             else{
+             abort(403);
+             }
 
-//     $kategori = Kategori::all();
-//     $mitra = Mitra::all();
-//     $trxstatus = Trxstatus::all();
-//     $prodi = Prodi::all();
-//     $dokumen = Dokumen::all();
-   
+        }
+            
 
-//     $startDate = ($request->tanggalawal);
-//     $endDate = ($request->tanggalakhir);
+            
+        }
 
+        
 
-//     $pengajuan = Pengajuan::all()
-//     ->whereBetween('created_at', [$startDate, $endDate]);
+    } 
 
-
-//     if (Auth()->user()->role == 1){
-//     return view('admin.pengajuan.cetakpengajuan' , compact('pengajuan' , 'mitra','prodi', 'dokumen',
-//   'trxstatus', 'user', 'kategori'));
-//     }
-//     else{
-//     abort(403);
-//     }
-
-// } 
-
-public function filter(Request $request){
-    {
-    if ($request->ajax()) {
-         $kategori = Kategori::all();
-         $pengajuan = Pengajuan::all();
-         $mitra = Mitra::all();
-         $status = Status::all();
-         $prodi = Prodi::all();
-         $dokumen = Dokumen::all();
-         $trxstatus = Trxstatus::all();
-         $data = User::select('*');
-
-    return Datatables::of($data, $kategori, $pengajuan, $mitra, $status, $prodi, $dokumen, $trxstatus)
-    ->addIndexColumn()
-    ->addColumn('status', function($row){
-    if($row->status){
-    return '<span class="badge badge-primary">Active</span>';
-    }else{
-    return '<span class="badge badge-danger">Deactive</span>';
-    }
-    })
-    ->filter(function ($instance) use ($request) {
-    if ($request->get('status') == '0' || $request->get('status') == '1') {
-    $instance->where('status', $request->get('status'));
-    }
-    if (!empty($request->get('search'))) {
-    $instance->where(function($w) use($request){
-    $search = $request->get('search');
-    $w->orWhere('name', 'LIKE', "%$search%")
-    ->orWhere('email', 'LIKE', "%$search%");
-    });
-    }
-    })
-    ->rawColumns(['status'])
-    ->make(true);
-    }
-
-    return view('users');
-    }
-}
                
         public function cetakpengajuan(){
             $ruanglingkup = RuangLingkup::all();
@@ -298,23 +276,5 @@ public function filter(Request $request){
             }
         }
 
-         public function riwayatvalidasi(){
-         $pengajuan = Pengajuan::all();
-         $mitra = Mitra::all();
-         $kategori = Kategori::all();
-         $status = Status::all();
-         $prodi = Prodi::all();
-         $dokumen = Dokumen::all();
-         $trxstatus = Trxstatus::all();
-         $user = User::all();
-
-         if (Auth()->user()->role == 3){
-         return view('reviewer.selesaivalidasi' , compact('pengajuan' , 'mitra', 'status','prodi', 'dokumen',
-         'trxstatus', 'user', 'kategori'));
-         }
-         else{
-         abort(403);
-         }
-         }
 
 }

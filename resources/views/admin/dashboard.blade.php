@@ -123,38 +123,23 @@
                         <div class="swiper-button swiper-button-prev"></div>
                     </div>
 
-
-                    <div class="d-slider1 overflow-hidden ">
-                        <ul class="swiper-wrapper list-inline m-0 p-0 mb-2">
-                            @php $i = 1;@endphp
-                            @foreach ($prodi as $p)
-                                <li class="swiper-slide card card-slide" data-aos="fade-up" data-aos-delay="700">
+                    <div class="row">
+                        @foreach ($prodi as $p)
+                            <div class="col-lg-3">
+                                <div class="card">
                                     <div class="card-body">
-                                        <div class="progress-widget">
-                                            <div id="circle-progress-{{ $i++ }}"
-                                                class="circle-progress-01 circle-progress circle-progress-primary text-center"
-                                                data-min-value="0" data-max-value="100" data-value="90"
-                                                data-type="percent">
-                                                <svg class="card-slie-arrow " width="24" height="24px"
-                                                    viewBox="0 0 24 24">
-                                                    <path fill="currentColor"
-                                                        d="M5,17.59L15.59,7H9V5H19V15H17V8.41L6.41,19L5,17.59Z" />
-                                                </svg>
-                                            </div>
-                                            <div class="progress-detail">
+                                        <div class="d-flex align-items-center justify-content-between">
+                                            <h6 class="text-primary mb-0">
                                                 <a href="/detail/{{ $p->id }}"
                                                     class="mb-2">{{ $p->namaprodi }}</a>
-                                                @php $jumlah = App\Models\Pengajuan::where('prodiid', $p->id)->count(); @endphp
-                                                <h4 class="counter">{{ $jumlah }}</h4>
-                                            </div>
+                                            </h6>
+                                            @php $jumlah = App\Models\Pengajuan::where('prodiid', $p->id)->count(); @endphp
+                                            <h4 class="text-dark mb-0">{{ $jumlah }}</h4>
                                         </div>
                                     </div>
-                                </li>
-                            @endforeach
-                        </ul>
-
-                        <div class="swiper-button swiper-button-next"></div>
-                        <div class="swiper-button swiper-button-prev"></div>
+                                </div>
+                            </div>
+                        @endforeach
                     </div>
                 </div>
             </div>

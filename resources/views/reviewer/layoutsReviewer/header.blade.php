@@ -48,7 +48,7 @@
     <aside class="sidebar sidebar-default navs-rounded-all ">
         <div class="sidebar-header d-flex align-items-center justify-content-start">
             <a class="navbar-brand">
-                <img src="SIKASI.png" width="162" height="75">
+                <img src="{{ asset('SIKASI.png') }}" width="162" height="75">
             </a>
             <div class="sidebar-toggle" data-toggle="sidebar" data-active="true">
                 <i class="icon">

@@ -101,6 +101,7 @@ route::get('/unduhtemplate',[TemplateController::class,"unduhtemplate"])->name('
 //Pengajuan
 route::get('/select-mitra',[PengajuanController::class,"getMitra"])->name('select.mitra');
 route::get('/get-mitra',[PengajuanController::class,"getDetailMitra"])->name('get.mitra');
+route::get('/datamitra',[PengajuanController::class,"datamitra"])->name('datamitra');
 route::get('/pengajuan',[PengajuanController::class,"index"])->name('pengajuan');
 route::get('/tambahpengajuan',[PengajuanController::class,"tambahpengajuan"])->name('tambahpengajuan');
 route::post('/insertpengajuan',[PengajuanController::class,"insertpengajuan"])->name('insertpengajuan');
@@ -109,6 +110,7 @@ route::get('/hapuspengajuan/{id}',[PengajuanController::class,"hapuspengajuan"])
 
 //Admin Pengajuan
 route::get('/datapengajuan',[StatusController::class,"dataajuan"])->name('dataajuan');
+route::get('detail/{id}', [StatusController::class,"detail"])->name('detail');
 route::get('/cetakpengajuan',[StatusController::class,"cetakpengajuan"])->name('cetakpengajuan');
 route::post('/filter',[StatusController::class,"filter"])->name('filter');
 route::get('/export_pengajuan', [PengajuanController::class, 'export_excel'])->name('export_pengajuan');
@@ -116,15 +118,13 @@ route::get('/export_pengajuan', [PengajuanController::class, 'export_excel'])->n
 
 //Status Verifikasi
 route::get('/verifikasi',[StatusController::class,"verifikasi"])->name('verifikasi');
-route::get('detail/{id}', [StatusController::class,"detail"])->name('detail');
+route::get('verifprodi/{id}', [StatusController::class,"verifprodi"])->name('verifprodi');
 route::get('/filter',[StatusController::class,"filter"])->name('filter');
-route::get('/newstatus',[StatusController::class,"newstatus"])->name('newstatus');
 route::post('/insertnewstatus',[StatusController::class,"insertnewstatus"])->name('insertnewstatus');
 
 //Reviewer
 route::get('/validasi',[StatusController::class,"validasi"])->name('validasi');
 route::get('/riwayatvalidasi',[StatusController::class,"riwayatvalidasi"])->name('riwayatvalidasi');
-route::get('/newstatus',[StatusController::class,"newstatus"])->name('newstatus');
 route::post('/insertnewstatus',[StatusController::class,"insertnewstatus"])->name('insertnewstatus');
 
 
