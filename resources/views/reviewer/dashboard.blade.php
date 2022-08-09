@@ -98,9 +98,27 @@
                 <div class="swiper-button swiper-button-prev"></div>
             </div>
         </div> --}}
+
+        <div class="row">
+            @foreach ($prodi as $p)
+                <div class="col-lg-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center justify-content-between">
+                                <h6 class="text-primary mb-0">
+                                    <a href="/detail/{{ $p->id }}" class="mb-2">{{ $p->namaprodi }}</a>
+                                </h6>
+                                @php $jumlah = App\Models\Pengajuan::where('prodiid', $p->id)->count(); @endphp
+                                <h4 class="text-dark mb-0">{{ $jumlah }}</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+        </div>
     </div>
 </div>
-</div>
+
 
 
 

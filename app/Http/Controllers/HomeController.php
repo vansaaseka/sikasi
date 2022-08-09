@@ -124,7 +124,7 @@ class HomeController extends Controller
                 //  $pj->id)->whereBetween('status_id',['1' , '10'])->orderBy('id', 'desc')->first()->count();
                  
                 // }
-                  
+                  $prodi = Prodi::all();
                   $total = Pengajuan::count();
                   $total_pks = Pengajuan::where('kategori_id', 1)->count();
                   $total_mou = Pengajuan::where('kategori_id', 2)->count();
@@ -139,7 +139,7 @@ class HomeController extends Controller
                   $selesai = $selesai_pks + $selesai_mou;
              
                return view('reviewer/dashboard', compact('total', 'total_pks', 'total_mou', 'selesai', 'selesai_pks',
-               'selesai_mou', 'belum_validasi', 'proses_validasi', 'selesai_validasi'
+               'selesai_mou', 'belum_validasi', 'proses_validasi', 'selesai_validasi', 'prodi'
                ));
             
             }

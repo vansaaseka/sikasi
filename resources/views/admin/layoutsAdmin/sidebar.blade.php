@@ -125,8 +125,7 @@
                     <span class="item-name">Prodi</span>
                 </a>
             </li>
-
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a class="nav-link {{ 'kategorimitra' == request()->path() ? 'active' : '' }}" href="/kategorimitra">
                     <i class="icon">
                         <svg width="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -140,9 +139,9 @@
                     </i>
                     <span class="item-name">Kategori Mitra</span>
                 </a>
-            </li>
+            </li> --}}
 
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a class="nav-link {{ 'ruanglingkup' == request()->path() ? 'active' : '' }}" href="/ruanglingkup">
                     <svg width="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -154,7 +153,7 @@
                     </svg>
                     <span class="item-name">RuangLingkup Mitra</span>
                 </a>
-            </li>
+            </li> --}}
 
             <li>
                 <hr class="hr-horizontal">
@@ -218,7 +217,7 @@
                                     </g>
                                 </svg>
                             </i>
-                            <i class="sidenav-mini-icon"> S </i>
+                            <i class="sidenav-mini-icon"> D </i>
                             <span class="item-name">Dosen</span>
                         </a>
                     </li>
@@ -234,7 +233,7 @@
                                     </g>
                                 </svg>
                             </i>
-                            <i class="sidenav-mini-icon"> O </i>
+                            <i class="sidenav-mini-icon"> A </i>
                             <span class="item-name">Admin</span></a>
                     </li>
                     <li class="nav-item">
@@ -249,7 +248,7 @@
                                     </g>
                                 </svg>
                             </i>
-                            <i class="sidenav-mini-icon"> D </i>
+                            <i class="sidenav-mini-icon"> V </i>
                             <span class="item-name">Verifikator</span>
                         </a>
                     </li>
@@ -265,7 +264,7 @@
                                     </g>
                                 </svg>
                             </i>
-                            <i class="sidenav-mini-icon"> D </i>
+                            <i class="sidenav-mini-icon"> R </i>
                             <span class="item-name">Reviewer</span>
                         </a>
                     </li>
