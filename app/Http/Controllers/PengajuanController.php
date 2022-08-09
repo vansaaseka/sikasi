@@ -39,9 +39,14 @@ class PengajuanController extends Controller
         //   ->first();
         // }
         // dd($maxdata);
-
-        return view('dosen\Pengajuan\detailpengajuan' , compact('pengajuan' , 'mitra','dokumen', 'trxstatus', 'status','user', 'kategori'));
+        if (Auth()->user()->role == 0){
+        return view('dosen\Pengajuan\detailpengajuan' , compact('pengajuan' , 'mitra','dokumen', 'trxstatus', 'status','user',
+        'kategori'));
         }
+        else{
+        abort(403);
+        }
+    }  
 
     public function tambahpengajuan()
     {
@@ -54,7 +59,12 @@ class PengajuanController extends Controller
         $prodi = Prodi::all();
         $ruanglingkup = RuangLingkup::all();
         $kategori = Kategori::all();
+         if (Auth()->user()->role == 0){
         return view('dosen\Pengajuan\tambahpengajuan' , compact('kategorimitra' , 'prodi' , 'ruanglingkup', 'kategori'));
+        }
+         else{
+         abort(403);
+         }
     }
 
   
@@ -270,7 +280,11 @@ class PengajuanController extends Controller
     public function datamitra(){
            $mitra = Mitra::all();
            $kategorimitra = KategoriMitra::all();
-          return view('admin\Mitra\datamitra' , compact('mitra', 'kategorimitra'));
-          
+             if (Auth()->user()->role == 1){
+              return view('admin\Mitra\datamitra' , compact('mitra', 'kategorimitra'));
+             }
+             else{
+             abort(403);
+             }
     }
 }

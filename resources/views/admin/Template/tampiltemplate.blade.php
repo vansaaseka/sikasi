@@ -14,11 +14,11 @@
                     <div class="header-title">
                         <h4 class="card-title">Template Kerjasama</h4>
                     </div>
-                    <div id="dataTableHover_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                    {{-- <div id="dataTableHover_wrapper" class="dataTables_wrapper dt-bootstrap4">
                         <a class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modaltambahprodi"
                             id="#modaltambahprodi">Tambah <i class="fa fa-plus"></i>
                         </a>
-                    </div>
+                    </div> --}}
                     {{-- Modal Tambah --}}
                     <div class="modal fade" id="modaltambahprodi" tabindex="-1" role="dialog"
                         aria-labelledby="staticBackdropLiveLabel" aria-hidden="true" style="text-align: left">

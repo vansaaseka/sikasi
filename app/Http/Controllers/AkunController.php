@@ -29,37 +29,89 @@ class AkunController extends Controller
     public function tampiladmin(){
         // Users tanpa dolar = nama database
         $admin = User::all();
-        return view('admin\ManajemenUser\tampilAdmin', compact('admin'));
-          // yang bertanda dolar harus sama dengan isi compact
+
+        if (Auth()->user()->role == 1){
+         return view('admin\ManajemenUser\tampilAdmin', compact('admin'));
+        }
+        else{
+        abort(403);
+        }
     }
     public function tampildosen(){
         $dosen = User::all();
         $prodi = Prodi::all();
         $pengajuan = Pengajuan::all();
+
+        if (Auth()->user()->role == 1){
         return view('admin\ManajemenUser\tampilDosen', compact('dosen', 'prodi', 'pengajuan'));
+        }
+        else{
+        abort(403);
+        }
+  
     }
     public function tampilverifikator(){
         $verifikator = User::all();
+
+         if (Auth()->user()->role == 1){
         return view('admin\ManajemenUser\tampilVerifikator', compact('verifikator'));
+         }
+         else{
+         abort(403);
+         }
     }
     public function tampilreviewer(){
         $reviewer = User::all();
-        return view('admin\ManajemenUser\tampilReviewer', compact('reviewer'));
+
+          if (Auth()->user()->role == 1){
+            return view('admin\ManajemenUser\tampilReviewer', compact('reviewer'));
+          }
+          else{
+          abort(403);
+          }
     }
 
     //FormTambah
     public function tambahadmin(){
-        return view('admin\ManajemenUser\tambahadmin');
+
+         if (Auth()->user()->role == 1){
+         return view('admin\ManajemenUser\tambahadmin');
+         }
+         else{
+         abort(403);
+         }
+   
     }
     public function tambahdosen(){
         $prodi = Prodi::all();
-        return view('admin\ManajemenUser\tambahdosen', compact('prodi'));
+
+           if (Auth()->user()->role == 1){
+            return view('admin\ManajemenUser\tambahdosen', compact('prodi'));
+           }
+           else{
+           abort(403);
+           }
+ 
     }
     public function tambahverifikator(){
-        return view('admin\ManajemenUser\tambahverifikator');
+
+         if (Auth()->user()->role == 1){
+          return view('admin\ManajemenUser\tambahverifikator');
+         }
+         else{
+         abort(403);
+         }
+        
     }
+
     public function tambahreviewer(){
+
+         if (Auth()->user()->role == 1){
         return view('admin\ManajemenUser\tambahreviewer');
+         }
+         else{
+         abort(403);
+         }
     }
 
 
@@ -78,6 +130,7 @@ class AkunController extends Controller
                 $akun->name = $request->input('name');
                 $akun->email = $request->input('email');
                 $akun->role = $request->input('role');
+                $akun->status = $request->input('status');
                 $akun->prodi_id = $request->input('prodi_id');
                 $akun->password = Hash::make($request->password);
 

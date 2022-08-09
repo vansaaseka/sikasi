@@ -61,7 +61,7 @@
 
                         {{-- Input Role --}}
                         <input name="role" type="hidden" value="1">
-
+                        <input name="status" type="hidden" value="1">
                         <button type="submit" class="btn btn-primary">Submit</button>
                         {{-- <a href="/kategori" class="btn btn-light">Cancel</a> --}}
                     </form>

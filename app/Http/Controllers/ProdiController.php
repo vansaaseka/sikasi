@@ -11,8 +11,13 @@ class ProdiController extends Controller
 
                 // Prodi tanpa dolar = nama database
                 $prodi = Prodi::all();
+                 if (Auth()->user()->role == 1){
                 return view('admin\Prodi\tampilprodi', compact('prodi'));
-                // yang bertanda dolar harus sama dengan isi compact
+                 }
+                 else{
+                 abort(403);
+                 }
+            
             }
            
 
@@ -41,4 +46,4 @@ class ProdiController extends Controller
             $prodi->delete();
             return redirect()->route('prodi');
             }
-            }
+        }
