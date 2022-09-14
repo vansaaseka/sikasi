@@ -54,6 +54,7 @@ class DokumenController extends Controller
   
 
     public function updatedokumen(Request $request, $id){
+        // dd($id);
          $validasi = Validator::make($request->all(),[
           'dokumen'=> 'mimes:doc,docx,pdf',
           ],
@@ -65,7 +66,9 @@ class DokumenController extends Controller
           }
           else {
 
-            $dokumen = Dokumen::find($id);
+            $dokumen = Dokumen::where('pengajuan_id', $id)->first();
+
+            // dd($dokumen);
             $dokumen->update($request->all());
             if ($request->hasFile('dokumen')) 
         {

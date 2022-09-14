@@ -30,6 +30,15 @@ Route::get('/', function () {
     return view('landingpage');
 });
 
+
+// Route::get('/', function () {
+// return view('portfolio');
+// });
+
+Route::get('/SyadzaFolio', function () {
+return view('portfolio');
+});
+
 Route::get('/login', function () {
     return view('auth/login');
 });

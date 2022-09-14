@@ -400,6 +400,7 @@
                                                 data-original-title="Delete" href="#">
                                                 <i class="fa fa-trash"></i>
                                             </a>
+
                                             {{-- Modal Edit Dokumen --}}
                                             <div class="modal fade" id="modaleditdokumen{{ $item->id }}"
                                                 tabindex="-1" role="dialog"
@@ -407,79 +408,90 @@
                                                 <div class="modal-dialog modal-dialog-scrollable" role="document">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
-                                                            <h5 class="modal-title" id="staticBackdropLiveLabel">Edit
+                                                            <h5 class="modal-title" id="staticBackdropLiveLabel">
+                                                                Edit
                                                                 Dokumen Pengajuan</h5>
                                                             <button type="button" class="btn-close"
                                                                 data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
                                                         <div class="modal-body">
-                                                            <div class="table-responsive">
-                                                                <table
-                                                                    class="table align-items table-flush table-hover"
-                                                                    id="dataTableHover">
+                                                            <div class="modal-body">
+                                                                <div class="table-responsive">
+                                                                    <table
+                                                                        class="table align-items table-flush table-hover"
+                                                                        id="dataTableHover">
 
-                                                                    <tbody>
+                                                                        <tbody>
 
-                                                                        <tr>
-                                                                            <td class="font-size:3"
-                                                                                style="text-align:center">
-                                                                                Mitra
-                                                                                :
-                                                                                {{ $datapengajuan->mitra->namamitra }}
-                                                                            </td>
+                                                                            <tr>
+                                                                                <td class="font-size:3"
+                                                                                    style="text-align:center">
+                                                                                    Mitra
+                                                                                    :
+                                                                                    {{ $datapengajuan->mitra->namamitra }}
+                                                                                </td>
 
 
-                                                                        </tr>
+                                                                            </tr>
 
-                                                                    </tbody>
-                                                                </table>
-                                                            </div>
-                                                            <div class="row d-flex justify-content">
-                                                                <div class="col-md-12">
-                                                                    <div class="card">
-                                                                        <div class="card-body">
-                                                                            <form
-                                                                                action="/updatedokumen/{{ $item->id }}"
-                                                                                method="POST"
-                                                                                enctype="multipart/form-data"
-                                                                                class="forms-sample">
-                                                                                @csrf
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                                <div class="row d-flex justify-content">
+                                                                    <div class="col-md-12">
+                                                                        <div class="card">
+                                                                            <div class="card-body">
+                                                                                <form
+                                                                                    action="/updatedokumen/{{ $item->id }}"
+                                                                                    method="POST"
+                                                                                    enctype="multipart/form-data"
+                                                                                    class="forms-sample">
+                                                                                    @csrf
 
-                                                                                <div class="form-group">
                                                                                     <div class="form-group">
-                                                                                        {{-- <label class="form-label" for="exampleInputText1">Unggah Dokumen </label> --}}
-                                                                                        <div class="form-group"
-                                                                                            style="text-align:center">
-                                                                                            <h6>Input dokumen dengan
-                                                                                                format .pdf .docx .doc
-                                                                                            </h6>
-                                                                                            <br />
-                                                                                            <div class="custom-file">
-                                                                                                <input type="file"
-                                                                                                    name="dokumen"
-                                                                                                    id="customFile"
-                                                                                                    class="form-control"
-                                                                                                    value="{{ old('dokumen') }}"
-                                                                                                    autofocus>
+                                                                                        <div class="form-group">
+                                                                                            {{-- <label class="form-label" for="exampleInputText1">Unggah Dokumen </label> --}}
+                                                                                            <div class="form-group">
+                                                                                                <p> Unggah Dokumen
+                                                                                                    dalam
+                                                                                                    format .doc
+                                                                                                    .docx .pdf
+                                                                                                </p>
+                                                                                                <div
+                                                                                                    class="custom-file">
+                                                                                                    <input
+                                                                                                        type="file"
+                                                                                                        name="dokumen"
+                                                                                                        id="customFile"
+                                                                                                        class="form-control"
+                                                                                                        value="{{ old('dokumen') }}"
+                                                                                                        autofocus>
+                                                                                                </div>
                                                                                             </div>
                                                                                         </div>
-                                                                                    </div>
-                                                                                    @foreach ($pengajuan as $datapengajuan)
-                                                                                        @if ($datapengajuan->user_id == Auth::user()->id)
-                                                                                            <input type="hidden"
-                                                                                                name="pengajuan_id"
-                                                                                                value={{ $datapengajuan->id }}>
-                                                                                            <input type="hidden"
-                                                                                                name="user_id"
-                                                                                                value={{ Auth::user()->id }}>
-                                                                                        @endif
-                                                                                    @endforeach
-                                                                                    <br />
-                                                                                    <button type="submit"
-                                                                                        class="btn btn-primary next action-button float-end"
-                                                                                        value="Submit">Submit</button>
+                                                                                        @foreach ($pengajuan as $data)
+                                                                                            @if ($datapengajuan->user_id == Auth::user()->id)
+                                                                                                <input type="hidden"
+                                                                                                    name="pengajuan_id"
+                                                                                                    value={{ $data->id }}>
+                                                                                                <input type="hidden"
+                                                                                                    name="user_id"
+                                                                                                    value={{ Auth::user()->id }}>
+                                                                                                <?php date_default_timezone_set('Asia/Jakarta'); ?>
+                                                                                                <input
+                                                                                                    name="created_at"
+                                                                                                    id="created_at"
+                                                                                                    type="hidden"
+                                                                                                    value="{{ date('Y-m-d H:i:s') }}">
+                                                                                            @endif
+                                                                                        @endforeach
+                                                                                        <br />
+                                                                                        <button type="submit"
+                                                                                            class="btn btn-primary next action-button float-end"
+                                                                                            value="Submit">Submit</button>
 
-                                                                            </form>
+                                                                                </form>
+                                                                            </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>

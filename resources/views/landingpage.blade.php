@@ -35,6 +35,14 @@
     <!-- Template Main CSS File -->
     <link href="{{ asset('landingpage/assets/css/main.css') }}" rel="stylesheet">
 
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $("#myModal").modal('show');
+        });
+    </script>
+
     <!-- =======================================================
   * Template Name: HeroBiz - v2.1.0
   * Template URL: https://bootstrapmade.com/herobiz-bootstrap-business-template/
@@ -93,7 +101,28 @@
 
     <main id="main">
 
+        <div id="myModal" class="modal fade show" aria-modal="true" role="dialog" style="display: block;">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title-center" text-align="center">Demo Produk Tugas Akhir</h3>
 
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p style="text-align:center; font-size: 17px;">Sistem Informasi Pengajuan Kerjasama Sekolah
+                            Vokasi UNS
+                        </p>
+                        <p style="text-align:center; font-size: 17px;font-weight: bold;">Developer : Syadza Tsurayya
+                            Eden
+                            <br> <a href="/SyadzaFolio"><i class="fa fa-user fa-3x"></i>Portofolio</a>
+                        </p>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <!-- ======= Tentang Section ======= -->
         <section id="about" class="about">
@@ -134,7 +163,8 @@
                                 <div class="icon">
                                     <i class="bi bi-globe"></i></i>
                                 </div>
-                                <h4><a href="" class="stretched-link">Momerandum Of Understanding (MoU)</a></h4>
+                                <h4><a href="" class="stretched-link">Momerandum Of Understanding (MoU)</a>
+                                </h4>
                                 <p>Memorandum of Understanding merupakan payung hukum untuk seluruh perjanjian
                                     kerjasama/kontrak kerja/kontrak swakelola/penunjukan langsung, antara Universitas
                                     Sebelas Maret dengan pihak mitra (instansi pemerintah/perguruan
@@ -427,7 +457,7 @@
                                     <ul class="list-inline p-0 m-0">
 
                                         <li>
-                                            <div class="timeline-dots1 border-success text-success">
+                                            <div class="timeline-dots1 border-primary text-primary">
                                                 <svg width="20" height="20" viewBox="0 0 24 24">
                                                     <path fill="currentColor"
                                                         d="M19,3H5C3.89,3 3,3.89 3,5V9H5V5H19V19H5V15H3V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5C21,3.89 20.1,3 19,3M10.08,15.58L11.5,17L16.5,12L11.5,7L10.08,8.41L12.67,11H3V13H12.67L10.08,15.58Z">
@@ -440,7 +470,7 @@
                                             </div>
                                         </li>
                                         <li>
-                                            <div class="timeline-dots1 border-success text-success">
+                                            <div class="timeline-dots1 border-primary text-primary">
                                                 <svg width="20" height="20" viewBox="0 0 24 24">
                                                     <path fill="currentColor"
                                                         d="M19,3H5C3.89,3 3,3.89 3,5V9H5V5H19V19H5V15H3V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5C21,3.89 20.1,3 19,3M10.08,15.58L11.5,17L16.5,12L11.5,7L10.08,8.41L12.67,11H3V13H12.67L10.08,15.58Z">
@@ -453,7 +483,7 @@
                                             </div>
                                         </li>
                                         <li>
-                                            <div class="timeline-dots1 border-success text-success">
+                                            <div class="timeline-dots1 border-primary text-primary">
                                                 <svg width="20" height="20" viewBox="0 0 24 24">
                                                     <path fill="currentColor"
                                                         d="M19,3H5C3.89,3 3,3.89 3,5V9H5V5H19V19H5V15H3V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5C21,3.89 20.1,3 19,3M10.08,15.58L11.5,17L16.5,12L11.5,7L10.08,8.41L12.67,11H3V13H12.67L10.08,15.58Z">
@@ -466,7 +496,7 @@
                                             </div>
                                         </li>
                                         <li>
-                                            <div class="timeline-dots1 border-success text-success">
+                                            <div class="timeline-dots1 border-primary text-primary">
                                                 <svg width="20" height="20" viewBox="0 0 24 24">
                                                     <path fill="currentColor"
                                                         d="M19,3H5C3.89,3 3,3.89 3,5V9H5V5H19V19H5V15H3V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5C21,3.89 20.1,3 19,3M10.08,15.58L11.5,17L16.5,12L11.5,7L10.08,8.41L12.67,11H3V13H12.67L10.08,15.58Z">
@@ -479,7 +509,7 @@
                                             </div>
                                         </li>
                                         <li>
-                                            <div class="timeline-dots1 border-success text-success">
+                                            <div class="timeline-dots1 border-primary text-primary">
                                                 <svg width="20" height="20" viewBox="0 0 24 24">
                                                     <path fill="currentColor"
                                                         d="M19,3H5C3.89,3 3,3.89 3,5V9H5V5H19V19H5V15H3V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5C21,3.89 20.1,3 19,3M10.08,15.58L11.5,17L16.5,12L11.5,7L10.08,8.41L12.67,11H3V13H12.67L10.08,15.58Z">
@@ -492,7 +522,7 @@
                                             </div>
                                         </li>
                                         <li>
-                                            <div class="timeline-dots1 border-success text-success">
+                                            <div class="timeline-dots1 border-primary text-primary">
                                                 <svg width="20" height="20" viewBox="0 0 24 24">
                                                     <path fill="currentColor"
                                                         d="M19,3H5C3.89,3 3,3.89 3,5V9H5V5H19V19H5V15H3V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5C21,3.89 20.1,3 19,3M10.08,15.58L11.5,17L16.5,12L11.5,7L10.08,8.41L12.67,11H3V13H12.67L10.08,15.58Z">
@@ -518,206 +548,6 @@
 
 
 
-
-
-
-        {{-- <!-- ======= F.A.Q Section ======= -->
-        <section id="faq" class="faq">
-            <div class="container-fluid" data-aos="fade-up">
-
-                <div class="row gy-4">
-
-                    <div
-                        class="col-lg-7 d-flex flex-column justify-content-center align-items-stretch  order-2 order-lg-1">
-
-                        <div class="content px-xl-5">
-                            <h3>Frequently Asked <strong>Questions</strong></h3>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                incididunt ut labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit
-                            </p>
-                        </div>
-
-                        <div class="accordion accordion-flush px-xl-5" id="faqlist">
-
-                            <div class="accordion-item" data-aos="fade-up" data-aos-delay="200">
-                                <h3 class="accordion-header">
-                                    <button class="accordion-button collapsed" type="button"
-                                        data-bs-toggle="collapse" data-bs-target="#faq-content-1">
-                                        <i class="bi bi-question-circle question-icon"></i>
-                                        Non consectetur a erat nam at lectus urna duis?
-                                    </button>
-                                </h3>
-                                <div id="faq-content-1" class="accordion-collapse collapse"
-                                    data-bs-parent="#faqlist">
-                                    <div class="accordion-body">
-                                        Feugiat pretium nibh ipsum consequat. Tempus iaculis urna id volutpat lacus
-                                        laoreet non curabitur gravida. Venenatis lectus magna fringilla urna porttitor
-                                        rhoncus dolor purus non.
-                                    </div>
-                                </div>
-                            </div><!-- # Faq item-->
-
-                            <div class="accordion-item" data-aos="fade-up" data-aos-delay="300">
-                                <h3 class="accordion-header">
-                                    <button class="accordion-button collapsed" type="button"
-                                        data-bs-toggle="collapse" data-bs-target="#faq-content-2">
-                                        <i class="bi bi-question-circle question-icon"></i>
-                                        Feugiat scelerisque varius morbi enim nunc faucibus a pellentesque?
-                                    </button>
-                                </h3>
-                                <div id="faq-content-2" class="accordion-collapse collapse"
-                                    data-bs-parent="#faqlist">
-                                    <div class="accordion-body">
-                                        Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi. Id
-                                        interdum velit laoreet id donec ultrices. Fringilla phasellus faucibus
-                                        scelerisque eleifend donec pretium. Est pellentesque elit ullamcorper dignissim.
-                                        Mauris ultrices eros in cursus turpis massa tincidunt dui.
-                                    </div>
-                                </div>
-                            </div><!-- # Faq item-->
-
-                            <div class="accordion-item" data-aos="fade-up" data-aos-delay="400">
-                                <h3 class="accordion-header">
-                                    <button class="accordion-button collapsed" type="button"
-                                        data-bs-toggle="collapse" data-bs-target="#faq-content-3">
-                                        <i class="bi bi-question-circle question-icon"></i>
-                                        Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi?
-                                    </button>
-                                </h3>
-                                <div id="faq-content-3" class="accordion-collapse collapse"
-                                    data-bs-parent="#faqlist">
-                                    <div class="accordion-body">
-                                        Eleifend mi in nulla posuere sollicitudin aliquam ultrices sagittis orci.
-                                        Faucibus pulvinar elementum integer enim. Sem nulla pharetra diam sit amet nisl
-                                        suscipit. Rutrum tellus pellentesque eu tincidunt. Lectus urna duis convallis
-                                        convallis tellus. Urna molestie at elementum eu facilisis sed odio morbi quis
-                                    </div>
-                                </div>
-                            </div><!-- # Faq item-->
-
-                            <div class="accordion-item" data-aos="fade-up" data-aos-delay="500">
-                                <h3 class="accordion-header">
-                                    <button class="accordion-button collapsed" type="button"
-                                        data-bs-toggle="collapse" data-bs-target="#faq-content-4">
-                                        <i class="bi bi-question-circle question-icon"></i>
-                                        Ac odio tempor orci dapibus. Aliquam eleifend mi in nulla?
-                                    </button>
-                                </h3>
-                                <div id="faq-content-4" class="accordion-collapse collapse"
-                                    data-bs-parent="#faqlist">
-                                    <div class="accordion-body">
-                                        <i class="bi bi-question-circle question-icon"></i>
-                                        Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi. Id
-                                        interdum velit laoreet id donec ultrices. Fringilla phasellus faucibus
-                                        scelerisque eleifend donec pretium. Est pellentesque elit ullamcorper dignissim.
-                                        Mauris ultrices eros in cursus turpis massa tincidunt dui.
-                                    </div>
-                                </div>
-                            </div><!-- # Faq item-->
-
-                            <div class="accordion-item" data-aos="fade-up" data-aos-delay="600">
-                                <h3 class="accordion-header">
-                                    <button class="accordion-button collapsed" type="button"
-                                        data-bs-toggle="collapse" data-bs-target="#faq-content-5">
-                                        <i class="bi bi-question-circle question-icon"></i>
-                                        Tempus quam pellentesque nec nam aliquam sem et tortor consequat?
-                                    </button>
-                                </h3>
-                                <div id="faq-content-5" class="accordion-collapse collapse"
-                                    data-bs-parent="#faqlist">
-                                    <div class="accordion-body">
-                                        Molestie a iaculis at erat pellentesque adipiscing commodo. Dignissim
-                                        suspendisse in est ante in. Nunc vel risus commodo viverra maecenas accumsan.
-                                        Sit amet nisl suscipit adipiscing bibendum est. Purus gravida quis blandit
-                                        turpis cursus in
-                                    </div>
-                                </div>
-                            </div><!-- # Faq item-->
-
-                        </div>
-
-                    </div>
-
-                    <div class="col-lg-5 align-items-stretch order-1 order-lg-2 img"
-                        style='background-image: url("assets/img/faq.jpg");'>&nbsp;</div>
-                </div>
-
-            </div>
-        </section><!-- End F.A.Q Section --> --}}
-
-
-
-        {{-- <!-- ======= Team Section ======= -->
-        <section id="team" class="team">
-            <div class="container" data-aos="fade-up">
-
-                <div class="section-header">
-                    <h2>Our Team</h2>
-                    <p>Architecto nobis eos vel nam quidem vitae temporibus voluptates qui hic deserunt iusto omnis nam
-                        voluptas asperiores sequi tenetur dolores incidunt enim voluptatem magnam cumque fuga.</p>
-                </div>
-
-                <div class="row gy-5">
-
-                    <div class="col-xl-4 col-md-6 d-flex" data-aos="zoom-in" data-aos-delay="200">
-                        <div class="team-member">
-                            <div class="member-img">
-                                <img src="assets/img/team/team-1.jpg" class="img-fluid" alt="">
-                            </div>
-                            <div class="member-info">
-                                <div class="social">
-                                    <a href=""><i class="bi bi-twitter"></i></a>
-                                    <a href=""><i class="bi bi-facebook"></i></a>
-                                    <a href=""><i class="bi bi-instagram"></i></a>
-                                    <a href=""><i class="bi bi-linkedin"></i></a>
-                                </div>
-                                <h4>Walter White</h4>
-                                <span>Chief Executive Officer</span>
-                            </div>
-                        </div>
-                    </div><!-- End Team Member -->
-
-                    <div class="col-xl-4 col-md-6 d-flex" data-aos="zoom-in" data-aos-delay="400">
-                        <div class="team-member">
-                            <div class="member-img">
-                                <img src="assets/img/team/team-2.jpg" class="img-fluid" alt="">
-                            </div>
-                            <div class="member-info">
-                                <div class="social">
-                                    <a href=""><i class="bi bi-twitter"></i></a>
-                                    <a href=""><i class="bi bi-facebook"></i></a>
-                                    <a href=""><i class="bi bi-instagram"></i></a>
-                                    <a href=""><i class="bi bi-linkedin"></i></a>
-                                </div>
-                                <h4>Sarah Jhonson</h4>
-                                <span>Product Manager</span>
-                            </div>
-                        </div>
-                    </div><!-- End Team Member -->
-
-                    <div class="col-xl-4 col-md-6 d-flex" data-aos="zoom-in" data-aos-delay="600">
-                        <div class="team-member">
-                            <div class="member-img">
-                                <img src="assets/img/team/team-3.jpg" class="img-fluid" alt="">
-                            </div>
-                            <div class="member-info">
-                                <div class="social">
-                                    <a href=""><i class="bi bi-twitter"></i></a>
-                                    <a href=""><i class="bi bi-facebook"></i></a>
-                                    <a href=""><i class="bi bi-instagram"></i></a>
-                                    <a href=""><i class="bi bi-linkedin"></i></a>
-                                </div>
-                                <h4>William Anderson</h4>
-                                <span>CTO</span>
-                            </div>
-                        </div>
-                    </div><!-- End Team Member -->
-
-                </div>
-
-            </div>
-        </section><!-- End Team Section --> --}}
 
 
 
