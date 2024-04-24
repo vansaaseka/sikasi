@@ -34,6 +34,34 @@
                         </div>
                     </div>
                 </div>
+
+
+                <div class="card" data-aos="fade-up" data-aos-delay="1000">
+                    <div class="card-header d-flex justify-content-between flex-wrap">
+                        <div class="header-title">
+                            <h4 class="card-title">Kategori Mitra</h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-xl-6">
+                            <div class="card-body">
+                                <div id="pie-chart"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 col-xl-6">
+                    <div class="card" data-aos="fade-up" data-aos-delay="1000">
+                        <div class="card-header d-flex justify-content-between flex-wrap">
+                            <div class="header-title">
+                                <h4 class="card-title">Proses Dokumen Kerjasama</h4>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div id="activity-bar" class="selesai"></div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         {{-- <div class="row row-cols-1">
@@ -215,7 +243,7 @@
                 ],
                 chart: {
                     type: 'bar',
-                    height: 230,
+                    height: 215,
                     stacked: true,
                     toolbar: {
                         show: false
@@ -284,4 +312,143 @@
             chart.render();
         }
     })(jQuery)
+</script>
+<script>
+    // Data untuk pie chart
+    const data = [{
+            x: "Perusahaan multinasinal",
+            y: {!! json_encode($kategori1) !!}
+        },
+        {
+            x: "Perusahaan nasionan berstandar tinggi",
+            y: {!! json_encode($kategori2) !!}
+        },
+        {
+            x: "Perusahaan teknologi global",
+            y: {!! json_encode($kategori3) !!}
+        },
+        {
+            x: "Perusahaan rintisan (startup company) teknologi",
+            y: {!! json_encode($kategori4) !!}
+        },
+        {
+            x: "Organisasi nirlaba kelas dunia",
+            y: {!! json_encode($kategori5) !!}
+        },
+        {
+            x: "Institusi/organisasi multilateral",
+            y: {!! json_encode($kategori6) !!}
+        },
+        {
+            x: "Perguruan tinggi yang masuk dalam daftar QS100 berdasarkan ilmu (QS100 by subject)",
+            y: {!! json_encode($kategori7) !!}
+        },
+        {
+            x: "Perguruan tinggi, fakultas, atau program studi dalam bidang yang relevan (univ vokasi)",
+            y: {!! json_encode($kategori8) !!}
+        },
+        {
+            x: "Instansi pemerintah, BUMN dan/atau BUMD",
+            y: {!! json_encode($kategori9) !!}
+        },
+        {
+            x: "Rumah sakit",
+            y: {!! json_encode($kategori10) !!}
+        },
+        {
+            x: "UMKM",
+            y: {!! json_encode($kategori11) !!}
+        },
+    ];
+
+    // Konfigurasi untuk pie chart
+    const options = {
+        chart: {
+            type: 'pie',
+            width: 800,
+        },
+        labels: data.map(item => item.x),
+        series: data.map(item => item.y),
+        colors: ["#4bc7d2", "#3a57e8", "#FF0000", "#FFA500", "#FFFF00", "#00FF00", "#0000FF", "#4B0082", "#8A2BE2",
+            "#FF1493", "#FF4500"
+        ],
+        legend: {
+            show: true,
+            position: 'right',
+
+        },
+        responsive: [{
+            breakpoint: 230,
+            options: {
+                chart: {
+                    width: 250
+                },
+                legend: {
+                    position: 'right'
+                }
+            }
+        }]
+    };
+
+    const chart = new ApexCharts(document.querySelector("#pie-chart"), options);
+    chart.render();
+
+    if (jQuery('#activity-bar').length) {
+        var statusCounts = {!! json_encode($statusCounts) !!};
+
+
+        var years = ['2021', '2022', '2023', '2024'];
+        var seriesData = [];
+
+        var colors = ['#008FFB', '#00E396', '#FEB019', '#FF4560', '#775DD0', '#00D8B6', '#FFD601', '#546E7A',
+            '#26a69a', '#D10CE8', '#FF7F00'
+        ];
+
+        Object.keys(statusCounts).forEach((status, index) => {
+            var data = [];
+            years.forEach(year => {
+                data.push(statusCounts[status][year] ||
+                    0);
+            });
+
+            seriesData.push({
+                name: status,
+                data: data,
+                color: colors[index % colors.length],
+            });
+        });
+
+
+        var activityOptions = {
+            chart: {
+                type: 'bar',
+                height: 260,
+                stacked: true,
+            },
+            plotOptions: {
+                bar: {
+                    horizontal: true,
+                    columnWidth: '50%',
+                },
+            },
+            stroke: {
+                width: 1,
+                colors: ['#fff'],
+            },
+            series: seriesData,
+            xaxis: {
+                categories: years,
+            },
+            fill: {
+                opacity: 1,
+            },
+            legend: {
+                position: 'top',
+                horizontalAlign: 'left',
+            },
+        };
+
+        var activityChart = new ApexCharts(document.querySelector("#activity-bar"), activityOptions);
+        activityChart.render();
+    }
 </script>

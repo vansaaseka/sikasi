@@ -9,6 +9,7 @@ use App\Models\Profile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Yoeunes\Toastr\Facades\Toastr;
 
 class ProfileController extends Controller
 {
@@ -18,14 +19,12 @@ class ProfileController extends Controller
 
             $prodi = Prodi::all();
             $profil = User::all();
-            // $profil = User::where('id', Auth::user()->id)->first();
+            $profil = User::where('id', Auth::user()->id)->first();
              if(empty(auth()->user()->nomorhp))
               {
              Alert::warning('Warning', 'Lengkapi Data Profil, untuk bisa menambahkan pengajuan !!');
              }
             return view('dosen\Profile\editprofile' , compact('prodi' , 'profil'));
-
-
         }
         public function profileVerifikator(){
 
@@ -34,7 +33,7 @@ class ProfileController extends Controller
         // $profil = User::where('id', Auth::user()->id)->first();
         return view('verifikator\Profile\editprofile' , compact('prodi' , 'profil'));
         }
-        
+
          public function profileReviewer(){
 
          $prodi = Prodi::all();
@@ -62,6 +61,7 @@ class ProfileController extends Controller
             'nomorhp' => 'required',
             // 'prodi_id' => 'required',
             'alamat' => 'required',
+            'nip' => 'required',
         ]);
         if (isset($request->photo)) {
             $extention = $request->photo->extension();
@@ -77,11 +77,12 @@ class ProfileController extends Controller
         $user->nomorhp = $request->nomorhp;
         // $user->prodi_id = $request->prodi_id;
         $user->alamat = $request->alamat;
+        $user->nip = $request->nip;
         $user->photo = $txt;
         $user->save();
 
-
-        return back()->with('toast_success', 'Data Berhasil Tersimpan');
+        Toastr::success('Data Berhasil Tersimpan', 'Success');
+        return back();
 
 
 

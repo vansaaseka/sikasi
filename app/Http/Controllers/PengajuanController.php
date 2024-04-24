@@ -16,6 +16,7 @@ use App\Models\RuangLingkup;
 use Illuminate\Http\Request;
 use App\Models\KategoriMitra;
 use App\Exports\PengajuanExport;
+use App\Models\ruanglingkup_lainnya;
 use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
 use PhpOffice\PhpWord\TemplateProcessor;
@@ -46,28 +47,33 @@ class PengajuanController extends Controller
         else{
         abort(403);
         }
-    }  
+    }
 
     public function tambahpengajuan()
     {
-        if(empty(auth()->user()->nomorhp)){
+        if (empty(auth()->user()->nomorhp)) {
             abort(404);
         }
-
 
         $kategorimitra = KategoriMitra::all();
         $prodi = Prodi::all();
         $ruanglingkup = RuangLingkup::all();
         $kategori = Kategori::all();
-         if (Auth()->user()->role == 0){
-        return view('dosen\Pengajuan\tambahpengajuan' , compact('kategorimitra' , 'prodi' , 'ruanglingkup', 'kategori'));
+        $ruanglingkup_lainnya = ruanglingkup_lainnya::all();
+        $lainnya_id = null;
+        if ($ruanglingkup_lainnya->isNotEmpty()) {
+            $lainnya_id = $ruanglingkup_lainnya->last()->id;
         }
-         else{
-         abort(403);
-         }
+
+        if (Auth()->user()->role == 0) {
+            return view('dosen\Pengajuan\tambahpengajuan', compact('kategorimitra', 'prodi', 'ruanglingkup', 'kategori', 'ruanglingkup_lainnya', 'lainnya_id'));
+        } else {
+            abort(403);
+        }
     }
 
-  
+
+
 
     public function insertpengajuan (Request $request)
     {
@@ -85,9 +91,11 @@ class PengajuanController extends Controller
             'tanggalmulai' => 'required',
             'tanggalakhir' => 'required',
             'kategori_id' => 'required',
-            // 'prodiid' => 'required'
+            'seremoni' => 'required',
+            // 'prodiid' => 'required',
 
         ];
+
         if ($request->id) {
             unset($rule['logo']);
         }
@@ -99,7 +107,7 @@ class PengajuanController extends Controller
             return redirect()->back();
         } else {
 
-         
+
         #untuk upload file logo mitra
         $path = 'logomitra/';
 
@@ -144,15 +152,25 @@ class PengajuanController extends Controller
         $prodi = new Prodi;
 
         $pengajuan = new Pengajuan;
+        $pengajuan->lainnya_id = $ruanglingkup->id;
         $pengajuan->user_id = Auth::user()->id;
+        $lainnya_id = null;
+
 
                 $ruanglingkup = $request->ruanglingkup_id;
-                if($ruanglingkup){
+                if ($ruanglingkup) {
                     $i = 0;
                     foreach ($ruanglingkup as $item) {
-                        // dd($item);
+                        if ($item == '4') {
+                            $lainnya = new ruanglingkup_lainnya;
+                            $lainnya->ruanglingkup_id = $item;
+                            $lainnya->nama = $request->lainnya;
+                            $lainnya->lainnya = true;
+                            $lainnya->save();
+                            $lainnya_id = $lainnya->id;
+                        }
                         $dataa1[$i] = ([
-                            'id' => (int) $item,
+                            'id' => (int)$item,
                         ]);
                         $i++;
                     }
@@ -174,6 +192,7 @@ class PengajuanController extends Controller
                     $dataa2 = [];
                 }
 
+        $pengajuan->lainnya_id = $lainnya_id;
         $pengajuan->kategori_id = $request->kategori_id;
         $pengajuan->mitra_id = $mitra->id;
         $pengajuan->ruanglingkup_id = json_encode($dataa1);
@@ -183,6 +202,7 @@ class PengajuanController extends Controller
         $pengajuan->tanggalakhir = $request->tanggalakhir;
         $pengajuan->tentang = $request->tentang;
         $pengajuan->prodiid = $request->prodiid;
+        $pengajuan->seremoni = $request->seremoni;
         $pengajuan->save();
 
 
@@ -230,7 +250,7 @@ class PengajuanController extends Controller
             $fileName = 'PKS '.$mitra->namamitra.' Tahun '. $startDateYear;
             $templateProcessor->saveAs($fileName . '.docx');
             return response()->download($fileName . '.docx')->deleteFileAfterSend(true);
-            
+
             Alert::success('Sukses', 'Data berhasil diinput!');
             }
 
@@ -246,15 +266,11 @@ class PengajuanController extends Controller
             $fileName = $fileName = 'MOU '.$mitra->namamitra.' Tahun '. $startDateYear;;
             $templateProcessor->saveAs($fileName . '.docx');
             return response()->download($fileName . '.docx')->deleteFileAfterSend(true);
-            
+
             Alert::success('Sukses', 'Data berhasil diinput!');
         }
         }
     }
-
-   
-
-   
 
     public function hapuspengajuan($id){
         $pengajuan = Pengajuan::find($id);

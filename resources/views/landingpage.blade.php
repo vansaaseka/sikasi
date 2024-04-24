@@ -101,29 +101,6 @@
 
     <main id="main">
 
-        <div id="myModal" class="modal fade show" aria-modal="true" role="dialog" style="display: block;">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h3 class="modal-title-center" text-align="center">Demo Produk Tugas Akhir</h3>
-
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <p style="text-align:center; font-size: 17px;">Sistem Informasi Pengajuan Kerjasama Sekolah
-                            Vokasi UNS
-                        </p>
-                        <p style="text-align:center; font-size: 17px;font-weight: bold;">Developer : Syadza Tsurayya
-                            Eden
-                            <br> <a href="/SyadzaFolio"><i class="fa fa-user fa-3x"></i>Portofolio</a>
-                        </p>
-
-
-                    </div>
-                </div>
-            </div>
-        </div>
-
         <!-- ======= Tentang Section ======= -->
         <section id="about" class="about">
             <div class="container" data-aos="fade-up">

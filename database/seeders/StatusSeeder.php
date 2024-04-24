@@ -12,7 +12,7 @@ class StatusSeeder extends Seeder
      *
      * @return void
      */
-    
+
         public function run()
         {
             $posts = [
@@ -25,7 +25,6 @@ class StatusSeeder extends Seeder
                 [
                   'namastatus' => 'Dokumen selesai direview BPU',
                 ],
-                
                 [
                     'namastatus' => 'Proses tanda tangan Dekan',
                 ],
@@ -50,25 +49,10 @@ class StatusSeeder extends Seeder
                 [
                     'namastatus' => 'Selesai',
                 ],
-                [
-                   'namastatus' => 'Ajuan Diterima',
-                ], 
-                [
-                   'namastatus' => 'Pengajuan DKPI',
-                ],
-                [
-                   'namastatus' => 'Dokumen direview DKPI',
-                ],
-                [
-                  'namastatus' => ' Proses tanda tangan WR 4',
-                ],
-                [
-                  'namastatus' => 'Selesai',
-                ],
-                
+
             ];
-    
+
             DB::table('status')->insert($posts);
         }
-    
+
 }

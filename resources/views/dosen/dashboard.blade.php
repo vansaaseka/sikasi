@@ -3,6 +3,7 @@
 @include('dosen/layoutsDosen/sidebar')
 
 @include('navbardashboard')
+@include('sweetalert::alert')
 
 
 <div class="conatiner-fluid content-inner mt-n5 py-0">
@@ -65,8 +66,6 @@
                                 </div>
                             </div>
                         </li>
-
-
                     </ul>
                     <div class="swiper-button swiper-button-next"></div>
                     <div class="swiper-button swiper-button-prev"></div>

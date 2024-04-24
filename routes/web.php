@@ -14,6 +14,12 @@ use App\Http\Controllers\TemplateController;
 use App\Http\Controllers\PengajuanController;
 use App\Http\Controllers\RuanglingkupController;
 use App\Http\Controllers\KategorimitraController;
+use App\Http\Controllers\LaporanController;
+use App\Http\Controllers\PDFController;
+use App\Http\Middleware\CheckDeadlineMiddleware;
+use App\Models\Laporan;
+use FontLib\Table\Type\name;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -30,15 +36,6 @@ Route::get('/', function () {
     return view('landingpage');
 });
 
-
-// Route::get('/', function () {
-// return view('portfolio');
-// });
-
-Route::get('/SyadzaFolio', function () {
-return view('portfolio');
-});
-
 Route::get('/login', function () {
     return view('auth/login');
 });
@@ -52,7 +49,6 @@ Route::get('/login', function () {
 // Route::get('/home', function () {
 //     return view('home');
 // });
-
 
 
 route::get('/dashboard',[HomeController::class,"index"])->name('dashboard');
@@ -72,6 +68,7 @@ route::get('/tambahadmin',[AkunController::class,"tambahadmin"])->name('tambahad
 route::get('/tampildosen',[AkunController::class,"tampildosen"])->name('tampildosen');
 route::get('/tambahdosen',[AkunController::class,"tambahdosen"])->name('tambahdosen');
 route::post('/import_dosen', [AkunController::class, 'import_excel'])->name('import_dosen');
+
 
 // Verifikator
 route::get('/tampilverifikator',[AkunController::class,"tampilverifikator"])->name('tampilverifikator');
@@ -107,11 +104,20 @@ route::post('/ubahpassword',[AkunController::class,"ubahpassword"])->name('ubahp
 //Unduh Template
 route::get('/unduhtemplate',[TemplateController::class,"unduhtemplate"])->name('unduhtemplate');
 
+
+
+
 //Pengajuan
 route::get('/select-mitra',[PengajuanController::class,"getMitra"])->name('select.mitra');
 route::get('/get-mitra',[PengajuanController::class,"getDetailMitra"])->name('get.mitra');
 route::get('/datamitra',[PengajuanController::class,"datamitra"])->name('datamitra');
 route::get('/pengajuan',[PengajuanController::class,"index"])->name('pengajuan');
+route::get('/laporan', [LaporanController::class, 'index'])->name('laporan');
+route::post('/laporan/prodi', [LaporanController::class, 'tampilData'])->name('post.tampilkan-data');
+route::post('/postlaporan', [LaporanController::class, 'post'])->name('post.laporan');
+route::post('/postlaporanword' , [LaporanController::class, 'postword'])->name('post.laporanword');
+route::get('/export-pdf/{id}', [LaporanController::class, 'exportPDF'])->name('exportPDF');
+route::get('/export-word/{id}', [LaporanController::class, 'exportWORD'])->name('exportWORD');
 route::get('/tambahpengajuan',[PengajuanController::class,"tambahpengajuan"])->name('tambahpengajuan');
 route::post('/insertpengajuan',[PengajuanController::class,"insertpengajuan"])->name('insertpengajuan');
 route::post('/updatepengajuan/{id}',[PengajuanController::class,"updatepengajuan"])->name('updatepengajuan');
@@ -132,7 +138,7 @@ route::get('/filter',[StatusController::class,"filter"])->name('filter');
 route::post('/insertnewstatus',[StatusController::class,"insertnewstatus"])->name('insertnewstatus');
 
 //Reviewer
-route::get('/validasi',[StatusController::class,"validasi"])->name('validasi');
+// route::get('/validasi',[StatusController::class,"validasi"])->name('validasi');
 route::get('/riwayatvalidasi',[StatusController::class,"riwayatvalidasi"])->name('riwayatvalidasi');
 route::post('/insertnewstatus',[StatusController::class,"insertnewstatus"])->name('insertnewstatus');
 
@@ -159,6 +165,7 @@ route::get('/hapuskategorimitra/{id}',[KategorimitraController::class,"hapuskate
 
 //Tambah RuangLingkup Mitra Admin
 route::get('/ruanglingkup',[RuanglingkupController::class,"index"])->name('ruanglingkup');
+route::get('/select-ruanglinkup',[RuanglingkupController::class,"getLinkup"])->name('select.ruanglingkup');
 route::post('/insertruanglingkup',[RuanglingkupController::class,"insertruanglingkup"])->name('insertruanglingkup');
 route::post('/updateruanglingkup/{id}',[RuanglingkupController::class,"updateruanglingkup"])->name('updateruanglingkup');
 route::get('/hapusruanglingkup/{id}',[RuanglingkupController::class,"hapusruanglingkup"])->name('hapusruanglingkup');

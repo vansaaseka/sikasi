@@ -22,11 +22,14 @@ class LingkupSeeder extends Seeder
               'ruanglingkup' => 'Penyelenggara Penelitian',
             ],
             [
-            'ruanglingkup' => 'Penyelenggara Pengabdian kepada Masyarakat',
+                'ruanglingkup' => 'Penyelenggara Pengabdian kepada Masyarakat',
             ],
-      
+            [
+                'ruanglingkup' => 'Lainnya',
+            ]
+
         ];
-    
+
         DB::table('ruanglingkup')->insert($posts);
     }
 }

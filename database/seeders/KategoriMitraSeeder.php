@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\DB;
 
 class KategoriMitraSeeder extends Seeder
 {
-    
+
         public function run()
         {
             $posts = [
@@ -15,7 +15,7 @@ class KategoriMitraSeeder extends Seeder
                   'kategorimitra' => '01 - Perusahaan multinasinal',
                 ],
                 [
-                  'kategorimitra' => '02 - Perusahaan nasionan berstandar tinggi',
+                  'kategorimitra' => '02 - Perusahaan nasional berstandar tinggi',
                 ],
                 [
                     'kategorimitra' => '03 - Perusahaan teknologi global',
@@ -45,7 +45,7 @@ class KategoriMitraSeeder extends Seeder
                     'kategorimitra' => '11 - UMKM',
                 ],
             ];
-    
+
             DB::table('kategorimitra')->insert($posts);
         }
 

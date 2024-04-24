@@ -12,4 +12,6 @@ class Status extends Model
     protected $guarded = [];
     protected $fillable = ['namastatus',];
     use HasFactory;
+
 }
+

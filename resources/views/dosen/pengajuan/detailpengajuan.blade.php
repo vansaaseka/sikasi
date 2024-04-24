@@ -172,7 +172,10 @@
 
                                             <td>
                                                 @php
-                                                    $tsr = App\Models\Trxstatus::where('pengajuan_id', $datapengajuan->id)
+                                                    $tsr = App\Models\Trxstatus::where(
+                                                        'pengajuan_id',
+                                                        $datapengajuan->id,
+                                                    )
                                                         ->orderBy('id', 'desc')
                                                         ->first();
                                                 @endphp
@@ -443,7 +446,10 @@
                                                                                 <td style="color: red">
 
                                                                                     @php
-                                                                                        $tr = App\Models\Trxstatus::where('pengajuan_id', $datapengajuan->id)
+                                                                                        $tr = App\Models\Trxstatus::where(
+                                                                                            'pengajuan_id',
+                                                                                            $datapengajuan->id,
+                                                                                        )
                                                                                             ->orderBy('id', 'desc')
                                                                                             ->first();
                                                                                     @endphp
@@ -480,7 +486,10 @@
                                                                                 <td>:</td>
                                                                                 <td>
                                                                                     @php
-                                                                                        $tsz = App\Models\Trxstatus::where('pengajuan_id', $datapengajuan->id)
+                                                                                        $tsz = App\Models\Trxstatus::where(
+                                                                                            'pengajuan_id',
+                                                                                            $datapengajuan->id,
+                                                                                        )
                                                                                             ->orderBy('id', 'desc')
                                                                                             ->first();
                                                                                     @endphp
@@ -521,9 +530,7 @@
                 <div class="modal-body">
                     <div class="table-responsive">
                         <table class="table align-items table-flush table-hover" id="dataTableHover">
-
                             <tbody>
-
                                 <tr>
                                     <td class="font-size:3" style="text-align:center">
                                         Mitra
@@ -562,8 +569,8 @@
 
                                             <button type="submit"
                                                 class="btn btn-primary next action-button float-end"
-                                                value="Submit">Submit</button>
-
+                                                value="Submit">Submit
+                                            </button>
                                     </form>
                                 </div>
                             </div>
@@ -573,10 +580,7 @@
             </div>
         </div>
     </div>
-
     </td>
-
-
     </tr>
     @endif
     @endforeach

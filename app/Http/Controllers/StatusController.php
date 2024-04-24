@@ -23,6 +23,7 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class StatusController extends Controller
 {
+
 public function index(){
 
         // Status tanpa dolar = nama database
@@ -75,9 +76,9 @@ public function hapusStatus($id){
         $dokumen = Dokumen::all();
         $trxstatus = Trxstatus::all();
         $user = User::all();
-       
-        
-   
+
+
+
 
       if (Auth()->user()->role == 2){
       return view('verifikator\tampilverifikasi' , compact('pengajuan' , 'mitra', 'status','prodi', 'dokumen',
@@ -123,7 +124,7 @@ public function hapusStatus($id){
     $dokumen = Dokumen::all();
     $trxstatus = Trxstatus::all();
     $user = User::all();
-   
+
      if (Auth()->user()->role == 1){
      return view('admin.pengajuan.tampilpengajuan' , compact('pengajuan' , 'mitra', 'status','prodi', 'dokumen',
      'trxstatus', 'user', 'kategori'));
@@ -133,7 +134,7 @@ public function hapusStatus($id){
      }
 }
 
-   
+
    public function detail($id){
    $kategori = Kategori::all();
    $pengajuan = Pengajuan::where('prodiid', $id)->get();
@@ -148,7 +149,7 @@ public function hapusStatus($id){
    'dokumen',
    'trxstatus', 'user',));
    }
-  
+
 
     public function filter(Request $request){
         $kategori = Kategori::all();
@@ -184,16 +185,16 @@ public function hapusStatus($id){
              }
 
         }
-            
 
-            
+
+
         }
 
-        
 
-    } 
 
-               
+    }
+
+
         public function cetakpengajuan(){
             $ruanglingkup = RuangLingkup::all();
             $kategorimitra = KategoriMitra::all();
@@ -212,11 +213,11 @@ public function hapusStatus($id){
              else{
              abort(403);
              }
-           
+
         }
     public function insertnewstatus(Request $request){
     $trxstatus = new Trxstatus;
-  
+
 
             $trxstatus->pengajuan_id = $request->input('pengajuan_id');
             $trxstatus->created_by = $request->input('created_by');
@@ -225,12 +226,12 @@ public function hapusStatus($id){
             // $trxstatus->catatan = $request['catatan'];
             $trxstatus->status_dokumen = $request['status_dokumen'];
             $trxstatus->save();
- 
-          
+
+
             $pengajuan = Pengajuan::find($request->input('pengajuan_id'));
             $status = Status::find($request->input('status_id'));
             $trxstatus = Trxstatus::find($request->input('catatan'));
-          
+
 
             $nama = $pengajuan->user->name;
             $mitra = $pengajuan->mitra->namamitra;
@@ -238,21 +239,21 @@ public function hapusStatus($id){
             $aksi = $status->namastatus;
             $tentang = $pengajuan->tentang;
 
-                
 
-         
-         
+
+
+
             $data = [
                'user' => $nama,
                'mitra' => $mitra,
                'aksi' => $aksi,
                'tentang' => $tentang,
             //    'catatan' => $catatan
-             
+
             ];
-            
-                
-                \Mail::to($tujuan)->send(new KirimEmail($data));
+
+
+                Mail::to($tujuan)->send(new KirimEmail($data));
                 Alert::success('Sukses', 'Email berhasil dikirim!');
                 return back();
 }
@@ -266,7 +267,7 @@ public function hapusStatus($id){
             $dokumen = Dokumen::all();
             $trxstatus = Trxstatus::all();
             $user = User::all();
-            
+
             if (Auth()->user()->role == 3){
             return view('reviewer.tampilvalidasi' , compact('pengajuan' , 'mitra', 'status','prodi', 'dokumen',
             'trxstatus', 'user', 'kategori'));

@@ -45,7 +45,6 @@
                                             aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-
                                         <div class="row d-flex justify-content">
                                             <div class="col-md-12">
                                                 <div class="card">
@@ -149,6 +148,20 @@
                                                     </div>
                                                 @enderror
                                             </div>
+
+                                            <div class="form-group">
+                                                <label class="form-label" for="turl">NIP</label>
+                                                <input type="number"
+                                                    class="form-control @error('nip') is-invalid @enderror"
+                                                    name="nip" required autocomplete="name" autofocus
+                                                    value=<?= Auth::user()->nip ?>>
+                                                @error('nip')
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
+                                            </div>
+
 
 
                                             <div class="form-group">

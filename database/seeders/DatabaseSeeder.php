@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Database\Seeders\DatabaseSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -22,6 +21,7 @@ class DatabaseSeeder extends Seeder
             KategoriSeeder::class,
             LingkupSeeder::class,
             ProdiSeeder::class,
+            TemplateSeeder::class,
         ]);
     }
 }

@@ -12,6 +12,7 @@
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
+
     <!-- Favicon -->
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 
@@ -32,6 +33,7 @@
 
     <!-- RTL Css -->
     <link rel="stylesheet" href="{{ asset('HOPE/assets/css/rtl.min.css') }}">
+
 
 </head>
 

@@ -2,6 +2,7 @@
 @include('dosen/layoutsDosen/sidebar')
 @include('dosen/layoutsDosen/navbar')
 @include('sweetalert::alert')
+
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" />
 <link rel="stylesheet"
     href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" />
@@ -154,15 +155,14 @@
                                         <div class="form-group">
                                             <label class="form-label">Nama Lengkap Penadatanganan
                                                 Mitra *</label>
-                                            <input type="text" class="form-control" name="namapenandatangan"
-                                                placeholder="Contoh: Drs. Santoso Tri Hananto, M,Acc., Ak" />
+                                            <input type="text" class="form-control" name="namapenandatangan" />
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="form-label">Jabatan Penandatangan Mitra *</label>
                                             <input type="text" class="form-control" name="jabatanpenandatangan"
-                                                placeholder="Contoh: Dekan Sekolah Vokasi UNS" />
+                                                placeholder="Contoh: Direktur Utama" />
                                         </div>
                                     </div>
                                     <div class="col-md-6">
@@ -196,19 +196,23 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="MultipleSelect">Ruang Lingkup Perjanjian</label>
-                                            {{-- <select class="js-example-basic-multiple" name="states[]"
-                                                multiple="multiple"> --}}
                                             <select class="select2-multiple form-control" name="ruanglingkup_id[]"
                                                 multiple="multiple" id="select2Multiple">
-                                                {{-- <option value="">--Pilih--</option> --}}
                                                 @foreach ($ruanglingkup as $item)
                                                     <option value="{{ $item->id }}">{{ $item->ruanglingkup }}
                                                     </option>
                                                 @endforeach
                                             </select>
+                                            <input type="text" class="form-control" id="lainnyaInput"
+                                                name="lainnya" style="display: none;"
+                                                placeholder="Masukkan Ruang Lingkup Perjanjian Lainnya">
                                         </div>
-                                    </div>
+                                        @if ($ruanglingkup_lainnya->isNotEmpty())
+                                            <input type="hidden" name="lainnya_id"
+                                                value="{{ $ruanglingkup_lainnya->last()->id }}">
+                                        @endif
 
+                                    </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="MultipleSelect">Prodi Yang Terlibat</label>
@@ -240,6 +244,15 @@
                                                 id="tanggalakhir" value="">
                                         </div>
                                     </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="seremoni" class="form-label">Seremoni</label>
+                                            <select name="seremoni" id="seremoni" class="form-select">
+                                                <option value="seremoni">Seremoni</option>
+                                                <option value="non_seremoni">Non Seremoni</option>
+                                            </select>
+                                        </div>
+                                    </div>
                                     <input type="hidden" name="prodiid" value="{{ Auth::user()->prodi_id }}">
                                     <div class="col-md-12">
                                         <div class="form-group">
@@ -250,8 +263,6 @@
                                     </div>
                                 </div>
                             </div>
-
-
                             <button type="submit" name="submit"
                                 class="btn btn-primary next action-button float-end" value="Submit">Submit</button>
                             {{-- <button type="button" name="next" class="btn btn-primary next action-button float-end"
@@ -290,15 +301,16 @@
                                 </div>
                             </div>
                         </fieldset>
-
-
                 </div>
             </div>
         </div>
     </div>
 </div>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 @include('dosen/layoutsDosen/footer')
+
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
 <script>
     $(document).ready(function() {
         // Select2 Multiple
@@ -306,6 +318,17 @@
             theme: 'bootstrap-5',
             placeholder: "Select",
             allowClear: true
+        });
+
+        $('#select2Multiple').on('change', function() {
+            var selectedOptions = $(this).val();
+
+            // Periksa apakah nilai "lainnya" dipilih
+            if (selectedOptions && selectedOptions.includes('4')) {
+                $('#lainnyaInput').show();
+            } else {
+                $('#lainnyaInput').hide();
+            }
         });
 
         $('#select2Multiple2').select2({
@@ -399,7 +422,6 @@
     $('#tanggalakhir').on('input', function() {
         $('#tanggalmulai').attr('max', this.value);
     });
-
 
     $('.cari-mitra').on('click', function() {
         alert('sat')

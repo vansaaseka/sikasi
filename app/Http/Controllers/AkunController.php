@@ -19,7 +19,7 @@ use Illuminate\Validation\ValidationException;
 
 class AkunController extends Controller
 {
-   
+
     public function __construct()
     {
         $this->middleware('auth');
@@ -48,7 +48,7 @@ class AkunController extends Controller
         else{
         abort(403);
         }
-  
+
     }
     public function tampilverifikator(){
         $verifikator = User::all();
@@ -80,7 +80,7 @@ class AkunController extends Controller
          else{
          abort(403);
          }
-   
+
     }
     public function tambahdosen(){
         $prodi = Prodi::all();
@@ -91,7 +91,7 @@ class AkunController extends Controller
            else{
            abort(403);
            }
- 
+
     }
     public function tambahverifikator(){
 
@@ -101,7 +101,7 @@ class AkunController extends Controller
          else{
          abort(403);
          }
-        
+
     }
 
     public function tambahreviewer(){
@@ -172,7 +172,7 @@ class AkunController extends Controller
                     }elseif ($data->role == 3){
                         return redirect()->route('tampilreviewer')->with('toast_success','Data Berhasil Diupdate');
                     }
-    
+
         }
 
         public function ubahstatus($id){
@@ -181,7 +181,7 @@ class AkunController extends Controller
             if($status_sekarang == 1){
                 $data->where('id',$id)->update([
                     'status'=>0
-                    
+
                 ]);
             }else{
                 $data->where('id',$id)->update([
@@ -189,9 +189,9 @@ class AkunController extends Controller
                 ]);
             }
             if ($status_sekarang == 0){
-               
+
             }
-            
+
             if ($data->role == 0){
                 return redirect()->route('tampildosen');
                 }
@@ -221,7 +221,7 @@ class AkunController extends Controller
         public function ubahpassword(Request $request)
         {
               $this->validate($request, [
-           
+
               'password' => ['required', 'string', 'min:8', 'confirmed'],
               'current_password' => ['required']
               ]);
@@ -234,8 +234,8 @@ class AkunController extends Controller
 
         throw ValidationException::withMessages([
         'current_password' => 'Password tidak sesuai dengan data password'
-        
+
     ]);
-  
+
         }
     }

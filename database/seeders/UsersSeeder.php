@@ -28,6 +28,16 @@ class UsersSeeder extends Seeder
                 'updated_at' => null,
             ],
             [
+                'name' => "Dosen2",
+                'email' => "dosen2@gmail.com",
+                'status' => "1",
+                'role' => "0",
+                'email_verified_at' => date(now()),
+                'password' => bcrypt('dosen123'),
+                'created_at' => new \DateTime,
+                'updated_at' => null,
+            ],
+            [
                 'name' => "Admin",
                 'email' => "admin@gmail.com",
                 'status' => "1",
@@ -46,7 +56,7 @@ class UsersSeeder extends Seeder
                 'password' => bcrypt('verifikator123'),
                 'created_at' => new \DateTime,
                 'updated_at' => null,
-            ],    
+            ],
             [
                 'name' => "Reviewer",
                 'email' => "reviewer@gmail.com",

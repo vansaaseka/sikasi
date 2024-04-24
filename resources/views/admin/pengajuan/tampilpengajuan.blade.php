@@ -4,7 +4,6 @@
 @include('sweetalert::alert')
 <!-- DataTable with Hover -->
 
-
 <div class="conatiner-fluid content-inner mt-n5 py-0">
     <div class="row">
         <div class="col-lg-12 mb-4">
@@ -24,9 +23,9 @@
                                     <th>Kategori Pengajuan</th>
                                     <th>Pengusul</th>
                                     <th>Prodi</th>
-
                                     <th>Mitra</th>
                                     <th>Status</th>
+                                    <th>Seremoni</th>
                                     <th>Catatan</th>
                                     <th>Nomor Dokumen</th>
                                     <th>Dokumen Kerjasama</th>
@@ -42,6 +41,7 @@
                                     <th>Prodi</th>
                                     <th>Mitra</th>
                                     <th>Status</th>
+                                    <th>Seremoni</th>
                                     <th>Catatan</th>
                                     <th>Nomor Dokumen</th>
                                     <th>Dokumen Kerjasama</th>
@@ -210,14 +210,15 @@
                                                                                                         class="form-check-input"
                                                                                                         name="status_id"
                                                                                                         id="status_id"
-                                                                                                        value="{{ $s->id }}">
+                                                                                                        value="{{ $s->id }}"
+                                                                                                        required>
 
                                                                                                     {{ $s->namastatus }}
                                                                                                 </label>
                                                                                             </div>
                                                                                         </div>
                                                                                         {{-- </div> --}}
-                                                                                        <?php 
+                                                                                        <?php
                                                                                                              }?>
 
                                                                                         <br />
@@ -228,7 +229,7 @@
                                                                                             <input type="text"
                                                                                                 class="form-control"
                                                                                                 id="exampleInputText1"
-                                                                                                name="catatan">
+                                                                                                name="catatan" required>
                                                                                         </div>
                                                                                         <div class="form-group">
                                                                                             <label class="form-label"
@@ -237,7 +238,8 @@
                                                                                             <input type="text"
                                                                                                 class="form-control"
                                                                                                 id="exampleInputText1"
-                                                                                                name="status_dokumen">
+                                                                                                name="status_dokumen"
+                                                                                                required>
                                                                                         </div>
                                                                                         {{-- <div class="custom-file">
                                                                 <input type="file" name="dokumen" placeholder="Choose file" id="file">
@@ -253,11 +255,9 @@
                                                                                     <input type="hidden"
                                                                                         name="created_by"
                                                                                         value={{ Auth::user()->id }}>
-
                                                                                     <button type="submit"
                                                                                         class="btn btn-primary next action-button float-end"
                                                                                         value="Submit">Submit</button>
-
                                                                             </form>
                                                                         </div>
                                                                     </div>
@@ -268,8 +268,13 @@
                                                 </div>
                                             </div>
                                         </td>
-
-
+                                       <td>
+                                        @if ($datapengajuan->seremoni == 'seremoni')
+                                            <p>Ada</p>
+                                        @elseif ($datapengajuan->seremoni == 'non_seremoni')
+                                            <p>Tidak Ada</p>
+                                        @endif
+                                       </td>
                                         <td> @php
                                             $tsz = App\Models\Trxstatus::where('pengajuan_id', $datapengajuan->id)
                                                 ->orderBy('id', 'desc')

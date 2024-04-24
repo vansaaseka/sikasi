@@ -28,7 +28,7 @@
             <li>
                 <hr class="hr-horizontal">
             </li>
-            <li class="nav-item static-item">
+            {{-- <li class="nav-item static-item">
                 <a class="nav-link static-item disabled" href="#" tabindex="-1">
                     <span class="default-icon">Pengajuan</span>
                     <span class="mini-icon">-</span>
@@ -49,10 +49,7 @@
                     </i>
                     <span class="item-name">Review Pengajuan</span>
                 </a>
-            </li>
-
-
-
+            </li> --}}
 
         </ul>
         <!-- Sidebar Menu End -->
