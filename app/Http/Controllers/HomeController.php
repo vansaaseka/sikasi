@@ -401,6 +401,13 @@ class HomeController extends Controller
             ->where('tanggalakhir', '<', $deadlineThreshold)
             ->get();
 
+
+            $trxstatus = Trxstatus::with('pengajuan', 'status') // Ganti $pengajuanId dengan id pengajuan yang Anda inginkan
+            ->orderByDesc('status_id') // Urutkan berdasarkan status_id dari yang terbesar ke terkecil
+            ->get(); // Ambil hanya satu data yang memiliki status_id terakhir
+
+
+
             // foreach ($pengajuanDeadline as $pengajuan) {
             //     if ($pengajuan->user_id == Auth::user()->id) {
             //         $mail = [
@@ -415,7 +422,7 @@ class HomeController extends Controller
             //         \Toastr::warning('Deadline pengajuan ' . $pengajuan->mitra->namamitra . ' sudah kurang dari 3 bulan.', 'Peringatan Deadline');
             //     }
             // }
-               return view('dosen/dashboard', compact('pengajuan_user', 'totalselesai', 'proses_pengajuan','pengajuanDeadline'));
+               return view('dosen/dashboard', compact('pengajuan_user', 'totalselesai', 'proses_pengajuan','pengajuanDeadline', 'trxstatus'));
            }
        }
 

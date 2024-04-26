@@ -18,8 +18,8 @@ class Trxstatus extends Model
  return $this->belongsTo(Status::class, 'status_id', 'id');
  }
 
-public function pengajuan(){
-return $this->belongsTo('App\Models\Pengajuan', 'id');
-}
+    public function pengajuan(){
+    return $this->belongsTo(Pengajuan::class, 'pengajuan_id');
+    }
 
 }

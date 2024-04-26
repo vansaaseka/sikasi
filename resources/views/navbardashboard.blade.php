@@ -56,6 +56,20 @@
                                     @endif
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownNotification">
+                                    @if ($trxstatus->isNotEmpty())
+                                        <p class="ms-2">Status Pengajuan</p>
+                                        @foreach ($trxstatus as $item)
+                                            <li class="dropdown-item">
+                                                <p style="font-size: 14px">
+                                                    Status: {{ $item->status->namastatus }} <br>
+                                                    Mitra: {{ $item->pengajuan->mitra->namamitra }}
+                                                </p>
+                                            </li>
+                                        @endforeach
+                                    @else
+                                        <p>Tidak ada data Status yang tersedia.</p>
+                                    @endif
+
                                     <p class="ms-2">Deadline Mitra</p>
                                     @foreach ($pengajuanDeadline as $item)
                                         <li class="dropdown-item">
