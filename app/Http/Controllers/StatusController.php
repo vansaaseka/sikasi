@@ -238,10 +238,6 @@ public function hapusStatus($id){
             $aksi = $status->namastatus;
             $tentang = $pengajuan->tentang;
 
-
-
-
-
             $data = [
                'user' => $nama,
                'mitra' => $mitra,
