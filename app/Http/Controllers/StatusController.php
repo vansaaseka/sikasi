@@ -18,8 +18,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Mail;
 use RealRashid\SweetAlert\Facades\Alert;
-
-
+use Yoeunes\Toastr\Facades\Toastr;
 
 class StatusController extends Controller
 {
@@ -253,8 +252,11 @@ public function hapusStatus($id){
             ];
 
 
-                Mail::to($tujuan)->send(new KirimEmail($data));
-                Alert::success('Sukses', 'Email berhasil dikirim!');
+                // uncomment Mail jika email pada env sudah disettings
+
+                // Mail::to($tujuan)->send(new KirimEmail($data));
+                Toastr::success('Data Berhasil Diupdate', 'Success');
+                // Alert::success('Sukses', 'Email berhasil dikirim!');
                 return back();
 }
 

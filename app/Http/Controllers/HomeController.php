@@ -395,27 +395,27 @@ class HomeController extends Controller
 
         //    dd($totall);
             $now = \Carbon\Carbon::now();
-            $deadlineThreshold = $now->addMonths(3);
+            $deadlineThreshold = $now->addMonths(0);
 
             $pengajuanDeadline = \App\Models\Pengajuan::with('user', 'mitra')
             ->where('tanggalakhir', '<', $deadlineThreshold)
             ->get();
 
-            foreach ($pengajuanDeadline as $pengajuan) {
-                if ($pengajuan->user_id == Auth::user()->id) {
-                    $mail = [
-                        'user' => $pengajuan->user->name,
-                        'mitra' => $pengajuan->mitra->namamitra,
-                        'deadline' => $pengajuan->tanggalakhir,
-                    ];
+            // foreach ($pengajuanDeadline as $pengajuan) {
+            //     if ($pengajuan->user_id == Auth::user()->id) {
+            //         $mail = [
+            //             'user' => $pengajuan->user->name,
+            //             'mitra' => $pengajuan->mitra->namamitra,
+            //             'deadline' => $pengajuan->tanggalakhir,
+            //         ];
 
-                    $emailUser = $pengajuan->user->email;
-                    // Aktifkan ini jika mail suddah di settng di env
-                    // Mail::to($emailUser)->send(new DeadlineAjuanKerjasamaMail($mail));
-                    \Toastr::warning('Deadline pengajuan ' . $pengajuan->mitra->namamitra . ' sudah kurang dari 3 bulan.', 'Peringatan Deadline');
-                }
-            }
-               return view('dosen/dashboard', compact('pengajuan_user', 'totalselesai', 'proses_pengajuan'));
+            //         $emailUser = $pengajuan->user->email;
+            //         // Aktifkan ini jika mail suddah di settng di env
+            //         // Mail::to($emailUser)->send(new DeadlineAjuanKerjasamaMail($mail));
+            //         \Toastr::warning('Deadline pengajuan ' . $pengajuan->mitra->namamitra . ' sudah kurang dari 3 bulan.', 'Peringatan Deadline');
+            //     }
+            // }
+               return view('dosen/dashboard', compact('pengajuan_user', 'totalselesai', 'proses_pengajuan','pengajuanDeadline'));
            }
        }
 

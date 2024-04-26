@@ -24,7 +24,6 @@
                                     <th>Kategori Pengajuan</th>
                                     <th>Pengusul</th>
                                     <th>Prodi</th>
-
                                     <th>Mitra</th>
                                     <th>Status</th>
                                     <th>Catatan</th>
@@ -217,7 +216,7 @@
                                                                                             </div>
                                                                                         </div>
                                                                                         {{-- </div> --}}
-                                                                                        <?php 
+                                                                                        <?php
                                                                                                              }?>
 
                                                                                         <br />

@@ -268,13 +268,13 @@
                                                 </div>
                                             </div>
                                         </td>
-                                       <td>
-                                        @if ($datapengajuan->seremoni == 'seremoni')
-                                            <p>Ada</p>
-                                        @elseif ($datapengajuan->seremoni == 'non_seremoni')
-                                            <p>Tidak Ada</p>
-                                        @endif
-                                       </td>
+                                        <td>
+                                            @if ($datapengajuan->seremoni == 'seremoni')
+                                                <p>Ada</p>
+                                            @elseif ($datapengajuan->seremoni == 'non_seremoni')
+                                                <p>Tidak Ada</p>
+                                            @endif
+                                        </td>
                                         <td> @php
                                             $tsz = App\Models\Trxstatus::where('pengajuan_id', $datapengajuan->id)
                                                 ->orderBy('id', 'desc')
