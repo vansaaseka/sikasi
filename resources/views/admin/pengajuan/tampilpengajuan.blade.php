@@ -10,41 +10,83 @@
             <div class="card">
                 <div class="card-header d-flex justify-content-between">
                     <div class="header-title">
-                        <h4 class="card-title">Pengajuan Kerjasama</h4>
+                        <h4 class="card-title">Pengajuan Kerja Sama</h4>
                     </div>
                 </div>
                 <div class="card-body">
+                    <div class="d-flex justify-content-end">
+                        <button id="filterModalButton" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal"
+                            data-bs-target="#filterModal">
+                            Filter
+                        </button>
+                    </div>
+                    <!-- Filter Modal -->
+                    <!-- Filter Modal -->
+                    <div class="modal fade" id="filterModal" tabindex="-1" aria-labelledby="filterModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="filterModalLabel">Filter Status</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <label for="modalFilterStatus" class="form-label">Pilih Status:</label>
+                                        <select id="modalFilterStatus" class="form-select">
+                                            <option value="">Semua Status</option>
+                                            @foreach ($status as $st)
+                                                <option value="{{ $st->namastatus }}">{{ $st->namastatus }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Tutup</button>
+                                    <button type="button" class="btn btn-primary" id="applyFilterButton">Terapkan
+                                        Filter</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="table-responsive mt-4">
                         <table id="datatable" class="table table-striped" data-toggle="data-table">
                             <thead>
                                 <tr class="odd text-center">
                                     <th>No</th>
-                                    <th>Tahun Kerjasama</th>
+                                    <th>Tahun Kerja Sama</th>
                                     <th>Kategori Pengajuan</th>
                                     <th>Pengusul</th>
                                     <th>Prodi</th>
                                     <th>Mitra</th>
                                     <th>Status</th>
                                     <th>Seremoni</th>
+                                    <th>Website</th>
+                                    <th>Sosmed</th>
                                     <th>Catatan</th>
                                     <th>Nomor Dokumen</th>
-                                    <th>Dokumen Kerjasama</th>
+                                    <th>Dokumen Kerja Sama</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tfoot>
                                 <tr class="odd text-center">
                                     <th>No</th>
-                                    <th>Tahun Kerjasama</th>
+                                    <th>Tahun Kerja Sama</th>
                                     <th>Kategori Pengajuan</th>
                                     <th>Pengusul</th>
                                     <th>Prodi</th>
                                     <th>Mitra</th>
                                     <th>Status</th>
                                     <th>Seremoni</th>
+                                    <th>Website</th>
+                                    <th>Sosmed</th>
                                     <th>Catatan</th>
                                     <th>Nomor Dokumen</th>
-                                    <th>Dokumen Kerjasama</th>
+                                    <th>Dokumen Kerja Sama</th>
                                     <th>Aksi</th>
                             </tfoot>
 
@@ -88,7 +130,11 @@
                                                 @if ($datapengajuan->id == $a->pengajuan_id)
                                                     @foreach ($status as $b)
                                                         @if ($a->status_id == $b->id)
-                                                            <?php $belumada_status = '<div class="btn btn-outline-primary btn-sm dropdown-toggle ' . $datapengajuan->id . '" data-bs-toggle="modal" data-bs-target="#status' . $datapengajuan->id . '"id="#status' . $datapengajuan->id . '"> ' . $b->namastatus . ' </div>'; ?>
+                                                            @if ($a->status_id == 11)
+                                                                <?php $belumada_status = '<div class="btn btn-outline-success btn-sm dropdown-toggle ' . $datapengajuan->id . '" data-bs-toggle="modal" data-bs-target="#status' . $datapengajuan->id . '"id="#status' . $datapengajuan->id . '"> ' . $b->namastatus . ' </div>'; ?>
+                                                            @else
+                                                                <?php $belumada_status = '<div class="btn btn-outline-primary btn-sm dropdown-toggle ' . $datapengajuan->id . '" data-bs-toggle="modal" data-bs-target="#status' . $datapengajuan->id . '"id="#status' . $datapengajuan->id . '"> ' . $b->namastatus . ' </div>'; ?>
+                                                            @endif
                                                             {{-- @php echo $belumada_status = '<div class="btn btn-outline-primary btn-sm dropdown-toggle ' . $datapengajuan->id . '" data-bs-toggle="modal" data-bs-target="#status' . $datapengajuan->id . '"id="#status' . $datapengajuan->id . '"> ' . $b->namastatus . ' </div>'; @endphp --}}
                                                         @endif
                                                     @endforeach
@@ -101,173 +147,170 @@
                                                 data-bs-target="#modalstatus{{ $datapengajuan->id }}"
                                                 id="#modalstatus{{ $datapengajuan->id }}">
                                             </i>
-                                            {{-- Modal Status --}}
-                                            <div class="modal fade" id="status{{ $datapengajuan->id }}" tabindex="-1"
-                                                role="dialog" aria-labelledby="staticBackdropLiveLabel"
-                                                aria-hidden="true">
-                                                <div class="modal-dialog modal-dialog-scrollable" role="document">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title" id="staticBackdropLiveLabel">
-                                                                Status Pengajuan
-                                                            </h5>
-                                                            <button type="button" class="btn-close"
-                                                                data-bs-dismiss="modal" aria-label="Close"></button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <div class="row d-flex justify-content-center">
-                                                                <div class="col-md-12">
-                                                                    <div class="card">
-                                                                        <div class="card-body">
-                                                                            <div
-                                                                                class="iq-timeline0 m-0 d-flex align-items-center justify-content-between position-relative">
-                                                                                <ul class="list-inline p-0 m-0">
-                                                                                    @foreach ($trxstatus as $a)
-                                                                                        @if ($datapengajuan->id == $a->pengajuan_id)
-                                                                                            <li>
-                                                                                                <div
-                                                                                                    class="timeline-dots timeline-dot1 border-primary text-primary">
-                                                                                                </div>
-                                                                                                @foreach ($status as $item)
-                                                                                                    @if ($a->status_id == $item->id)
-                                                                                                        <h6
-                                                                                                            class="float-left mb-1">
-                                                                                                            {{ $item->namastatus }}
-                                                                                                        </h6>
-                                                                                                    @endif
-                                                                                                @endforeach
 
-                                                                                                <?php
-                                                                                                            foreach($user as $p){
-                                                                                                                if($a->created_by == $p->id){?>
-                                                                                                <div
-                                                                                                    class="d-inline-block w-100">
-                                                                                                    <p>
-                                                                                                        Created
-                                                                                                        by
-                                                                                                        {{ $p->name }}<br>
-                                                                                                        {{ $a->created_at }}
-                                                                                                    </p>
-                                                                                                </div>
-                                                                                                <?php }
-                                                                                                                        }
-                                                                                                                        ?>
-
-                                                                                            </li>
-                                                                                        @endif
-                                                                                    @endforeach
-                                                                                </ul>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            {{-- Modal Edit Status --}}
-                                            <div class="modal fade" id="modalstatus{{ $datapengajuan->id }}"
-                                                tabindex="-1" role="dialog" aria-labelledby="staticBackdropLiveLabel"
-                                                aria-hidden="true">
-                                                <div class="modal-dialog modal-dialog-scrollable" role="document"
-                                                    style="text-align: left">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title" id="staticBackdropLiveLabel">
-                                                                Verifikasi Pengajuan</h5>
-                                                            <button type="button" class="btn-close"
-                                                                data-bs-dismiss="modal" aria-label="Close"></button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <div class="row d-flex justify-content-center">
-                                                                <div class="col-md-12">
-                                                                    <div class="card">
-                                                                        <div class="card-body">
-                                                                            <form action="/insertnewstatus"
-                                                                                method="POST"
-                                                                                enctype="multipart/form-data"
-                                                                                class="forms-sample">
-                                                                                @csrf
-
-                                                                                <div class="form-group">
-                                                                                    <label class="form-label"
-                                                                                        for="exampleInputText1">Update
-                                                                                        Status
-                                                                                    </label>
-                                                                                    <div class="form-group"><label
-                                                                                            class="col-lg-5 control-label">Status</label>
-                                                                                        <br />
-                                                                                        <?php foreach($status as $s){
-                                                                                            ?>
-                                                                                        <div class="col-lg-10">
-                                                                                            <div class="form-check">
-                                                                                                <label
-                                                                                                    class="form-check-label">
-                                                                                                    <input
-                                                                                                        type="radio"
-                                                                                                        class="form-check-input"
-                                                                                                        name="status_id"
-                                                                                                        id="status_id"
-                                                                                                        value="{{ $s->id }}"
-                                                                                                        required>
-
-                                                                                                    {{ $s->namastatus }}
-                                                                                                </label>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                        {{-- </div> --}}
-                                                                                        <?php
-                                                                                                             }?>
-
-                                                                                        <br />
-                                                                                        <div class="form-group">
-                                                                                            <label class="form-label"
-                                                                                                for="exampleInputText1">Catatan
-                                                                                            </label>
-                                                                                            <input type="text"
-                                                                                                class="form-control"
-                                                                                                id="exampleInputText1"
-                                                                                                name="catatan" required>
-                                                                                        </div>
-                                                                                        <div class="form-group">
-                                                                                            <label class="form-label"
-                                                                                                for="exampleInputText1">Status
-                                                                                                Dokumen </label>
-                                                                                            <input type="text"
-                                                                                                class="form-control"
-                                                                                                id="exampleInputText1"
-                                                                                                name="status_dokumen"
-                                                                                                required>
-                                                                                        </div>
-                                                                                        {{-- <div class="custom-file">
-                                                                <input type="file" name="dokumen" placeholder="Choose file" id="file">
-                                                            </div> --}}
-                                                                                    </div>
-
-                                                                                    <input type="hidden"
-                                                                                        name="pengajuan_id"
-                                                                                        value={{ $datapengajuan->id }}>
-                                                                                    <input type="hidden"
-                                                                                        name="created_by"
-                                                                                        value={{ Auth::user()->id }}>
-                                                                                    <input type="hidden"
-                                                                                        name="created_by"
-                                                                                        value={{ Auth::user()->id }}>
-                                                                                    <button type="submit"
-                                                                                        class="btn btn-primary next action-button float-end"
-                                                                                        value="Submit">Submit</button>
-                                                                            </form>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
                                         </td>
+                                        {{-- Modal Status --}}
+                                        <div class="modal fade" id="status{{ $datapengajuan->id }}" tabindex="-1"
+                                            role="dialog" aria-labelledby="staticBackdropLiveLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-scrollable" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="staticBackdropLiveLabel">
+                                                            Status Pengajuan
+                                                        </h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                            aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="row d-flex justify-content-center">
+                                                            <div class="col-md-12">
+                                                                <div class="card">
+                                                                    <div class="card-body">
+                                                                        <div
+                                                                            class="iq-timeline0 m-0 d-flex align-items-center justify-content-between position-relative">
+                                                                            <ul class="list-inline p-0 m-0">
+                                                                                @foreach ($trxstatus as $a)
+                                                                                    @if ($datapengajuan->id == $a->pengajuan_id)
+                                                                                        <li>
+                                                                                            <div
+                                                                                                class="timeline-dots timeline-dot1 border-primary text-primary">
+                                                                                            </div>
+                                                                                            @foreach ($status as $item)
+                                                                                                @if ($a->status_id == $item->id)
+                                                                                                    <h6
+                                                                                                        class="float-left mb-1">
+                                                                                                        {{ $item->namastatus }}
+                                                                                                    </h6>
+                                                                                                @endif
+                                                                                            @endforeach
+
+                                                                                            <?php
+                                                                                                        foreach($user as $p){
+                                                                                                            if($a->created_by == $p->id){?>
+                                                                                            <div
+                                                                                                class="d-inline-block w-100">
+                                                                                                <p>
+                                                                                                    Created
+                                                                                                    by
+                                                                                                    {{ $p->name }}<br>
+                                                                                                    {{ $a->created_at }}
+                                                                                                </p>
+                                                                                            </div>
+                                                                                            <?php }
+                                                                                                                    }
+                                                                                                                    ?>
+
+                                                                                        </li>
+                                                                                    @endif
+                                                                                @endforeach
+                                                                            </ul>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        {{-- Modal Edit Status --}}
+                                        <div class="modal fade" id="modalstatus{{ $datapengajuan->id }}" tabindex="-1"
+                                            role="dialog" aria-labelledby="staticBackdropLiveLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-scrollable" role="document"
+                                                style="text-align: left">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="staticBackdropLiveLabel">
+                                                            Verifikasi Pengajuan</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                            aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="row d-flex justify-content-center">
+                                                            <div class="col-md-12">
+                                                                <div class="card">
+                                                                    <div class="card-body">
+                                                                        <form action="/insertnewstatus" method="POST"
+                                                                            enctype="multipart/form-data"
+                                                                            class="forms-sample">
+                                                                            @csrf
+
+                                                                            <div class="form-group">
+                                                                                <label class="form-label"
+                                                                                    for="exampleInputText1">Update
+                                                                                    Status
+                                                                                </label>
+                                                                                <div class="form-group"><label
+                                                                                        class="col-lg-5 control-label">Status</label>
+                                                                                    <br />
+                                                                                    <?php foreach($status as $s){
+                                                                                        ?>
+                                                                                    <div class="col-lg-10">
+                                                                                        <div class="form-check">
+                                                                                            <label
+                                                                                                class="form-check-label">
+                                                                                                <input type="radio"
+                                                                                                    class="form-check-input"
+                                                                                                    name="status_id"
+                                                                                                    id="status_id"
+                                                                                                    value="{{ $s->id }}"
+                                                                                                    required>
+
+                                                                                                {{ $s->namastatus }}
+                                                                                            </label>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    {{-- </div> --}}
+                                                                                    <?php
+                                                                                                         }?>
+
+                                                                                    <br />
+                                                                                    <div class="form-group">
+                                                                                        <label class="form-label"
+                                                                                            for="exampleInputText1">Catatan
+                                                                                        </label>
+                                                                                        <input type="text"
+                                                                                            class="form-control"
+                                                                                            id="exampleInputText1"
+                                                                                            name="catatan" required>
+                                                                                    </div>
+                                                                                    <div class="form-group">
+                                                                                        <label class="form-label"
+                                                                                            for="exampleInputText1">Status
+                                                                                            Dokumen </label>
+                                                                                        <input type="text"
+                                                                                            class="form-control"
+                                                                                            id="exampleInputText1"
+                                                                                            name="status_dokumen"
+                                                                                            required>
+                                                                                    </div>
+                                                                                    {{-- <div class="custom-file">
+                                                            <input type="file" name="dokumen" placeholder="Choose file" id="file">
+                                                        </div> --}}
+                                                                                </div>
+
+                                                                                <input type="hidden"
+                                                                                    name="pengajuan_id"
+                                                                                    value={{ $datapengajuan->id }}>
+                                                                                <input type="hidden"
+                                                                                    name="created_by"
+                                                                                    value={{ Auth::user()->id }}>
+                                                                                <input type="hidden"
+                                                                                    name="created_by"
+                                                                                    value={{ Auth::user()->id }}>
+                                                                                <button type="submit"
+                                                                                    class="btn btn-primary next action-button float-end"
+                                                                                    value="Submit">Submit</button>
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                         <td>
                                             @if ($datapengajuan->seremoni == 'seremoni')
                                                 <p>Ada</p>
@@ -275,6 +318,11 @@
                                                 <p>Tidak Ada</p>
                                             @endif
                                         </td>
+                                        <td><a href="{{ $datapengajuan->mitra->website }}"
+                                                class="btn btn-outline-primary btn-sm">Website</a></td>
+
+                                        <td><a href="{{ $datapengajuan->mitra->sosmed }}"
+                                                class="btn btn-outline-primary btn-sm">Sosmed</a></td>
                                         <td> @php
                                             $tsz = App\Models\Trxstatus::where('pengajuan_id', $datapengajuan->id)
                                                 ->orderBy('id', 'desc')
@@ -541,6 +589,24 @@
                 });
             } else {
                 swal("Data tidak berhasil dihapus");
+            }
+        });
+    });
+</script>
+<script>
+    $(document).ready(function() {
+        $('#applyFilterButton').click(function() {
+            var selectedStatus = $('#modalFilterStatus').val();
+            if (selectedStatus) {
+                $('#datatable tbody tr').hide();
+                $('#datatable tbody tr').each(function() {
+                    var statusColumn = $(this).find('td:nth-child(7)').text().trim();
+                    if (statusColumn === selectedStatus) {
+                        $(this).show();
+                    }
+                });
+            } else {
+                $('#datatable tbody tr').show();
             }
         });
     });

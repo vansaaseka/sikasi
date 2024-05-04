@@ -16,6 +16,7 @@ use App\Models\RuangLingkup;
 use Illuminate\Http\Request;
 use App\Models\KategoriMitra;
 use App\Exports\PengajuanExport;
+use App\Models\MitraKategori;
 use App\Models\ruanglingkup_lainnya;
 use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
@@ -60,13 +61,14 @@ class PengajuanController extends Controller
         $ruanglingkup = RuangLingkup::all();
         $kategori = Kategori::all();
         $ruanglingkup_lainnya = ruanglingkup_lainnya::all();
+        $mitraKategori  = MitraKategori::all();
         $lainnya_id = null;
         if ($ruanglingkup_lainnya->isNotEmpty()) {
             $lainnya_id = $ruanglingkup_lainnya->last()->id;
         }
 
         if (Auth()->user()->role == 0) {
-            return view('dosen\Pengajuan\tambahpengajuan', compact('kategorimitra', 'prodi', 'ruanglingkup', 'kategori', 'ruanglingkup_lainnya', 'lainnya_id'));
+            return view('dosen\Pengajuan\tambahpengajuan', compact('mitraKategori','kategorimitra', 'prodi', 'ruanglingkup', 'kategori', 'ruanglingkup_lainnya', 'lainnya_id'));
         } else {
             abort(403);
         }
@@ -79,7 +81,7 @@ class PengajuanController extends Controller
     {
         $rule = [
             'namamitra' => 'required',
-            'logo' => 'required|image|mimes:jpg,png,jpeg' ,
+            // 'logo' => 'required|image|mimes:jpg,png,jpeg' ,
             'kategorimitra_id' => 'required',
             'alamat' => 'required',
             'email' => 'required|email',
@@ -96,9 +98,9 @@ class PengajuanController extends Controller
 
         ];
 
-        if ($request->id) {
-            unset($rule['logo']);
-        }
+        // if ($request->id) {
+        //     unset($rule['logo']);
+        // }
         $validasi = Validator::make($request->all(),$rule);
 
         if($validasi->fails()) {
@@ -109,16 +111,16 @@ class PengajuanController extends Controller
 
 
         #untuk upload file logo mitra
-        $path = 'logomitra/';
+        // $path = 'logomitra/';
 
-        if (!$request->id) {
-        $file = $request->file('logo');
-        $name_file = time() . '.' . $file->extension();
-        $file->move($path, $name_file);
-        }else{
-            $mit = Mitra::find($request->id);
-            $name_file =  $mit->logo;
-        }
+        // if (!$request->id) {
+        // $file = $request->file('logo');
+        // $name_file = time() . '.' . $file->extension();
+        // $file->move($path, $name_file);
+        // }else{
+        //     $mit = Mitra::find($request->id);
+        //     $name_file =  $mit->logo;
+        // }
 
         $mitra = new Mitra;
         $kategorimitra = new KategoriMitra;
@@ -130,10 +132,11 @@ class PengajuanController extends Controller
 
         $mitra->namamitra = Str::upper($request->namamitra);
         $mitra->namadagangmitra = $request->namadagangmitra;
-        $mitra->logo = $name_file;
         $mitra->kategorimitra_id = $request->kategorimitra_id;
         $mitra->alamat = $request->alamat;
         $mitra->email = $request->email;
+        $mitra->website = $request->website;
+        $mitra->sosmed = $request->sosmed;
         $mitra->namapenandatangan = $request->namapenandatangan;
         $mitra->jabatanpenandatangan = $request->jabatanpenandatangan;
         $mitra->narahubung = $request->narahubung;
@@ -150,6 +153,7 @@ class PengajuanController extends Controller
         $kategori = new Kategori;
         $ruanglingkup = new RuangLingkup;
         $prodi = new Prodi;
+        $mitraKategori = new MitraKategori;
 
         $pengajuan = new Pengajuan;
         $pengajuan->lainnya_id = $ruanglingkup->id;
@@ -195,6 +199,7 @@ class PengajuanController extends Controller
         $pengajuan->lainnya_id = $lainnya_id;
         $pengajuan->kategori_id = $request->kategori_id;
         $pengajuan->mitra_id = $mitra->id;
+        $pengajuan->mitraKategori_id = $request->mitraKategori_id;
         $pengajuan->ruanglingkup_id = json_encode($dataa1);
         $pengajuan->proditerlibat_id = json_encode($dataa2);
         $pengajuan->tentang = $request->tentang;
@@ -246,7 +251,7 @@ class PengajuanController extends Controller
             $templateProcessor = new TemplateProcessor(public_path('template/'.$path->template));
             // $templateProcessor = new TemplateProcessor('pks.docx');
             $templateProcessor->setValues($dataTemplate);
-            $templateProcessor->setImageValue('logo', public_path('logomitra/'.$name_file));
+            // $templateProcessor->setImageValue('logo', public_path('logomitra/'.$name_file));
             $fileName = 'PKS '.$mitra->namamitra.' Tahun '. $startDateYear;
             $templateProcessor->saveAs($fileName . '.docx');
             return response()->download($fileName . '.docx')->deleteFileAfterSend(true);
@@ -262,13 +267,74 @@ class PengajuanController extends Controller
             $templateProcessor = new TemplateProcessor(public_path('template/'.$path2->template));
             $templateProcessor = new TemplateProcessor('mou.docx');
             $templateProcessor->setValues($dataTemplate);
-            $templateProcessor->setImageValue('logo', public_path('logomitra/'.$name_file));
+            // $templateProcessor->setImageValue('logo', public_path('logomitra/'.$name_file));
             $fileName = $fileName = 'MOU '.$mitra->namamitra.' Tahun '. $startDateYear;;
             $templateProcessor->saveAs($fileName . '.docx');
             return response()->download($fileName . '.docx')->deleteFileAfterSend(true);
 
             Alert::success('Sukses', 'Data berhasil diinput!');
         }
+
+        if($pengajuan->kategori_id == 3){
+            #generate template mou
+            $path2 = Template::where('template', 'pks.docx')->first();
+
+            $templateProcessor = new TemplateProcessor(public_path('template/'.$path2->template));
+            $templateProcessor = new TemplateProcessor('pks.docx');
+            $templateProcessor->setValues($dataTemplate);
+            // $templateProcessor->setImageValue('logo', public_path('logomitra/'.$name_file));
+            $fileName = $fileName = 'PKS_Turunan_dari_PKS_Induk'.$mitra->namamitra.' Tahun '. $startDateYear;;
+            $templateProcessor->saveAs($fileName . '.docx');
+            return response()->download($fileName . '.docx')->deleteFileAfterSend(true);
+
+            Alert::success('Sukses', 'Data berhasil diinput!');
+        }
+
+        if($pengajuan->kategori_id == 4){
+            #generate template mou
+            $path2 = Template::where('template', 'mou.docx')->first();
+
+            $templateProcessor = new TemplateProcessor(public_path('template/'.$path2->template));
+            $templateProcessor = new TemplateProcessor('mou.docx');
+            $templateProcessor->setValues($dataTemplate);
+            // $templateProcessor->setImageValue('logo', public_path('logomitra/'.$name_file));
+            $fileName = $fileName = 'Addendum_PKS'.$mitra->namamitra.' Tahun '. $startDateYear;;
+            $templateProcessor->saveAs($fileName . '.docx');
+            return response()->download($fileName . '.docx')->deleteFileAfterSend(true);
+
+            Alert::success('Sukses', 'Data berhasil diinput!');
+        }
+
+        if($pengajuan->kategori_id == 5){
+            #generate template mou
+            $path2 = Template::where('template', 'pks.docx')->first();
+
+            $templateProcessor = new TemplateProcessor(public_path('template/'.$path2->template));
+            $templateProcessor = new TemplateProcessor('pks.docx');
+            $templateProcessor->setValues($dataTemplate);
+            // $templateProcessor->setImageValue('logo', public_path('logomitra/'.$name_file));
+            $fileName = $fileName = 'PKS(perpanjangan)'.$mitra->namamitra.' Tahun '. $startDateYear;;
+            $templateProcessor->saveAs($fileName . '.docx');
+            return response()->download($fileName . '.docx')->deleteFileAfterSend(true);
+
+            Alert::success('Sukses', 'Data berhasil diinput!');
+        }
+
+        if($pengajuan->kategori_id == 6){
+            #generate template mou
+            $path2 = Template::where('template', 'mou.docx')->first();
+
+            $templateProcessor = new TemplateProcessor(public_path('template/'.$path2->template));
+            $templateProcessor = new TemplateProcessor('mou.docx');
+            $templateProcessor->setValues($dataTemplate);
+            // $templateProcessor->setImageValue('logo', public_path('logomitra/'.$name_file));
+            $fileName = $fileName = 'MoU(perpanjangan)'.$mitra->namamitra.' Tahun '. $startDateYear;;
+            $templateProcessor->saveAs($fileName . '.docx');
+            return response()->download($fileName . '.docx')->deleteFileAfterSend(true);
+
+            Alert::success('Sukses', 'Data berhasil diinput!');
+        }
+
         }
     }
 

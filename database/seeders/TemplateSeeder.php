@@ -23,8 +23,24 @@ class TemplateSeeder extends Seeder
             'namatemplate' => 'mou',
             'template' => 'mou.docx',
            ],
+           [
+            'namatemplate' => 'PKS Turunan dari PKS Induk',
+            'template' => 'pks.docx',
+           ],
+           [
+            'namatemplate' => 'Addendum PKS',
+            'template' => 'mou.docx',
+           ],
+           [
+            'namatemplate' => 'PKS (perpanjangan)',
+            'template' => 'pks.docx',
+           ],
+           [
+            'namatemplate' => 'MoU (perpanjangan)',
+            'template' => 'mou.docx',
+           ],
         ];
-        
+
         DB::table('template')->insert($posts);
     }
 }

@@ -65,12 +65,18 @@
                     </tr>
                     <tr>
                         <th>2.</th>
+                        <th>REFRENSI KERJA SAMA (MoA/IA)</th>
+                        <th>:</th>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th>3.</th>
                         <th>MITRA KERJASAMA</th>
                         <th>:</th>
                         <td>{{ $dataPengaju->mitra->namamitra }}</td>
                     </tr>
                     <tr>
-                        <th>3.</th>
+                        <th>4.</th>
                         <th>RUANGLINGKUP</th>
                         <th>:</th>
                         <td>
@@ -81,13 +87,13 @@
                     </tr>
 
                     <tr>
-                        <th>4.</th>
+                        <th>5.</th>
                         <th>HASIL PELAKSANAAN<br>(OUTPUT & OUTCOME)</th>
                         <th>:</th>
                         <td>{{ $hasilPelaksanaan }}</td>
                     </tr>
                     <tr>
-                        <th>5.</th>
+                        <th>6.</th>
                         <th>TAUTAN/LINK<br>DOKUMENTASI KEGIATAN</th>
                         <th>:</th>
                         <td style="font-size: 13">{{ $linkDokumen }}</td>
@@ -103,9 +109,9 @@
 {{ $dataPengaju->tanggalmulai }}
 <span>PIC Kegiatan,</span>                                                   {{ $dataPengaju->mitra->jabatanpenandatangan }}                        <span>Mengetahui,</span>
                                                                           {{ $dataPengaju->mitra->namamitra }},                         <span> Dekan Fakultas Sekolah Vokasi UNS,</span>
-                                                                            <img width="40px" src="{{ $gambarMitra }}" alt="Gambar Pengajuan">
+
 {{ $dataPengaju->user->name }}                                                               {{ $dataPengaju->mitra->namapenandatangan }}                          <span> Drs. Santoso Tri Hananto, M.Acc., Ak</span>
-{{ 'NIP.' . $dataPengaju->user->nip }}                                                                                              <span> NIP.196909241994021001</span>
+{{ 'NIP.' . $dataPengaju->user->nip }}                                                                               <span> NIP.196909241994021001</span>
         </pre>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"

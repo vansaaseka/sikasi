@@ -44,4 +44,9 @@ class Pengajuan extends Model
     {
         return $this->hasMany(Laporan::class, 'pengajuan_id');
     }
+
+    public function mitraKategori()
+    {
+        return $this->belongsTo(MitraKategori::class, 'mitraKategori_id', 'id');
+    }
 }

@@ -22,12 +22,24 @@ class KategoriSeeder extends Seeder
      [
      'namakategori' => 'Memorandum of Understanding (MoU)',
      ],
-    
+     [
+     'namakategori' => 'PKS Turunan dari PKS Induk',
+     ],
+     [
+     'namakategori' => 'Addendum PKS',
+     ],
+     [
+     'namakategori' => 'PKS (perpanjangan)',
+     ],
+     [
+     'namakategori' => 'MoU (perpanjangan)',
+     ],
+
 
      ];
 
      DB::table('kategori')->insert($posts);
      }
 
-    
+
 }

@@ -12,7 +12,7 @@
             <div class="card">
                 <div class="card-header d-flex justify-content-between">
                     <div class="header-title">
-                        <h4 class="card-title">Template Kerjasama</h4>
+                        <h4 class="card-title">Template Kerja Sama</h4>
                     </div>
                     {{-- <div id="dataTableHover_wrapper" class="dataTables_wrapper dt-bootstrap4">
                         <a class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modaltambahprodi"
@@ -44,7 +44,7 @@
                                                             <div class="form-group">
 
                                                                 <div class="form-group">
-                                                                    <label for="prodi">Nama Kerjasama</label>
+                                                                    <label for="prodi">Nama Kerja Sama</label>
 
                                                                     <input type="text" name="namatemplate"
                                                                         id="prodi" class="form-control"
@@ -86,7 +86,7 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Kategori Kerjasama</th>
+                                    <th>Kategori Kerja Sama</th>
                                     <th>File Template</th>
                                     <th>Aksi</th>
                                 </tr>

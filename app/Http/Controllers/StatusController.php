@@ -124,6 +124,7 @@ public function hapusStatus($id){
     $trxstatus = Trxstatus::all();
     $user = User::all();
 
+
      if (Auth()->user()->role == 1){
      return view('admin.pengajuan.tampilpengajuan' , compact('pengajuan' , 'mitra', 'status','prodi', 'dokumen',
      'trxstatus', 'user', 'kategori'));
@@ -132,6 +133,8 @@ public function hapusStatus($id){
      abort(403);
      }
 }
+
+
 
 
    public function detail($id){

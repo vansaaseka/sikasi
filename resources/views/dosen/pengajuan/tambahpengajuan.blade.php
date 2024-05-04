@@ -112,19 +112,27 @@
                                             @enderror --}}
                                         </div>
                                     </div>
-
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label class="form-label">Logo Resmi Mitra * - format
-                                                .jpg .png .jpeg</label>
-                                            <input type="file" class="form-control" name="logo" />
+                                            <label class="form-label" for="choices-single-default">Mitra Kategori
+                                                *</label>
+                                            <select class="form-control" name="mitraKategori_id" id="mitraKategori_id">
+                                                {{-- <option value="">--Pilih--</option> --}}
+                                                @foreach ($mitraKategori as $item)
+                                                    <option value="{{ $item->id }}">{{ $item->mitrakategori }}
+                                                    </option>
+                                                @endforeach
+                                                {{-- @error('kategori_id')
+                                                <div class="invalid-feedback">Example invalid form file feedback</div>
+                                                @enderror --}}
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="form-label" for="choices-single-default">Kategori
                                                 Mitra *</label>
-                                            <select class="form-select" name="kategorimitra_id"
+                                            <select class="form-control" name="kategorimitra_id"
                                                 id="kategorimitra_id">
                                                 {{-- <option value="">--Pilih--</option> --}}
                                                 @foreach ($kategorimitra as $item)
@@ -177,6 +185,20 @@
                                             <label class="form-label">Nomor HP Narahubung Mitra *</label>
                                             <input type="text" class="form-control" name="no_hp"
                                                 placeholder="Contoh: 0856789876211" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label">Website Mitra *</label>
+                                            <input type="text" class="form-control" name="website"
+                                                placeholder="Contoh: https://mitra.com/" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label">Sosmed Mitra *</label>
+                                            <input type="text" class="form-control" name="sosmed"
+                                                placeholder="(Instagram/Facebook/LinkedIn)" />
                                         </div>
                                     </div>
                                 </div>

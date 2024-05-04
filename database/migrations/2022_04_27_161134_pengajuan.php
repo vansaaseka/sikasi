@@ -18,6 +18,7 @@ class Pengajuan extends Migration
             $table->foreignId('user_id')->nullable()->default(null)->constrained('users')->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('mitra_id')->nullable()->default(null)->constrained('mitra')->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('prodiid')->nullable()->default(null)->constrained('prodis')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('mitraKategori_id')->nullable()->default(null)->constrained('mitra_kategori')->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('kategori_id')->nullable()->default(null)->constrained('kategori')->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('lainnya_id')->nullable()->default(null)->constrained('ruanglingkup_lainnyas')->onDelete('cascade')->onUpdate('cascade');
             $table->json('ruanglingkup_id')->nullable()->default(null);

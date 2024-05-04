@@ -8,8 +8,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\User;
 use App\Providers\RouteServiceProvider;
-use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use RealRashid\SweetAlert\Facades\Alert;
 
 
 class LoginController extends Controller
@@ -55,9 +55,9 @@ class LoginController extends Controller
     //         'password'  => Input::get('password'),
     //         'active'    => 1
     //     ), $remember);
-        
-        
-        
+
+
+
     // }
     public function login(Request $request){
         $input = $request->all();
@@ -70,8 +70,8 @@ class LoginController extends Controller
         ]);
         if (auth()->attempt(array('email' => $input['email'], 'password' => $input['password']))) {
 
-      
-         
+
+
             if (empty(auth()->user()->nomorhp) && auth()->user()->role == 3 && auth()->user()->status == 1) {
                 return redirect()->route('dashboard');
             } elseif (auth()->user()->role == 3 && auth()->user()->status == 0) {
@@ -80,9 +80,7 @@ class LoginController extends Controller
                 return redirect()->route('dashboard');
             } elseif (auth()->user()->role == 1 && auth()->user()->status == 0) {
                 (auth()->logout());
-            } elseif ( empty(auth()->user()->nomorhp) && auth()->user()->role == 0 && auth()->user()->status == 1) {
-                return view('dosen\Profile\editprofile', compact( 'profil' ,'prodi'));
-            } elseif ( !empty(auth()->user()->nomorhp) && auth()->user()->role == 0 && auth()->user()->status == 1) {
+            } elseif ( auth()->user()->role == 0 && auth()->user()->status == 1) {
                 return redirect()->route('dashboard');
             } elseif (auth()->user()->role == 0 && auth()->user()->status == 0) {
                 // Alert::info('Info', 'Akun Anda belum di aktifkan');
@@ -93,14 +91,14 @@ class LoginController extends Controller
                  return redirect()->route('dashboard');
             } elseif (auth()->user()->role == 2 && auth()->user()->status == 0) {
                 (auth()->logout());
-           
+
             }
-        } 
-   
+        }
+
         else {
             Alert::error('Error', 'Email atau Password dan Salah');
             return redirect()->route('login');
         }
-        
+
     }
 }

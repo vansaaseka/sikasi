@@ -8,7 +8,7 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class TemplateController extends Controller
 {
-   
+
    public function index(){
 
    // dokumen tanpa dolar = nama database
@@ -18,7 +18,7 @@ class TemplateController extends Controller
    }
 
    public function inserttemplate(Request $request){
-   
+
 
    $validasi = Validator::make($request->all(),[
       'namatemplate'=>'required',
@@ -31,19 +31,19 @@ class TemplateController extends Controller
    return redirect()->back();
    }
    else {
-   
+
    $template = $request->file('template');
-  
+
    $nama_template = $template->getClientOriginalName();
- 
+
    $template->move('template', $template->getClientOriginalName());
    $template = new Template;
    $template->template = $nama_template;
    $template->namatemplate = $request->input('namatemplate');
-   
+
    $template->save();
 
-   
+
    return back()->with('toast_success', 'Data Berhasil Tersimpan');
 
    }
@@ -52,7 +52,7 @@ class TemplateController extends Controller
    public function updatetemplate(Request $request, $id){
 
     $validasi = Validator::make($request->all(),[
-    
+
     'template'=> 'required|mimes:docx',
     ],
 
@@ -62,7 +62,7 @@ class TemplateController extends Controller
          return redirect()->back();
          }
          else {
-            
+
     $template = Template::find($id);
     $template->update($request->all());
    if ($request->hasFile('template'))

@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
             // DrafSeeder::class,
             KategoriMitraSeeder::class,
             KategoriSeeder::class,
+            MitraKategoriSeeder::class,
             LingkupSeeder::class,
             ProdiSeeder::class,
             TemplateSeeder::class,

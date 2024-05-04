@@ -225,48 +225,44 @@
                 }
                 if (jQuery('#pie-chart').length) {
                     const data = [{
-                            x: "Perusahaan multinasinal",
+                            x: "Perusahaan nasionan berstandar tinggi",
                             y: {!! json_encode($kategori1) !!}
                         },
                         {
-                            x: "Perusahaan nasionan berstandar tinggi",
+                            x: "Perusahaan teknologi global",
                             y: {!! json_encode($kategori2) !!}
                         },
                         {
-                            x: "Perusahaan teknologi global",
+                            x: "Perusahaan rintisan (startup company) teknologi",
                             y: {!! json_encode($kategori3) !!}
                         },
                         {
-                            x: "Perusahaan rintisan (startup company) teknologi",
+                            x: "Organisasi nirlaba kelas dunia",
                             y: {!! json_encode($kategori4) !!}
                         },
                         {
-                            x: "Organisasi nirlaba kelas dunia",
+                            x: "Institusi/organisasi multilateral",
                             y: {!! json_encode($kategori5) !!}
                         },
                         {
-                            x: "Institusi/organisasi multilateral",
+                            x: "Perguruan tinggi yang masuk dalam daftar QS100 berdasarkan ilmu (QS100 by subject)",
                             y: {!! json_encode($kategori6) !!}
                         },
                         {
-                            x: "Perguruan tinggi yang masuk dalam daftar QS100 berdasarkan ilmu (QS100 by subject)",
+                            x: "Perguruan tinggi, fakultas, atau program studi dalam bidang yang relevan (univ vokasi)",
                             y: {!! json_encode($kategori7) !!}
                         },
                         {
-                            x: "Perguruan tinggi, fakultas, atau program studi dalam bidang yang relevan (univ vokasi)",
+                            x: "Instansi pemerintah, BUMN dan/atau BUMD",
                             y: {!! json_encode($kategori8) !!}
                         },
                         {
-                            x: "Instansi pemerintah, BUMN dan/atau BUMD",
+                            x: "Rumah sakit",
                             y: {!! json_encode($kategori9) !!}
                         },
                         {
-                            x: "Rumah sakit",
-                            y: {!! json_encode($kategori10) !!}
-                        },
-                        {
                             x: "UMKM",
-                            y: {!! json_encode($kategori11) !!}
+                            y: {!! json_encode($kategori10) !!}
                         },
                     ];
                     const PieOptions = {

@@ -12,37 +12,34 @@ class KategoriMitraSeeder extends Seeder
         {
             $posts = [
                 [
-                  'kategorimitra' => '01 - Perusahaan multinasinal',
+                  'kategorimitra' => '01 - Perusahaan nasional berstandar tinggi',
                 ],
                 [
-                  'kategorimitra' => '02 - Perusahaan nasional berstandar tinggi',
+                    'kategorimitra' => '02 - Perusahaan teknologi global',
                 ],
                 [
-                    'kategorimitra' => '03 - Perusahaan teknologi global',
+                    'kategorimitra' => '03 - Perusahaan rintisan (startup company) teknologi',
                 ],
                 [
-                    'kategorimitra' => '04 - Perusahaan rintisan (startup company) teknologi',
+                    'kategorimitra' => '04 - Organisasi nirlaba kelas dunia',
                 ],
                 [
-                    'kategorimitra' => '05 - Organisasi nirlaba kelas dunia',
+                    'kategorimitra' => '05 - Institusi/organisasi multilateral',
                 ],
                 [
-                    'kategorimitra' => '06 - Institusi/organisasi multilateral',
+                    'kategorimitra' => '06 - Perguruan tinggi yang masuk dalam daftar QS100 berdasarkan ilmu (QS100 by subject)',
                 ],
                 [
-                    'kategorimitra' => '07 - Perguruan tinggi yang masuk dalam daftar QS100 berdasarkan ilmu (QS100 by subject)',
+                    'kategorimitra' => '07 - Perguruan tinggi, fakultas, atau program studi dalam bidang yang relevan (univ vokasi)',
                 ],
                 [
-                    'kategorimitra' => '08 - Perguruan tinggi, fakultas, atau program studi dalam bidang yang relevan (univ vokasi)',
+                    'kategorimitra' => '08 - Instansi pemerintah, BUMN dan/atau BUMD',
                 ],
                 [
-                    'kategorimitra' => '09 - Instansi pemerintah, BUMN dan/atau BUMD',
+                    'kategorimitra' => '09 - Rumah sakit',
                 ],
                 [
-                    'kategorimitra' => '10 - Rumah sakit',
-                ],
-                [
-                    'kategorimitra' => '11 - UMKM',
+                    'kategorimitra' => '10 - UMKM',
                 ],
             ];
 

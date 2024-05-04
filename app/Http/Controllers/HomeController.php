@@ -90,7 +90,6 @@ class HomeController extends Controller
             $kategori8 = Mitra::where('kategorimitra_id', 8)->count();
             $kategori9 = Mitra::where('kategorimitra_id', 9)->count();
             $kategori10 = Mitra::where('kategorimitra_id',10)->count();
-            $kategori11= Mitra::where('kategorimitra_id', 11)->count();
 
 
             $total_trxstatus = Trxstatus::count();
@@ -166,7 +165,7 @@ class HomeController extends Controller
            return view('admin.dashboard', compact('total_ajuan', 'total_juli', 'total_agus', 'total_sept',
                'total_okto', 'total_nove', 'total_dese', 'total_jan', 'total_feb', 'total_mar', 'total_apr',
                'total_mei', 'total_jun','total_ajuan', 'proses_pks', 'proses_mou', 'kategori1', 'kategori2', 'kategori3', 'kategori4', 'kategori5', 'kategori6',
-               'kategori7', 'kategori8', 'kategori9', 'kategori10', 'kategori11', 'prodi',
+               'kategori7', 'kategori8', 'kategori9', 'kategori10', 'prodi',
               'total_trxstatus', 'statusCounts'
             ));
            }
@@ -263,7 +262,6 @@ class HomeController extends Controller
                 $kategori8 = Mitra::where('kategorimitra_id', 8)->count();
                 $kategori9 = Mitra::where('kategorimitra_id', 9)->count();
                 $kategori10 = Mitra::where('kategorimitra_id',10)->count();
-                $kategori11= Mitra::where('kategorimitra_id', 11)->count();
 
                   $prodi = Prodi::all();
                   $total = Pengajuan::count();
@@ -357,7 +355,7 @@ class HomeController extends Controller
                'total_ajuan', 'total_juli', 'total_agus', 'total_sept',
                'total_okto', 'total_nove', 'total_dese', 'total_jan', 'total_feb', 'total_mar', 'total_apr',
                'total_mei', 'total_jun','total_ajuan', 'proses_pks', 'proses_mou', 'kategori1', 'kategori2', 'kategori3', 'kategori4', 'kategori5', 'kategori6',
-               'kategori7', 'kategori8', 'kategori9', 'kategori10', 'kategori11', 'thn_sekarang', 'total_trxstatus', 'statusCounts',
+               'kategori7', 'kategori8', 'kategori9', 'kategori10',  'thn_sekarang', 'total_trxstatus', 'statusCounts',
                ));
 
             }
