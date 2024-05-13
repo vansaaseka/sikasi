@@ -125,6 +125,8 @@ route::get('/hapuspengajuan/{id}',[PengajuanController::class,"hapuspengajuan"])
 
 //Admin Pengajuan
 route::get('/datapengajuan',[StatusController::class,"dataajuan"])->name('dataajuan');
+Route::get('/getChartData', [HomeController::class, 'chartStatusPengajuan']);
+Route::get('/getCategoryMitra', [HomeController::class, 'getCategoryMitra']);
 
 route::get('detail/{id}', [StatusController::class,"detail"])->name('detail');
 route::get('/cetakpengajuan',[StatusController::class,"cetakpengajuan"])->name('cetakpengajuan');

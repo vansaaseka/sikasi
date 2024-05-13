@@ -140,7 +140,7 @@
                         <div class="d-flex justify-content-between align-items-center flex-wrap">
                             <div>
                                 <br />
-                                <h4>Sistem Informasi Kerjasama Sekolah Vokasi
+                                <h4>Sistem Informasi Kerja Sama Sekolah Vokasi
                                 </h4>
                                 <hr class="dropdown-divider">
 

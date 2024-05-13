@@ -136,6 +136,7 @@ class PengajuanController extends Controller
         $mitra->alamat = $request->alamat;
         $mitra->email = $request->email;
         $mitra->website = $request->website;
+        $mitra->mitraKategori_id = $request->mitraKategori_id;
         $mitra->sosmed = $request->sosmed;
         $mitra->namapenandatangan = $request->namapenandatangan;
         $mitra->jabatanpenandatangan = $request->jabatanpenandatangan;
@@ -199,7 +200,6 @@ class PengajuanController extends Controller
         $pengajuan->lainnya_id = $lainnya_id;
         $pengajuan->kategori_id = $request->kategori_id;
         $pengajuan->mitra_id = $mitra->id;
-        $pengajuan->mitraKategori_id = $request->mitraKategori_id;
         $pengajuan->ruanglingkup_id = json_encode($dataa1);
         $pengajuan->proditerlibat_id = json_encode($dataa2);
         $pengajuan->tentang = $request->tentang;
