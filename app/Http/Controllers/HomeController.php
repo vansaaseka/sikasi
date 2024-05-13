@@ -13,6 +13,7 @@ use Illuminate\Foundation\Auth\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Mail;
 use RealRashid\SweetAlert\Facades\Alert;
 use Toastr;
@@ -572,14 +573,18 @@ class HomeController extends Controller
             $now = \Carbon\Carbon::now();
             $deadlineThreshold = $now->addMonths(0);
 
-            $pengajuanDeadline = \App\Models\Pengajuan::with('user', 'mitra')
-            ->where('tanggalakhir', '<', $deadlineThreshold)
+            $pengajuanDeadline = Pengajuan::join('trxstatus', 'pengajuan.id', '=', 'trxstatus.pengajuan_id')
+            ->where('trxstatus.status_id', '11')
+            ->whereDate('tanggalakhir', '<=', $deadlineThreshold)
             ->get();
 
+            $tanggalHariIni = Carbon::today();
+            $trxstatusnotification = Trxstatus::whereDate('created_at', $tanggalHariIni)->get();
 
-            $trxstatus = Trxstatus::with('pengajuan', 'status') // Ganti $pengajuanId dengan id pengajuan yang Anda inginkan
-            ->orderByDesc('status_id') // Urutkan berdasarkan status_id dari yang terbesar ke terkecil
-            ->get(); // Ambil hanya satu data yang memiliki status_id terakhir
+
+            $trxstatus = Trxstatus::with('pengajuan', 'status')
+            ->orderByDesc('status_id')
+            ->get();
 
 
             $kerjasama = Trxstatus::where('status_id', 11)->count();
@@ -614,7 +619,7 @@ class HomeController extends Controller
                'total_okto', 'total_nove', 'total_dese', 'total_jan', 'total_feb', 'total_mar', 'total_apr',
                'total_mei', 'total_jun','total_ajuan', 'proses_pks', 'proses_mou', 'kategori1', 'kategori2', 'kategori3', 'kategori4', 'kategori5', 'kategori6',
                'kategori7', 'kategori8', 'kategori9', 'kategori10', 'prodis',
-              'total_trxstatus', 'statusCounts','kerjasama', 'mitraSharing'));
+              'total_trxstatus', 'statusCounts','kerjasama', 'mitraSharing','trxstatusnotification'));
            }
        }
 

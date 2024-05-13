@@ -56,29 +56,34 @@
                                     @endif
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownNotification">
-                                    @if ($trxstatus->isNotEmpty())
-                                        <p class="ms-2">Status Pengajuan</p>
+                                    @if ($trxstatusnotification->isNotEmpty())
+                                        <p class="ms-2 fw-bold">
+                                            <i class="bi bi-bell"></i>
+                                            Status Pengajuan
+                                        </p>
                                         @foreach ($trxstatus as $item)
                                             <li class="dropdown-item">
-                                                <p style="font-size: 14px">
-                                                    Status: {{ $item->status->namastatus }} <br>
-                                                    Mitra: {{ $item->pengajuan->mitra->namamitra }}
+                                                <p style="font-size: 16px">
+                                                    {{ $item->pengajuan->mitra->namamitra }}<br>
+                                                    <span>Status :</span> {{ $item->status->namastatus }}
                                                 </p>
                                             </li>
                                         @endforeach
                                     @else
-                                        <p>Tidak ada data Status yang tersedia.</p>
+                                        <p class="ms-2 mb-5 fs-5 fw-semibold">Tidak ada data Status yang tersedia hari
+                                            ini.
+                                        </p>
                                     @endif
 
-                                    <p class="ms-2">Deadline Mitra</p>
+
+                                    <p class="ms-2 fw-bold"> <i class="bi bi-exclamation-circle"></i> Deadline Mitra</p>
                                     @foreach ($pengajuanDeadline as $item)
                                         <li class="dropdown-item">
-                                            <p style="font-size: 14px">
-                                                <i class="bi bi-exclamation-circle"></i>
-                                                {{ $item->mitra->namamitra }} <br>
-                                                <span style="font-size: 11px" class="text-secondary">Tanggal
-                                                    Berakhir:</span>
-                                                <label for="" style="font-size: 11px" class="text-secondary">
+                                            <p style="font-size: 16px">
+
+                                                <span class="fw-semibold">{{ $item->mitra->namamitra }}</span> <br>
+                                                <span style="font-size: 14px" class="text-secondary">Deadline :</span>
+                                                <label for="" style="font-size: 14px" class="text-secondary">
                                                     {{ \Carbon\Carbon::parse($item->tanggalakhir)->format('d M Y') }}
                                                 </label>
                                             </p>
