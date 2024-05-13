@@ -146,7 +146,12 @@
                                                 @if ($datapengajuan->id == $a->pengajuan_id)
                                                     @foreach ($status as $b)
                                                         @if ($a->status_id == $b->id)
-                                                            <?php $belumada_status = '<div class="btn btn-outline-primary btn-sm dropdown-toggle ' . $datapengajuan->id . '" data-bs-toggle="modal" data-bs-target="#status' . $datapengajuan->id . '"id="#status' . $datapengajuan->id . '"> ' . $b->namastatus . ' </div>'; ?>
+                                                            @if ($a->status_id == 11)
+                                                                <?php $belumada_status = '<div class="btn btn-outline-success btn-sm dropdown-toggle ' . $datapengajuan->id . '" data-bs-toggle="modal" data-bs-target="#status' . $datapengajuan->id . '"id="#status' . $datapengajuan->id . '"> ' . $b->namastatus . ' </div>'; ?>
+                                                            @else
+                                                                <?php $belumada_status = '<div class="btn btn-outline-primary btn-sm dropdown-toggle ' . $datapengajuan->id . '" data-bs-toggle="modal" data-bs-target="#status' . $datapengajuan->id . '"id="#status' . $datapengajuan->id . '"> ' . $b->namastatus . ' </div>'; ?>
+                                                            @endif
+                                                            {{-- @php echo $belumada_status = '<div class="btn btn-outline-primary btn-sm dropdown-toggle ' . $datapengajuan->id . '" data-bs-toggle="modal" data-bs-target="#status' . $datapengajuan->id . '"id="#status' . $datapengajuan->id . '"> ' . $b->namastatus . ' </div>'; @endphp --}}
                                                         @endif
                                                     @endforeach
                                                 @endif
@@ -441,7 +446,10 @@
                                                                             <td style="color: red">
 
                                                                                 @php
-                                                                                    $tr = App\Models\Trxstatus::where('pengajuan_id', $datapengajuan->id)
+                                                                                    $tr = App\Models\Trxstatus::where(
+                                                                                        'pengajuan_id',
+                                                                                        $datapengajuan->id,
+                                                                                    )
                                                                                         ->orderBy('id', 'desc')
                                                                                         ->first();
                                                                                 @endphp
@@ -467,7 +475,10 @@
                                                                             <td>
 
                                                                                 @php
-                                                                                    $tst = App\Models\Trxstatus::where('pengajuan_id', $datapengajuan->id)
+                                                                                    $tst = App\Models\Trxstatus::where(
+                                                                                        'pengajuan_id',
+                                                                                        $datapengajuan->id,
+                                                                                    )
                                                                                         ->orderBy('id', 'desc')
                                                                                         ->first();
                                                                                 @endphp
