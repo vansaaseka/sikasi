@@ -114,9 +114,17 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
+                                            <label class="form-label">Logo Resmi Mitra * - format
+                                                .jpg .png .jpeg</label>
+                                            <input type="file" class="form-control" name="logo" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
                                             <label class="form-label" for="choices-single-default">Mitra Kategori
                                                 *</label>
-                                            <select class="form-control" name="mitraKategori_id" id="mitraKategori_id">
+                                            <select class="form-control" name="mitraKategori_id"
+                                                id="mitraKategori_id">
                                                 {{-- <option value="">--Pilih--</option> --}}
                                                 @foreach ($mitraKategori as $item)
                                                     <option value="{{ $item->id }}">{{ $item->mitrakategori }}

@@ -111,16 +111,16 @@ class PengajuanController extends Controller
 
 
         #untuk upload file logo mitra
-        // $path = 'logomitra/';
+        $path = 'logomitra/';
 
-        // if (!$request->id) {
-        // $file = $request->file('logo');
-        // $name_file = time() . '.' . $file->extension();
-        // $file->move($path, $name_file);
-        // }else{
-        //     $mit = Mitra::find($request->id);
-        //     $name_file =  $mit->logo;
-        // }
+        if (!$request->id) {
+        $file = $request->file('logo');
+        $name_file = time() . '.' . $file->extension();
+        $file->move($path, $name_file);
+        }else{
+            $mit = Mitra::find($request->id);
+            $name_file =  $mit->logo;
+        }
 
         $mitra = new Mitra;
         $kategorimitra = new KategoriMitra;
@@ -133,6 +133,7 @@ class PengajuanController extends Controller
         $mitra->namamitra = Str::upper($request->namamitra);
         $mitra->namadagangmitra = $request->namadagangmitra;
         $mitra->kategorimitra_id = $request->kategorimitra_id;
+        $mitra->logo = $name_file;
         $mitra->alamat = $request->alamat;
         $mitra->email = $request->email;
         $mitra->website = $request->website;
@@ -249,9 +250,9 @@ class PengajuanController extends Controller
             $path = Template::where('template', 'pks.docx')->first();
 
             $templateProcessor = new TemplateProcessor(public_path('template/'.$path->template));
-            // $templateProcessor = new TemplateProcessor('pks.docx');
+            $templateProcessor = new TemplateProcessor('pks.docx');
             $templateProcessor->setValues($dataTemplate);
-            // $templateProcessor->setImageValue('logo', public_path('logomitra/'.$name_file));
+            $templateProcessor->setImageValue('logo', public_path('logomitra/'.$name_file));
             $fileName = 'PKS '.$mitra->namamitra.' Tahun '. $startDateYear;
             $templateProcessor->saveAs($fileName . '.docx');
             return response()->download($fileName . '.docx')->deleteFileAfterSend(true);
@@ -267,7 +268,7 @@ class PengajuanController extends Controller
             $templateProcessor = new TemplateProcessor(public_path('template/'.$path2->template));
             $templateProcessor = new TemplateProcessor('mou.docx');
             $templateProcessor->setValues($dataTemplate);
-            // $templateProcessor->setImageValue('logo', public_path('logomitra/'.$name_file));
+            $templateProcessor->setImageValue('logo', public_path('logomitra/'.$name_file));
             $fileName = $fileName = 'MOU '.$mitra->namamitra.' Tahun '. $startDateYear;;
             $templateProcessor->saveAs($fileName . '.docx');
             return response()->download($fileName . '.docx')->deleteFileAfterSend(true);
@@ -282,7 +283,7 @@ class PengajuanController extends Controller
             $templateProcessor = new TemplateProcessor(public_path('template/'.$path2->template));
             $templateProcessor = new TemplateProcessor('pks.docx');
             $templateProcessor->setValues($dataTemplate);
-            // $templateProcessor->setImageValue('logo', public_path('logomitra/'.$name_file));
+            $templateProcessor->setImageValue('logo', public_path('logomitra/'.$name_file));
             $fileName = $fileName = 'PKS_Turunan_dari_PKS_Induk'.$mitra->namamitra.' Tahun '. $startDateYear;;
             $templateProcessor->saveAs($fileName . '.docx');
             return response()->download($fileName . '.docx')->deleteFileAfterSend(true);
@@ -297,7 +298,7 @@ class PengajuanController extends Controller
             $templateProcessor = new TemplateProcessor(public_path('template/'.$path2->template));
             $templateProcessor = new TemplateProcessor('mou.docx');
             $templateProcessor->setValues($dataTemplate);
-            // $templateProcessor->setImageValue('logo', public_path('logomitra/'.$name_file));
+            $templateProcessor->setImageValue('logo', public_path('logomitra/'.$name_file));
             $fileName = $fileName = 'Addendum_PKS'.$mitra->namamitra.' Tahun '. $startDateYear;;
             $templateProcessor->saveAs($fileName . '.docx');
             return response()->download($fileName . '.docx')->deleteFileAfterSend(true);
@@ -312,7 +313,7 @@ class PengajuanController extends Controller
             $templateProcessor = new TemplateProcessor(public_path('template/'.$path2->template));
             $templateProcessor = new TemplateProcessor('pks.docx');
             $templateProcessor->setValues($dataTemplate);
-            // $templateProcessor->setImageValue('logo', public_path('logomitra/'.$name_file));
+            $templateProcessor->setImageValue('logo', public_path('logomitra/'.$name_file));
             $fileName = $fileName = 'PKS(perpanjangan)'.$mitra->namamitra.' Tahun '. $startDateYear;;
             $templateProcessor->saveAs($fileName . '.docx');
             return response()->download($fileName . '.docx')->deleteFileAfterSend(true);
@@ -327,7 +328,7 @@ class PengajuanController extends Controller
             $templateProcessor = new TemplateProcessor(public_path('template/'.$path2->template));
             $templateProcessor = new TemplateProcessor('mou.docx');
             $templateProcessor->setValues($dataTemplate);
-            // $templateProcessor->setImageValue('logo', public_path('logomitra/'.$name_file));
+            $templateProcessor->setImageValue('logo', public_path('logomitra/'.$name_file));
             $fileName = $fileName = 'MoU(perpanjangan)'.$mitra->namamitra.' Tahun '. $startDateYear;;
             $templateProcessor->saveAs($fileName . '.docx');
             return response()->download($fileName . '.docx')->deleteFileAfterSend(true);

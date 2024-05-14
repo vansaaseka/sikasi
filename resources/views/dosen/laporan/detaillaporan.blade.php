@@ -12,14 +12,6 @@
                     <div class="header-title">
                         <h4 class="card-title">Laporan</h4>
                     </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div id="dataTableHover_wrapper" class="dataTables_wrapper dt-bootstrap4">
-                                <a href="/tambahpengajuan" type="button" class="btn btn-success">Tambah
-                                </a>
-                            </div>
-                        </div>
-                    </div>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive mt-4">

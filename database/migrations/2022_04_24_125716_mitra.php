@@ -21,6 +21,7 @@ class Mitra extends Migration
             $table->foreignId('kategorimitra_id')->nullable()->constrained('kategorimitra')->onDelete('cascade')->onUpdate('cascade');
             $table->string('alamat');
             $table->string('website');
+            $table->string('logo')->nullable()->default(null);
             $table->string('sosmed');
             $table->string('email');
             $table->string('namapenandatangan');
