@@ -215,7 +215,7 @@
                                                         @if ($prodi)
                                                             {{ $prodi->namaprodi }}
                                                             @if (!$loop->last)
-                                                                ,
+                                                                <br>
                                                             @endif
                                                         @endif
                                                     @endforeach
