@@ -15,6 +15,7 @@ use App\Http\Controllers\PengajuanController;
 use App\Http\Controllers\RuanglingkupController;
 use App\Http\Controllers\KategorimitraController;
 use App\Http\Controllers\LaporanController;
+use App\Http\Controllers\NomorMitraController;
 use App\Http\Controllers\PDFController;
 use App\Http\Middleware\CheckDeadlineMiddleware;
 use App\Models\Laporan;
@@ -176,3 +177,6 @@ route::get('/hapusruanglingkup/{id}',[RuanglingkupController::class,"hapusruangl
 //Unggah Dokumen
 route::post('/insertdokumen',[DokumenController::class,"insertdokumen"])->name('insertdokumen');
 route::post('/updatedokumen/{id}',[DokumenController::class,"updatedokumen"])->name('updatedokumen');
+
+
+route::put('/updatemitra/{id}', [NomorMitraController::class, 'update']);

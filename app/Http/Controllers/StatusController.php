@@ -125,6 +125,8 @@ public function hapusStatus($id){
     $user = User::all();
 
 
+
+
      if (Auth()->user()->role == 1){
      return view('admin.pengajuan.tampilpengajuan' , compact('pengajuan' , 'mitra', 'status','prodi', 'dokumen',
      'trxstatus', 'user', 'kategori'));

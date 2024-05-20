@@ -67,7 +67,8 @@
                                     <th>Website</th>
                                     <th>Sosmed</th>
                                     <th>Catatan</th>
-                                    <th>Nomor Dokumen</th>
+                                    <th>Nomor Kerja Sama</th>
+                                    <th>Nomor Mitra</th>
                                     <th>Dokumen Kerja Sama</th>
                                     <th>Aksi</th>
                                 </tr>
@@ -85,7 +86,8 @@
                                     <th>Website</th>
                                     <th>Sosmed</th>
                                     <th>Catatan</th>
-                                    <th>Nomor Dokumen</th>
+                                    <th>Nomor Kerja Sama</th>
+                                    <th>Nomor Mitra</th>
                                     <th>Dokumen Kerja Sama</th>
                                     <th>Aksi</th>
                             </tfoot>
@@ -318,11 +320,9 @@
                                                 <p>Tidak Ada</p>
                                             @endif
                                         </td>
-                                        <td><a href="{{ $datapengajuan->mitra->website }}"
-                                                class="btn btn-outline-primary btn-sm">Website</a></td>
+                                        <td>{{ $datapengajuan->mitra->website }}</td>
 
-                                        <td><a href="{{ $datapengajuan->mitra->sosmed }}"
-                                                class="btn btn-outline-primary btn-sm">Sosmed</a></td>
+                                        <td>{{ $datapengajuan->mitra->sosmed }}</td>
                                         <td> @php
                                             $tsz = App\Models\Trxstatus::where('pengajuan_id', $datapengajuan->id)
                                                 ->orderBy('id', 'desc')
@@ -332,12 +332,6 @@
                                                 {{ $tsz->catatan }}
                                             @endisset
                                         </td>
-
-
-
-
-
-
                                         <td>
                                             @foreach ($dokumen as $doc)
                                                 @if ($datapengajuan->id == $doc->pengajuan_id)
@@ -424,7 +418,86 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                        </td>
+                                        <td>
+                                            @foreach ($mitra as $mit)
+                                                @if (empty($mit->nomor))
+                                                    <button type="button" class="btn btn-secondary btn-sm"
+                                                        data-bs-toggle="modal"
+                                                        data-bs-target="#nomormitra{{ $datapengajuan->id }}"
+                                                        id="#nomormitra{{ $datapengajuan->id }}">
+                                                        Input
+                                                    </button>
+                                                @else
+                                                    {{ $mit->nodokumen }}
+                                                @endif
+                                            @endforeach
+                                            {{-- Modal Nomor Dokumen --}}
+                                            <div class="modal fade" id="nomormitra{{ $datapengajuan->id }}"
+                                                tabindex="-1" role="dialog"
+                                                aria-labelledby="staticBackdropLiveLabel" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-scrollable" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="staticBackdropLiveLabel">
+                                                                Input Nomor Mitra</h5>
+                                                            <button type="button" class="btn-close"
+                                                                data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div class="table-responsive">
+                                                                <table
+                                                                    class="table align-items table-flush table-hover"
+                                                                    id="dataTableHover">
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <td class="font-size:3"
+                                                                                style="text-align:center">
+                                                                                Mitra
+                                                                                :
+                                                                                {{ $datapengajuan->mitra->namamitra }}
+                                                                            </td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                            <div class="row d-flex justify-content">
+                                                                <div class="col-md-12">
+                                                                    <div class="card">
+                                                                        <form
+                                                                            action="/updatemitra/{{ $datapengajuan->id }}"
+                                                                            method="POST"
+                                                                            enctype="multipart/form-data"
+                                                                            class="forms-sample">
+                                                                            @csrf
 
+                                                                            <div class="form-group">
+
+                                                                                <div class="form-group">
+                                                                                    <div class="form-group">
+
+                                                                                        <input type="text"
+                                                                                            name="nodokumen"
+                                                                                            id="customFile"
+                                                                                            class="form-control"
+                                                                                            value="" autofocus>
+
+                                                                                    </div>
+                                                                                </div>
+
+
+                                                                                <button type="submit"
+                                                                                    class="btn btn-primary next action-button float-end"
+                                                                                    value="Submit">Submit</button>
+
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </td>
 
                                         <td>

@@ -26,6 +26,7 @@ class Mitra extends Migration
             $table->string('email');
             $table->string('namapenandatangan');
             $table->string('jabatanpenandatangan');
+            $table->string('nomor')->nullable();
             $table->string('narahubung')->nullable()->default(null);
             $table->string('no_hp');
             $table->timestamps();
