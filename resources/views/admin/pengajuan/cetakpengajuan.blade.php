@@ -2,15 +2,15 @@
 @include('admin/layoutsAdmin/sidebar')
 @include('admin/layoutsAdmin/navbar')
 
-
+{{-- @include('data') --}}
 
 <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-
+{{--
 <link rel="stylesheet" type="text/css"
-    href="https://cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.11.3/b-2.1.1/b-html5-2.1.1/datatables.min.css" />
+    href="https://cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.11.3/b-2.1.1/b-html5-2.1.1/datatables.min.css" /> --}}
 
-<script type="text/javascript"
-    src="https://cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.11.3/b-2.1.1/b-html5-2.1.1/datatables.min.js"></script>
+{{-- <script type="text/javascript"
+    src="https://cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.11.3/b-2.1.1/b-html5-2.1.1/datatables.min.js"></script> --}}
 
 <div class="conatiner-fluid content-inner mt-n5 py-0">
     <div class="row">

@@ -48,7 +48,21 @@ class StatusSeeder extends Seeder
                 ],
                 [
                     'namastatus' => 'Selesai',
-                ],
+                ],  [
+                    'namastatus' => 'Ajuan Diterima',
+                 ],
+                 [
+                    'namastatus' => 'Pengajuan DKPI',
+                 ],
+                 [
+                    'namastatus' => 'Dokumen direview DKPI',
+                 ],
+                 [
+                   'namastatus' => ' Proses tanda tangan WR 4',
+                 ],
+                 [
+                   'namastatus' => 'Selesai',
+                 ],
 
             ];
 

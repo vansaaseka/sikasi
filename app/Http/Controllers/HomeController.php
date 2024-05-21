@@ -164,7 +164,7 @@ class HomeController extends Controller
                 ],
             ];
 
-            $kerjasama = Trxstatus::where('status_id', 11)->count();
+            $kerjasama = Trxstatus::where('status_id', 16)->count();
 
 
 
@@ -172,7 +172,7 @@ class HomeController extends Controller
             ->join('trxstatus', 'pengajuan.id', '=', 'trxstatus.pengajuan_id')
             ->select('pengajuan.*')
             ->where('proditerlibat_id', 'LIKE', '%{"id"%')
-            ->where('trxstatus.status_id', '11')
+            ->where('trxstatus.status_id', '16')
             ->get();
 
 
@@ -200,7 +200,7 @@ class HomeController extends Controller
              $proses_pks = $total_pks - $selesai_pks;
              $proses_mou = $total_mou - $selesai_mou;
 
-             $kerjasama = Trxstatus::where('status_id', 11)->count();
+             $kerjasama = Trxstatus::where('status_id', 16)->count();
 
             //  $mitraSharing = Pengajuan::with(['prodi' => function ($query) {
             //     $query->select('id', 'namaprodi');
@@ -214,7 +214,7 @@ class HomeController extends Controller
             ->join('trxstatus', 'pengajuan.id', '=', 'trxstatus.pengajuan_id')
             ->select('pengajuan.*')
             ->where('proditerlibat_id', 'LIKE', '%{"id"%')
-            ->where('trxstatus.status_id', '11')
+            ->where('trxstatus.status_id', '16')
             ->get();
 
              return view('verifikator/dashboard', compact('prodis', 'total', 'total_pks', 'total_mou', 'selesai', 'selesai_pks', 'selesai_mou', 'proses', 'proses_pks', 'proses_mou','kerjasama', 'mitraSharing'));
@@ -300,6 +300,10 @@ class HomeController extends Controller
                   $total = Pengajuan::count();
                   $total_pks = Pengajuan::where('kategori_id', 1)->count();
                   $total_mou = Pengajuan::where('kategori_id', 2)->count();
+                  $total_pksTurunan = Pengajuan::where('kategori_id', 3)->count();
+                  $total_addendum = Pengajuan::where('kategori_id', 4)->count();
+                  $total_pksPerpanjangan = Pengajuan::where('kategori_id', 5)->count();
+                  $total_mouPerpanjangan = Pengajuan::where('kategori_id', 6)->count();
 
 
                   $belum_validasi = Trxstatus::where('status_id', 1)->orderBy('id', 'desc')->get()->count();
@@ -382,17 +386,17 @@ class HomeController extends Controller
                       ],
                   ];
 
-                  $kerjasama = Trxstatus::where('status_id', 11)->count();
+                  $kerjasama = Trxstatus::where('status_id', 16)->count();
 
 
             $mitraSharing = Pengajuan::with(['prodi', 'status'])
             ->join('trxstatus', 'pengajuan.id', '=', 'trxstatus.pengajuan_id')
             ->select('pengajuan.*')
             ->where('proditerlibat_id', 'LIKE', '%{"id"%')
-            ->where('trxstatus.status_id', '11')
+            ->where('trxstatus.status_id', '16')
             ->get();
 
-               return view('reviewer/dashboard', compact('total', 'total_pks', 'total_mou', 'selesai', 'selesai_pks',
+               return view('reviewer/dashboard', compact('total', 'total_pks', 'total_mou','total_pksTurunan','total_addendum','total_pksPerpanjangan','total_mouPerpanjangan', 'selesai', 'selesai_pks',
                'selesai_mou', 'belum_validasi', 'proses_validasi', 'selesai_validasi', 'prodis',
                'total_ajuan', 'total_juli', 'total_agus', 'total_sept',
                'total_okto', 'total_nove', 'total_dese', 'total_jan', 'total_feb', 'total_mar', 'total_apr',
@@ -574,7 +578,7 @@ class HomeController extends Controller
             $deadlineThreshold = $now->addMonths(0);
 
             $pengajuanDeadline = Pengajuan::join('trxstatus', 'pengajuan.id', '=', 'trxstatus.pengajuan_id')
-            ->where('trxstatus.status_id', '11')
+            ->where('trxstatus.status_id', '16')
             ->whereDate('tanggalakhir', '<=', $deadlineThreshold)
             ->get();
 
@@ -587,7 +591,7 @@ class HomeController extends Controller
             ->get();
 
 
-            $kerjasama = Trxstatus::where('status_id', 11)->count();
+            $kerjasama = Trxstatus::where('status_id', 16)->count();
 
 
 
@@ -595,7 +599,7 @@ class HomeController extends Controller
             ->join('trxstatus', 'pengajuan.id', '=', 'trxstatus.pengajuan_id')
             ->select('pengajuan.*')
             ->where('proditerlibat_id', 'LIKE', '%{"id"%')
-            ->where('trxstatus.status_id', '11')
+            ->where('trxstatus.status_id', '16')
             ->get();
 
 
@@ -614,12 +618,22 @@ class HomeController extends Controller
             //         \Toastr::warning('Deadline pengajuan ' . $pengajuan->mitra->namamitra . ' sudah kurang dari 3 bulan.', 'Peringatan Deadline');
             //     }
             // }
+
+            $total = Pengajuan::count();
+            $total_pks = Pengajuan::where('kategori_id', 1)->count();
+            $total_mou = Pengajuan::where('kategori_id', 2)->count();
+            $total_pksTurunan = Pengajuan::where('kategori_id', 3)->count();
+            $total_addendum = Pengajuan::where('kategori_id', 4)->count();
+            $total_pksPerpanjangan = Pengajuan::where('kategori_id', 5)->count();
+            $total_mouPerpanjangan = Pengajuan::where('kategori_id', 6)->count();
+
+
                return view('dosen/dashboard', compact('pengajuan_user','kerjasama', 'totalselesai', 'proses_pengajuan','pengajuanDeadline', 'trxstatus',
                'total_ajuan', 'total_juli', 'total_agus', 'total_sept',
                'total_okto', 'total_nove', 'total_dese', 'total_jan', 'total_feb', 'total_mar', 'total_apr',
                'total_mei', 'total_jun','total_ajuan', 'proses_pks', 'proses_mou', 'kategori1', 'kategori2', 'kategori3', 'kategori4', 'kategori5', 'kategori6',
                'kategori7', 'kategori8', 'kategori9', 'kategori10', 'prodis',
-              'total_trxstatus', 'statusCounts','kerjasama', 'mitraSharing','trxstatusnotification'));
+              'total_trxstatus', 'statusCounts','kerjasama', 'mitraSharing','trxstatusnotification', 'total', 'total_pks', 'total_mou','total_pksTurunan','total_addendum','total_pksPerpanjangan','total_mouPerpanjangan',));
            }
        }
 
@@ -628,23 +642,23 @@ class HomeController extends Controller
        public function chartStatusPengajuan()
        {
            $aktifCount = Pengajuan::join('trxstatus', 'pengajuan.id', '=', 'trxstatus.pengajuan_id')
-               ->where('trxstatus.status_id', '11')
+               ->where('trxstatus.status_id', '16')
                ->whereDate('pengajuan.tanggalakhir', '>=', now())
                ->whereNotIn('pengajuan.id', function ($query) {
                    $query->select('pengajuan_id')
                        ->from('trxstatus')
-                       ->where('status_id', '11')
+                       ->where('status_id', '16')
                        ->whereDate('tanggalakhir', '<=', now());
                })
                ->count();
 
            $kadaluwarsaCount = Pengajuan::join('trxstatus', 'pengajuan.id', '=', 'trxstatus.pengajuan_id')
-               ->where('trxstatus.status_id', '11')
+               ->where('trxstatus.status_id', '16')
                ->whereDate('tanggalakhir', '<=', now())
                ->count();
 
            $kurang3BulanCount = Pengajuan::join('trxstatus', 'pengajuan.id', '=', 'trxstatus.pengajuan_id')
-               ->where('trxstatus.status_id', '11')
+               ->where('trxstatus.status_id', '16')
                ->whereBetween('tanggalakhir', [now(), now()->addMonths(2)])
                ->count();
 

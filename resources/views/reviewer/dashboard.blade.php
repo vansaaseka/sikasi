@@ -270,7 +270,10 @@
 
                     {
                         name: 'Pengajuan',
-                        data: [{!! json_encode($total) !!}, {!! json_encode($total_pks) !!}, {!! json_encode($total_mou) !!}]
+                        data: [{!! json_encode($total) !!}, {!! json_encode($total_pks) !!}, {!! json_encode($total_mou) !!},
+                            {!! json_encode($total_pksTurunan) !!}, {!! json_encode($total_addendum) !!}, {!! json_encode($total_pksPerpanjangan) !!},
+                            {!! json_encode($total_mouPerpanjangan) !!}
+                        ]
                     }
                 ],
                 chart: {
@@ -303,7 +306,9 @@
                 },
                 xaxis: {
                     categories: [
-                        "Total", "PKS", "Mou"
+                        "Total", "PKS", "Mou", "PKS Turunan dari PKS Induk", "Addendum PKS",
+                        "PKS (perpanjangan)",
+                        "Mou (Perpanjangan)",
                     ],
                     labels: {
                         minHeight: 20,

@@ -106,6 +106,7 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="col-md-6 col-xl-6">
                     <div class="card" data-aos="fade-up" data-aos-delay="1000">
                         <div class="card-header d-flex justify-content-between flex-wrap">
@@ -166,9 +167,19 @@
                         </div>
                     </div>
                 </div>
-
+                <div class="col-md-12 col-xl-6">
+                    <div class="card" data-aos="fade-up" data-aos-delay="1000">
+                        <div class="card-header d-flex justify-content-between flex-wrap">
+                            <div class="header-title">
+                                <h4 class="card-title">Kategori Pengajuan</h4>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div id="kategori_pengajuan" class="d-activity"></div>
+                        </div>
+                    </div>
+                </div>
             </div>
-
             <div class="row">
                 <div class="col-md-12">
                     <div class="card">
@@ -463,6 +474,90 @@
 
             var chart = new ApexCharts(document.querySelector("#activity-bar"), options);
             chart.render();
+        }
+
+        if (jQuery('#kategori_pengajuan').length) {
+            const options = {
+                series: [
+
+                    {
+                        name: 'Pengajuan',
+                        data: [{!! json_encode($total) !!}, {!! json_encode($total_pks) !!}, {!! json_encode($total_mou) !!},
+                            {!! json_encode($total_pksTurunan) !!}, {!! json_encode($total_addendum) !!},
+                            {!! json_encode($total_pksPerpanjangan) !!},
+                            {!! json_encode($total_mouPerpanjangan) !!}
+                        ]
+                    }
+                ],
+                chart: {
+                    type: 'bar',
+                    height: 230,
+                    stacked: true,
+                    toolbar: {
+                        show: false
+                    }
+                },
+                colors: ["#3a57e8", "#4bc7d2"],
+                plotOptions: {
+                    bar: {
+                        horizontal: false,
+                        columnWidth: '28%',
+                        endingShape: 'rounded',
+                        borderRadius: 5,
+                    },
+                },
+                legend: {
+                    show: false
+                },
+                dataLabels: {
+                    enabled: false
+                },
+                stroke: {
+                    show: true,
+                    width: 2,
+                    colors: ['transparent']
+                },
+                xaxis: {
+                    categories: [
+                        "Total", "PKS", "Mou", "PKS Turunan dari PKS Induk", "Addendum PKS",
+                        "PKS (perpanjangan)",
+                        "Mou (Perpanjangan)",
+                    ],
+                    labels: {
+                        minHeight: 20,
+                        maxHeight: 20,
+                        style: {
+                            colors: "#8A92A6",
+                        },
+                    }
+                },
+                yaxis: {
+                    title: {
+                        text: 'Jumlah'
+
+                    },
+                    labels: {
+                        minWidth: 19,
+                        maxWidth: 19,
+                        style: {
+                            colors: "#8A92A6",
+                        },
+                    }
+                },
+                fill: {
+                    opacity: 1
+                },
+                tooltip: {
+                    y: {
+                        formatter: function(val) {
+                            return val + " pengajuan"
+                        }
+                    }
+                }
+            };
+
+            const ChartKategoriPengajuan = new ApexCharts(document.querySelector("#kategori_pengajuan"), options);
+            ChartKategoriPengajuan.render();
         }
 
 
