@@ -429,7 +429,7 @@
                                                         Input
                                                     </button>
                                                 @else
-                                                    {{ $mit->nodokumen }}
+                                                    {{ $mit->nomor }}
                                                 @endif
                                             @endforeach
                                             {{-- Modal Nomor Dokumen --}}
@@ -470,22 +470,18 @@
                                                                             enctype="multipart/form-data"
                                                                             class="forms-sample">
                                                                             @csrf
-
+                                                                            @method('PUT')
                                                                             <div class="form-group">
-
                                                                                 <div class="form-group">
                                                                                     <div class="form-group">
-
                                                                                         <input type="text"
-                                                                                            name="nodokumen"
+                                                                                            name="nomor"
                                                                                             id="customFile"
                                                                                             class="form-control"
-                                                                                            value="" autofocus>
+                                                                                            autofocus>
 
                                                                                     </div>
                                                                                 </div>
-
-
                                                                                 <button type="submit"
                                                                                     class="btn btn-primary next action-button float-end"
                                                                                     value="Submit">Submit</button>
