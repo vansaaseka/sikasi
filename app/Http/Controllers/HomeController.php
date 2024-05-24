@@ -81,6 +81,12 @@ class HomeController extends Controller
            $prodis = Prodi::all();
            $proses_pks = Pengajuan::where('kategori_id', 1)->count();
            $proses_mou = Pengajuan::where('kategori_id', 2)->count();
+           $total_pks = Pengajuan::where('kategori_id', 1)->count();
+           $total_mou = Pengajuan::where('kategori_id', 2)->count();
+           $total_pksTurunan = Pengajuan::where('kategori_id', 3)->count();
+           $total_addendum = Pengajuan::where('kategori_id', 4)->count();
+           $total_pksPerpanjangan = Pengajuan::where('kategori_id', 5)->count();
+           $total_mouPerpanjangan = Pengajuan::where('kategori_id', 6)->count();
 
             $kategori1 = Mitra::where('kategorimitra_id', 1)->count();
             $kategori2 = Mitra::where('kategorimitra_id', 2)->count();
@@ -178,7 +184,7 @@ class HomeController extends Controller
 
 
 
-           return view('admin.dashboard', compact('total_ajuan', 'total_juli', 'total_agus', 'total_sept',
+           return view('admin.dashboard', compact('total_ajuan','total_mou','total_pks','total_pksTurunan','total_addendum','total_pksPerpanjangan','total_mouPerpanjangan', 'total_juli', 'total_agus', 'total_sept',
                'total_okto', 'total_nove', 'total_dese', 'total_jan', 'total_feb', 'total_mar', 'total_apr',
                'total_mei', 'total_jun','total_ajuan', 'proses_pks', 'proses_mou', 'kategori1', 'kategori2', 'kategori3', 'kategori4', 'kategori5', 'kategori6',
                'kategori7', 'kategori8', 'kategori9', 'kategori10', 'prodis',
