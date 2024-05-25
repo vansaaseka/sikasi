@@ -567,7 +567,11 @@
                                                                                         for="exampleInputText1">Update
                                                                                         Status
                                                                                     </label>
-                                                                                    @if ($datapengajuan->kategori_id == 1)
+                                                                                    @if (
+                                                                                        $datapengajuan->kategori_id == 1 ||
+                                                                                            $datapengajuan->kategori_id == 3 ||
+                                                                                            $datapengajuan->kategori_id == 4 ||
+                                                                                            $datapengajuan->kategori_id == 5)
                                                                                         <?php $tombol = '<div class="custom-control custom-radio custom-radio-color-checked "><input type="radio" name="status_id" id="gembel" value="1"> <label for="gembel"> Ajuan Diterima</label></div>'; ?>
                                                                                         @foreach ($trxstatus as $a)
                                                                                             @if ($a->pengajuan_id == $datapengajuan->id)
@@ -602,7 +606,7 @@
                                                                                         <br />
                                                                                     @endif
 
-                                                                                    @if ($datapengajuan->kategori_id == 2)
+                                                                                    @if ($datapengajuan->kategori_id == 2 || $datapengajuan->kategori_id == 6)
                                                                                         <?php $button = '<div class="custom-control custom-radio custom-radio-color-checked "><input type="radio" name="status_id" id="gembel" value="12"> <label for="gembel"> Ajuan Diterima</label></div>'; ?>
                                                                                         @foreach ($trxstatus as $a)
                                                                                             @if ($a->pengajuan_id == $datapengajuan->id)
