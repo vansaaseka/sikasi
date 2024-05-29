@@ -99,7 +99,19 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 col-xl-6">
+                <div class="col-md-12 col-xl-6">
+                    <div class="card" data-aos="fade-up" data-aos-delay="1000">
+                        <div class="card-header d-flex justify-content-between flex-wrap">
+                            <div class="header-title">
+                                <h4 class="card-title">Pengajuan Kategori</h4>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div id="pengajuan-activity" class="d-activity"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 col-xl-12">
                     <div class="card" data-aos="fade-up" data-aos-delay="1000">
                         <div class="card-header d-flex justify-content-between flex-wrap">
                             <div class="header-title">
@@ -111,18 +123,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-12 col-xl-6">
-                    <div class="card" data-aos="fade-up" data-aos-delay="1000">
-                        <div class="card-header d-flex justify-content-between flex-wrap">
-                            <div class="header-title">
-                                <h4 class="card-title">Pengajuan</h4>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <div id="pengajuan-activity" class="d-activity"></div>
-                        </div>
-                    </div>
-                </div>
+
                 <div class="col-md-12 col-xl-12">
                     <div class="card" data-aos="fade-up" data-aos-delay="1000">
                         <div class="card-header d-flex justify-content-between flex-wrap">

@@ -57,16 +57,18 @@
                         </div>
                     </div>
                 </div>
-                <div class="card" data-aos="fade-up" data-aos-delay="1000">
-                    <div class="card-header d-flex justify-content-between flex-wrap">
-                        <div class="header-title">
-                            <h4 class="card-title">Kategori Mitra</h4>
+                <div class="col-md-6 col-xl-6">
+                    <div class="card" data-aos="fade-up" data-aos-delay="1000">
+                        <div class="card-header d-flex justify-content-between flex-wrap">
+                            <div class="header-title">
+                                <h4 class="card-title">Kategori Mitra</h4>
+                            </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6 col-xl-6">
-                            <div class="card-body">
-                                <div id="pie-chart"></div>
+                        <div class="row">
+                            <div class="col-md-6 col-xl-6">
+                                <div class="card-body">
+                                    <div id="pie-chart"></div>
+                                </div>
                             </div>
                         </div>
                     </div>
